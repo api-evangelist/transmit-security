@@ -1,0 +1,156 @@
+aid: transmit-security
+name: Transmit Security
+description: >
+  Transmit Security provides the Mosaic platform, a comprehensive CIAM (Customer Identity and
+  Access Management) solution offering REST APIs for passkey and WebAuthn authentication, fraud
+  detection and risk-based access control, identity orchestration, identity verification, and
+  user journey management. The platform delivers unified identity management across customer,
+  business, and workforce contexts through an API-first architecture with OAuth2 and JWT
+  authentication. Mosaic serves leading banks, insurers, and retailers worldwide with region-specific
+  deployments across the US, EU, Canada, and Australia, backed by a 99.99% uptime SLA.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - CIAM
+  - Identity
+  - Authentication
+  - Passkeys
+  - WebAuthn
+  - Fraud Detection
+  - Risk Management
+  - Identity Verification
+  - Orchestration
+  - OAuth2
+  - Security
+  - SSO
+url: https://raw.githubusercontent.com/api-evangelist/transmit-security/refs/heads/main/apis.yml
+created: '2026-06-12'
+modified: '2026-06-12'
+specificationVersion: '0.19'
+apis:
+  - name: Mosaic Identity Management, Authentication & Journeys API
+    description: >
+      Core identity management and authentication API covering user lifecycle management,
+      passwordless authentication (passkeys, WebAuthn, OTP, magic links, MFA), OIDC hosted
+      authentication, SAML SSO, and orchestrated identity journey flows.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+    baseURL: https://api.transmitsecurity.io
+    tags:
+      - Identity Management
+      - Authentication
+      - Passkeys
+      - WebAuthn
+      - OIDC
+      - SSO
+      - Journeys
+    properties:
+      - type: Documentation
+        url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
+      - type: OpenAPI
+        url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+
+  - name: Mosaic Fraud Prevention API
+    description: >
+      Risk and fraud detection API providing real-time risk recommendations, account protection,
+      threat detection and response, bot detection, and behavioral analytics to prevent account
+      takeovers and fraud across web, iOS, and Android channels.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+    baseURL: https://api.transmitsecurity.io
+    tags:
+      - Fraud Detection
+      - Risk Management
+      - Account Protection
+      - Threat Detection
+      - Bot Detection
+    properties:
+      - type: Documentation
+        url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+      - type: OpenAPI
+        url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+
+  - name: Mosaic Identity Verification API
+    description: >
+      Document-based identity verification API enabling remote employee onboarding, contractor
+      vetting, and customer identity verification through automated ID document checks and
+      biometric verification workflows.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+    baseURL: https://api.transmitsecurity.io
+    tags:
+      - Identity Verification
+      - KYC
+      - Document Verification
+      - Biometrics
+    properties:
+      - type: Documentation
+        url: https://transmitsecurity.com/core-services/identity-verification
+      - type: OpenAPI
+        url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+
+  - name: Mosaic Orchestration API
+    description: >
+      No-code identity orchestration API and policy engine enabling dynamic identity flow
+      composition, adaptive access control, and integration with third-party services through
+      pre-built journey templates and a visual orchestration canvas.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.transmitsecurity.com/guides/orchestration/sdk/web_sdk_guide
+    baseURL: https://api.transmitsecurity.io
+    tags:
+      - Orchestration
+      - Identity Journeys
+      - Policy Engine
+      - Adaptive Access
+    properties:
+      - type: Documentation
+        url: https://developer.transmitsecurity.com/guides/orchestration/sdk/web_sdk_guide
+
+  - name: Mosaic Platform Administration API
+    description: >
+      Platform administration and management API providing organization management, role-based
+      access control, audit logs, compliance reporting, and multi-tenant configuration for
+      Mosaic deployments.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+    baseURL: https://api.transmitsecurity.io
+    tags:
+      - Administration
+      - Organizations
+      - RBAC
+      - Compliance
+      - Audit
+    properties:
+      - type: Documentation
+        url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+
+common:
+  - type: Website
+    url: https://transmitsecurity.com/
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/
+  - type: GitHubOrganization
+    url: https://github.com/TransmitSecurity
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/transmit-security
+  - type: X
+    url: https://x.com/transmitsec
+  - type: Blog
+    url: https://transmitsecurity.com/blog
+  - type: Pricing
+    url: https://transmitsecurity.com/pricing
+  - type: StatusPage
+    url: https://status.transmitsecurity.io/
+  - type: Changelog
+    url: https://developer.transmitsecurity.com/sdk-ref/platform/changelog
+  - type: SDKs
+    url: https://developer.transmitsecurity.com/sdk-ref/sdk_ref_intro
+  - type: Plans
+    url: plans/transmit-security-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/transmit-security-rate-limits.yml
+  - type: FinOps
+    url: finops/transmit-security-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

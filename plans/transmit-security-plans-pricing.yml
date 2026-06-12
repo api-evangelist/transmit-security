@@ -1,0 +1,122 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+provider: Transmit Security
+providerId: transmit-security
+created: '2026-06-12'
+modified: '2026-06-12'
+reconciled: true
+type: enterprise
+description: >
+  Transmit Security uses a custom enterprise pricing model based on Monthly Active Users (MAUs)
+  or event volume. No free tier is available. All plans include 99.99% uptime SLA, no-code
+  orchestration policy engine, AI assistant (Spark), compliance reporting, audit logs,
+  third-party integrations hub, and role-based access control.
+plans:
+  - name: Mosaic for Identity Verification
+    description: >
+      Entry-level plan for enterprises needing document-based identity verification only.
+      Covers remote employee onboarding, contractor vetting, and customer identity checks.
+    type: enterprise
+    url: https://transmitsecurity.com/pricing
+    entries:
+      - name: Identity Verification Checks
+        type: quota
+        metric: ID checks per year
+        limit: 100000
+        price: 50000
+        currency: USD
+        period: annual
+      - name: Uptime SLA
+        type: boolean
+        description: 99.99% uptime SLA included
+        value: true
+      - name: Compliance Reporting
+        type: boolean
+        description: Audit logs and compliance reporting included
+        value: true
+
+  - name: Mosaic for Identity
+    description: >
+      Plan targeting organizations modernizing workforce or customer authentication.
+      Covers orchestration, passkey/WebAuthn authentication, OIDC, SSO, and user management.
+    type: enterprise
+    url: https://transmitsecurity.com/pricing
+    entries:
+      - name: Monthly Active Users
+        type: quota
+        metric: MAUs per year
+        limit: 100000
+        price: 100000
+        currency: USD
+        period: annual
+      - name: Authentication Methods
+        type: boolean
+        description: Passkeys, WebAuthn, OTP, magic links, MFA, OIDC, SAML SSO included
+        value: true
+      - name: No-code Orchestration
+        type: boolean
+        description: Identity journey orchestration and policy engine included
+        value: true
+      - name: Spark AI Assistant
+        type: boolean
+        description: AI assistant for building journeys included
+        value: true
+
+  - name: Mosaic for Identity Fraud and Threat Detection
+    description: >
+      Plan for fraud and security teams targeting account takeovers, bot attacks, and
+      identity fraud. Includes detection and response capabilities with behavioral analytics.
+    type: enterprise
+    url: https://transmitsecurity.com/pricing
+    entries:
+      - name: Login Events
+        type: quota
+        metric: logins per year
+        limit: 10000000
+        price: 100000
+        currency: USD
+        period: annual
+      - name: Fraud Detection
+        type: boolean
+        description: Real-time risk scoring and fraud recommendations included
+        value: true
+      - name: Bot Detection
+        type: boolean
+        description: Bot and automated threat detection included
+        value: true
+      - name: Behavioral Analytics
+        type: boolean
+        description: Behavioral biometrics and account protection included
+        value: true
+
+  - name: Full Mosaic Platform
+    description: >
+      Comprehensive enterprise plan providing all platform services across authentication,
+      fraud prevention, identity verification, orchestration, and threat detection.
+      Best for enterprises seeking end-to-end identity security.
+    type: enterprise
+    url: https://transmitsecurity.com/pricing
+    entries:
+      - name: Monthly Active Users
+        type: quota
+        metric: MAUs per year
+        limit: 100000
+        price: 200000
+        currency: USD
+        period: annual
+      - name: All Platform Services
+        type: boolean
+        description: Full access to identity, fraud, verification, and orchestration APIs
+        value: true
+      - name: Uptime SLA
+        type: boolean
+        description: 99.99% uptime SLA included
+        value: true
+      - name: Third-party Integrations Hub
+        type: boolean
+        description: Pre-built integrations with third-party services included
+        value: true
+      - name: Custom Pricing Scaling
+        type: boolean
+        description: Custom pricing available for 15M–200M+ user enterprise deployments
+        value: true

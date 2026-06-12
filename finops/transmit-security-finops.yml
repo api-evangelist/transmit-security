@@ -1,0 +1,98 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+provider: Transmit Security
+providerId: transmit-security
+created: '2026-06-12'
+modified: '2026-06-12'
+description: >
+  FinOps profile for Transmit Security Mosaic platform API consumption. The billing model
+  is enterprise contract-based, driven by Monthly Active Users (MAUs), login event volume,
+  or identity verification check counts depending on the selected plan. All pricing is
+  annual and requires custom quotes for larger deployments.
+billingModel: contract
+billingCycle: annual
+currency: USD
+focusColumns:
+  - BilledCost
+  - UsageQuantity
+  - UsageUnit
+  - ResourceName
+  - ServiceName
+  - SubAccountId
+  - ChargeCategory
+  - ChargeType
+meters:
+  - name: Monthly Active Users (MAUs)
+    description: >
+      Count of unique active users per month across authentication and identity management APIs.
+      Primary billing metric for Identity and Full Platform plans.
+    unit: MAU
+    chargeType: recurring
+    chargeCategory: usage
+    services:
+      - Mosaic Identity Management, Authentication and Journeys API
+      - Mosaic Orchestration API
+      - Mosaic Platform Administration API
+    pricingTiers:
+      - upTo: 100000
+        pricePerUnit: 1.00
+        annualMinimum: 100000
+        description: Identity plan starting at $100K/year for 100K MAUs
+      - upTo: 100000
+        pricePerUnit: 2.00
+        annualMinimum: 200000
+        description: Full Platform plan starting at $200K/year for 100K MAUs
+      - upTo: null
+        description: Custom enterprise pricing for 15M–200M+ MAU deployments
+
+  - name: Login Events
+    description: >
+      Count of authentication/login events processed by the Fraud Prevention and
+      Threat Detection and Response APIs. Billing metric for fraud detection plans.
+    unit: login events
+    chargeType: recurring
+    chargeCategory: usage
+    services:
+      - Mosaic Fraud Prevention API
+    pricingTiers:
+      - upTo: 10000000
+        annualMinimum: 100000
+        description: Fraud and Threat Detection plan starting at $100K/year for 10M logins
+
+  - name: Identity Verification Checks
+    description: >
+      Count of document-based identity verification checks performed.
+      Billing metric for the Identity Verification plan.
+    unit: ID checks
+    chargeType: recurring
+    chargeCategory: usage
+    services:
+      - Mosaic Identity Verification API
+    pricingTiers:
+      - upTo: 100000
+        annualMinimum: 50000
+        description: Identity Verification plan starting at $50K/year for 100K ID checks
+
+principles:
+  - name: Visibility
+    description: >
+      Track MAU counts, login event volumes, and ID check consumption monthly against
+      contracted limits. Use audit logs and compliance reports from the Mosaic admin portal
+      to attribute usage across business units and applications.
+    actions:
+      - Monitor MAU counts per client application via Mosaic admin console
+      - Track login event volume for fraud detection against annual contract quota
+      - Review ID check consumption for verification plans monthly
+      - Tag workloads by department or business unit using Mosaic organizations feature
+
+  - name: Optimization
+    description: >
+      Select the appropriate Mosaic plan module (Identity, Fraud, Verification, or Full Platform)
+      to avoid paying for unused services. Use the sandbox environment for development to
+      prevent consuming production quotas during testing.
+    actions:
+      - Choose modular plans to pay only for needed capabilities (identity vs. fraud vs. verification)
+      - Use sandbox environment (api.sbx.transmitsecurity.io) for all development and QA
+      - Negotiate annual contract volumes based on actual MAU projections with buffer
+      - Review and right-size MAU commitments at contract renewal based on actual usage data
+      - Consolidate multiple applications under a single Mosaic organization to maximize efficiency

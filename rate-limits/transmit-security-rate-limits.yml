@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Transmit Security
+providerId: transmit-security
+created: '2026-06-12'
+modified: '2026-06-12'
+notes: >
+  Transmit Security does not publicly document specific numeric rate limits in their
+  developer portal. Rate limits are enforced by the platform and vary by plan, API endpoint,
+  and deployment region. The platform returns HTTP 429 responses when limits are exceeded.
+  Contact Transmit Security support for plan-specific rate limit details.
+retryAfter:
+  header: Retry-After
+  description: Seconds to wait before retrying after a 429 response
+throttled:
+  statusCode: 429
+  description: Too Many Requests — rate limit exceeded for the endpoint
+limits:
+  - name: Authentication API (CIS)
+    description: >
+      Limits for identity management, authentication, and journey API endpoints.
+      Exact values are contract-dependent and enforced per application (client ID).
+    scope: application
+    metric: requests
+    timeFrame: per minute
+    notes: Enforced per client application; contact support for specific limits
+
+  - name: Fraud Prevention / Risk API
+    description: >
+      Limits for risk recommendation and fraud detection endpoints.
+      Volume-based plans (e.g., 10M logins/year) imply sustained throughput limits.
+    scope: application
+    metric: requests
+    timeFrame: per minute
+    notes: Based on contracted login event volume; overage charges may apply
+
+  - name: Identity Verification API
+    description: >
+      Limits for document-based identity verification endpoints.
+      Quota-based plans (e.g., 100K ID checks/year) define annual consumption caps.
+    scope: account
+    metric: ID checks
+    timeFrame: per year
+    notes: Hard quota limit based on contracted ID check volume
+
+  - name: Sandbox Environment
+    description: >
+      The sandbox environment (api.sbx.transmitsecurity.io) is subject to stricter
+      rate limits to prevent abuse during development and testing.
+    scope: application
+    metric: requests
+    timeFrame: per minute
+    notes: Sandbox limits are lower than production; intended for development and testing only
+
+regions:
+  - name: US (Global)
+    host: api.transmitsecurity.io
+  - name: EU
+    host: api.eu.transmitsecurity.io
+  - name: Canada
+    host: api.ca.transmitsecurity.io
+  - name: Australia
+    host: api.au.transmitsecurity.io
+  - name: Sandbox
+    host: api.sbx.transmitsecurity.io
