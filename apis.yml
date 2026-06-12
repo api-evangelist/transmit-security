@@ -49,6 +49,18 @@ apis:
         url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
       - type: OpenAPI
         url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+      - type: OpenAPI
+        url: openapi/transmit-security-identity-management-openapi.yml
+      - type: OpenAPI
+        url: openapi/transmit-security-backend-authentication-openapi.yml
+      - type: OpenAPI
+        url: openapi/transmit-security-oidc-hosted-authentication-openapi.yml
+      - type: JSONSchema
+        url: json-schema/transmit-security-identity-management-schema.json
+      - type: JSONSchema
+        url: json-schema/transmit-security-backend-authentication-schema.json
+      - type: JSONSchema
+        url: json-schema/transmit-security-oidc-authentication-schema.json
 
   - name: Mosaic Fraud Prevention API
     description: >
@@ -69,6 +81,10 @@ apis:
         url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
       - type: OpenAPI
         url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+      - type: OpenAPI
+        url: openapi/transmit-security-fraud-prevention-openapi.yml
+      - type: JSONSchema
+        url: json-schema/transmit-security-fraud-prevention-schema.json
 
   - name: Mosaic Identity Verification API
     description: >
@@ -88,6 +104,10 @@ apis:
         url: https://transmitsecurity.com/core-services/identity-verification
       - type: OpenAPI
         url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+      - type: OpenAPI
+        url: openapi/transmit-security-identity-verification-openapi.yml
+      - type: JSONSchema
+        url: json-schema/transmit-security-identity-verification-schema.json
 
   - name: Mosaic Orchestration API
     description: >
@@ -123,6 +143,14 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+      - type: OpenAPI
+        url: openapi/transmit-security-platform-administration-openapi.yml
+      - type: OpenAPI
+        url: openapi/transmit-security-organizations-openapi.yml
+      - type: JSONSchema
+        url: json-schema/transmit-security-platform-administration-schema.json
+      - type: JSONSchema
+        url: json-schema/transmit-security-organizations-schema.json
 
 common:
   - type: Website
@@ -151,6 +179,10 @@ common:
     url: rate-limits/transmit-security-rate-limits.yml
   - type: FinOps
     url: finops/transmit-security-finops.yml
+  - type: Vocabulary
+    url: vocabulary/transmit-security-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/transmit-security-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

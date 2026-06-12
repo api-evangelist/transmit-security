@@ -1,0 +1,12 @@
+{
+  "name": "Acme Corp",
+  "display_name": "Acme Corporation",
+  "description": "Managed organization for Acme Corp tenant",
+  "admin": {
+    "email": "admin@acme.com",
+    "name": {
+      "given_name": "Jane",
+      "family_name": "Admin"
+    }
+  }
+}

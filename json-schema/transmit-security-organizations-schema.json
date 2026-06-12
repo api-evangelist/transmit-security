@@ -1,0 +1,425 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.transmitsecurity.com/schemas/organizations",
+  "title": "Transmit Security Organizations Schemas",
+  "description": "JSON Schema definitions for Transmit Security organizations API",
+  "definitions": {
+    "ApiCreateOrganizationInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the organization"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the organization",
+          "deprecated": true
+        },
+        "domains": {
+          "description": "Domains of the organization",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "app_ids": {
+          "description": "A list of applications the organization can access",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the organization is currently enabled"
+        },
+        "alias_name": {
+          "type": "string",
+          "description": "Alias name of the organization"
+        }
+      },
+      "required": [
+        "name",
+        "domain",
+        "domains",
+        "app_ids"
+      ]
+    },
+    "BadRequestHttpError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "example": "Bad request",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "error_code": {
+          "type": "number",
+          "example": 400
+        }
+      },
+      "required": [
+        "message",
+        "error_code"
+      ]
+    },
+    "IdentifierIsTakenHttpError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "error_code": {
+          "type": "number"
+        },
+        "ts_error_code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message",
+        "error_code",
+        "ts_error_code"
+      ]
+    },
+    "ApiOrganization": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "description": "ID of the organization"
+        },
+        "app_ids": {
+          "description": "A list of applications the organization can access",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the organization"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the organization",
+          "deprecated": true
+        },
+        "domains": {
+          "description": "Domains of the organization",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created_at": {
+          "type": "number",
+          "description": "Date the organization was created in the tenant"
+        },
+        "updated_at": {
+          "type": "number",
+          "description": "Date the organization was last updated"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the organization is currently enabled"
+        },
+        "managed_organizations_by_app": {
+          "type": "object",
+          "description": "Mapping of app IDs to managed organization IDs assigned to this app",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "managing_organization_id": {
+          "type": "string",
+          "description": "ID of the managing organization"
+        },
+        "logo_url": {
+          "type": "string",
+          "description": "The URL of the organization's logo"
+        },
+        "alias_name": {
+          "type": "string",
+          "description": "Alias name of the organization"
+        }
+      },
+      "required": [
+        "organization_id",
+        "app_ids",
+        "name",
+        "domain",
+        "enabled"
+      ]
+    },
+    "NotFoundHttpError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "error_code": {
+          "type": "number",
+          "example": 404
+        }
+      },
+      "required": [
+        "message",
+        "error_code"
+      ]
+    },
+    "ApiUpdateOrganizationInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the organization"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the organization",
+          "deprecated": true
+        },
+        "domains": {
+          "description": "Domains of the organization",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the organization is currently enabled"
+        },
+        "alias_name": {
+          "type": "string",
+          "description": "Alias name of the organization"
+        }
+      }
+    },
+    "ApiAppIds": {
+      "type": "object",
+      "properties": {
+        "app_ids": {
+          "description": "A list of applications to add the organization to",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "app_ids"
+      ]
+    },
+    "LogoUploadDto": {
+      "type": "object",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "format": "binary"
+        }
+      },
+      "required": [
+        "logo"
+      ]
+    },
+    "ApiCreateManagedOrganizationInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the organization"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the organization",
+          "deprecated": true
+        },
+        "domains": {
+          "description": "Domains of the organization",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the organization is currently enabled"
+        },
+        "alias_name": {
+          "type": "string",
+          "description": "Alias name of the managed organization"
+        }
+      },
+      "required": [
+        "name",
+        "domain",
+        "domains"
+      ]
+    },
+    "ApiRoleGroupIds": {
+      "type": "object",
+      "properties": {
+        "role_group_ids": {
+          "description": "Role group ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "role_group_ids"
+      ]
+    },
+    "RoleGroupsAndDefaultOrgRolesDto": {
+      "type": "object",
+      "properties": {
+        "role_groups": {
+          "description": "Role groups",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiRoleGroup"
+          }
+        },
+        "default_organization_roles": {
+          "description": "Default organization roles",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiRole"
+          }
+        }
+      },
+      "required": [
+        "role_groups",
+        "default_organization_roles"
+      ]
+    },
+    "RolesAndRoleGroupsInputDto": {
+      "type": "object",
+      "properties": {
+        "role_group_ids": {
+          "description": "Role group ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "role_ids": {
+          "description": "Role ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RolesAndRoleGroupsDto": {
+      "type": "object",
+      "properties": {
+        "role_groups": {
+          "description": "Role groups",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiRoleGroup"
+          }
+        },
+        "default_organization_roles": {
+          "description": "Default organization roles",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiRole"
+          }
+        },
+        "roles": {
+          "description": "Assigned roles",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiRole"
+          }
+        }
+      },
+      "required": [
+        "role_groups",
+        "default_organization_roles",
+        "roles"
+      ]
+    },
+    "ApiRoleGroup": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "description": "Group ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Group name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Group description"
+        },
+        "roles": {
+          "description": "Group's roles",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiRole"
+          }
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Role group's display name"
+        }
+      },
+      "required": [
+        "group_id",
+        "name",
+        "roles"
+      ]
+    },
+    "ApiRole": {
+      "type": "object",
+      "properties": {
+        "role_id": {
+          "type": "string",
+          "description": "Role ID"
+        },
+        "role_name": {
+          "type": "string",
+          "description": "Role name"
+        },
+        "permissions": {
+          "description": "Role permissions",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "app_id": {
+          "type": "string",
+          "description": "Role's app id"
+        },
+        "description": {
+          "type": "string",
+          "description": "Role's description"
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Role's display name"
+        }
+      },
+      "required": [
+        "role_id",
+        "role_name"
+      ]
+    }
+  }
+}

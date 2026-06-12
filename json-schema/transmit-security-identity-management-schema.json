@@ -1,0 +1,1018 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.transmitsecurity.com/schemas/identity-management",
+  "title": "Transmit Security Users Schemas",
+  "description": "JSON Schema definitions for Transmit Security identity-management API",
+  "definitions": {
+    "BadRequestHttpError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "example": "Bad request",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "error_code": {
+          "type": "number",
+          "example": 400
+        }
+      },
+      "required": [
+        "message",
+        "error_code"
+      ]
+    },
+    "ApiUsersCount": {
+      "type": "object",
+      "properties": {
+        "user_count": {
+          "type": "number",
+          "description": "Number of users"
+        }
+      },
+      "required": [
+        "user_count"
+      ]
+    },
+    "ApiGetAllUsers": {
+      "type": "object",
+      "properties": {
+        "total_count": {
+          "type": "number"
+        },
+        "page_info": {
+          "$ref": "#/components/schemas/PageInfo"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiUser"
+          }
+        }
+      },
+      "required": [
+        "total_count",
+        "page_info",
+        "result"
+      ]
+    },
+    "ApiCreateUserInput": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Primary email address of the user"
+        },
+        "phone_number": {
+          "type": "string",
+          "description": "Primary phone number of the user, specified in E.164 format"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username used to identify the user"
+        },
+        "secondary_emails": {
+          "description": "Secondary email addresses to add to user's current emails",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "secondary_phone_numbers": {
+          "description": "Secondary phone numbers to add to user's phone numbers, each specified in E.164 format",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "birthday": {
+          "format": "date-time",
+          "type": "string",
+          "description": "User's birthday"
+        },
+        "address": {
+          "description": "User's address",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiCreateOrUpdateAddressInput"
+            }
+          ]
+        },
+        "name": {
+          "description": "Object describing user's full name",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiUserNameInput"
+            }
+          ]
+        },
+        "external_account_id": {
+          "type": "string",
+          "description": "User identifier in an app, set by the app"
+        },
+        "custom_app_data": {
+          "type": "object",
+          "description": "Custom data object for app-related user info"
+        },
+        "picture": {
+          "type": "string",
+          "description": "The picture of user, specified as a URL"
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the user, as provided by the browser using the [Accept-Language](https://www.rfc-editor.org/rfc/rfc7231#section-5.3.5) header field"
+        },
+        "custom_data": {
+          "type": "object",
+          "description": "Custom data object for tenant user info"
+        },
+        "external_user_id": {
+          "type": "string",
+          "description": "A unique identifier in a tenant"
+        },
+        "credentials": {
+          "description": "The password of the user, who is identified by either a username or primary email.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiUserPasswordInput"
+            }
+          ]
+        },
+        "delegated_access": {
+          "description": "If this user is a dependent, this defines the permissions that the primary user will have to act on behalf of the dependent user.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DelegatedAccessInput"
+            }
+          ]
+        }
+      }
+    },
+    "IdentifierIsTakenHttpError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "error_code": {
+          "type": "number"
+        },
+        "ts_error_code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message",
+        "error_code",
+        "ts_error_code"
+      ]
+    },
+    "ApiUser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "description": "Primary email address, used as user identifier",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiUserEmail"
+            }
+          ]
+        },
+        "secondary_emails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiUserEmail"
+          }
+        },
+        "phone_number": {
+          "description": "Primary phone number, used as user identifier",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiUserPhone"
+            }
+          ]
+        },
+        "secondary_phone_numbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiUserPhone"
+          }
+        },
+        "username": {
+          "type": "string",
+          "description": "Username used to identify the user for password login (unless a primary email will be used instead). Defined only if a password was set for the user."
+        },
+        "user_id": {
+          "type": "string",
+          "description": "User ID autogenerated upon user creation"
+        },
+        "birthday": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Birthday as YYYY-MM-DD"
+        },
+        "address": {
+          "description": "User's address",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiAddress"
+            }
+          ]
+        },
+        "name": {
+          "description": "Full name",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiUserName"
+            }
+          ]
+        },
+        "status": {
+          "$ref": "#/components/schemas/Status"
+        },
+        "status_changed_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date status was last updated"
+        },
+        "created_at": {
+          "type": "number",
+          "description": "Date user was created in the tenant"
+        },
+        "updated_at": {
+          "type": "number",
+          "description": "Date user was last updated"
+        },
+        "identity_providers": {
+          "deprecated": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiUserIdentityProvider"
+          }
+        },
+        "identities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiUserIdentity"
+          }
+        },
+        "last_auth": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date user last authenticated"
+        },
+        "external_account_id": {
+          "type": "string",
+          "description": "User identifier in an app, set by the app"
+        },
+        "app_name": {
+          "type": "string",
+          "description": "Name of the app the user is associated with"
+        },
+        "custom_app_data": {
+          "type": "object",
+          "description": "Custom data object for app-related user info"
+        },
+        "groupIds": {
+          "description": "List of group IDs the user is assigned to",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "picture": {
+          "type": "string",
+          "description": "The picture of user, specified as a URL"
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the user, as provided by the browser using the [Accept-Language](https://www.rfc-editor.org/rfc/rfc7231#section-5.3.5) header field"
+        },
+        "custom_data": {
+          "type": "object",
+          "description": "Custom data object for tenant user info"
+        },
+        "external_user_id": {
+          "type": "string",
+          "description": "A unique identifier in a tenant"
+        },
+        "password_information": {
+          "description": "The information of the user's password",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiPasswordInformation"
+            }
+          ]
+        }
+      },
+      "required": [
+        "user_id",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "NotFoundHttpError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "error_code": {
+          "type": "number",
+          "example": 404
+        }
+      },
+      "required": [
+        "message",
+        "error_code"
+      ]
+    },
+    "ApiUpdateUserInput": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Primary email address of the user"
+        },
+        "phone_number": {
+          "type": "string",
+          "description": "Primary phone number of the user, specified in E.164 format"
+        },
+        "secondary_emails": {
+          "description": "Secondary email addresses to add to user's current emails",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "secondary_phone_numbers": {
+          "description": "Secondary phone numbers to add to user's phone numbers, each specified in E.164 format",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "birthday": {
+          "format": "date-time",
+          "type": "string",
+          "description": "User's birthday"
+        },
+        "address": {
+          "description": "User's address",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiCreateOrUpdateAddressInput"
+            }
+          ]
+        },
+        "name": {
+          "description": "Object describing user's full name",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiUserNameInput"
+            }
+          ]
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of user",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Pending"
+          ]
+        },
+        "external_account_id": {
+          "type": "string",
+          "description": "User identifier in an app, set by the app"
+        },
+        "custom_app_data": {
+          "type": "object",
+          "description": "Custom data object for app-related user info"
+        },
+        "picture": {
+          "type": "string",
+          "description": "The picture of user, specified as a URL"
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the user, as provided by the browser using the [Accept-Language](https://www.rfc-editor.org/rfc/rfc7231#section-5.3.5) header field"
+        },
+        "custom_data": {
+          "type": "object",
+          "description": "Custom data object for tenant user info"
+        },
+        "external_user_id": {
+          "type": "string",
+          "description": "A unique identifier in a tenant"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username used to identify the user for password login (unless a primary email will be used instead)"
+        }
+      }
+    },
+    "ApiGroup": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "description": "Group ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Group name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Group description"
+        },
+        "created_at": {
+          "type": "number",
+          "description": "Date group was created in the tenant"
+        },
+        "updated_at": {
+          "type": "number",
+          "description": "Date group was last updated"
+        },
+        "custom_data": {
+          "type": "object",
+          "description": "Group custom data object"
+        }
+      },
+      "required": [
+        "group_id",
+        "name",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "ApiAddPassword": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "The user's new password"
+        },
+        "force_replace": {
+          "type": "boolean",
+          "description": "When true the password is temporary and the user will be required to replace it upon successful login",
+          "default": true
+        },
+        "username": {
+          "type": "string",
+          "description": "The user's new username. This will be the identifier the user will use to authenticate. If username is not provided and the user has verified their email, that email address will be used as the username."
+        },
+        "enforce_complexity": {
+          "type": "boolean",
+          "description": "If true, the password must meet the password complexity requirements. If false, the password can be any string.",
+          "default": true
+        }
+      },
+      "required": [
+        "password"
+      ]
+    },
+    "RegisterPasswordResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "example": "Password registered"
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "ApiUpdatePassword": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "The user's new password"
+        },
+        "force_replace": {
+          "type": "boolean",
+          "description": "When true the password is temporary and the user will be required to replace it upon successful login",
+          "default": true
+        }
+      }
+    },
+    "UserVerifyEmailOrPhoneNumberInput": {
+      "type": "object",
+      "properties": {
+        "change_to_primary": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ApiMeAddPassword": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "The user's new password"
+        },
+        "username": {
+          "type": "string",
+          "description": "The user's new username. This will be the identifier the user will use to authenticate. If username is not provided and the user has verified their email, that email address will be used as the username."
+        }
+      },
+      "required": [
+        "password"
+      ]
+    },
+    "ForbiddenHttpError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "error_code": {
+          "type": "number",
+          "example": 403
+        }
+      },
+      "required": [
+        "message",
+        "error_code"
+      ]
+    },
+    "DeviceKeyResponseDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the device",
+          "$ref": "#/components/schemas/DeviceStatus"
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Friendly device name, used when displaying a list of the user's devices"
+        },
+        "custom_data": {
+          "type": "object",
+          "description": "Custom data stored for this device, such as tags or device data obtained using other tools"
+        },
+        "push_config": {
+          "description": "Device push notification configuration",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DevicePushConfigDto"
+            }
+          ]
+        },
+        "key_id": {
+          "type": "string",
+          "description": "Identifier of the user's device"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date the device key was added"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date the device key metadata was last updated"
+        }
+      },
+      "required": [
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "PageInfo": {
+      "type": "object",
+      "properties": {
+        "has_next_page": {
+          "type": "boolean"
+        },
+        "has_previous_page": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "has_next_page",
+        "has_previous_page"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Disabled",
+        "Pending"
+      ]
+    },
+    "DeviceStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Blocked",
+        "Suspended"
+      ]
+    },
+    "ApiUserEmail": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Email address"
+        },
+        "email_verified": {
+          "type": "boolean",
+          "description": "Indicates if email was verified (via magic link, social login, or email verification flows)"
+        },
+        "verified_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Last verification date of the email"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApiUserPhone": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Phone number"
+        },
+        "phone_number_verified": {
+          "type": "boolean",
+          "description": "Indicates if phone number was verified (via SMS OTP or verification flow)"
+        },
+        "verified_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Last verification date of the phone number"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApiUserIdentityProvider": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Type of identity provider",
+          "enum": [
+            "UserID",
+            "BindID",
+            "Google",
+            "Apple",
+            "Facebook",
+            "Line",
+            "Tiktok",
+            "Transmit Identity",
+            "Transmit Security",
+            "BindIDApi",
+            "Email OTP",
+            "SMS OTP",
+            "Direct OTP",
+            "Email Magic Link",
+            "Password",
+            "Orchestrated",
+            "SAML",
+            "SSO OIDC",
+            "Mobile Biometrics",
+            "totp",
+            "face"
+          ]
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Identifier of the user in the provider's system"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email used by the user to authenticate to this provider"
+        },
+        "first_auth_date": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date user first authenticated to this provider"
+        },
+        "last_auth_date": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date user last authenticated to this provider"
+        }
+      },
+      "required": [
+        "source",
+        "identifier",
+        "email",
+        "first_auth_date",
+        "last_auth_date"
+      ]
+    },
+    "ApiUserIdentity": {
+      "type": "object",
+      "properties": {
+        "provider_name": {
+          "type": "string",
+          "description": "Name of identity provider"
+        },
+        "provider_type": {
+          "type": "string",
+          "description": "Indicates whether the identity provider is Transmit (Native) or a social login provider (OAuth2)",
+          "enum": [
+            "OAuth2",
+            "Native",
+            "External"
+          ]
+        },
+        "auth_type": {
+          "type": "string",
+          "enum": [
+            "webauthn",
+            "email_otp",
+            "sms_otp",
+            "direct_otp",
+            "email_magic_link",
+            "password",
+            "oauth2",
+            "saml",
+            "transmit",
+            "totp"
+          ],
+          "description": "Type of authentication method that was used"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Identifier of the user in the provider's system"
+        },
+        "user_alias": {
+          "description": "Alias used by the user to authenticate to this provider",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ApiUserIdentityAlias"
+            }
+          ]
+        },
+        "first_auth_date": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date user first authenticated to this provider"
+        },
+        "last_auth_date": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date user last authenticated to this provider"
+        }
+      },
+      "required": [
+        "provider_name",
+        "provider_type",
+        "auth_type",
+        "identifier",
+        "first_auth_date",
+        "last_auth_date"
+      ]
+    },
+    "ApiCreateOrUpdateAddressInput": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Country"
+        },
+        "state": {
+          "type": "string",
+          "description": "State"
+        },
+        "city": {
+          "type": "string",
+          "description": "City"
+        },
+        "street_address": {
+          "type": "string",
+          "description": "Street address"
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "Postal code"
+        },
+        "type": {
+          "$ref": "#/components/schemas/AddressType"
+        }
+      }
+    },
+    "ApiUserNameInput": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title"
+        },
+        "first_name": {
+          "type": "string",
+          "description": "User's first name"
+        },
+        "last_name": {
+          "type": "string",
+          "description": "User's last name"
+        },
+        "middle_name": {
+          "type": "string",
+          "description": "User's middle name"
+        }
+      }
+    },
+    "ApiUserPasswordInput": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "The user's new password"
+        },
+        "force_replace": {
+          "type": "boolean",
+          "description": "When true the password is temporary and the user will be required to replace it upon successful login",
+          "default": true
+        }
+      },
+      "required": [
+        "password"
+      ]
+    },
+    "DelegatedAccessInput": {
+      "type": "object",
+      "properties": {
+        "actor_id": {
+          "type": "string",
+          "description": "The ID of the primary user that has permissions to act on behalf of this user"
+        },
+        "permissions": {
+          "description": "Names of permissions that are granted to the primary user on behalf of the dependent",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "actor_id",
+        "permissions"
+      ]
+    },
+    "ApiAddress": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Country",
+          "maximum": 30
+        },
+        "state": {
+          "type": "string",
+          "description": "State",
+          "maximum": 30
+        },
+        "city": {
+          "type": "string",
+          "description": "City",
+          "maximum": 30
+        },
+        "street_address": {
+          "type": "string",
+          "description": "Street address",
+          "maximum": 150
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "Postal code",
+          "maximum": 30
+        },
+        "type": {
+          "$ref": "#/components/schemas/AddressType"
+        },
+        "updated_at": {
+          "type": "number",
+          "description": "Date user's address was last updated"
+        }
+      }
+    },
+    "ApiUserName": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title",
+          "maximum": 30
+        },
+        "first_name": {
+          "type": "string",
+          "description": "User's first name",
+          "maximum": 30
+        },
+        "last_name": {
+          "type": "string",
+          "description": "User's last name",
+          "maximum": 30
+        },
+        "middle_name": {
+          "type": "string",
+          "description": "User's middle name",
+          "maximum": 30
+        }
+      }
+    },
+    "ApiPasswordInformation": {
+      "type": "object",
+      "properties": {
+        "expired": {
+          "type": "boolean",
+          "description": "Whether the password is currently expired"
+        },
+        "temporary": {
+          "type": "boolean",
+          "description": "Whether the password must be reset after first use"
+        },
+        "updated_at": {
+          "type": "number",
+          "description": "The date the password was last updated, as unix epoch in milliseconds"
+        },
+        "expires_in": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The date the password will be expired"
+        }
+      },
+      "required": [
+        "expired",
+        "temporary",
+        "updated_at"
+      ]
+    },
+    "DevicePushConfigDto": {
+      "type": "object",
+      "properties": {
+        "device_token": {
+          "type": "string",
+          "description": "Device token for push notifications (FCM registration token or APN device token)",
+          "minLength": 32,
+          "maxLength": 255
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "FCM",
+            "APN"
+          ],
+          "description": "Type of push notification"
+        },
+        "bundle_id": {
+          "type": "string",
+          "description": "Bundle identifier, used for push notifications"
+        }
+      },
+      "required": [
+        "device_token",
+        "type"
+      ]
+    },
+    "AddressType": {
+      "type": "string",
+      "enum": [
+        "Home",
+        "Work",
+        "Other"
+      ]
+    },
+    "ApiUserIdentityAlias": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Alias type, which varies based on authentication method",
+          "enum": [
+            "username",
+            "email",
+            "phone_number",
+            "unspecified"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "Alias value"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    }
+  }
+}

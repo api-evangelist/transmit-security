@@ -1,0 +1,1613 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.transmitsecurity.com/schemas/identity-verification",
+  "title": "Transmit Security Document Verification Schemas",
+  "description": "JSON Schema definitions for Transmit Security identity-verification API",
+  "definitions": {
+    "SessionConsent": {
+      "type": "object",
+      "properties": {
+        "granted": {
+          "type": "boolean",
+          "description": "Flag confirming consent was granted"
+        },
+        "document_id": {
+          "type": "string",
+          "description": "The ID of the consent document presented to the customer"
+        }
+      },
+      "required": [
+        "granted",
+        "document_id"
+      ]
+    },
+    "DeprecatedAddressDetailsDto": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-3 country code",
+          "example": "USA"
+        },
+        "region": {
+          "type": "string",
+          "description": "Region",
+          "example": "Indiana"
+        },
+        "city": {
+          "type": "string",
+          "description": "City",
+          "example": "Indianapolis"
+        },
+        "street": {
+          "type": "string",
+          "description": "Street",
+          "example": "Snowy Ridge Road"
+        },
+        "house_number": {
+          "type": "string",
+          "description": "House number",
+          "example": "1234"
+        },
+        "apartment_number": {
+          "type": "string",
+          "description": "Apartment number",
+          "example": "12"
+        },
+        "postcode": {
+          "type": "string",
+          "description": "Postcode",
+          "example": "56789"
+        },
+        "full_address": {
+          "type": "string",
+          "description": "Full address",
+          "example": "1234 Snowy Ridge Road Indianapolis, IN 56789"
+        }
+      }
+    },
+    "DeprecatedPersonDto": {
+      "type": "object",
+      "properties": {
+        "given_name": {
+          "type": "string",
+          "description": "Given name",
+          "example": "Marie"
+        },
+        "surname": {
+          "type": "string",
+          "description": "Family name",
+          "example": "Curie"
+        },
+        "gender": {
+          "type": "string",
+          "description": "Gender",
+          "example": "F"
+        },
+        "full_name": {
+          "type": "string",
+          "description": "Full name",
+          "example": "Marie Salomea Sk\u0142odowska-Curies"
+        },
+        "age": {
+          "type": "number",
+          "description": "The person's age, at the current UTC date",
+          "example": 36
+        },
+        "address": {
+          "description": "The person's address",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeprecatedAddressDetailsDto"
+            }
+          ]
+        },
+        "date_of_birth": {
+          "type": "string",
+          "description": "The person's date of birth, as an ISO-8601 string",
+          "example": "1867-11-07T00:00:00.000Z"
+        }
+      }
+    },
+    "DeprecatedDocumentDto": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of this document",
+          "enum": [
+            "national_id",
+            "drivers_license",
+            "passport",
+            "residence_permit",
+            "visa",
+            "firearm_license",
+            "criminal_police_certificate",
+            "health_card",
+            "membership_card",
+            "postal",
+            "social_security_card",
+            "voter_card",
+            "professional_id",
+            "other"
+          ]
+        },
+        "country": {
+          "type": "string",
+          "description": "The country that issued this document, as an ISO 3166-1 alpha-3 code",
+          "example": "USA"
+        },
+        "region": {
+          "type": "string",
+          "description": "Sub-division of the document's issuer within the country. For example, this field will contain the issuing state for a US drivers license but will be empty for a US passport.",
+          "example": "ny"
+        },
+        "issue_date": {
+          "type": "string",
+          "description": "The date the document was issued, as an ISO-8601 string",
+          "example": "1867-11-07T00:00:00.000Z"
+        },
+        "document_serial_number": {
+          "type": "string",
+          "description": "A value that identifies this specific document. When an ID (for example) expires and a new one is issued, the 'id_value' will remain the same but this value will be different.",
+          "example": "1234567"
+        },
+        "id_value": {
+          "type": "string",
+          "description": "The value that identifies this specific person, like an ID number",
+          "example": "123ABC"
+        },
+        "given_name": {
+          "type": "string",
+          "description": "The person's given name, according to this document",
+          "example": "Marie"
+        },
+        "surname": {
+          "type": "string",
+          "description": "The person's surname, according to this document",
+          "example": "Curie"
+        },
+        "full_name": {
+          "type": "string",
+          "description": "The person's full name, according to this document",
+          "example": "Marie Salomea Sk\u0142odowska-Curie"
+        },
+        "date_of_birth": {
+          "type": "string",
+          "description": "The person's date of birth, as an ISO-8601 string",
+          "example": "1867-11-07T00:00:00.000Z"
+        },
+        "valid_until": {
+          "type": "string",
+          "description": "The date the document is expired, as an ISO-8601 string",
+          "example": "1867-11-07T00:00:00.000Z"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ExtractedDetails": {
+      "type": "object",
+      "properties": {
+        "person_details": {
+          "description": "Information about the person in this session",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeprecatedPersonDto"
+            }
+          ]
+        },
+        "document_details": {
+          "description": "Information extracted from the document in this session",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeprecatedDocumentDto"
+            }
+          ]
+        }
+      }
+    },
+    "MockBehavior": {
+      "type": "object",
+      "properties": {
+        "mock_recommendation": {
+          "type": "string",
+          "description": "Deprecated. see 'recommendation'",
+          "deprecated": true,
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY"
+          ]
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "The desired recommendation for this session.\n     See [recommendations](/guides/verify/identity_verification_result/#recommendations)",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY"
+          ]
+        },
+        "processing_time": {
+          "type": "string",
+          "description": "The desired processing time once all the images are captured. Formatted as a duration, e.g \"15s\", \"1m30s\""
+        },
+        "force_retry": {
+          "type": "boolean",
+          "description": "Allows simulating a recapture status. If true, a recapture status will be returned for the first attempt to verify the session"
+        },
+        "info": {
+          "description": "The desired result for extracted info fields",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ExtractedDetails"
+            }
+          ]
+        }
+      }
+    },
+    "StartSessionConfigDto": {
+      "type": "object",
+      "properties": {
+        "consent": {
+          "description": "Consent for the session",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/SessionConsent"
+            }
+          ]
+        }
+      }
+    },
+    "CustomerInformation": {
+      "type": "object",
+      "properties": {
+        "organization_name": {
+          "type": "string",
+          "description": "Name of the organization or branch"
+        },
+        "organization_id": {
+          "type": "string",
+          "description": "Unique ID of the organization"
+        },
+        "external_user_id": {
+          "type": "string",
+          "description": "Unique identifier of a user. It should be one word and shouldn't not include any PII"
+        }
+      }
+    },
+    "CreateSessionRequest": {
+      "type": "object",
+      "properties": {
+        "callback_url": {
+          "type": "string",
+          "description": "The url that the user will be redirected to once the verification process completes. It will contain the session ID used to obtain the verification result"
+        },
+        "state": {
+          "type": "string",
+          "description": "An opaque string that is used to maintain state between the request and the callback, so it should be unique per request. It will be added as a URL parameter (named state) to the callback URL. The URL parameter should be validated by your server to protect against cross-site request forgery (CSRF) attacks"
+        },
+        "time_to_live": {
+          "type": "string",
+          "description": "The time after which this session will be deleted (including all images and verification data). Once deleted, it will no longer be visible in the Admin Portal and the verification result won't be available via API. It should be formatted as a duration, e.g \"30d\", \"60d\", \"90d\". Defaults to \"90d\", which is 90 days.",
+          "deprecated": true,
+          "example": "90d",
+          "default": "90d"
+        },
+        "mock_behavior": {
+          "description": "Sets the behavior for the session for testing purposes only. For example, you can simulate a flow that results in a specific recommendation without performing an actual verification.",
+          "example": null,
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/MockBehavior"
+            }
+          ]
+        },
+        "auto_start": {
+          "type": "boolean",
+          "description": "Deprecated. See 'start'",
+          "deprecated": true
+        },
+        "start": {
+          "description": "Automatically start the session upon creation. If you intend to send this session to a frontend component (app, sdk, etc), leave this parameter empty - the session will be started by the frontend. However if you want to operate this session via your backend server, this parameter should be filled in.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/StartSessionConfigDto"
+            }
+          ]
+        },
+        "customer_information": {
+          "description": "Additional customer information for this session. This information should not contain any PII data.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/CustomerInformation"
+            }
+          ]
+        }
+      }
+    },
+    "CreateSessionResponse": {
+      "type": "object",
+      "properties": {
+        "start_token": {
+          "type": "string",
+          "description": "A single-use token that is used in the request to initiate the verification process. It will bind the session to the device. In case of an auto-start session, this token won't be returned"
+        },
+        "session_id": {
+          "type": "string",
+          "description": "ID of the new verification session, which can be used to check the status and the result"
+        },
+        "expiration": {
+          "type": "string",
+          "description": "The expiration date of this session"
+        },
+        "missing_images": {
+          "type": "array",
+          "description": "The additional image types that need to be added",
+          "items": {
+            "type": "string",
+            "enum": [
+              "document_front",
+              "document_back",
+              "selfie"
+            ]
+          }
+        }
+      },
+      "required": [
+        "session_id",
+        "expiration",
+        "missing_images"
+      ]
+    },
+    "PersonDto": {
+      "type": "object",
+      "properties": {
+        "full_name": {
+          "type": "string",
+          "description": "Full name",
+          "example": "Marie Salomea Sk\u0142odowska-Curies"
+        },
+        "given_name": {
+          "type": "string",
+          "description": "Given name",
+          "example": "Marie"
+        },
+        "surname": {
+          "type": "string",
+          "description": "Family name",
+          "example": "Curies"
+        },
+        "gender": {
+          "type": "string",
+          "description": "Gender",
+          "enum": [
+            "male",
+            "female",
+            "other"
+          ],
+          "example": "female"
+        },
+        "national_id": {
+          "type": "string",
+          "description": "The value that identifies this specific person, like an ID number",
+          "example": "123ABC"
+        },
+        "date_of_birth": {
+          "type": "string",
+          "description": "The person's date of birth, as an ISO-8601 string",
+          "example": "1867-11-07T00:00:00.000Z"
+        },
+        "age": {
+          "type": "number",
+          "description": "The person's age, at the time the verification was created. This is a derived field and is not present in the original document. It is calculated from the date of birth and the current date.",
+          "example": 35
+        }
+      }
+    },
+    "DocumentDto": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "The country that issued this document, as an ISO 3166 alpha-2 code",
+          "example": "US"
+        },
+        "region": {
+          "type": "string",
+          "description": "Sub-division of the document's issuer within the country. For example, this field will contain the issuing state for a US drivers license but will be empty for a US passport. Given as a as an ISO 3166 alpha-2 code",
+          "example": "NY"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of this document",
+          "enum": [
+            "national_id",
+            "drivers_license",
+            "passport",
+            "residence_permit",
+            "visa",
+            "firearm_license",
+            "criminal_police_certificate",
+            "health_card",
+            "membership_card",
+            "postal",
+            "social_security_card",
+            "voter_card",
+            "professional_id",
+            "other"
+          ]
+        },
+        "number": {
+          "type": "string",
+          "description": "This value identifies the document and the person attached to it.",
+          "example": "1234567"
+        },
+        "serial_number": {
+          "type": "string",
+          "description": "This value identifies the document itself and not the person attached to it. This property isn't present on all document types, but when it is, the value will change when a document is renewed or reissued. This value is only meaningful in the context of the specific document's country and type",
+          "example": "1234567"
+        },
+        "issue_date": {
+          "type": "string",
+          "description": "The date the document was issued, as an ISO-8601 string",
+          "example": "1867-11-07T00:00:00.000Z"
+        },
+        "expiration_date": {
+          "type": "string",
+          "description": "The date the document is expired, as an ISO-8601 string",
+          "example": "1867-11-07T00:00:00.000Z"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AddressDto": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-3 country code",
+          "example": "USA"
+        },
+        "region": {
+          "type": "string",
+          "description": "Region",
+          "example": "Indiana"
+        },
+        "city": {
+          "type": "string",
+          "description": "City",
+          "example": "Indianapolis"
+        },
+        "street": {
+          "type": "string",
+          "description": "Street",
+          "example": "Snowy Ridge Road"
+        },
+        "house_number": {
+          "type": "string",
+          "description": "House number",
+          "example": "1234"
+        },
+        "apartment_number": {
+          "type": "string",
+          "description": "Apartment number",
+          "example": "12"
+        },
+        "postcode": {
+          "type": "string",
+          "description": "Postcode",
+          "example": "56789"
+        },
+        "full_address": {
+          "type": "string",
+          "description": "Full address",
+          "example": "1234 Snowy Ridge Road Indianapolis, IN 56789"
+        }
+      }
+    },
+    "NationalStatusDto": {
+      "type": "object",
+      "properties": {
+        "citizen": {
+          "type": "boolean",
+          "description": "Indicates if the person is a citizen of the issuing country"
+        },
+        "resident": {
+          "type": "boolean",
+          "description": "Indicates if the person is a permanent resident of the issuing country"
+        }
+      }
+    },
+    "EmploymentDto": {
+      "type": "object",
+      "properties": {
+        "profession": {
+          "type": "string",
+          "description": "The person's profession"
+        }
+      }
+    },
+    "AdditionalInfoDto": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "description": "The person's address",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AddressDto"
+            }
+          ]
+        },
+        "national_status": {
+          "description": "The person's national status",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/NationalStatusDto"
+            }
+          ]
+        },
+        "employment": {
+          "description": "The person's employment information",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/EmploymentDto"
+            }
+          ]
+        }
+      }
+    },
+    "DocumentValidationCheckDto": {
+      "type": "object",
+      "properties": {
+        "recommendation": {
+          "type": "string",
+          "description": "The recommendation of the check.",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY",
+            "N/A"
+          ],
+          "example": "DENY"
+        },
+        "reasons": {
+          "type": "array",
+          "description": "Machine-readable rejection reasons.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "data_extraction_failed",
+              "data_validation_failed",
+              "data_comparison_failed",
+              "mrz_check_digits_invalid"
+            ]
+          }
+        }
+      },
+      "required": [
+        "recommendation"
+      ]
+    },
+    "DocumentAuthenticationCheckDto": {
+      "type": "object",
+      "properties": {
+        "recommendation": {
+          "type": "string",
+          "description": "The recommendation of the check.",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY",
+            "N/A"
+          ],
+          "example": "DENY"
+        },
+        "reasons": {
+          "type": "array",
+          "description": "Machine-readable rejection reasons.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "face_tampering",
+              "face_not_found",
+              "missing_security_features",
+              "document_tampering",
+              "document_text_tampering",
+              "wrong_font",
+              "document_damaged",
+              "document_template_mismatch"
+            ]
+          }
+        }
+      },
+      "required": [
+        "recommendation"
+      ]
+    },
+    "DocumentLivenessCheckDto": {
+      "type": "object",
+      "properties": {
+        "recommendation": {
+          "type": "string",
+          "description": "The recommendation of the check.",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY",
+            "N/A"
+          ],
+          "example": "DENY"
+        },
+        "reasons": {
+          "type": "array",
+          "description": "Machine-readable rejection reasons.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "presentation_attack"
+            ]
+          }
+        }
+      },
+      "required": [
+        "recommendation"
+      ]
+    },
+    "BiometricMatchingCheckDto": {
+      "type": "object",
+      "properties": {
+        "recommendation": {
+          "type": "string",
+          "description": "The recommendation of the check.",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY",
+            "N/A"
+          ],
+          "example": "DENY"
+        },
+        "reasons": {
+          "type": "array",
+          "description": "Machine-readable rejection reasons.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "biometric_mismatch",
+              "age_mismatch",
+              "gender_mismatch"
+            ]
+          }
+        }
+      },
+      "required": [
+        "recommendation"
+      ]
+    },
+    "BiometricLivenessCheckDto": {
+      "type": "object",
+      "properties": {
+        "recommendation": {
+          "type": "string",
+          "description": "The recommendation of the check.",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY",
+            "N/A"
+          ],
+          "example": "DENY"
+        },
+        "reasons": {
+          "type": "array",
+          "description": "Machine-readable rejection reasons.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "screen_capture",
+              "printed_copy_capture",
+              "printed_cutout",
+              "mask_detected",
+              "injection_attack_detected",
+              "selfie_liveness_attack",
+              "multiple_faces_detected"
+            ]
+          }
+        }
+      },
+      "required": [
+        "recommendation"
+      ]
+    },
+    "FlaggedIdentityCheckDto": {
+      "type": "object",
+      "properties": {
+        "recommendation": {
+          "type": "string",
+          "description": "The recommendation of the check.",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY",
+            "N/A"
+          ],
+          "example": "DENY"
+        },
+        "reasons": {
+          "type": "array",
+          "description": "Machine-readable rejection reasons.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "multiple_same_identity_attempts",
+              "previous_document_fraud",
+              "previous_face_fraud"
+            ]
+          }
+        }
+      },
+      "required": [
+        "recommendation"
+      ]
+    },
+    "RiskRecommendationCheckDto": {
+      "type": "object",
+      "properties": {
+        "recommendation": {
+          "type": "string",
+          "description": "The recommendation of the check.",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY",
+            "N/A"
+          ],
+          "example": "DENY"
+        },
+        "reasons": {
+          "type": "array",
+          "description": "Machine-readable [reasons](/guides/risk/recommendations.md) forwarded from Fraud Prevention services.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "action_is_legit",
+              "action_is_suspected_fraud",
+              "behavior_bot_typing",
+              "behavior_bot",
+              "behavior_inhuman_input",
+              "behavior_suspicious_input",
+              "behavior_suspicious_movement",
+              "device_bot",
+              "device_cookie_reused",
+              "device_emulated_gpu",
+              "device_emulator",
+              "device_history_suspicious_fingerprint",
+              "device_impossible_travel",
+              "device_incognito_browser",
+              "device_old_version",
+              "device_origin_anomaly",
+              "device_platform_anomaly",
+              "device_platform_automation",
+              "device_private_browser",
+              "device_profile_velocity",
+              "device_risky_reputation",
+              "device_rooted",
+              "device_spoofed",
+              "device_suspected_bot",
+              "device_suspicious_cpu_core",
+              "device_suspicious_display",
+              "device_suspicious_language",
+              "device_suspicious_network",
+              "device_suspicious_platform",
+              "device_suspicious_timezone",
+              "device_suspicious_useragent",
+              "device_suspicious_velocity",
+              "device_takeover",
+              "device_tampered",
+              "device_vm",
+              "ip_action_velocity",
+              "ip_country_blocked",
+              "ip_is_biz",
+              "ip_is_gov",
+              "ip_is_mil",
+              "ip_is_vpn",
+              "ip_risky_anonymize",
+              "ip_risky_reputation",
+              "ip_trusted",
+              "profile_action_velocity",
+              "profile_activity_anomaly",
+              "profile_device_anomaly",
+              "profile_device_familiar_model",
+              "profile_device_familiar",
+              "profile_device_new",
+              "profile_device_velocity",
+              "profile_familiar",
+              "profile_impossible_travel",
+              "profile_ip_familiar",
+              "profile_location_anomaly",
+              "profile_location_new",
+              "profile_network_anomaly",
+              "profile_trusted",
+              "user_profile_anomaly",
+              "user_trusted",
+              "other"
+            ]
+          }
+        }
+      },
+      "required": [
+        "recommendation"
+      ]
+    },
+    "RiskDetailsGeneralDto": {
+      "type": "object",
+      "properties": {
+        "correlation_id": {
+          "type": "string",
+          "description": "Unique correlation ID for the verification action.",
+          "example": "SUMCposIdWZfgNp"
+        },
+        "action_type": {
+          "type": "string",
+          "description": "Type of action assessed by Fraud Prevention.",
+          "example": "identity_verification"
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "Fraud Prevention recommendation for the verification action.",
+          "example": "rejected"
+        },
+        "risk_score": {
+          "type": "number",
+          "format": "float",
+          "description": "Risk score calculated by Fraud Prevention.",
+          "example": 94.6
+        }
+      }
+    },
+    "RiskDetailsDeviceDto": {
+      "type": "object",
+      "properties": {
+        "os": {
+          "type": "string",
+          "description": "Operating system used by the device.",
+          "example": "Android"
+        },
+        "browser": {
+          "type": "string",
+          "description": "Browser used by the device.",
+          "example": "Chrome"
+        },
+        "device_id": {
+          "type": "string",
+          "description": "Unique device identifier.",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+        },
+        "device_fingerprint": {
+          "type": "string",
+          "description": "Device fingerprint hash.",
+          "example": "4ebf21edcb4297363ad239386fc6e45e34123045f6ac7b9da93c415d7cb60bdc"
+        },
+        "device_type": {
+          "type": "string",
+          "enum": [
+            "mobile",
+            "desktop"
+          ],
+          "description": "Type of device used for the verification.",
+          "example": "mobile"
+        },
+        "device_model": {
+          "type": "string",
+          "description": "Device model used for the verification.",
+          "example": "SM-G955U"
+        },
+        "device_timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timestamp of the device event, in epoch milliseconds.",
+          "example": 1777462766771
+        },
+        "timezone": {
+          "type": "string",
+          "description": "Device timezone.",
+          "example": "Asia/Jerusalem"
+        },
+        "incognito": {
+          "type": "boolean",
+          "description": "Indicates whether incognito mode was detected.",
+          "example": false
+        },
+        "tampered": {
+          "type": "boolean",
+          "description": "Indicates whether device tampering was detected.",
+          "example": false
+        },
+        "emulated": {
+          "type": "boolean",
+          "description": "Indicates whether an emulator was detected.",
+          "example": false
+        },
+        "spoofed": {
+          "type": "boolean",
+          "description": "Indicates whether device spoofing was detected.",
+          "example": true
+        },
+        "esim": {
+          "type": "boolean",
+          "description": "Indicates whether eSIM information was detected.",
+          "example": false
+        }
+      }
+    },
+    "RiskDetailsNetworkDto": {
+      "type": "object",
+      "properties": {
+        "network_country": {
+          "type": "string",
+          "description": "Country detected from the network.",
+          "example": "IE"
+        },
+        "ip_address": {
+          "type": "string",
+          "description": "IP address (IPv4 or IPv6) detected from the network.",
+          "example": "192.168.1.1"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "Type of IP address detected.",
+          "example": "hosting"
+        },
+        "ip_organization": {
+          "type": "string",
+          "description": "Organization associated with the IP address.",
+          "example": "Amazon.com, Inc."
+        },
+        "timezone": {
+          "type": "string",
+          "description": "Timezone detected from the IP address.",
+          "example": "Europe/Dublin"
+        },
+        "vpn": {
+          "type": "boolean",
+          "description": "Indicates whether VPN usage was detected.",
+          "example": false
+        },
+        "tor": {
+          "type": "boolean",
+          "description": "Indicates whether Tor usage was detected.",
+          "example": false
+        },
+        "proxy": {
+          "type": "boolean",
+          "description": "Indicates whether proxy usage was detected.",
+          "example": false
+        },
+        "anonymizer": {
+          "type": "boolean",
+          "description": "Indicates whether anonymizer usage was detected.",
+          "example": false
+        }
+      }
+    },
+    "RiskDetailsDto": {
+      "type": "object",
+      "properties": {
+        "general": {
+          "description": "General Fraud Prevention details for the verification action.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/RiskDetailsGeneralDto"
+            }
+          ]
+        },
+        "device": {
+          "description": "Device risk details collected during the verification flow.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/RiskDetailsDeviceDto"
+            }
+          ]
+        },
+        "network": {
+          "description": "Network risk details collected during the verification flow.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/RiskDetailsNetworkDto"
+            }
+          ]
+        },
+        "recommendation_reasons": {
+          "type": "array",
+          "description": "Risk signals that contributed to the recommendation.",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "DEVICE_SPOOFED_BY_USERAGENT",
+            "DEVICE_SUSPICIOUS_PLATFORM_OS",
+            "DEVICE_VERY_OLD_VERSION",
+            "DEVICE_PLATFORM_ANOMALY",
+            "DEVICE_IP_TIMEZONE_MISMATCH",
+            "IP_RISKY_REPUTATION",
+            "DEVICE_NEW"
+          ]
+        }
+      }
+    },
+    "SessionChecksDto": {
+      "type": "object",
+      "properties": {
+        "document_validation": {
+          "description": "Checks that the data extracted from the document is valid and matches the document template.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DocumentValidationCheckDto"
+            }
+          ]
+        },
+        "document_authentication": {
+          "description": "Checks that the document is authentic and that there are no signs of tampering.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DocumentAuthenticationCheckDto"
+            }
+          ]
+        },
+        "document_liveness": {
+          "description": "Checks that the document is a real live document (e.g., not a screen capture).",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DocumentLivenessCheckDto"
+            }
+          ]
+        },
+        "biometric_matching": {
+          "description": "Checks that the selfie is a biometric match to the picture extracted from the document.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/BiometricMatchingCheckDto"
+            }
+          ]
+        },
+        "biometric_liveness": {
+          "description": "Checks that the selfie is a real live person (e.g., not a screen capture).",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/BiometricLivenessCheckDto"
+            }
+          ]
+        },
+        "flagged_identity": {
+          "description": "Checks the session against previous sessions identifying suspicious fraudulent behavior (e.g., previous face fraud).",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/FlaggedIdentityCheckDto"
+            }
+          ]
+        },
+        "risk_recommendation": {
+          "description": "Assesses the risk throughout the verification process using a built-in integration with our [Fraud Prevention](/guides/risk/overview.md) services. This is used to detect risk signals, such as bots, spoofed devices, behavioral anomalies, malicious networks, and more.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/RiskRecommendationCheckDto"
+            }
+          ]
+        }
+      }
+    },
+    "VerificationImageDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Image ID"
+        },
+        "type": {
+          "type": "string",
+          "description": "Image type",
+          "enum": [
+            "document_front",
+            "document_back",
+            "selfie"
+          ],
+          "example": "document_front"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "CompleteSessionResult": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "description": "ID of the verification session"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the verification session.\n     See [verification statuses](/guides/verify/identity_verification_result/#verification-status)",
+          "enum": [
+            "complete"
+          ]
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "Aggregated result of the verification checks.\n    See [recommendations]( /guides/verify/identity_verification_result/#recommendations)",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY"
+          ],
+          "example": "DENY"
+        },
+        "risk_details": {
+          "description": "Detailed risk information collected during the verification flow.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/RiskDetailsDto"
+            }
+          ]
+        },
+        "person": {
+          "description": "Information about the person in this session.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/PersonDto"
+            }
+          ]
+        },
+        "document": {
+          "description": "Information about the document in this session.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DocumentDto"
+            }
+          ]
+        },
+        "additional_info": {
+          "description": "Additional information extracted from this session.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AdditionalInfoDto"
+            }
+          ]
+        },
+        "checks": {
+          "description": "The verification checks performed in this session.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/SessionChecksDto"
+            }
+          ]
+        },
+        "verification_images": {
+          "type": "array",
+          "description": "Images used for verification",
+          "items": {
+            "$ref": "#/components/schemas/VerificationImageDto"
+          }
+        }
+      },
+      "required": [
+        "session_id",
+        "status",
+        "recommendation",
+        "person",
+        "document",
+        "checks",
+        "verification_images"
+      ]
+    },
+    "IncompleteSessionResult": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "description": "ID of the verification session"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the verification session.\n     See [verification statuses](/guides/verify/identity_verification_result/#verification-status)",
+          "enum": [
+            "pending",
+            "capturing",
+            "processing",
+            "recapture",
+            "error"
+          ]
+        }
+      },
+      "required": [
+        "session_id",
+        "status"
+      ]
+    },
+    "DeprecatedExtractedInfoDto": {
+      "type": "object",
+      "properties": {
+        "document": {
+          "description": "Info extracted from the verification session. Returned only if the verification was completed",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeprecatedDocumentDto"
+            }
+          ]
+        },
+        "person": {
+          "description": "Information about the person in this session",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeprecatedPersonDto"
+            }
+          ]
+        }
+      }
+    },
+    "VerifiedInfoDto": {
+      "type": "object",
+      "properties": {
+        "person": {
+          "description": "Information about the person identified by this session",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeprecatedPersonDto"
+            }
+          ]
+        },
+        "document": {
+          "description": "Information from the documents of this session",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeprecatedDocumentDto"
+            }
+          ]
+        }
+      }
+    },
+    "DeprecatedSessionResult": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "description": "ID of the verification session"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the verification session.\n     See [verification statuses](/guides/verify/identity_verification_result/#verification-status)",
+          "enum": [
+            "pending",
+            "capturing",
+            "processing",
+            "recapture",
+            "complete",
+            "error"
+          ]
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "Aggregated result of the verification checks. Returned only if the verification was completed.\n    See [recommendations]( /guides/verify/identity_verification_result/#recommendations)",
+          "enum": [
+            "ALLOW",
+            "CHALLENGE",
+            "DENY"
+          ]
+        },
+        "rejection_description": {
+          "description": "Human-readable description of any issues with this session. Not returned if the recommendation is ALLOW",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extracted_info": {
+          "description": "Information extracted from this session, but not guaranteed to be verified. Not returned if the recommendation is ALLOW",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeprecatedExtractedInfoDto"
+            }
+          ]
+        },
+        "verified_info": {
+          "description": "Info verified in the verification session. Returned only if the recommendation is ALLOW",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/VerifiedInfoDto"
+            }
+          ]
+        }
+      },
+      "required": [
+        "session_id",
+        "status"
+      ]
+    },
+    "SessionImageDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the image"
+        },
+        "format": {
+          "type": "string",
+          "description": "The data format of the image. Currently, only jpg is supported"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of content in the image",
+          "enum": [
+            "document_front",
+            "document_back",
+            "selfie"
+          ]
+        },
+        "rejected": {
+          "type": "boolean",
+          "description": "true if the image was rejected for processing - i.e it's too blurry, the document is obstructed, etc"
+        },
+        "original": {
+          "type": "boolean",
+          "description": "True if this is the original image uploaded by the user, false if it was refined by our system"
+        },
+        "original_id": {
+          "type": "string",
+          "description": "The ID of the original image, if this is a refined image"
+        }
+      },
+      "required": [
+        "id",
+        "rejected",
+        "original"
+      ]
+    },
+    "SessionImagesResponse": {
+      "type": "object",
+      "properties": {
+        "session_images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/SessionImageDto"
+          }
+        }
+      },
+      "required": [
+        "session_images"
+      ]
+    },
+    "GetConsentApprovalResponse": {
+      "type": "object",
+      "properties": {
+        "consent_granted": {
+          "type": "boolean",
+          "description": "An indication of whether a user has approved the consent or not"
+        },
+        "consent_date": {
+          "type": "string",
+          "description": "The timestamp of the consent approval. Returned empty if consent was not granted"
+        }
+      },
+      "required": [
+        "consent_granted"
+      ]
+    },
+    "CaptureMargins": {
+      "type": "object",
+      "properties": {
+        "top": {
+          "type": "number",
+          "description": "The top margin of captured area on image"
+        },
+        "bottom": {
+          "type": "number",
+          "description": "The bottom margin of captured area on image"
+        },
+        "left": {
+          "type": "number",
+          "description": "The left margin of captured area on image"
+        },
+        "right": {
+          "type": "number",
+          "description": "The right margin of captured area on image"
+        }
+      },
+      "required": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ]
+    },
+    "ImageDto": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "The data format of the image. Currently, only jpg is supported\".",
+          "example": "jpg"
+        },
+        "image_type": {
+          "type": "string",
+          "description": "The type of content in the image",
+          "enum": [
+            "document_front",
+            "document_back",
+            "selfie"
+          ],
+          "example": "document_front"
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the image, as a base64 string. Image requirements: min width 640px, max width 3840px, min height 480px, max height 2160px.",
+          "example": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+        },
+        "capture_margins": {
+          "description": "The coordinates of the image area to process, which typically corresponds to the capture area that guides the user when taking a picture. If defined, the image is cropped using the specified margins before processing. Otherwise, the whole image is used.",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/CaptureMargins"
+            }
+          ]
+        },
+        "image_id": {
+          "type": "string",
+          "description": "A unique identifier for the image, generated by the client"
+        }
+      },
+      "required": [
+        "format",
+        "image_type",
+        "content"
+      ]
+    },
+    "DeviceCameraInfoDto": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "The device camera label"
+        }
+      }
+    },
+    "DeviceInfoDto": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The device model"
+        },
+        "type": {
+          "type": "string",
+          "description": "The device type"
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "The device manufacturer"
+        },
+        "os": {
+          "type": "string",
+          "description": "The device operating system"
+        },
+        "os_version": {
+          "type": "string",
+          "description": "The device operating system version"
+        },
+        "browser": {
+          "type": "string",
+          "description": "The device browser"
+        },
+        "browser_version": {
+          "type": "string",
+          "description": "The device browser version"
+        },
+        "used_camera": {
+          "description": "Information about the device camera that was used to capture the image",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeviceCameraInfoDto"
+            }
+          ]
+        },
+        "cameras": {
+          "description": "List of device cameras that were available to capture the image",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/DeviceCameraInfoDto"
+          }
+        }
+      }
+    },
+    "AddImageRequest": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "description": "The image to add",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/ImageDto"
+            }
+          ]
+        },
+        "device_info": {
+          "description": "The device information",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/DeviceInfoDto"
+            }
+          ]
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "AddImagesResponse": {
+      "type": "object",
+      "properties": {
+        "feedback": {
+          "type": "string",
+          "description": "Feedback for the submitted image",
+          "enum": [
+            "ok",
+            "other",
+            "document_not_found",
+            "face_not_found",
+            "document_face_not_found",
+            "obstructed",
+            "blur",
+            "glare",
+            "document_not_supported",
+            "document_not_matching",
+            "wrong_document_side",
+            "multi_face",
+            "face_rotated",
+            "face_too_small",
+            "face_too_close",
+            "closed_eyes",
+            "face_angle_too_large",
+            "face_close_to_border",
+            "face_occluded",
+            "face_cropped",
+            "barcode_not_found",
+            "glare_selfie",
+            "blur_selfie",
+            "restricted_criteria"
+          ]
+        },
+        "complete": {
+          "type": "boolean",
+          "description": "Indicates whether all the images required for the verification check were received",
+          "example": "false"
+        },
+        "missing_images": {
+          "type": "array",
+          "description": "The additional image types that need to be added",
+          "items": {
+            "type": "string",
+            "enum": [
+              "document_front",
+              "document_back",
+              "selfie"
+            ]
+          }
+        },
+        "custom_feedback": {
+          "type": "string",
+          "description": "Custom feedback corresponding to the restricted criteria (as configured in the Admin Portal)"
+        }
+      },
+      "required": [
+        "feedback",
+        "complete",
+        "missing_images"
+      ]
+    }
+  }
+}

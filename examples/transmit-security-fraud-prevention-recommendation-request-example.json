@@ -1,0 +1,13 @@
+{
+  "action_type": "login",
+  "user_id": "user-12345",
+  "session_id": "sess-abc123",
+  "context": {
+    "ip": "203.0.113.42",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "coordinates": {
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    }
+  }
+}

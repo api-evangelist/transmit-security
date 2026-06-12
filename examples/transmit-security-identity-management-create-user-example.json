@@ -1,0 +1,11 @@
+{
+  "email": "user@example.com",
+  "phone_number": "+15555551234",
+  "username": "john.doe",
+  "name": {
+    "given_name": "John",
+    "family_name": "Doe"
+  },
+  "external_user_id": "ext-user-12345",
+  "language": "en"
+}

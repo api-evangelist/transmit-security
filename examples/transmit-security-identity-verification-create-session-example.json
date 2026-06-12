@@ -1,0 +1,6 @@
+{
+  "user_id": "user-12345",
+  "session_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "document_type": "passport",
+  "country": "US"
+}

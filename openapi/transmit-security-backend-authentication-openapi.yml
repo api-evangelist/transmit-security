@@ -1,0 +1,742 @@
+openapi: 3.0.3
+info:
+  title: One-Time Login
+  description: >-
+    Login users using one-time login methods like magic links or OTPs. This
+    implements a backend-to-backend integration for authentication.
+  version: ''
+servers:
+  - url: https://api.sbx.transmitsecurity.io/cis
+    description: Sandbox environment
+  - url: https://api.transmitsecurity.io/cis
+    description: Production environment (US)
+  - url: https://api.eu.transmitsecurity.io/cis
+    description: Production environment (EU)
+  - url: https://api.ca.transmitsecurity.io/cis
+    description: Production environment (CA)
+  - url: https://api.au.transmitsecurity.io/cis
+    description: Production environment (AU)
+security: []
+paths:
+  /v1/auth/link/email/send:
+    post:
+      operationId: sendMagicLinkEmail
+      summary: Send email link
+      description: >-
+        Send a magic link by email to a user. Upon clicking the email link, the
+        User Agent will be redirected to the requested redirect URI with a code
+        (passed in the `code` query parameter). This code can be used to
+        complete the authentication in the subsequent request.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: >-
+                    #/components/schemas/ApiMagicLinkInitWithIdentifierRequestDto
+                - $ref: '#/components/schemas/ApiMagicLinkInitWithEmailRequestDto'
+      responses:
+        '200':
+          description: Backend auth initialized successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSendEmailResponse'
+        '400':
+          content:
+            application/json:
+              examples:
+                redirectUriNotAllowed:
+                  value:
+                    error_code: '400'
+                    message: >-
+                      redirect_uri is not one of the allowed redirect URIs
+                      configured for this app
+                  description: >-
+                    redirect_uri is not one of the allowed redirect URIs
+                    configured for this app
+          description: ''
+        '403':
+          content:
+            application/json:
+              examples:
+                signupNotAllowed:
+                  value:
+                    error_code: '403'
+                    message: Public signup is not allowed for this application
+                  description: Public signup is not allowed for this application
+                userNotActive:
+                  value:
+                    error_code: '403'
+                    message: User is not active
+                  description: User is not active
+          description: ''
+        '404':
+          content:
+            application/json:
+              examples:
+                appNotFound:
+                  value:
+                    error_code: '404'
+                    message: App not found
+                  description: App not found
+                userNotFound:
+                  value:
+                    error_code: '404'
+                    message: User not found
+                  description: User not found
+          description: ''
+      security:
+        - ClientAccessToken: []
+  /v1/auth/link/email/authenticate:
+    post:
+      operationId: authenticateMagicLink
+      summary: Authenticate email link
+      description: >-
+        Authenticate a user using the email magic link you sent them. Upon
+        clicking the email link, a code was returned to your redirect URI as the
+        `code` query parameter. This API validates this code and returns user
+        tokens.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiMagicLinkTokenRequestDto'
+      responses:
+        '200':
+          description: Returns user tokens
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiTokenResponse'
+        '400':
+          content:
+            application/json:
+              examples:
+                invalidMagicLinkCode:
+                  value:
+                    error_code: '400'
+                    message: Invalid magic link code
+                  description: Invalid magic link code
+                userNotFound:
+                  value:
+                    error_code: '400'
+                    message: User not found
+                  description: User not found
+                sessionNotFound:
+                  value:
+                    error_code: '400'
+                    message: Session not found
+                  description: Session not found
+          description: ''
+      security:
+        - ClientAccessToken: []
+  /v1/auth/otp/send:
+    post:
+      operationId: sendOTP
+      summary: Send OTP
+      description: >-
+        Send a one-time passcode to a user by email or SMS, or retrieve the code
+        directly in the response to deliver it out-of-band — for example, when
+        an admin generates a temporary access code on behalf of a user.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiOtpInitRequestDto'
+      responses:
+        '200':
+          description: Backend auth initialized successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSendOtpResponse'
+        '400':
+          description: Invalid input or configuration errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    enum:
+                      - system_invalid_input
+                      - external_provider_configuration_error
+                  message:
+                    type: string
+        '403':
+          description: User not active or OTP login preferences not configured
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    enum:
+                      - user_not_active
+                      - auth_login_preferences_missing
+                  message:
+                    type: string
+        '404':
+          description: User or configuration not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    enum:
+                      - user_not_found
+                      - user_email_address_missing
+                      - user_phone_number_missing
+                      - auth_login_preferences_missing
+                  message:
+                    type: string
+      security:
+        - ClientAccessToken: []
+  /v1/auth/otp/authenticate:
+    post:
+      operationId: authenticateOTP
+      summary: Authenticate OTP
+      description: >-
+        Authenticates a user using a one-time passcode that was sent to them by
+        email or SMS. This API validates the code provided by the user and
+        returns user tokens.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiOtpTokenRequestDto'
+      responses:
+        '200':
+          description: Returns user tokens
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiTokenResponse'
+        '400':
+          description: Invalid credentials or passcode expired
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    enum:
+                      - system_invalid_input
+                      - auth_invalid_credentials
+                      - auth_otp_passcode_expired
+                  message:
+                    type: string
+        '403':
+          description: One time code invalid due to multiple failed attempts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    enum:
+                      - auth_locked
+                  message:
+                    type: string
+      security:
+        - ClientAccessToken: []
+components:
+  schemas:
+    ApiMagicLinkInitWithIdentifierRequestDto:
+      type: object
+      properties:
+        device_id:
+          type: string
+          description: >-
+            Identifier of the device from which the authentication request
+            originates
+          maxLength: 80
+        redirect_uri:
+          type: string
+          example: https://www.example.com/verify
+          description: >-
+            URI that receives a code when the user clicks the email link. This
+            is your server GET endpoint used to complete the authentication, and
+            should accept 'code' as a query parameter. This URI must be
+            configured as an allowed redirect URI for your Transmit client.
+        email_content:
+          description: Texts, logo and color to render email template with
+          allOf:
+            - $ref: '#/components/schemas/EmailContentAttributes'
+        state:
+          type: string
+          description: >-
+            An opaque string that is used to maintain state between the request
+            and the callback. It will be added to the redirect URI as a query
+            parameter, which should be validated by your server to protect
+            against cross-site request forgery (CSRF) attacks
+        email_expiration:
+          type: number
+          description: invitation link expiration in minutes
+        channel:
+          type: string
+          enum:
+            - email
+            - direct
+          description: Channel to use to send the magic link
+        client_attributes:
+          description: Client attributes
+          allOf:
+            - $ref: '#/components/schemas/ClientAttributes'
+        generate_request_id:
+          type: boolean
+          description: >-
+            The request ID can serve as an additional security identifier for
+            authentication requests. When set to 'false' (by default), the
+            request ID isn't returned. When set to 'true',  Mosaic generates a
+            unique request ID that must be included in the subsequent
+            Authenticate OTP request along with other required parameters.
+          default: false
+        identifier:
+          type: string
+          example: name@example.com
+          description: >-
+            Identifier value (email, phone number, user ID, or custom
+            identifier)
+        identifier_type:
+          type: string
+          example: email
+          description: >-
+            Type of identifier (email, phone_number, user_id, username, or
+            custom identifier type)
+      required:
+        - redirect_uri
+        - identifier
+        - identifier_type
+    ApiMagicLinkInitWithEmailRequestDto:
+      type: object
+      properties:
+        device_id:
+          type: string
+          description: >-
+            Identifier of the device from which the authentication request
+            originates
+          maxLength: 80
+        redirect_uri:
+          type: string
+          example: https://www.example.com/verify
+          description: >-
+            URI that receives a code when the user clicks the email link. This
+            is your server GET endpoint used to complete the authentication, and
+            should accept 'code' as a query parameter. This URI must be
+            configured as an allowed redirect URI for your Transmit client.
+        email_content:
+          description: Texts, logo and color to render email template with
+          allOf:
+            - $ref: '#/components/schemas/EmailContentAttributes'
+        state:
+          type: string
+          description: >-
+            An opaque string that is used to maintain state between the request
+            and the callback. It will be added to the redirect URI as a query
+            parameter, which should be validated by your server to protect
+            against cross-site request forgery (CSRF) attacks
+        email_expiration:
+          type: number
+          description: invitation link expiration in minutes
+        channel:
+          type: string
+          enum:
+            - email
+            - direct
+          description: Channel to use to send the magic link
+        client_attributes:
+          description: Client attributes
+          allOf:
+            - $ref: '#/components/schemas/ClientAttributes'
+        generate_request_id:
+          type: boolean
+          description: >-
+            The request ID can serve as an additional security identifier for
+            authentication requests. When set to 'false' (by default), the
+            request ID isn't returned. When set to 'true',  Mosaic generates a
+            unique request ID that must be included in the subsequent
+            Authenticate OTP request along with other required parameters.
+          default: false
+        email:
+          type: string
+          example: name@example.com
+          description: >-
+            Email of the user (deprecated, use identifier and identifier_type
+            instead)
+          deprecated: true
+      required:
+        - redirect_uri
+        - email
+    ApiSendEmailResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Email sent successfully
+      required:
+        - message
+    ApiMagicLinkTokenRequestDto:
+      type: object
+      properties:
+        resource:
+          type: string
+          description: >-
+            Resource URI the authentication request is attempting to access,
+            which is reflected in the audience (`aud` claim) of the access
+            token. This must be configured as resource for the application.
+        claims:
+          example:
+            id_token:
+              roles: null
+          description: >-
+            Used to request additional claims in the ID token, such as roles,
+            permissions, and other user profile data. The structure is per the
+            [OIDC
+            Standard](https://openid.net/specs/openid-connect-core-1_0-final.html#ClaimsParameter).
+            For supported claims and how to request custom claims, see the [ID
+            Token
+            Reference](https://developer.transmitsecurity.com/openapi/id_token_reference/).
+          allOf:
+            - $ref: '#/components/schemas/ApiTokenRequestClaims'
+        org_id:
+          type: string
+          description: Organization ID, used for member login in B2B scenarios
+        client_attributes:
+          description: Client attributes
+          allOf:
+            - $ref: '#/components/schemas/ClientAttributes'
+        device_id:
+          type: string
+          description: >-
+            Identifier of the device from which the authentication request
+            originates
+          maxLength: 80
+        session_id:
+          type: string
+          description: >-
+            Used to associate the authentication with an existing session (such
+            as for MFA). If unspecified, a new session is created and the
+            session ID is returned.
+        code:
+          type: string
+          description: The code received from the magic link
+        request_id:
+          type: string
+          description: >-
+            The request ID. This is a mandatory parameter if you’ve previously
+            requested to generate a request ID when sending OTP or email link.
+      required:
+        - code
+    ApiTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: >-
+            User access token for accessing endpoints on behalf of the
+            authenticated user.
+        id_token:
+          type: string
+          description: ID token that identifies the user.
+        refresh_token:
+          type: string
+          description: Refresh token used to refresh an expired access token.
+        token_type:
+          type: string
+          description: Bearer.
+        expires_in:
+          type: number
+          description: Expiration time of the access token in seconds.
+          default: 3600
+        session_id:
+          type: string
+          description: ID of the session in which the authentication occurs.
+      required:
+        - access_token
+        - token_type
+        - expires_in
+        - session_id
+    ApiOtpInitRequestDto:
+      type: object
+      properties:
+        device_id:
+          type: string
+          description: >-
+            Identifier of the device from which the authentication request
+            originates
+          maxLength: 80
+        channel:
+          type: string
+          enum:
+            - sms
+            - email
+            - direct
+          description: >-
+            Channel to use to send the OTP. Use `sms` or `email` to deliver the
+            code to the user. Use `direct` to return the code in the response
+            body without sending it — for example, to deliver it out-of-band as
+            a temporary access code. See [Generate temporary access
+            code](/guides/user/account_recovery.md).
+        identifier_type:
+          type: string
+          description: Type of user identifier used for login
+        identifier:
+          type: string
+          description: >-
+            User identifier, which may correspond to the user's email, phone
+            number, username, or user ID. The type of identifier should be
+            specified as the `identifier_type`.
+        email_content:
+          description: >-
+            Texts, logo and color to render email template with, if the channel
+            is `email`
+          allOf:
+            - $ref: '#/components/schemas/EmailContentAttributes'
+        custom_sms_input:
+          description: Custom SMS message to send, if the channel is `sms`
+          allOf:
+            - $ref: '#/components/schemas/BaseSmsOtpInput'
+        approval_data:
+          type: object
+          example:
+            transaction_id: eFII2y40uB9hQ98nXt3tc1IHkRt8GrRZiqZuRn_59wT
+            sum: '200'
+          description: >-
+            Flat object that contains the data that your customer should approve
+            for a transaction signing or custom approval flow. It can contain up
+            to 10 keys, and only alphanumeric characters, underscores, hyphens,
+            and periods. It will be returned as a claim in the ID token upon
+            successful authentication.
+        custom_email:
+          type: string
+          description: >-
+            Custom email to send the OTP to, can be different than the user's
+            email (if the channel is `email`)
+        custom_phone_number:
+          type: string
+          description: >-
+            Custom phone number to send the OTP to, can be different than the
+            user's phone number (if the channel is `sms`)
+        client_attributes:
+          description: Client attributes
+          allOf:
+            - $ref: '#/components/schemas/ClientAttributes'
+        expires_in:
+          type: number
+          description: Number of minutes until the OTP expires
+        generate_request_id:
+          type: boolean
+          description: >-
+            The request ID can serve as an additional security identifier for
+            authentication requests. When set to 'false' (by default), the
+            request ID isn't returned. When set to 'true',  Mosaic generates a
+            unique request ID that must be included in the subsequent
+            Authenticate OTP request along with other required parameters.
+          default: false
+      required:
+        - channel
+        - identifier_type
+        - identifier
+    ApiSendOtpResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          readOnly: true
+          example: OTP sent
+        approval_data:
+          type: object
+          readOnly: true
+          example:
+            transaction_id: eFII2y40uB9hQ98nXt3tc1IHkRt8GrRZiqZuRn_59wT
+            sum: '200'
+          description: Approval data object, if passed in the request.
+        code:
+          type: string
+          readOnly: true
+          example: '123456'
+          description: One time passcode, if the channel is `direct`.
+      required:
+        - message
+    ApiOtpTokenRequestDto:
+      type: object
+      properties:
+        resource:
+          type: string
+          description: >-
+            Resource URI the authentication request is attempting to access,
+            which is reflected in the audience (`aud` claim) of the access
+            token. This must be configured as resource for the application.
+        claims:
+          type: object
+          example:
+            id_token:
+              roles: null
+          description: >-
+            Used to request additional claims in the ID token, such as roles,
+            permissions, and other user profile data. The structure is per the
+            [OIDC
+            Standard](https://openid.net/specs/openid-connect-core-1_0-final.html#ClaimsParameter).
+            For supported claims and how to request custom claims, see the [ID
+            Token
+            Reference](https://developer.transmitsecurity.com/openapi/id_token_reference/).
+        org_id:
+          type: string
+          description: Organization ID, used for member login in B2B scenarios
+        client_attributes:
+          description: Client attributes
+          allOf:
+            - $ref: '#/components/schemas/ClientAttributes'
+        device_id:
+          type: string
+          description: >-
+            Identifier of the device from which the authentication request
+            originates
+          maxLength: 80
+        session_id:
+          type: string
+          description: >-
+            Used to associate the authentication with an existing session (such
+            as for MFA). If unspecified, a new session is created and the
+            session ID is returned.
+        passcode:
+          type: string
+          description: OTP to validate
+        identifier_type:
+          type: string
+          description: Type of user identifier used for sending the OTP
+        identifier:
+          type: string
+          description: User identifier that the OTP was sent to
+        request_id:
+          type: string
+          description: >-
+            The request ID. This is a mandatory parameter if you’ve previously
+            requested to generate a request ID when sending OTP or email link.
+      required:
+        - passcode
+        - identifier_type
+        - identifier
+    EmailContentAttributes:
+      type: object
+      properties:
+        subject:
+          type: string
+          description: The subject of the email
+        primaryColor:
+          type: string
+          example: '#6981FF'
+          description: Primary color of the email, specified as a Hex color
+        base64logo:
+          type: string
+          description: >-
+            Base64 encoded image for email logo. The string length must be less
+            than or equal to 20000 characters
+        headerText:
+          type: string
+          description: The header of the email
+        bodyText:
+          type: string
+          description: The body of the email
+        linkText:
+          type: string
+          description: The text of the link button in the email
+        infoText:
+          type: string
+          description: Any extra information in the email
+        footerText:
+          type: string
+          example: If you didn't request this email, you can safely ignore it.
+          description: The footer of the email
+        senderName:
+          type: string
+          description: Name of the sender of the email
+      required:
+        - subject
+    ClientAttributes:
+      type: object
+      properties:
+        user_agent:
+          type: string
+        ip_address:
+          type: string
+    ApiTokenRequestClaims:
+      type: object
+      properties:
+        id_token:
+          type: object
+        access_token:
+          type: object
+    BaseSmsOtpInput:
+      type: object
+      properties:
+        custom_message:
+          type: string
+          description: >-
+            Message to send, must contain {otp} and {app} placeholders to be
+            replaced with one time password and application name. Limited to 140
+            characters
+        sender_id:
+          type: string
+          description: >-
+            The sender name that appears as the message sender on recipients
+            devices. Limited to 11 characters. Limited support see
+            https://docs.aws.amazon.com/sns/latest/dg/sns-supported-regions-countries.html
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+    UserAccessToken:
+      type: http
+      description: >-
+        A token returned upon end-user authentication, which provides access to
+        resources and data for the user and app for which it was generated
+      scheme: bearer
+      bearerFormat: JWT
+    AdminAccessToken:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /oidc/token
+          scopes: {}
+      description: >-
+        A token generated by a management application using the [token
+        endpoint](/openapi/token.openapi/other/getaccesstoken). It provides
+        access to all resources for the tenant and its apps
+    ClientAccessToken:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /oidc/token
+          scopes: {}
+      description: >-
+        A token generated by an end-user application using the [token
+        endpoint](/openapi/token.openapi/other/getaccesstoken). It provides
+        access to resources and data on the tenant level or associated with the
+        specific application (but not other apps in the tenant)
+    OrgAdminAccessToken:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /oidc/token
+          scopes: {}
+      description: >-
+        A token returned upon B2B authentication for a user that has the
+        organizationAdmin or organizationCreator role.

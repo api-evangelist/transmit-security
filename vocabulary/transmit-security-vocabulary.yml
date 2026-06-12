@@ -1,0 +1,458 @@
+vocabulary:
+  aid: transmit-security
+  name: Transmit Security API Vocabulary
+  description: Terms and concepts used across Transmit Security Mosaic platform APIs
+  url: https://developer.transmitsecurity.com/openapi/api_ref_overview
+  created: '2026-06-12'
+  modified: '2026-06-12'
+  terms:
+    - name: APNConfiguration
+      type: object
+    - name: AddImageRequest
+      type: object
+    - name: AddImagesResponse
+      type: object
+    - name: AdditionalInfoDto
+      type: object
+    - name: AddressDto
+      type: object
+    - name: AddressType
+      type: string
+    - name: ApiAddPassword
+      type: object
+    - name: ApiAddress
+      type: object
+    - name: ApiApp
+      type: object
+    - name: ApiAppIds
+      type: object
+    - name: ApiAppWithoutLogo
+      type: object
+    - name: ApiAuthMethods
+      type: object
+    - name: ApiAuthenticatorAppPreferences
+      type: object
+    - name: ApiBasicApp
+      type: object
+    - name: ApiCibaAuthConfiguration
+      type: object
+    - name: ApiClientAuthenticationConfiguration
+      type: object
+    - name: ApiCreateAppInput
+      type: object
+    - name: ApiCreateManagedOrganizationInput
+      type: object
+    - name: ApiCreateOidcClientInput
+      type: object
+    - name: ApiCreateOrUpdateAddressInput
+      type: object
+    - name: ApiCreateOrganizationInput
+      type: object
+    - name: ApiCreateSamlClientInput
+      type: object
+    - name: ApiCreateUserInput
+      type: object
+    - name: ApiCustomDomainOutput
+      type: object
+    - name: ApiDeviceAuthConfiguration
+      type: object
+    - name: ApiExternalCommunication
+      type: object
+    - name: ApiGetAllUsers
+      type: object
+    - name: ApiGroup
+      type: object
+    - name: ApiIdTokenEncryptionConfiguration
+      type: object
+    - name: ApiLoginPreferences
+      type: object
+    - name: ApiLogoutResponse
+      type: object
+    - name: ApiMagicLinkInitWithEmailRequestDto
+      type: object
+    - name: ApiMagicLinkInitWithIdentifierRequestDto
+      type: object
+    - name: ApiMagicLinkTokenRequestDto
+      type: object
+    - name: ApiMeAddPassword
+      type: object
+    - name: ApiOidcClient
+      type: object
+    - name: ApiOrganization
+      type: object
+    - name: ApiOtpInitRequestDto
+      type: object
+    - name: ApiOtpTokenRequestDto
+      type: object
+    - name: ApiPasswordInformation
+      type: object
+    - name: ApiRefreshTokenInvalidationTriggerConfiguration
+      type: object
+    - name: ApiRole
+      type: object
+    - name: ApiRoleGroup
+      type: object
+    - name: ApiRoleGroupIds
+      type: object
+    - name: ApiSamlClient
+      type: object
+    - name: ApiSendAuthSmsOtpInput
+      type: object
+    - name: ApiSendAuthSmsResponse
+      type: object
+    - name: ApiSendEmailResponse
+      type: object
+    - name: ApiSendLoginEmailInput
+      type: object
+    - name: ApiSendOtpEmailRequestInput
+      type: object
+    - name: ApiSendOtpEmailResponse
+      type: object
+    - name: ApiSendOtpResponse
+      type: object
+    - name: ApiTokenExchangeRequestInput
+      type: object
+    - name: ApiTokenExchangeResponse
+      type: object
+    - name: ApiTokenExpirationConfiguration
+      type: object
+    - name: ApiTokenRequestClaims
+      type: object
+    - name: ApiTokenResponse
+      type: object
+    - name: ApiTokenSigningKey
+      type: object
+    - name: ApiUpdateAppInput
+      type: object
+    - name: ApiUpdateOidcClientInput
+      type: object
+    - name: ApiUpdateOrganizationInput
+      type: object
+    - name: ApiUpdatePassword
+      type: object
+    - name: ApiUpdateResourceInAppInput
+      type: object
+    - name: ApiUpdateSamlClientInput
+      type: object
+    - name: ApiUpdateUserInput
+      type: object
+    - name: ApiUser
+      type: object
+    - name: ApiUserEmail
+      type: object
+    - name: ApiUserIdentity
+      type: object
+    - name: ApiUserIdentityAlias
+      type: object
+    - name: ApiUserIdentityProvider
+      type: object
+    - name: ApiUserName
+      type: object
+    - name: ApiUserNameInput
+      type: object
+    - name: ApiUserPasswordInput
+      type: object
+    - name: ApiUserPhone
+      type: object
+    - name: ApiUsersCount
+      type: object
+    - name: ApiValidateAuthEmailOtpInput
+      type: object
+    - name: ApiValidateAuthSmsOtpInput
+      type: object
+    - name: AppleConfiguration
+      type: object
+    - name: BadRequestException
+      type: object
+    - name: BadRequestHttpError
+      type: object
+    - name: BaseSmsOtpInput
+      type: object
+    - name: BiometricLivenessCheckDto
+      type: object
+    - name: BiometricMatchingCheckDto
+      type: object
+    - name: CaptureMargins
+      type: object
+    - name: ClientAttributes
+      type: object
+    - name: ClientSecretConfiguration
+      type: object
+    - name: CompleteSessionResult
+      type: object
+    - name: CreateSessionRequest
+      type: object
+    - name: CreateSessionResponse
+      type: object
+    - name: CreateTokenSigningKeyInput
+      type: object
+    - name: CustomerInformation
+      type: object
+    - name: DelegatedAccessInput
+      type: object
+    - name: DeprecatedAddressDetailsDto
+      type: object
+    - name: DeprecatedDocumentDto
+      type: object
+    - name: DeprecatedExtractedInfoDto
+      type: object
+    - name: DeprecatedPersonDto
+      type: object
+    - name: DeprecatedSessionResult
+      type: object
+    - name: DeviceCameraInfoDto
+      type: object
+    - name: DeviceInfoDto
+      type: object
+    - name: DeviceKeyResponseDto
+      type: object
+    - name: DevicePushConfigDto
+      type: object
+    - name: DeviceStatus
+      type: string
+    - name: DocumentAuthenticationCheckDto
+      type: object
+    - name: DocumentDto
+      type: object
+    - name: DocumentLivenessCheckDto
+      type: object
+    - name: DocumentValidationCheckDto
+      type: object
+    - name: EmailConfiguration
+      type: object
+    - name: EmailContentAttributes
+      type: object
+    - name: EmailOtpConfiguration
+      type: object
+    - name: EmploymentDto
+      type: object
+    - name: ExtractedDetails
+      type: object
+    - name: FaceAuthenticatorConfiguration
+      type: object
+    - name: FcmConfiguration
+      type: object
+    - name: FlaggedIdentityCheckDto
+      type: object
+    - name: ForbiddenHttpError
+      type: object
+    - name: GetConsentApprovalResponse
+      type: object
+    - name: IdentifierIsTakenHttpError
+      type: object
+    - name: ImageDto
+      type: object
+    - name: IncompleteSessionResult
+      type: object
+    - name: InvalidTokenHttpError
+      type: object
+    - name: LockoutTier
+      type: object
+    - name: LogoUploadDto
+      type: object
+    - name: MessageConfiguration
+      type: object
+    - name: MockBehavior
+      type: object
+    - name: NationalStatusDto
+      type: object
+    - name: NotFoundHttpError
+      type: object
+    - name: PageInfo
+      type: object
+    - name: PasswordConfiguration
+      type: object
+    - name: PersonDto
+      type: object
+    - name: PinAuthenticatorConfiguration
+      type: object
+    - name: PushConfiguration
+      type: object
+    - name: RedirectUriResponse
+      type: object
+    - name: RegisterPasswordResponse
+      type: object
+    - name: RiskDetailsDeviceDto
+      type: object
+    - name: RiskDetailsDto
+      type: object
+    - name: RiskDetailsGeneralDto
+      type: object
+    - name: RiskDetailsNetworkDto
+      type: object
+    - name: RiskRecommendationCheckDto
+      type: object
+    - name: RoleGroupsAndDefaultOrgRolesDto
+      type: object
+    - name: RolesAndRoleGroupsDto
+      type: object
+    - name: RolesAndRoleGroupsInputDto
+      type: object
+    - name: SMSConfiguration
+      type: object
+    - name: SessionChecksDto
+      type: object
+    - name: SessionConsent
+      type: object
+    - name: SessionImageDto
+      type: object
+    - name: SessionImagesResponse
+      type: object
+    - name: StartSessionConfigDto
+      type: object
+    - name: Status
+      type: string
+    - name: TlsClientAuth
+      type: object
+    - name: TotpConfiguration
+      type: object
+    - name: UpdateTokenSigningKey
+      type: object
+    - name: UploadTokenSigningKey
+      type: object
+    - name: UserVerifyEmailOrPhoneNumberInput
+      type: object
+    - name: VerificationImageDto
+      type: object
+    - name: VerifiedInfoDto
+      type: object
+    - name: WebAuthnApiConfiguration
+      type: object
+    - name: action_type
+      description: >-
+        Type of client action this recommendation was issued for.
+      type: string
+    - name: avs_match_level
+      description: >-
+        AVS match level.
+      type: string
+    - name: browser_names
+      type: object
+    - name: challenge_type
+      description: >-
+        The type of challenge enforced for the reported action.
+      type: string
+    - name: context
+      description: >-
+        Identifies the context in which the action occurred.
+      type: object
+    - name: country_codes
+      type: object
+    - name: create_rule_response
+      type: object
+    - name: custom_attributes
+      description: >-
+        Tenant-defined custom attributes attached to the action. These add context to an action but must match the schema defined in the Admin Portal. Invalid attributes are ignored and not included in the...
+      type: object
+    - name: device_fingerprints
+      type: object
+    - name: device_ids
+      type: object
+    - name: device_public_keys
+      type: object
+    - name: get_all_response
+      type: object
+    - name: get_rule_response
+      type: object
+    - name: ip_cidrs
+      type: object
+    - name: matcher
+      description: >-
+        Activity field matcher. Only one matcher can be defined per rule.
+    - name: os_versions
+      type: object
+    - name: preview_rule
+      description: >-
+        Rule configured in preview mode that would have determined this action's recommendation if all enabled rules were in production. Useful for impact analysis without changing live behavior.
+      type: object
+    - name: reasons
+      description: >-
+        Reasons that contributed to the recommendation.
+      type: array
+    - name: recommendation
+      description: >-
+        Decision the engine produced for the action.
+      type: object
+    - name: recommendation_full
+      description: >-
+        Recommendation
+      type: object
+    - name: recommendation_type
+      description: >-
+        Recommendation type.
+      type: string
+    - name: result_type
+      description: >-
+        The outcome of the action.
+      type: string
+    - name: risk_score
+      description: >-
+        Used to assess the risk level of the action.
+      type: number
+    - name: risk_signals
+      description: >-
+        Additional informative signals derived from the action.
+      type: object
+    - name: rule
+      description: >-
+        Recommendation rule
+      type: object
+    - name: rule_mode
+      description: >-
+        Allows you to simulate a rule and evaluate its impact before releasing it to production. The simulation occurs each time a recommendation is requested. If a preview rule matches the request (meanin...
+      type: string
+    - name: rule_recommendation_type
+      description: >-
+        Recommendation type
+      type: string
+    - name: threats
+      description: >-
+        List of all detected threats.
+      type: array
+    - name: transaction_address
+      description: >-
+        Address and contact information (used by `billingInfo` and `shippingInfo`).
+      type: object
+    - name: transaction_avs
+      description: >-
+        Address Verification Service result for the transaction.
+      type: object
+    - name: transaction_card
+      description: >-
+        Card-level identifiers for the party.
+      type: object
+    - name: transaction_data
+      description: >-
+        Transaction data-points provided with the action via the SDK.
+      type: object
+    - name: transaction_method
+      description: >-
+        Transaction method.
+      type: string
+    - name: transaction_party
+      description: >-
+        Shared shape for a transaction party (payee or payer).
+      type: object
+    - name: transaction_payee
+      description: >-
+        Payee party of the transaction.
+    - name: transaction_payer
+      description: >-
+        Payer party of the transaction. Adds customer-tier and billing-info fields on top of the shared party shape.
+      type: object
+    - name: transaction_product
+      description: >-
+        A single product line item.
+      type: object
+    - name: transaction_purchase
+      description: >-
+        Purchase details for the transaction.
+      type: object
+    - name: transaction_type
+      description: >-
+        Transaction type.
+      type: string
+    - name: update_delete_rule_response
+      type: object
+    - name: user_ids
+      type: object

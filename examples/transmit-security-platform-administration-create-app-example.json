@@ -1,0 +1,9 @@
+{
+  "name": "My Mobile App",
+  "description": "Production mobile application",
+  "login_uri": "https://app.example.com/login",
+  "redirect_uris": [
+    "https://app.example.com/callback"
+  ],
+  "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjAN..."
+}
