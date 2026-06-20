@@ -9,7 +9,7 @@ description: >
   authentication. Mosaic serves leading banks, insurers, and retailers worldwide with region-specific
   deployments across the US, EU, Canada, and Australia, backed by a 99.99% uptime SLA.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - CIAM
   - Identity
@@ -33,7 +33,7 @@ apis:
       Core identity management and authentication API covering user lifecycle management,
       passwordless authentication (passkeys, WebAuthn, OTP, magic links, MFA), OIDC hosted
       authentication, SAML SSO, and orchestrated identity journey flows.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
     baseURL: https://api.transmitsecurity.io
     tags:
@@ -67,7 +67,7 @@ apis:
       Risk and fraud detection API providing real-time risk recommendations, account protection,
       threat detection and response, bot detection, and behavioral analytics to prevent account
       takeovers and fraud across web, iOS, and Android channels.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.transmitsecurity.com/guides/risk/quick_start_web
     baseURL: https://api.transmitsecurity.io
     tags:
@@ -91,7 +91,7 @@ apis:
       Document-based identity verification API enabling remote employee onboarding, contractor
       vetting, and customer identity verification through automated ID document checks and
       biometric verification workflows.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
     baseURL: https://api.transmitsecurity.io
     tags:
@@ -114,7 +114,7 @@ apis:
       No-code identity orchestration API and policy engine enabling dynamic identity flow
       composition, adaptive access control, and integration with third-party services through
       pre-built journey templates and a visual orchestration canvas.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.transmitsecurity.com/guides/orchestration/sdk/web_sdk_guide
     baseURL: https://api.transmitsecurity.io
     tags:
@@ -131,7 +131,7 @@ apis:
       Platform administration and management API providing organization management, role-based
       access control, audit logs, compliance reporting, and multi-tenant configuration for
       Mosaic deployments.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
     baseURL: https://api.transmitsecurity.io
     tags:
