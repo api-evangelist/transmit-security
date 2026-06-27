@@ -169,7 +169,7 @@ common:
     url: https://transmitsecurity.com/pricing
   - type: StatusPage
     url: https://status.transmitsecurity.io/
-  - type: Changelog
+  - type: ChangeLog
     url: https://developer.transmitsecurity.com/sdk-ref/platform/changelog
   - type: SDKs
     url: https://developer.transmitsecurity.com/sdk-ref/sdk_ref_intro
