@@ -153,6 +153,10 @@ apis:
         url: json-schema/transmit-security-organizations-schema.json
 
 common:
+  - type: Authentication
+    url: authentication/transmit-security-authentication.yml
+  - type: OAuthScopes
+    url: scopes/transmit-security-scopes.yml
   - type: Website
     url: https://transmitsecurity.com/
   - type: Documentation
