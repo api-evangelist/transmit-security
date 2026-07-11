@@ -153,6 +153,8 @@ apis:
         url: json-schema/transmit-security-organizations-schema.json
 
 common:
+  - type: DomainSecurity
+    url: security/transmit-security-domain-security.yml
   - type: Authentication
     url: authentication/transmit-security-authentication.yml
   - type: OAuthScopes
