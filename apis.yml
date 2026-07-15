@@ -153,6 +153,8 @@ apis:
         url: json-schema/transmit-security-organizations-schema.json
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/transmit-security-agentic-access.yml
   - type: DomainSecurity
     url: security/transmit-security-domain-security.yml
   - type: Authentication
