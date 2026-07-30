@@ -9,7 +9,20 @@ description: >
   authentication. Mosaic serves leading banks, insurers, and retailers worldwide with region-specific
   deployments across the US, EU, Canada, and Australia, backed by a 99.99% uptime SLA.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/transmit-security.png
 tags:
   - CIAM
   - Identity
@@ -28,131 +41,281 @@ created: '2026-06-12'
 modified: '2026-06-12'
 specificationVersion: '0.19'
 apis:
-  - name: Mosaic Identity Management, Authentication & Journeys API
-    description: >
-      Core identity management and authentication API covering user lifecycle management,
-      passwordless authentication (passkeys, WebAuthn, OTP, magic links, MFA), OIDC hosted
-      authentication, SAML SSO, and orchestrated identity journey flows.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
-    baseURL: https://api.transmitsecurity.io
-    tags:
-      - Identity Management
-      - Authentication
-      - Passkeys
-      - WebAuthn
-      - OIDC
-      - SSO
-      - Journeys
-    properties:
-      - type: Documentation
-        url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
-      - type: OpenAPI
-        url: https://developer.transmitsecurity.com/openapi/api_ref_intro
-      - type: OpenAPI
-        url: openapi/transmit-security-identity-management-openapi.yml
-      - type: OpenAPI
-        url: openapi/transmit-security-backend-authentication-openapi.yml
-      - type: OpenAPI
-        url: openapi/transmit-security-oidc-hosted-authentication-openapi.yml
-      - type: JSONSchema
-        url: json-schema/transmit-security-identity-management-schema.json
-      - type: JSONSchema
-        url: json-schema/transmit-security-backend-authentication-schema.json
-      - type: JSONSchema
-        url: json-schema/transmit-security-oidc-authentication-schema.json
-
-  - name: Mosaic Fraud Prevention API
-    description: >
-      Risk and fraud detection API providing real-time risk recommendations, account protection,
-      threat detection and response, bot detection, and behavioral analytics to prevent account
-      takeovers and fraud across web, iOS, and Android channels.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.transmitsecurity.com/guides/risk/quick_start_web
-    baseURL: https://api.transmitsecurity.io
-    tags:
-      - Fraud Detection
-      - Risk Management
-      - Account Protection
-      - Threat Detection
-      - Bot Detection
-    properties:
-      - type: Documentation
-        url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
-      - type: OpenAPI
-        url: https://developer.transmitsecurity.com/openapi/api_ref_intro
-      - type: OpenAPI
-        url: openapi/transmit-security-fraud-prevention-openapi.yml
-      - type: JSONSchema
-        url: json-schema/transmit-security-fraud-prevention-schema.json
-
-  - name: Mosaic Identity Verification API
-    description: >
-      Document-based identity verification API enabling remote employee onboarding, contractor
-      vetting, and customer identity verification through automated ID document checks and
-      biometric verification workflows.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
-    baseURL: https://api.transmitsecurity.io
-    tags:
-      - Identity Verification
-      - KYC
-      - Document Verification
-      - Biometrics
-    properties:
-      - type: Documentation
-        url: https://transmitsecurity.com/core-services/identity-verification
-      - type: OpenAPI
-        url: https://developer.transmitsecurity.com/openapi/api_ref_intro
-      - type: OpenAPI
-        url: openapi/transmit-security-identity-verification-openapi.yml
-      - type: JSONSchema
-        url: json-schema/transmit-security-identity-verification-schema.json
-
-  - name: Mosaic Orchestration API
-    description: >
-      No-code identity orchestration API and policy engine enabling dynamic identity flow
-      composition, adaptive access control, and integration with third-party services through
-      pre-built journey templates and a visual orchestration canvas.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.transmitsecurity.com/guides/orchestration/sdk/web_sdk_guide
-    baseURL: https://api.transmitsecurity.io
-    tags:
-      - Orchestration
-      - Identity Journeys
-      - Policy Engine
-      - Adaptive Access
-    properties:
-      - type: Documentation
-        url: https://developer.transmitsecurity.com/guides/orchestration/sdk/web_sdk_guide
-
-  - name: Mosaic Platform Administration API
-    description: >
-      Platform administration and management API providing organization management, role-based
-      access control, audit logs, compliance reporting, and multi-tenant configuration for
-      Mosaic deployments.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
-    baseURL: https://api.transmitsecurity.io
-    tags:
-      - Administration
-      - Organizations
-      - RBAC
-      - Compliance
-      - Audit
-    properties:
-      - type: Documentation
-        url: https://developer.transmitsecurity.com/openapi/api_ref_intro
-      - type: OpenAPI
-        url: openapi/transmit-security-platform-administration-openapi.yml
-      - type: OpenAPI
-        url: openapi/transmit-security-organizations-openapi.yml
-      - type: JSONSchema
-        url: json-schema/transmit-security-platform-administration-schema.json
-      - type: JSONSchema
-        url: json-schema/transmit-security-organizations-schema.json
-
+- name: Mosaic Orchestration API
+  description: >
+    No-code identity orchestration API and policy engine enabling dynamic identity flow composition, adaptive
+    access control, and integration with third-party services through pre-built journey templates and
+    a visual orchestration canvas.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.transmitsecurity.com/guides/orchestration/sdk/web_sdk_guide
+  baseURL: https://api.transmitsecurity.io
+  tags:
+  - Orchestration
+  - Identity Journeys
+  - Policy Engine
+  - Adaptive Access
+  properties:
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/orchestration/sdk/web_sdk_guide
+- aid: transmit-security:transmit-security-applications-api
+  name: Transmit Security Applications API
+  description: The Applications API from Transmit Security — 14 operation(s) for applications.
+  humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  baseURL: https://api.transmitsecurity.io
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/transmit-security-applications-api-openapi.yml
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-management-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-backend-authentication-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-oidc-authentication-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+  - type: JSONSchema
+    url: json-schema/transmit-security-fraud-prevention-schema.json
+  - type: Documentation
+    url: https://transmitsecurity.com/core-services/identity-verification
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-verification-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  - type: JSONSchema
+    url: json-schema/transmit-security-platform-administration-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-organizations-schema.json
+- aid: transmit-security:transmit-security-auth-api
+  name: Transmit Security Auth API
+  description: The Auth API from Transmit Security — 10 operation(s) for auth.
+  humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  baseURL: https://api.transmitsecurity.io
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/transmit-security-auth-api-openapi.yml
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-management-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-backend-authentication-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-oidc-authentication-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+  - type: JSONSchema
+    url: json-schema/transmit-security-fraud-prevention-schema.json
+  - type: Documentation
+    url: https://transmitsecurity.com/core-services/identity-verification
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-verification-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  - type: JSONSchema
+    url: json-schema/transmit-security-platform-administration-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-organizations-schema.json
+- aid: transmit-security:transmit-security-manage-api
+  name: Transmit Security Manage API
+  description: The Manage API from Transmit Security — 1 operation(s) for manage.
+  humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  baseURL: https://api.transmitsecurity.io
+  tags:
+  - Manage
+  properties:
+  - type: OpenAPI
+    url: openapi/transmit-security-manage-api-openapi.yml
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-management-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-backend-authentication-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-oidc-authentication-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+  - type: JSONSchema
+    url: json-schema/transmit-security-fraud-prevention-schema.json
+  - type: Documentation
+    url: https://transmitsecurity.com/core-services/identity-verification
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-verification-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  - type: JSONSchema
+    url: json-schema/transmit-security-platform-administration-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-organizations-schema.json
+- aid: transmit-security:transmit-security-organizations-api
+  name: Transmit Security Organizations API
+  description: The Organizations API from Transmit Security — 6 operation(s) for organizations.
+  humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  baseURL: https://api.transmitsecurity.io
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/transmit-security-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-management-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-backend-authentication-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-oidc-authentication-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+  - type: JSONSchema
+    url: json-schema/transmit-security-fraud-prevention-schema.json
+  - type: Documentation
+    url: https://transmitsecurity.com/core-services/identity-verification
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-verification-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  - type: JSONSchema
+    url: json-schema/transmit-security-platform-administration-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-organizations-schema.json
+- aid: transmit-security:transmit-security-recommendation-api
+  name: Transmit Security Recommendation API
+  description: The Recommendation API from Transmit Security — 3 operation(s) for recommendation.
+  humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  baseURL: https://api.transmitsecurity.io
+  tags:
+  - Recommendation
+  properties:
+  - type: OpenAPI
+    url: openapi/transmit-security-recommendation-api-openapi.yml
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-management-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-backend-authentication-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-oidc-authentication-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+  - type: JSONSchema
+    url: json-schema/transmit-security-fraud-prevention-schema.json
+  - type: Documentation
+    url: https://transmitsecurity.com/core-services/identity-verification
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-verification-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  - type: JSONSchema
+    url: json-schema/transmit-security-platform-administration-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-organizations-schema.json
+- aid: transmit-security:transmit-security-token-api
+  name: Transmit Security Token API
+  description: The Token API from Transmit Security — 1 operation(s) for token.
+  humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  baseURL: https://api.transmitsecurity.io
+  tags:
+  - Token
+  properties:
+  - type: OpenAPI
+    url: openapi/transmit-security-token-api-openapi.yml
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-management-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-backend-authentication-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-oidc-authentication-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+  - type: JSONSchema
+    url: json-schema/transmit-security-fraud-prevention-schema.json
+  - type: Documentation
+    url: https://transmitsecurity.com/core-services/identity-verification
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-verification-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  - type: JSONSchema
+    url: json-schema/transmit-security-platform-administration-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-organizations-schema.json
+- aid: transmit-security:transmit-security-users-api
+  name: Transmit Security Users API
+  description: The Users API from Transmit Security — 18 operation(s) for users.
+  humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  baseURL: https://api.transmitsecurity.io
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/transmit-security-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-management-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-backend-authentication-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-oidc-authentication-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+  - type: JSONSchema
+    url: json-schema/transmit-security-fraud-prevention-schema.json
+  - type: Documentation
+    url: https://transmitsecurity.com/core-services/identity-verification
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-verification-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  - type: JSONSchema
+    url: json-schema/transmit-security-platform-administration-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-organizations-schema.json
+- aid: transmit-security:transmit-security-verification-api
+  name: Transmit Security Verification API
+  description: The Verification API from Transmit Security — 6 operation(s) for verification.
+  humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  baseURL: https://api.transmitsecurity.io
+  tags:
+  - Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/transmit-security-verification-api-openapi.yml
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/webauthn/quick_start_sdk
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-management-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-backend-authentication-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-oidc-authentication-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/guides/risk/quick_start_web
+  - type: JSONSchema
+    url: json-schema/transmit-security-fraud-prevention-schema.json
+  - type: Documentation
+    url: https://transmitsecurity.com/core-services/identity-verification
+  - type: JSONSchema
+    url: json-schema/transmit-security-identity-verification-schema.json
+  - type: Documentation
+    url: https://developer.transmitsecurity.com/openapi/api_ref_intro
+  - type: JSONSchema
+    url: json-schema/transmit-security-platform-administration-schema.json
+  - type: JSONSchema
+    url: json-schema/transmit-security-organizations-schema.json
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/transmit-security/overview
   - type: AgenticAccess
     url: agentic-access/transmit-security-agentic-access.yml
   - type: DomainSecurity
