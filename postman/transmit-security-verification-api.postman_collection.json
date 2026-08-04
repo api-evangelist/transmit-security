@@ -1,0 +1,1302 @@
+{
+  "info": {
+    "_postman_id": "6f29f371-25d6-4c0c-87cd-4fd3a206c778",
+    "name": "One-Time Login Applications Verification API",
+    "description": "Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T11:05:19.000Z",
+    "updatedAt": "2026-07-28T11:05:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6f29f371-25d6-4c0c-87cd-4fd3a206c778"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "verification",
+              "item": [
+                {
+                  "name": "{sid}",
+                  "item": [
+                    {
+                      "name": "result",
+                      "item": [
+                        {
+                          "name": "Get verification result",
+                          "id": "406b03f0-f4fa-4ef4-8f40-89a6e842dce6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/verification/:sid/result?detailed=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "verification",
+                                ":sid",
+                                "result"
+                              ],
+                              "query": [
+                                {
+                                  "description": "This parameter allows existing customers to select between response objects. You should explicitly send `false` to return the `DeprecatedSessionResult` response structure or send `true` to return the new `CompleteSessionResult`/`IncompleteSessionResult` response structure. Please note this parameter will be removed once `DeprecatedSessionResult` is fully deprecated.",
+                                  "key": "detailed",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b319284e-41fe-4e05-aa15-8fe0626c0d3b",
+                                  "key": "sid",
+                                  "value": "",
+                                  "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the results of the verification session, which contains detailed information about the submitted documents (including PII). This should be called from the backend."
+                          },
+                          "response": [
+                            {
+                              "id": "59aea4b1-d121-4bc8-b904-cc4896a6a11a",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/result?detailed=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "result"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "This parameter allows existing customers to select between response objects. You should explicitly send `false` to return the `DeprecatedSessionResult` response structure or send `true` to return the new `CompleteSessionResult`/`IncompleteSessionResult` response structure. Please note this parameter will be removed once `DeprecatedSessionResult` is fully deprecated.",
+                                      "key": "detailed",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"session_id\": \"<string>\",\n  \"status\": \"complete\",\n  \"recommendation\": \"ALLOW\",\n  \"person\": {\n    \"full_name\": \"<string>\",\n    \"given_name\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"gender\": \"male\",\n    \"national_id\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"age\": \"<number>\"\n  },\n  \"document\": {\n    \"type\": \"postal\",\n    \"country\": \"<string>\",\n    \"region\": \"<string>\",\n    \"number\": \"<string>\",\n    \"serial_number\": \"<string>\",\n    \"issue_date\": \"<string>\",\n    \"expiration_date\": \"<string>\"\n  },\n  \"checks\": {\n    \"document_validation\": {\n      \"recommendation\": \"N/A\",\n      \"reasons\": [\n        \"mrz_check_digits_invalid\",\n        \"mrz_check_digits_invalid\"\n      ]\n    },\n    \"document_authentication\": {\n      \"recommendation\": \"DENY\",\n      \"reasons\": [\n        \"face_not_found\",\n        \"face_not_found\"\n      ]\n    },\n    \"document_liveness\": {\n      \"recommendation\": \"CHALLENGE\",\n      \"reasons\": [\n        \"presentation_attack\",\n        \"presentation_attack\"\n      ]\n    },\n    \"biometric_matching\": {\n      \"recommendation\": \"CHALLENGE\",\n      \"reasons\": [\n        \"age_mismatch\",\n        \"age_mismatch\"\n      ]\n    },\n    \"biometric_liveness\": {\n      \"recommendation\": \"N/A\",\n      \"reasons\": [\n        \"screen_capture\",\n        \"printed_cutout\"\n      ]\n    },\n    \"flagged_identity\": {\n      \"recommendation\": \"CHALLENGE\",\n      \"reasons\": [\n        \"multiple_same_identity_attempts\",\n        \"previous_document_fraud\"\n      ]\n    },\n    \"risk_recommendation\": {\n      \"recommendation\": \"N/A\",\n      \"reasons\": [\n        \"behavior_bot\",\n        \"device_platform_anomaly\"\n      ]\n    }\n  },\n  \"verification_images\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"document_front\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"selfie\"\n    }\n  ],\n  \"risk_details\": {\n    \"general\": {\n      \"correlation_id\": \"<string>\",\n      \"action_type\": \"<string>\",\n      \"recommendation\": \"<string>\",\n      \"risk_score\": \"<float>\"\n    },\n    \"device\": {\n      \"os\": \"<string>\",\n      \"browser\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"device_fingerprint\": \"<string>\",\n      \"device_type\": \"mobile\",\n      \"device_model\": \"<string>\",\n      \"device_timestamp\": \"<long>\",\n      \"timezone\": \"<string>\",\n      \"incognito\": \"<boolean>\",\n      \"tampered\": \"<boolean>\",\n      \"emulated\": \"<boolean>\",\n      \"spoofed\": \"<boolean>\",\n      \"esim\": \"<boolean>\"\n    },\n    \"network\": {\n      \"network_country\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"ip_type\": \"<string>\",\n      \"ip_organization\": \"<string>\",\n      \"timezone\": \"<string>\",\n      \"vpn\": \"<boolean>\",\n      \"tor\": \"<boolean>\",\n      \"proxy\": \"<boolean>\",\n      \"anonymizer\": \"<boolean>\"\n    },\n    \"recommendation_reasons\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"additional_info\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"street\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"apartment_number\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    \"national_status\": {\n      \"citizen\": \"<boolean>\",\n      \"resident\": \"<boolean>\"\n    },\n    \"employment\": {\n      \"profession\": \"<string>\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-59aea4b1-d121-4bc8-b904-cc4896a6a11a"
+                            },
+                            {
+                              "id": "cb083934-0818-4a5f-b569-91925f40ebd1",
+                              "name": "Request is malformed or missing required fields",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/result?detailed=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "result"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "This parameter allows existing customers to select between response objects. You should explicitly send `false` to return the `DeprecatedSessionResult` response structure or send `true` to return the new `CompleteSessionResult`/`IncompleteSessionResult` response structure. Please note this parameter will be removed once `DeprecatedSessionResult` is fully deprecated.",
+                                      "key": "detailed",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-cb083934-0818-4a5f-b569-91925f40ebd1"
+                            },
+                            {
+                              "id": "e30ecc0e-bcb0-45e4-823a-028b8620439e",
+                              "name": "Access token is malformed, missing data, or expired",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/result?detailed=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "result"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "This parameter allows existing customers to select between response objects. You should explicitly send `false` to return the `DeprecatedSessionResult` response structure or send `true` to return the new `CompleteSessionResult`/`IncompleteSessionResult` response structure. Please note this parameter will be removed once `DeprecatedSessionResult` is fully deprecated.",
+                                      "key": "detailed",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-e30ecc0e-bcb0-45e4-823a-028b8620439e"
+                            },
+                            {
+                              "id": "6d736c57-2773-4393-890e-da8f5f536173",
+                              "name": "Session not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/result?detailed=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "result"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "This parameter allows existing customers to select between response objects. You should explicitly send `false` to return the `DeprecatedSessionResult` response structure or send `true` to return the new `CompleteSessionResult`/`IncompleteSessionResult` response structure. Please note this parameter will be removed once `DeprecatedSessionResult` is fully deprecated.",
+                                      "key": "detailed",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-6d736c57-2773-4393-890e-da8f5f536173"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:05:20.000Z",
+                          "updatedAt": "2026-07-28T11:05:20.000Z",
+                          "uid": "35240-406b03f0-f4fa-4ef4-8f40-89a6e842dce6"
+                        }
+                      ],
+                      "id": "8c8747bc-42fa-4c5d-bb2c-5ceb159c46f5",
+                      "createdAt": "2026-07-28T11:05:20.000Z",
+                      "updatedAt": "2026-07-28T11:05:20.000Z",
+                      "uid": "35240-8c8747bc-42fa-4c5d-bb2c-5ceb159c46f5"
+                    },
+                    {
+                      "name": "images",
+                      "item": [
+                        {
+                          "name": "{id}",
+                          "item": [
+                            {
+                              "name": "Get image by ID",
+                              "id": "8cc764e1-d71a-46c1-bd5d-253eed6b9d53",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "image/jpg"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/images/:id?format=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "images",
+                                    ":id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Optional. Determines the image format returned. Enum: `raw` `base64`",
+                                      "key": "format",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "cb78c02d-6adc-4f21-bf70-db7a65f3d470",
+                                      "key": "sid",
+                                      "value": "",
+                                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                                    },
+                                    {
+                                      "id": "b6229c6f-620a-47bf-ace5-ce382d84b960",
+                                      "key": "id",
+                                      "value": "<string>",
+                                      "description": "(Required) Image ID returned by the request to get all images"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieve the actual image from the session (and not only the image metadata). The image is specified by the image ID returned upon fetching all the session images."
+                              },
+                              "response": [
+                                {
+                                  "id": "2f56b056-fde9-425f-a80f-5bd08aae4282",
+                                  "name": "Actual image",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "image/jpg"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/verification/:sid/images/:id?format=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "verification",
+                                        ":sid",
+                                        "images",
+                                        ":id"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Optional. Determines the image format returned. Enum: `raw` `base64`",
+                                          "key": "format",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sid"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "image/jpg"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<binary>",
+                                  "createdAt": "2026-07-28T11:05:20.000Z",
+                                  "updatedAt": "2026-07-28T11:05:20.000Z",
+                                  "uid": "35240-2f56b056-fde9-425f-a80f-5bd08aae4282"
+                                },
+                                {
+                                  "id": "7028f5d9-0d0e-446b-9f01-6ff392aca0cf",
+                                  "name": "Request is malformed or missing required fields",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/verification/:sid/images/:id?format=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "verification",
+                                        ":sid",
+                                        "images",
+                                        ":id"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Optional. Determines the image format returned. Enum: `raw` `base64`",
+                                          "key": "format",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sid"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T11:05:20.000Z",
+                                  "updatedAt": "2026-07-28T11:05:20.000Z",
+                                  "uid": "35240-7028f5d9-0d0e-446b-9f01-6ff392aca0cf"
+                                },
+                                {
+                                  "id": "ab4362f6-c8ba-4bff-90b9-a121ced6a8f6",
+                                  "name": "Access token is malformed, missing data, or expired",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/verification/:sid/images/:id?format=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "verification",
+                                        ":sid",
+                                        "images",
+                                        ":id"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Optional. Determines the image format returned. Enum: `raw` `base64`",
+                                          "key": "format",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sid"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T11:05:20.000Z",
+                                  "updatedAt": "2026-07-28T11:05:20.000Z",
+                                  "uid": "35240-ab4362f6-c8ba-4bff-90b9-a121ced6a8f6"
+                                },
+                                {
+                                  "id": "c8616456-112f-481c-8218-91dd249dda04",
+                                  "name": "Image not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/verification/:sid/images/:id?format=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "verification",
+                                        ":sid",
+                                        "images",
+                                        ":id"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Optional. Determines the image format returned. Enum: `raw` `base64`",
+                                          "key": "format",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "sid"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T11:05:20.000Z",
+                                  "updatedAt": "2026-07-28T11:05:20.000Z",
+                                  "uid": "35240-c8616456-112f-481c-8218-91dd249dda04"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-8cc764e1-d71a-46c1-bd5d-253eed6b9d53"
+                            }
+                          ],
+                          "id": "c43ad592-33df-4f55-a257-a83bc43b6537",
+                          "createdAt": "2026-07-28T11:05:20.000Z",
+                          "updatedAt": "2026-07-28T11:05:20.000Z",
+                          "uid": "35240-c43ad592-33df-4f55-a257-a83bc43b6537"
+                        },
+                        {
+                          "name": "Get all images for session",
+                          "id": "dea1ddef-8851-4361-b933-908a8177157b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/verification/:sid/images",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "verification",
+                                ":sid",
+                                "images"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d6dce284-d6b5-4bc0-89df-7613fb9eb3f4",
+                                  "key": "sid",
+                                  "value": "",
+                                  "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves all the images that were submitted for the session. The response contains only the image metadata, which includes the image ID that can be used to fetch the actual image."
+                          },
+                          "response": [
+                            {
+                              "id": "fc5353fd-86bc-41e0-9331-e54ccb011cee",
+                              "name": "List of all images (metadata)",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/images",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "images"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"session_images\": [\n    {\n      \"id\": \"<string>\",\n      \"rejected\": \"<boolean>\",\n      \"original\": \"<boolean>\",\n      \"format\": \"<string>\",\n      \"type\": \"document_back\",\n      \"original_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"rejected\": \"<boolean>\",\n      \"original\": \"<boolean>\",\n      \"format\": \"<string>\",\n      \"type\": \"selfie\",\n      \"original_id\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-fc5353fd-86bc-41e0-9331-e54ccb011cee"
+                            },
+                            {
+                              "id": "60d11312-9e98-443a-bb9b-20238c7c5d67",
+                              "name": "Request is malformed or missing required fields",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/images",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "images"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-60d11312-9e98-443a-bb9b-20238c7c5d67"
+                            },
+                            {
+                              "id": "bd15fc26-0cbd-4d3c-9e26-5c02abdd4dda",
+                              "name": "Access token is malformed, missing data, or expired",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/images",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "images"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-bd15fc26-0cbd-4d3c-9e26-5c02abdd4dda"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:05:20.000Z",
+                          "updatedAt": "2026-07-28T11:05:20.000Z",
+                          "uid": "35240-dea1ddef-8851-4361-b933-908a8177157b"
+                        }
+                      ],
+                      "id": "06445f7a-8ee8-461b-a60c-38a8585c47ab",
+                      "createdAt": "2026-07-28T11:05:20.000Z",
+                      "updatedAt": "2026-07-28T11:05:20.000Z",
+                      "uid": "35240-06445f7a-8ee8-461b-a60c-38a8585c47ab"
+                    },
+                    {
+                      "name": "consent",
+                      "item": [
+                        {
+                          "name": "Get consent",
+                          "id": "10069ecc-f814-4349-a8fa-3d5aa4251e41",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/verification/:sid/consent",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "verification",
+                                ":sid",
+                                "consent"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a3ca5216-371d-4b9f-afb4-e8a9a3c2f3da",
+                                  "key": "sid",
+                                  "value": "",
+                                  "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                                }
+                              ]
+                            },
+                            "description": "Checks whether user consent was provided for a specific session and if so, provides the timestamp"
+                          },
+                          "response": [
+                            {
+                              "id": "4ed94013-8216-47e4-8c80-c915aa8ee96d",
+                              "name": "Session created",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/consent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "consent"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"consent_granted\": \"<boolean>\",\n  \"consent_date\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-4ed94013-8216-47e4-8c80-c915aa8ee96d"
+                            },
+                            {
+                              "id": "0322486d-8eb2-452d-a77b-92dbfa9569c7",
+                              "name": "Request is malformed or missing required fields",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/consent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "consent"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-0322486d-8eb2-452d-a77b-92dbfa9569c7"
+                            },
+                            {
+                              "id": "6237291f-0846-47a1-b7af-8abdf8d6ae29",
+                              "name": "Access token is malformed, missing data, or expired",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/consent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "consent"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-6237291f-0846-47a1-b7af-8abdf8d6ae29"
+                            },
+                            {
+                              "id": "db58bbcc-b80e-4309-99b4-fc2a27316c84",
+                              "name": "Session not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/verification/:sid/consent",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "verification",
+                                    ":sid",
+                                    "consent"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sid"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T11:05:20.000Z",
+                              "updatedAt": "2026-07-28T11:05:20.000Z",
+                              "uid": "35240-db58bbcc-b80e-4309-99b4-fc2a27316c84"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:05:20.000Z",
+                          "updatedAt": "2026-07-28T11:05:20.000Z",
+                          "uid": "35240-10069ecc-f814-4349-a8fa-3d5aa4251e41"
+                        }
+                      ],
+                      "id": "025a63d3-8f29-452e-a93a-e666021966ea",
+                      "createdAt": "2026-07-28T11:05:20.000Z",
+                      "updatedAt": "2026-07-28T11:05:20.000Z",
+                      "uid": "35240-025a63d3-8f29-452e-a93a-e666021966ea"
+                    },
+                    {
+                      "name": "Delete verification session",
+                      "id": "dc97393f-fb79-47af-9eea-8267efa85130",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/verification/:sid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "verification",
+                            ":sid"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4b9bee7b-b864-4ba0-bad2-e01191584bcd",
+                              "key": "sid",
+                              "value": "",
+                              "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                            }
+                          ]
+                        },
+                        "description": "Deletes a verification session. This deletes the personal user data collected during the verification process"
+                      },
+                      "response": [
+                        {
+                          "id": "7c972d75-9fb5-45b6-a3e0-b8e3e78902e6",
+                          "name": "Session deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/verification/:sid",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "verification",
+                                ":sid"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T11:05:20.000Z",
+                          "updatedAt": "2026-07-28T11:05:20.000Z",
+                          "uid": "35240-7c972d75-9fb5-45b6-a3e0-b8e3e78902e6"
+                        },
+                        {
+                          "id": "b0faaf22-f12d-4a06-825a-1831d019fa05",
+                          "name": "Request is malformed or missing required fields",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/verification/:sid",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "verification",
+                                ":sid"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T11:05:20.000Z",
+                          "updatedAt": "2026-07-28T11:05:20.000Z",
+                          "uid": "35240-b0faaf22-f12d-4a06-825a-1831d019fa05"
+                        },
+                        {
+                          "id": "8f33f508-8f81-46c7-b2e1-3403b2c85b50",
+                          "name": "Access token is malformed, missing data, or expired",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/verification/:sid",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "verification",
+                                ":sid"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T11:05:20.000Z",
+                          "updatedAt": "2026-07-28T11:05:20.000Z",
+                          "uid": "35240-8f33f508-8f81-46c7-b2e1-3403b2c85b50"
+                        },
+                        {
+                          "id": "8b448545-a52a-4c34-9ade-6a634aac70b4",
+                          "name": "Session not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/verification/:sid",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "verification",
+                                ":sid"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T11:05:20.000Z",
+                          "updatedAt": "2026-07-28T11:05:20.000Z",
+                          "uid": "35240-8b448545-a52a-4c34-9ade-6a634aac70b4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T11:05:20.000Z",
+                      "updatedAt": "2026-07-28T11:05:20.000Z",
+                      "uid": "35240-dc97393f-fb79-47af-9eea-8267efa85130"
+                    }
+                  ],
+                  "id": "bdb23d73-ff3a-4ea7-8d2b-d4b5be702341",
+                  "createdAt": "2026-07-28T11:05:20.000Z",
+                  "updatedAt": "2026-07-28T11:05:20.000Z",
+                  "uid": "35240-bdb23d73-ff3a-4ea7-8d2b-d4b5be702341"
+                },
+                {
+                  "name": "Create verification session",
+                  "id": "a21c9e9c-fe53-470e-97d8-e92ce336f203",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"callback_url\": \"<string>\",\n  \"state\": \"<string>\",\n  \"time_to_live\": \"90d\",\n  \"mock_behavior\": {\n    \"mock_recommendation\": \"ALLOW\",\n    \"recommendation\": \"CHALLENGE\",\n    \"processing_time\": \"<string>\",\n    \"force_retry\": \"<boolean>\",\n    \"info\": {\n      \"person_details\": {\n        \"given_name\": \"<string>\",\n        \"surname\": \"<string>\",\n        \"gender\": \"<string>\",\n        \"full_name\": \"<string>\",\n        \"age\": \"<number>\",\n        \"address\": {\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"city\": \"<string>\",\n          \"street\": \"<string>\",\n          \"house_number\": \"<string>\",\n          \"apartment_number\": \"<string>\",\n          \"postcode\": \"<string>\",\n          \"full_address\": \"<string>\"\n        },\n        \"date_of_birth\": \"<string>\"\n      },\n      \"document_details\": {\n        \"type\": \"passport\",\n        \"country\": \"<string>\",\n        \"region\": \"<string>\",\n        \"issue_date\": \"<string>\",\n        \"document_serial_number\": \"<string>\",\n        \"id_value\": \"<string>\",\n        \"given_name\": \"<string>\",\n        \"surname\": \"<string>\",\n        \"full_name\": \"<string>\",\n        \"date_of_birth\": \"<string>\",\n        \"valid_until\": \"<string>\"\n      }\n    }\n  },\n  \"auto_start\": \"<boolean>\",\n  \"start\": {\n    \"consent\": {\n      \"granted\": \"<boolean>\",\n      \"document_id\": \"<string>\"\n    }\n  },\n  \"customer_information\": {\n    \"organization_name\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"external_user_id\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/verification",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "verification"
+                      ]
+                    },
+                    "description": "Creates a new verification session that will provide a secure context to the verification process. It returns a start token that will be used when initiating the verification process from the client side. This should be called from the backend. See the [Quick start guide](https://developer.transmitsecurity.com/guides/verify/quick_start_web/#step-4-initiate-id-verification) for details."
+                  },
+                  "response": [
+                    {
+                      "id": "3cfa22f6-06cc-4d4d-b581-3db245159a0b",
+                      "name": "Session created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"callback_url\": \"<string>\",\n  \"state\": \"<string>\",\n  \"time_to_live\": \"90d\",\n  \"mock_behavior\": {\n    \"mock_recommendation\": \"ALLOW\",\n    \"recommendation\": \"CHALLENGE\",\n    \"processing_time\": \"<string>\",\n    \"force_retry\": \"<boolean>\",\n    \"info\": {\n      \"person_details\": {\n        \"given_name\": \"<string>\",\n        \"surname\": \"<string>\",\n        \"gender\": \"<string>\",\n        \"full_name\": \"<string>\",\n        \"age\": \"<number>\",\n        \"address\": {\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"city\": \"<string>\",\n          \"street\": \"<string>\",\n          \"house_number\": \"<string>\",\n          \"apartment_number\": \"<string>\",\n          \"postcode\": \"<string>\",\n          \"full_address\": \"<string>\"\n        },\n        \"date_of_birth\": \"<string>\"\n      },\n      \"document_details\": {\n        \"type\": \"passport\",\n        \"country\": \"<string>\",\n        \"region\": \"<string>\",\n        \"issue_date\": \"<string>\",\n        \"document_serial_number\": \"<string>\",\n        \"id_value\": \"<string>\",\n        \"given_name\": \"<string>\",\n        \"surname\": \"<string>\",\n        \"full_name\": \"<string>\",\n        \"date_of_birth\": \"<string>\",\n        \"valid_until\": \"<string>\"\n      }\n    }\n  },\n  \"auto_start\": \"<boolean>\",\n  \"start\": {\n    \"consent\": {\n      \"granted\": \"<boolean>\",\n      \"document_id\": \"<string>\"\n    }\n  },\n  \"customer_information\": {\n    \"organization_name\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"external_user_id\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/verification",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "verification"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"session_id\": \"<string>\",\n  \"expiration\": \"<string>\",\n  \"missing_images\": [\n    \"document_back\",\n    \"document_back\"\n  ],\n  \"start_token\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T11:05:20.000Z",
+                      "updatedAt": "2026-07-28T11:05:20.000Z",
+                      "uid": "35240-3cfa22f6-06cc-4d4d-b581-3db245159a0b"
+                    },
+                    {
+                      "id": "44ec39b5-c4ec-4d14-96e2-c5c69e7135ab",
+                      "name": "Request is malformed or missing required fields",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"callback_url\": \"<string>\",\n  \"state\": \"<string>\",\n  \"time_to_live\": \"90d\",\n  \"mock_behavior\": {\n    \"mock_recommendation\": \"ALLOW\",\n    \"recommendation\": \"CHALLENGE\",\n    \"processing_time\": \"<string>\",\n    \"force_retry\": \"<boolean>\",\n    \"info\": {\n      \"person_details\": {\n        \"given_name\": \"<string>\",\n        \"surname\": \"<string>\",\n        \"gender\": \"<string>\",\n        \"full_name\": \"<string>\",\n        \"age\": \"<number>\",\n        \"address\": {\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"city\": \"<string>\",\n          \"street\": \"<string>\",\n          \"house_number\": \"<string>\",\n          \"apartment_number\": \"<string>\",\n          \"postcode\": \"<string>\",\n          \"full_address\": \"<string>\"\n        },\n        \"date_of_birth\": \"<string>\"\n      },\n      \"document_details\": {\n        \"type\": \"passport\",\n        \"country\": \"<string>\",\n        \"region\": \"<string>\",\n        \"issue_date\": \"<string>\",\n        \"document_serial_number\": \"<string>\",\n        \"id_value\": \"<string>\",\n        \"given_name\": \"<string>\",\n        \"surname\": \"<string>\",\n        \"full_name\": \"<string>\",\n        \"date_of_birth\": \"<string>\",\n        \"valid_until\": \"<string>\"\n      }\n    }\n  },\n  \"auto_start\": \"<boolean>\",\n  \"start\": {\n    \"consent\": {\n      \"granted\": \"<boolean>\",\n      \"document_id\": \"<string>\"\n    }\n  },\n  \"customer_information\": {\n    \"organization_name\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"external_user_id\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/verification",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "verification"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:20.000Z",
+                      "updatedAt": "2026-07-28T11:05:20.000Z",
+                      "uid": "35240-44ec39b5-c4ec-4d14-96e2-c5c69e7135ab"
+                    },
+                    {
+                      "id": "f21d4dab-3fea-4f47-9c55-7ca1ea8108c1",
+                      "name": "Access token is malformed, missing data, or expired",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"callback_url\": \"<string>\",\n  \"state\": \"<string>\",\n  \"time_to_live\": \"90d\",\n  \"mock_behavior\": {\n    \"mock_recommendation\": \"ALLOW\",\n    \"recommendation\": \"CHALLENGE\",\n    \"processing_time\": \"<string>\",\n    \"force_retry\": \"<boolean>\",\n    \"info\": {\n      \"person_details\": {\n        \"given_name\": \"<string>\",\n        \"surname\": \"<string>\",\n        \"gender\": \"<string>\",\n        \"full_name\": \"<string>\",\n        \"age\": \"<number>\",\n        \"address\": {\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"city\": \"<string>\",\n          \"street\": \"<string>\",\n          \"house_number\": \"<string>\",\n          \"apartment_number\": \"<string>\",\n          \"postcode\": \"<string>\",\n          \"full_address\": \"<string>\"\n        },\n        \"date_of_birth\": \"<string>\"\n      },\n      \"document_details\": {\n        \"type\": \"passport\",\n        \"country\": \"<string>\",\n        \"region\": \"<string>\",\n        \"issue_date\": \"<string>\",\n        \"document_serial_number\": \"<string>\",\n        \"id_value\": \"<string>\",\n        \"given_name\": \"<string>\",\n        \"surname\": \"<string>\",\n        \"full_name\": \"<string>\",\n        \"date_of_birth\": \"<string>\",\n        \"valid_until\": \"<string>\"\n      }\n    }\n  },\n  \"auto_start\": \"<boolean>\",\n  \"start\": {\n    \"consent\": {\n      \"granted\": \"<boolean>\",\n      \"document_id\": \"<string>\"\n    }\n  },\n  \"customer_information\": {\n    \"organization_name\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"external_user_id\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/verification",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "verification"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:20.000Z",
+                      "updatedAt": "2026-07-28T11:05:20.000Z",
+                      "uid": "35240-f21d4dab-3fea-4f47-9c55-7ca1ea8108c1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T11:05:20.000Z",
+                  "updatedAt": "2026-07-28T11:05:20.000Z",
+                  "uid": "35240-a21c9e9c-fe53-470e-97d8-e92ce336f203"
+                }
+              ],
+              "id": "d2faa04a-ca9c-4bc7-bdcc-5bd25489add2",
+              "createdAt": "2026-07-28T11:05:20.000Z",
+              "updatedAt": "2026-07-28T11:05:20.000Z",
+              "uid": "35240-d2faa04a-ca9c-4bc7-bdcc-5bd25489add2"
+            }
+          ],
+          "id": "9033dab3-fd12-4f74-b7b7-b431aa728ef6",
+          "createdAt": "2026-07-28T11:05:20.000Z",
+          "updatedAt": "2026-07-28T11:05:20.000Z",
+          "uid": "35240-9033dab3-fd12-4f74-b7b7-b431aa728ef6"
+        }
+      ],
+      "id": "00b5166d-5fba-4645-8105-570a735b5b50",
+      "createdAt": "2026-07-28T11:05:20.000Z",
+      "updatedAt": "2026-07-28T11:05:20.000Z",
+      "uid": "35240-00b5166d-5fba-4645-8105-570a735b5b50"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sbx.transmitsecurity.io/cis"
+    }
+  ]
+}

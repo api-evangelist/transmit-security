@@ -1,0 +1,199 @@
+{
+  "info": {
+    "_postman_id": "2866212d-910a-4386-b3b1-2cac7b762433",
+    "name": "One-Time Login Applications Manage API",
+    "description": "Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T11:05:12.000Z",
+    "updatedAt": "2026-07-28T11:05:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2866212d-910a-4386-b3b1-2cac7b762433"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "manage",
+          "item": [
+            {
+              "name": "users",
+              "item": [
+                {
+                  "name": "{user_id}",
+                  "item": [
+                    {
+                      "name": "Delete user",
+                      "id": "98536acf-f85a-4a5a-b39e-2edd9029a7ea",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/manage/users/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "manage",
+                            "users",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "90a5c971-2fd9-46af-b887-8cce890386e1",
+                              "key": "user_id",
+                              "value": "<string>",
+                              "description": "(Required) ID of the user"
+                            }
+                          ]
+                        },
+                        "description": "Delete a user and all their data (tenant-level and app-level). Requires an admin access token (from a management app). <br><br>**Required permissions**: `users:delete`."
+                      },
+                      "response": [
+                        {
+                          "id": "711c0ba0-0f19-40dc-88cc-104bf17d4ddb",
+                          "name": "User deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/manage/users/:user_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "manage",
+                                "users",
+                                ":user_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T11:05:13.000Z",
+                          "updatedAt": "2026-07-28T11:05:13.000Z",
+                          "uid": "35240-711c0ba0-0f19-40dc-88cc-104bf17d4ddb"
+                        },
+                        {
+                          "id": "173dd285-5758-4fd8-bde4-bb503d0d82ea",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/manage/users/:user_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "manage",
+                                "users",
+                                ":user_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"error_code\": \"<number>\"\n}",
+                          "createdAt": "2026-07-28T11:05:13.000Z",
+                          "updatedAt": "2026-07-28T11:05:13.000Z",
+                          "uid": "35240-173dd285-5758-4fd8-bde4-bb503d0d82ea"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T11:05:13.000Z",
+                      "updatedAt": "2026-07-28T11:05:13.000Z",
+                      "uid": "35240-98536acf-f85a-4a5a-b39e-2edd9029a7ea"
+                    }
+                  ],
+                  "id": "977a5138-5ddf-488d-871c-59c4a440991f",
+                  "createdAt": "2026-07-28T11:05:13.000Z",
+                  "updatedAt": "2026-07-28T11:05:13.000Z",
+                  "uid": "35240-977a5138-5ddf-488d-871c-59c4a440991f"
+                }
+              ],
+              "id": "754770da-5a1b-4c3a-b0ba-da2c7dd17a17",
+              "createdAt": "2026-07-28T11:05:13.000Z",
+              "updatedAt": "2026-07-28T11:05:13.000Z",
+              "uid": "35240-754770da-5a1b-4c3a-b0ba-da2c7dd17a17"
+            }
+          ],
+          "id": "7a41ff6b-fcbd-4447-94a9-c210611fee98",
+          "createdAt": "2026-07-28T11:05:13.000Z",
+          "updatedAt": "2026-07-28T11:05:13.000Z",
+          "uid": "35240-7a41ff6b-fcbd-4447-94a9-c210611fee98"
+        }
+      ],
+      "id": "22ce7f88-a47e-4fc0-81fb-991e866a40eb",
+      "createdAt": "2026-07-28T11:05:13.000Z",
+      "updatedAt": "2026-07-28T11:05:13.000Z",
+      "uid": "35240-22ce7f88-a47e-4fc0-81fb-991e866a40eb"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sbx.transmitsecurity.io/cis"
+    }
+  ]
+}

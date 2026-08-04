@@ -1,0 +1,37 @@
+{
+  "provider": "transmit-security",
+  "sources": [
+    "transmit-security-applications-api-openapi.yml",
+    "transmit-security-auth-api-openapi.yml",
+    "transmit-security-manage-api-openapi.yml",
+    "transmit-security-organizations-api-openapi.yml",
+    "transmit-security-recommendation-api-openapi.yml",
+    "transmit-security-token-api-openapi.yml",
+    "transmit-security-users-api-openapi.yml",
+    "transmit-security-verification-api-openapi.yml"
+  ],
+  "outputs": [
+    "transmit-security-applications-api-openapi.yml",
+    "transmit-security-auth-api-openapi.yml",
+    "transmit-security-manage-api-openapi.yml",
+    "transmit-security-organizations-api-openapi.yml",
+    "transmit-security-recommendation-api-openapi.yml",
+    "transmit-security-token-api-openapi.yml",
+    "transmit-security-users-api-openapi.yml",
+    "transmit-security-verification-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [
+    "transmit-security-applications-api-openapi.yml: info.version missing",
+    "transmit-security-auth-api-openapi.yml: info.version missing",
+    "transmit-security-manage-api-openapi.yml: info.version missing",
+    "transmit-security-organizations-api-openapi.yml: info.version missing",
+    "transmit-security-recommendation-api-openapi.yml: info.version missing",
+    "transmit-security-token-api-openapi.yml: info.version missing",
+    "transmit-security-users-api-openapi.yml: info.version missing",
+    "transmit-security-verification-api-openapi.yml: info.version missing"
+  ],
+  "notes": [],
+  "skipped": []
+}

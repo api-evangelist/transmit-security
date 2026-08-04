@@ -1,0 +1,1922 @@
+{
+  "info": {
+    "_postman_id": "f544921e-597b-4366-8d81-36f58441c99b",
+    "name": "One-Time Login Applications Recommendation API",
+    "description": "Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T11:05:14.000Z",
+    "updatedAt": "2026-07-28T11:05:15.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f544921e-597b-4366-8d81-36f58441c99b"
+  },
+  "item": [
+    {
+      "name": "recommendation",
+      "item": [
+        {
+          "name": "rules",
+          "item": [
+            {
+              "name": "{rule_id}",
+              "item": [
+                {
+                  "name": "Get rule by ID",
+                  "id": "96bb2284-cd3c-410e-b660-3475fb0b4e11",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules",
+                        ":rule_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3d5e6b7f-06c2-4bd7-bf88-0fe3016318a8",
+                          "key": "rule_id",
+                          "value": "<string>",
+                          "description": "(Required) ID of the recommendation rule"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a specific recommendation rule by its ID"
+                  },
+                  "response": [
+                    {
+                      "id": "98c45fb6-1843-4465-9e1d-cd0abb55fa0b",
+                      "name": "Rule retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"data\": {\n    \"priority\": \"<integer>\",\n    \"matcher\": {\n      \"ip_cidrs\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"recommendation\": \"CHALLENGE\",\n    \"enabled\": \"<boolean>\",\n    \"mode\": \"PRODUCTION\",\n    \"name\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-98c45fb6-1843-4465-9e1d-cd0abb55fa0b"
+                    },
+                    {
+                      "id": "beb18fd3-c63f-4291-affc-63470b761f7e",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-beb18fd3-c63f-4291-affc-63470b761f7e"
+                    },
+                    {
+                      "id": "d11e41ae-9233-4a28-8e71-cf8ec4861028",
+                      "name": "Invalid authentication",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-d11e41ae-9233-4a28-8e71-cf8ec4861028"
+                    },
+                    {
+                      "id": "94298765-a19a-4aaa-9cdf-6df1fb12654b",
+                      "name": "Invalid authorization",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-94298765-a19a-4aaa-9cdf-6df1fb12654b"
+                    },
+                    {
+                      "id": "62534a05-2f96-4455-a8a6-8c62403361f5",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-62534a05-2f96-4455-a8a6-8c62403361f5"
+                    },
+                    {
+                      "id": "b98ed9f1-0b60-47c5-8dd1-23b94d59fa9b",
+                      "name": "Rate limit reached",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-b98ed9f1-0b60-47c5-8dd1-23b94d59fa9b"
+                    },
+                    {
+                      "id": "682ad05f-339c-4725-9cdf-577871dcbb2a",
+                      "name": "Internal error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-682ad05f-339c-4725-9cdf-577871dcbb2a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-96bb2284-cd3c-410e-b660-3475fb0b4e11"
+                },
+                {
+                  "name": "Update rule by ID",
+                  "id": "2f11f6be-ecaa-40d8-9be2-82c48d2facc6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules",
+                        ":rule_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "49ab4838-77e6-4a8d-bfd0-a1fba89673e6",
+                          "key": "rule_id",
+                          "value": "<string>",
+                          "description": "(Required) ID of the recommendation rule"
+                        }
+                      ]
+                    },
+                    "description": "Updates a specific recommendation rule"
+                  },
+                  "response": [
+                    {
+                      "id": "e69a3d76-f3fe-4fa3-af78-ff4cb70b42f8",
+                      "name": "Rule updated successfully",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-e69a3d76-f3fe-4fa3-af78-ff4cb70b42f8"
+                    },
+                    {
+                      "id": "0e3b4699-4bb5-4fbb-bda9-e7704c873dfe",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-0e3b4699-4bb5-4fbb-bda9-e7704c873dfe"
+                    },
+                    {
+                      "id": "e664f468-7f37-45f2-865e-b5e80e46211a",
+                      "name": "Invalid authentication",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-e664f468-7f37-45f2-865e-b5e80e46211a"
+                    },
+                    {
+                      "id": "89fa0d3f-00ae-4966-8f0d-7077eb50ad21",
+                      "name": "Invalid authorization",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-89fa0d3f-00ae-4966-8f0d-7077eb50ad21"
+                    },
+                    {
+                      "id": "38fe29d1-1700-43ac-b6f5-0cf227138eb9",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-38fe29d1-1700-43ac-b6f5-0cf227138eb9"
+                    },
+                    {
+                      "id": "3cfe5952-2f8e-4ef5-a256-0e5a510400a1",
+                      "name": "Rate limit reached",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-3cfe5952-2f8e-4ef5-a256-0e5a510400a1"
+                    },
+                    {
+                      "id": "06cd913f-2a4b-4dd6-81ea-e88d68bd9929",
+                      "name": "Internal error",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-06cd913f-2a4b-4dd6-81ea-e88d68bd9929"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-2f11f6be-ecaa-40d8-9be2-82c48d2facc6"
+                },
+                {
+                  "name": "Delete rule by ID",
+                  "id": "f1731c0c-fc79-410d-a73e-d8f96c4b4d83",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules",
+                        ":rule_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f62f9a1f-a8b0-4511-9f5e-6d0e4b2a75b7",
+                          "key": "rule_id",
+                          "value": "<string>",
+                          "description": "(Required) ID of the recommendation rule"
+                        }
+                      ]
+                    },
+                    "description": "Deletes a specific recommendation rule. Note that you can also disable rules if needed using the enabled rule attribute."
+                  },
+                  "response": [
+                    {
+                      "id": "9859b5da-9c0b-484b-a406-2258c86a092b",
+                      "name": "Rule updated successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-9859b5da-9c0b-484b-a406-2258c86a092b"
+                    },
+                    {
+                      "id": "3fa19811-7299-4c3f-b63e-5b26e33b279e",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-3fa19811-7299-4c3f-b63e-5b26e33b279e"
+                    },
+                    {
+                      "id": "b78d2913-3b18-49de-80fd-0929a0bcf55c",
+                      "name": "Invalid authentication",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-b78d2913-3b18-49de-80fd-0929a0bcf55c"
+                    },
+                    {
+                      "id": "cada49c0-16e9-4152-9029-83f8e1a6a7d2",
+                      "name": "Invalid authorization",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-cada49c0-16e9-4152-9029-83f8e1a6a7d2"
+                    },
+                    {
+                      "id": "60cf18fc-6104-46ac-b9eb-452baa790509",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-60cf18fc-6104-46ac-b9eb-452baa790509"
+                    },
+                    {
+                      "id": "9320d14d-a68e-440a-8296-1b30802b1e27",
+                      "name": "Rate limit reached",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-9320d14d-a68e-440a-8296-1b30802b1e27"
+                    },
+                    {
+                      "id": "90a3ee1a-3d88-4b40-a404-56430201abd2",
+                      "name": "Internal error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/recommendation/rules/:rule_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recommendation",
+                            "rules",
+                            ":rule_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rule_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T11:05:15.000Z",
+                      "updatedAt": "2026-07-28T11:05:15.000Z",
+                      "uid": "35240-90a3ee1a-3d88-4b40-a404-56430201abd2"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-f1731c0c-fc79-410d-a73e-d8f96c4b4d83"
+                }
+              ],
+              "id": "0ff6540d-2192-4ec3-9bb1-83ea60c91bc2",
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-0ff6540d-2192-4ec3-9bb1-83ea60c91bc2"
+            },
+            {
+              "name": "Create rule",
+              "id": "90257146-d3ea-4b9a-8b25-ab9d0318d826",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/recommendation/rules",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ]
+                },
+                "description": "Creates a new recommendation rule. Returns the `rule_id` used to reference the rule in subsequent requests."
+              },
+              "response": [
+                {
+                  "id": "904800a8-606a-4b3b-87b6-0d3355896089",
+                  "name": "Rule created successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"rule_id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-904800a8-606a-4b3b-87b6-0d3355896089"
+                },
+                {
+                  "id": "411d3a60-cf9e-4cfe-b2cc-90221c25fac6",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-411d3a60-cf9e-4cfe-b2cc-90221c25fac6"
+                },
+                {
+                  "id": "13e3994a-544b-4fce-b61c-2b0b5c2b0e26",
+                  "name": "Invalid authentication",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-13e3994a-544b-4fce-b61c-2b0b5c2b0e26"
+                },
+                {
+                  "id": "0245011d-f6f3-4e0f-a3cf-098d5e4a8155",
+                  "name": "Invalid authorization",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-0245011d-f6f3-4e0f-a3cf-098d5e4a8155"
+                },
+                {
+                  "id": "72b0da59-351f-44b0-a6fe-011eaf80fbc3",
+                  "name": "Unique field collision",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-72b0da59-351f-44b0-a6fe-011eaf80fbc3"
+                },
+                {
+                  "id": "86c89997-28c0-4433-b68f-d1a1f8ac66ef",
+                  "name": "Rate limit reached",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-86c89997-28c0-4433-b68f-d1a1f8ac66ef"
+                },
+                {
+                  "id": "618eae6f-595c-4aeb-978e-4ab9834e5c0d",
+                  "name": "Internal error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"DENY\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"PREVIEW\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-618eae6f-595c-4aeb-978e-4ab9834e5c0d"
+                }
+              ],
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-90257146-d3ea-4b9a-8b25-ab9d0318d826"
+            },
+            {
+              "name": "Get all rules",
+              "id": "4c5d1bb4-a566-4c9d-93b1-7049132cd6c3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/recommendation/rules",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ]
+                },
+                "description": "Retrieves a list of all recommendation rules"
+              },
+              "response": [
+                {
+                  "id": "5960505e-066a-4ec4-a385-fbc2ca971272",
+                  "name": "Rules retrieved successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"matcher\": {\n        \"ip_cidrs\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"recommendation\": \"CHALLENGE\",\n      \"enabled\": \"<boolean>\",\n      \"mode\": \"PREVIEW\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"priority\": \"<integer>\",\n      \"matcher\": {\n        \"ip_cidrs\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"recommendation\": \"CHALLENGE\",\n      \"enabled\": \"<boolean>\",\n      \"mode\": \"PREVIEW\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-5960505e-066a-4ec4-a385-fbc2ca971272"
+                },
+                {
+                  "id": "4c578ef0-65b8-4b16-a938-7030c65f1365",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-4c578ef0-65b8-4b16-a938-7030c65f1365"
+                },
+                {
+                  "id": "bad62dc6-ff86-46e9-a528-8fd34a9be942",
+                  "name": "Invalid authentication",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-bad62dc6-ff86-46e9-a528-8fd34a9be942"
+                },
+                {
+                  "id": "8db70137-2cd0-47eb-bd5d-2f6a9b03469d",
+                  "name": "Invalid authorization",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-8db70137-2cd0-47eb-bd5d-2f6a9b03469d"
+                },
+                {
+                  "id": "0ca31983-8f75-4ebb-819f-1895b34daa5a",
+                  "name": "Rate limit reached",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-0ca31983-8f75-4ebb-819f-1895b34daa5a"
+                },
+                {
+                  "id": "1abec316-9a0c-4557-be7a-35b68a2f671d",
+                  "name": "Internal error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/recommendation/rules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recommendation",
+                        "rules"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T11:05:15.000Z",
+                  "updatedAt": "2026-07-28T11:05:15.000Z",
+                  "uid": "35240-1abec316-9a0c-4557-be7a-35b68a2f671d"
+                }
+              ],
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-4c5d1bb4-a566-4c9d-93b1-7049132cd6c3"
+            }
+          ],
+          "id": "727c59ef-73b2-417c-8b42-36be4cc61e32",
+          "createdAt": "2026-07-28T11:05:15.000Z",
+          "updatedAt": "2026-07-28T11:05:15.000Z",
+          "uid": "35240-727c59ef-73b2-417c-8b42-36be4cc61e32"
+        },
+        {
+          "name": "Get recommendation",
+          "id": "4d4b6824-a6e2-4e72-83e2-409649992673",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/recommendation?action_token=REPLACE_WITH_ACTION_TOKEN&user_id=REPLACE_WITH_USER_ID",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "recommendation"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Action token returned by the SDK when the action was reported",
+                  "key": "action_token",
+                  "value": "REPLACE_WITH_ACTION_TOKEN"
+                },
+                {
+                  "description": "*Deprecated \u2013 This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`.",
+                  "key": "user_id",
+                  "value": "REPLACE_WITH_USER_ID"
+                }
+              ]
+            },
+            "description": "Get a risk recommendation for a client action reported to the SDK (via `triggerActionEvent()` call)"
+          },
+          "response": [
+            {
+              "id": "c2034814-b609-4100-ae43-d92b32f56a1b",
+              "name": "Recommendation",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/recommendation?action_token=REPLACE_WITH_ACTION_TOKEN&user_id=REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recommendation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action token returned by the SDK when the action was reported",
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "description": "*Deprecated \u2013 This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`.",
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"issued_at\": \"<number>\",\n  \"recommendation\": {\n    \"type\": \"CHALLENGE\",\n    \"result\": \"incomplete\",\n    \"challenge_type\": \"password\"\n  },\n  \"risk_score\": \"<number>\",\n  \"context\": {\n    \"action_id\": \"<string>\",\n    \"action_type\": \"<string>\",\n    \"action_performed_at\": \"<integer>\",\n    \"device_id\": \"<string>\",\n    \"device_fingerprint\": \"<string>\",\n    \"application_id\": \"<string>\",\n    \"device_timestamp\": \"<integer>\",\n    \"client_id\": \"<string>\",\n    \"tenant_id\": \"<string>\",\n    \"correlation_id\": \"<string>\",\n    \"device_public_key\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"claimed_user_id\": \"<string>\",\n    \"location\": \"<string>\",\n    \"ip\": \"<ipv4>\",\n    \"ip_country\": \"<string>\",\n    \"ip_location_region\": \"<string>\",\n    \"ip_domain\": \"<string>\",\n    \"ip_location_city\": \"<string>\",\n    \"ip_location_zip\": \"<string>\",\n    \"ip_location_longitude\": \"<string>\",\n    \"ip_location_latitude\": \"<string>\",\n    \"ip_asn_id\": \"<string>\",\n    \"ip_asn_name\": \"<string>\",\n    \"ip_organization_name\": \"<string>\",\n    \"ip_organization_type\": \"<string>\",\n    \"ip_location_timezone\": \"<string>\",\n    \"device_timezone\": \"<string>\",\n    \"device_languages\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"device_platform\": \"<string>\",\n    \"os_name\": \"<string>\",\n    \"os_version\": \"<string>\",\n    \"browser_name\": \"<string>\",\n    \"browser_version\": \"<string>\",\n    \"user_agent\": \"<string>\"\n  },\n  \"reasons\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"risk_signals\": {\n    \"device\": {\n      \"ram\": \"<number>\",\n      \"total_storage\": \"<number>\",\n      \"available_storage\": \"<number>\",\n      \"battery_level\": \"<number>\",\n      \"device_power_state\": \"<string>\",\n      \"core_number\": \"<number>\",\n      \"graphic_card\": \"<string>\",\n      \"model\": \"<string>\",\n      \"screen_width\": \"<number>\",\n      \"screen_height\": \"<number>\",\n      \"screen_pixel_depth\": \"<number>\",\n      \"screen_color_depth\": \"<number>\",\n      \"screen_avail_width\": \"<number>\",\n      \"screen_avail_height\": \"<number>\",\n      \"incognito\": \"<boolean>\",\n      \"tampered\": \"<boolean>\",\n      \"emulated\": \"<boolean>\",\n      \"spoofed\": \"<boolean>\",\n      \"tz_mismatch\": \"<boolean>\",\n      \"esim_usage\": \"<boolean>\",\n      \"accept_languages\": \"<string>\",\n      \"mobile_network_code\": \"<string>\",\n      \"font_count\": \"<number>\",\n      \"cpu_arch\": \"<string>\",\n      \"navigator_useragent\": \"<string>\",\n      \"true_useragent\": \"<string>\",\n      \"device_timezone_offset\": \"<number>\",\n      \"summer_timezone_offset\": \"<number>\",\n      \"winter_timezone_offset\": \"<number>\",\n      \"device_name\": \"<string>\"\n    },\n    \"network\": {\n      \"vpn\": \"<boolean>\",\n      \"tor\": \"<boolean>\",\n      \"hosting\": \"<boolean>\",\n      \"proxy\": \"<boolean>\",\n      \"anonymizer\": \"<boolean>\",\n      \"x_forwarded_for\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"behavior\": {\n      \"typing_velocity\": \"<number>\",\n      \"movement_velocity\": \"<number>\",\n      \"input_method\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"no_user_interaction\": \"<boolean>\",\n      \"straight_line_ratio\": \"<number>\",\n      \"right_angels_ratio\": \"<number>\",\n      \"minor_angels_ratio\": \"<number>\",\n      \"movement_latency\": \"<number>\",\n      \"corner_click\": \"<boolean>\"\n    },\n    \"history\": {\n      \"ip_action_rate_60_sec\": \"<integer>\",\n      \"user_action_rate_60_sec\": \"<integer>\",\n      \"device_action_rate_60_sec\": \"<integer>\",\n      \"ip_user_count_last_hour\": \"<integer>\",\n      \"ip_device_count_last_hour\": \"<integer>\",\n      \"linking_device_to_users_count\": \"<integer>\",\n      \"linking_user_to_device_count\": \"<integer>\"\n    }\n  },\n  \"transaction_data\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"type\": \"credit_redemption\",\n    \"method\": \"wire\",\n    \"channelId\": \"<string>\",\n    \"reason\": \"<string>\",\n    \"transactionDate\": \"<integer>\",\n    \"payer\": {\n      \"customerTier\": \"voluptate\",\n      \"billingInfo\": {},\n      \"name\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"accountId\": \"<string>\",\n      \"accountCountryCode\": \"MP\",\n      \"bankIdentifier\": \"<string>\",\n      \"branchIdentifier\": \"<string>\",\n      \"card\": {\n        \"holderName\": \"<string>\",\n        \"bin\": \"<string>\",\n        \"last4\": \"<string>\"\n      }\n    },\n    \"payee\": {\n      \"name\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"accountId\": \"<string>\",\n      \"accountCountryCode\": \"LG\",\n      \"bankIdentifier\": \"<string>\",\n      \"branchIdentifier\": \"<string>\",\n      \"card\": {\n        \"holderName\": \"<string>\",\n        \"bin\": \"<string>\",\n        \"last4\": \"<string>\"\n      }\n    },\n    \"purchase\": {\n      \"totalItems\": \"<integer>\",\n      \"products\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"amount\": \"<integer>\",\n          \"price\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"amount\": \"<integer>\",\n          \"price\": \"<number>\"\n        }\n      ],\n      \"shippingInfo\": {\n        \"name\": \"<string>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zipPostalCode\": \"<string>\",\n        \"country\": \"JR\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\"\n      }\n    },\n    \"avs\": {\n      \"code\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"matchLevel\": \"full\"\n    }\n  },\n  \"custom_attributes\": {\n    \"enim3\": \"<string>\",\n    \"euef\": \"<string>\"\n  },\n  \"threats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"preview_rule\": {\n    \"rule_name\": \"<string>\",\n    \"recommendation\": \"CHALLENGE\",\n    \"risk_score\": \"<number>\"\n  }\n}",
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-c2034814-b609-4100-ae43-d92b32f56a1b"
+            },
+            {
+              "id": "3bff1f00-c8ec-4a58-8c23-70d085202b3c",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/recommendation?action_token=REPLACE_WITH_ACTION_TOKEN&user_id=REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recommendation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action token returned by the SDK when the action was reported",
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "description": "*Deprecated \u2013 This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`.",
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-3bff1f00-c8ec-4a58-8c23-70d085202b3c"
+            },
+            {
+              "id": "7a780b71-7edf-47d9-b4f5-e9e9e4f6afb2",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/recommendation?action_token=REPLACE_WITH_ACTION_TOKEN&user_id=REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recommendation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action token returned by the SDK when the action was reported",
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "description": "*Deprecated \u2013 This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`.",
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-7a780b71-7edf-47d9-b4f5-e9e9e4f6afb2"
+            },
+            {
+              "id": "503f0241-1550-4917-b3bf-e98c3a148d9d",
+              "name": "Invalid authorization",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/recommendation?action_token=REPLACE_WITH_ACTION_TOKEN&user_id=REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recommendation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action token returned by the SDK when the action was reported",
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "description": "*Deprecated \u2013 This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`.",
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-503f0241-1550-4917-b3bf-e98c3a148d9d"
+            },
+            {
+              "id": "5ec1a8ee-c766-4d5f-81a3-51c81d740390",
+              "name": "Rate limit reached",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/recommendation?action_token=REPLACE_WITH_ACTION_TOKEN&user_id=REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recommendation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action token returned by the SDK when the action was reported",
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "description": "*Deprecated \u2013 This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`.",
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-5ec1a8ee-c766-4d5f-81a3-51c81d740390"
+            },
+            {
+              "id": "22b36e49-cb5d-441a-bb07-2979a581de7e",
+              "name": "Blacklisted token\u2014Returned when Fraud Prevention detects repeated or abusive token/payload misuse within a short time window (e.g., reuse of expired tokens, token caching/automation, or repeated invalid requests, including highly repetitive invalid reques",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/recommendation?action_token=REPLACE_WITH_ACTION_TOKEN&user_id=REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recommendation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action token returned by the SDK when the action was reported",
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "description": "*Deprecated \u2013 This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`.",
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-22b36e49-cb5d-441a-bb07-2979a581de7e"
+            },
+            {
+              "id": "bc5a159d-a8f1-465b-b2fc-4528ef3552eb",
+              "name": "Internal error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/recommendation?action_token=REPLACE_WITH_ACTION_TOKEN&user_id=REPLACE_WITH_USER_ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recommendation"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action token returned by the SDK when the action was reported",
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "description": "*Deprecated \u2013 This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`.",
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T11:05:15.000Z",
+              "updatedAt": "2026-07-28T11:05:15.000Z",
+              "uid": "35240-bc5a159d-a8f1-465b-b2fc-4528ef3552eb"
+            }
+          ],
+          "createdAt": "2026-07-28T11:05:15.000Z",
+          "updatedAt": "2026-07-28T11:05:15.000Z",
+          "uid": "35240-4d4b6824-a6e2-4e72-83e2-409649992673"
+        }
+      ],
+      "id": "a22404aa-c56d-4607-ad0b-fef9c8ca956d",
+      "createdAt": "2026-07-28T11:05:15.000Z",
+      "updatedAt": "2026-07-28T11:05:15.000Z",
+      "uid": "35240-a22404aa-c56d-4607-ad0b-fef9c8ca956d"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sbx.transmitsecurity.io/cis"
+    }
+  ]
+}

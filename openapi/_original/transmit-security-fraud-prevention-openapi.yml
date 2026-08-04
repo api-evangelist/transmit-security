@@ -1,0 +1,1367 @@
+openapi: 3.0.2
+info:
+  title: Recommendations
+  version: ''
+  description: >-
+    Recommendation APIs provided by Fraud Prevention are used to assess risk
+    level, obtain recommendations, and provide feedback
+servers:
+  - url: https://api.sbx.transmitsecurity.io/risk/v1
+    description: Sandbox environment
+  - url: https://api.transmitsecurity.io/risk/v1
+    description: Production environment (US)
+  - url: https://api.eu.transmitsecurity.io/risk/v1
+    description: Production environment (EU)
+  - url: https://api.ca.transmitsecurity.io/risk/v1
+    description: Production environment (CA)
+  - url: https://api.au.transmitsecurity.io/risk/v1
+    description: Production environment (AU)
+paths:
+  /recommendation:
+    get:
+      description: >-
+        Get a risk recommendation for a client action reported to the SDK (via
+        `triggerActionEvent()` call)
+      operationId: getRiskRecommendation
+      security:
+        - risk_access_token: []
+      summary: Get recommendation
+      parameters:
+        - name: action_token
+          in: query
+          required: true
+          schema:
+            type: string
+            default: REPLACE_WITH_ACTION_TOKEN
+          description: Action token returned by the SDK when the action was reported
+        - name: user_id
+          in: query
+          required: false
+          deprecated: true
+          schema:
+            type: string
+            default: REPLACE_WITH_USER_ID
+          description: >-
+            *Deprecated – This parameter is no longer required. Identity and
+            context should be provided during the `triggerActionEvent` or
+            `reportActionResult` call. This API now only retrieves the
+            calculated recommendation tied to the `action_token`.
+      responses:
+        '200':
+          $ref: '#/components/responses/recommendation'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '429':
+          $ref: '#/components/responses/rate_limit_reached'
+        '463':
+          $ref: '#/components/responses/blacklisted_token'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /recommendation/rules:
+    post:
+      summary: Create rule
+      description: >-
+        Creates a new recommendation rule. Returns the `rule_id` used to
+        reference the rule in subsequent requests.
+      operationId: createRule
+      deprecated: true
+      security:
+        - risk_access_token: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rule'
+      responses:
+        '201':
+          $ref: '#/components/responses/success_create_rule'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '409':
+          $ref: '#/components/responses/collision'
+        '429':
+          $ref: '#/components/responses/rate_limit_reached'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    get:
+      summary: Get all rules
+      description: Retrieves a list of all recommendation rules
+      operationId: getRules
+      deprecated: true
+      security:
+        - risk_access_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/success_get_rules'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '429':
+          $ref: '#/components/responses/rate_limit_reached'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /recommendation/rules/{rule_id}:
+    get:
+      summary: Get rule by ID
+      description: Retrieves a specific recommendation rule by its ID
+      operationId: getRuleById
+      deprecated: true
+      security:
+        - risk_access_token: []
+      parameters:
+        - name: rule_id
+          description: ID of the recommendation rule
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/success_get_rule_by_id'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '429':
+          $ref: '#/components/responses/rate_limit_reached'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Update rule by ID
+      description: Updates a specific recommendation rule
+      operationId: updateRule
+      deprecated: true
+      security:
+        - risk_access_token: []
+      parameters:
+        - name: rule_id
+          description: ID of the recommendation rule
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rule'
+      responses:
+        '200':
+          $ref: '#/components/responses/success_update_delete_rule'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '429':
+          $ref: '#/components/responses/rate_limit_reached'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    delete:
+      summary: Delete rule by ID
+      description: >-
+        Deletes a specific recommendation rule. Note that you can also disable
+        rules if needed using the enabled rule attribute.
+      operationId: deleteRule
+      deprecated: true
+      security:
+        - risk_access_token: []
+      parameters:
+        - name: rule_id
+          description: ID of the recommendation rule
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/success_update_delete_rule'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '429':
+          $ref: '#/components/responses/rate_limit_reached'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  schemas:
+    recommendation_full:
+      type: object
+      description: Recommendation
+      required:
+        - id
+        - issued_at
+        - recommendation
+        - risk_score
+        - context
+        - reasons
+      properties:
+        id:
+          type: string
+          example: 385cd06b527a974982e0560b67123fe2b1b5a39fd98d8d32cdbaca8ec16fd62d
+          description: Recommendation identifier
+        issued_at:
+          type: number
+          example: 1648028118123
+          description: Unix epoch time in milliseconds this recommendation was issued at
+        recommendation:
+          $ref: '#/components/schemas/recommendation'
+        risk_score:
+          $ref: '#/components/schemas/risk_score'
+        context:
+          allOf:
+            - $ref: '#/components/schemas/context'
+            - type: object
+              required:
+                - action_id
+                - action_type
+                - action_performed_at
+                - device_id
+                - device_fingerprint
+                - application_id
+        risk_signals:
+          $ref: '#/components/schemas/risk_signals'
+        reasons:
+          $ref: '#/components/schemas/reasons'
+        transaction_data:
+          $ref: '#/components/schemas/transaction_data'
+        custom_attributes:
+          $ref: '#/components/schemas/custom_attributes'
+        threats:
+          $ref: '#/components/schemas/threats'
+        preview_rule:
+          $ref: '#/components/schemas/preview_rule'
+    rule:
+      type: object
+      description: Recommendation rule
+      required:
+        - priority
+        - matcher
+        - recommendation
+        - enabled
+        - mode
+      properties:
+        name:
+          type: string
+          example: Block risky countries
+          description: >
+            Name of the recommendation rule. Must be unique across the tenant.
+            Auto generated if not provided.
+        priority:
+          type: integer
+          example: 10
+          minimum: 1
+          maximum: 1000
+          description: >
+            Priority of the recommendation rule, which determines the order in
+            which rules are evaluated. Rules are evaluated from smallest to
+            biggest priority value and only the first rule to match will apply.
+            Priority value must be unique.
+        matcher:
+          $ref: '#/components/schemas/matcher'
+        recommendation:
+          $ref: '#/components/schemas/rule_recommendation_type'
+        enabled:
+          type: boolean
+          description: Whether or not the rule will be evaluated
+        mode:
+          $ref: '#/components/schemas/rule_mode'
+    matcher:
+      description: Activity field matcher. Only one matcher can be defined per rule.
+      oneOf:
+        - $ref: '#/components/schemas/ip_cidrs'
+        - $ref: '#/components/schemas/device_ids'
+        - $ref: '#/components/schemas/device_fingerprints'
+        - $ref: '#/components/schemas/device_public_keys'
+        - $ref: '#/components/schemas/user_ids'
+        - $ref: '#/components/schemas/country_codes'
+        - $ref: '#/components/schemas/browser_names'
+        - $ref: '#/components/schemas/os_versions'
+    ip_cidrs:
+      type: object
+      properties:
+        ip_cidrs:
+          type: array
+          description: List of IP ranges in CIDR notation
+          items:
+            type: string
+    device_ids:
+      type: object
+      properties:
+        device_ids:
+          type: array
+          description: >-
+            List of device identifiers generated by Transmit Security and stored
+            by the SDK
+          items:
+            type: string
+    device_fingerprints:
+      type: object
+      properties:
+        device_fingerprints:
+          type: array
+          description: >-
+            List of device fingerprints calculated based on multiple device
+            persistent identifiers
+          items:
+            type: string
+    device_public_keys:
+      type: object
+      properties:
+        device_public_keys:
+          type: array
+          description: >-
+            List of unique and persistent device key IDs derived from
+            cryptographic binding
+          items:
+            type: string
+    user_ids:
+      type: object
+      properties:
+        user_ids:
+          type: array
+          description: List of opaque identifiers of users in your system
+          items:
+            type: string
+    country_codes:
+      type: object
+      properties:
+        country_codes:
+          type: array
+          description: List of country codes per ISO 3166-1 alpha-2 standard
+          items:
+            type: string
+    browser_names:
+      type: object
+      properties:
+        browser_names:
+          type: array
+          description: >
+            List of browser names as presented by Transmit Security systems.
+            e.g. `yandex`, `electron`
+          items:
+            type: string
+    os_versions:
+      type: object
+      properties:
+        os_versions:
+          type: array
+          description: >
+            List of OS versions as presented by Transmit Security systems. e.g.
+            `14.4.2`, `x86_64`
+          items:
+            type: string
+    rule_recommendation_type:
+      type: string
+      description: Recommendation type
+      enum:
+        - CHALLENGE
+        - DENY
+        - TRUST
+    rule_mode:
+      type: string
+      description: >
+        Allows you to simulate a rule and evaluate its impact before releasing
+        it to production. The simulation occurs each time a recommendation is
+        requested. If a preview rule matches the request (meaning, its priority
+        is higher than all matching rules), the response will include this
+        preview rule and what the recommendation would have been if all rules
+        were in production.
+      enum:
+        - PREVIEW
+        - PRODUCTION
+    create_rule_response:
+      type: object
+      properties:
+        message:
+          type: string
+        rule_id:
+          type: string
+          description: ID of the recommendation rule, used to reference the rule
+    get_all_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            description: Recommendation rule
+            properties:
+              id:
+                type: string
+                description: Rule ID
+              name:
+                $ref: '#/components/schemas/rule/properties/name'
+              priority:
+                $ref: '#/components/schemas/rule/properties/priority'
+              matcher:
+                $ref: '#/components/schemas/matcher'
+              recommendation:
+                $ref: '#/components/schemas/rule_recommendation_type'
+              enabled:
+                $ref: '#/components/schemas/rule/properties/enabled'
+              mode:
+                $ref: '#/components/schemas/rule_mode'
+    get_rule_response:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Rule ID
+        data:
+          $ref: '#/components/schemas/rule'
+    update_delete_rule_response:
+      type: object
+      properties:
+        message:
+          type: string
+    recommendation_type:
+      type: string
+      description: Recommendation type.
+      enum:
+        - ALLOW
+        - CHALLENGE
+        - DENY
+        - TRUST
+      example: CHALLENGE
+    result_type:
+      type: string
+      description: The outcome of the action.
+      enum:
+        - success
+        - failure
+        - incomplete
+      example: success
+    challenge_type:
+      type: string
+      description: The type of challenge enforced for the reported action.
+      enum:
+        - sms_otp
+        - email_otp
+        - totp
+        - push_otp
+        - voice_otp
+        - idv
+        - captcha
+        - invisible_captcha
+        - password
+        - passkey
+      example: email_otp
+    recommendation:
+      type: object
+      description: Decision the engine produced for the action.
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/recommendation_type'
+        result:
+          allOf:
+            - $ref: '#/components/schemas/result_type'
+          nullable: true
+        challenge_type:
+          $ref: '#/components/schemas/challenge_type'
+    risk_score:
+      type: number
+      description: Used to assess the risk level of the action.
+      minimum: 0
+      maximum: 100
+      example: 73.2
+    action_type:
+      type: string
+      example: login
+      description: Type of client action this recommendation was issued for.
+    context:
+      type: object
+      description: Identifies the context in which the action occurred.
+      properties:
+        action_id:
+          type: string
+          example: 885cd06b527a97498200560b67123fe221b5a39fd98d8d22cdb7ca8ec16ed62d
+          description: Identifier of the client action.
+        action_type:
+          $ref: '#/components/schemas/action_type'
+        action_performed_at:
+          type: integer
+          example: 1648028118123
+          description: Unix epoch time in milliseconds the action event was reported.
+        device_timestamp:
+          type: integer
+          example: 1648028107819
+          description: >
+            Unix epoch timestamp (ms) from the device clock when the action is
+            triggered via `triggerActionEvent()`. For backend-triggered actions,
+            uses the server time. Used to correlate client and server events.
+        client_id:
+          type: string
+          example: d152ddd.ece93f4.c2a3d12.riskid.security
+          description: Identifies the client associated with the action.
+        application_id:
+          type: string
+          example: ece93f4
+          description: Identifies the application associated with the action.
+        tenant_id:
+          type: string
+          example: c2a3d12
+          description: Identifies your tenant within Transmit.
+        device_id:
+          type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwZGE4ZmZjYy01NmE1LTRmMjgtYThkZi04NDY5MmYwYThmYTAiLCJ2ZXJzaW9uIjoxLCJpYXQiOjE2NTU3OTYzODQ1MzF9.TeGoqlCe_6eWzl9a3-vAumG4Xap8WjwsgcO2-DzGtLg
+          description: >
+            Unique device identifier generated by Transmit Security and stored
+            by the SDK. On web, stored in the cookie. On mobile, uses
+            platform-provided identifiers such as Android ID (hex string) or iOS
+            `identifierForVendor` (alphanumeric). Not derived from IMEI or other
+            hardware identifiers.
+        correlation_id:
+          type: string
+          example: bcb934d8-89cb-433b-a4c7-b7d94299586b
+          description: >-
+            Any ID that could help relate the action with external context or
+            session (if set via `triggerActionEvent()` SDK calls).
+        device_fingerprint:
+          type: string
+          example: a3c8f5ea75cb65fcdc3d0452b985f957a46e24afdc912e93dac1e115ecf408e5
+          description: Hash value on all the device data collected from the browser.
+        device_public_key:
+          type: string
+          example: 625ad815e47a1a05318c98185ff8cfb35fd706d836a1ad7459842f381929a8e3
+          description: >-
+            A unique and persistent identifier derived from cryptographic
+            binding.
+        user_id:
+          type: string
+          example: 5c4afa75c
+          description: >-
+            Opaque identifier of the user in your system (if set via
+            `setAuthenticatedUser()` or `init()` SDK calls).
+        claimed_user_id:
+          type: string
+          example: 5c4afa75c
+          description: >-
+            User ID of the not-yet-authenticated user, used to enhance risk and
+            trust assessments. Once the user is authenticated,
+            `setAuthenticatedUser()` should be called.
+        location:
+          type: string
+          example: https://www.amazingapp.com/shops?target=1
+          description: >-
+            The place in the application in which the action was performed (such
+            as the page URL).
+        ip:
+          type: string
+          format: ipv4
+          example: 160.221.187.219
+          description: IP address.
+        ip_country:
+          type: string
+          example: US
+          description: Country code, specified in a two-letter format (ISO 3166-1 alpha-2).
+        ip_location_region:
+          type: string
+          example: California
+          description: Location region identified by IP address.
+        ip_domain:
+          type: string
+          example: example.com
+          description: Domain name resolved from IP address.
+        ip_location_city:
+          type: string
+          example: Los Angeles
+          description: Location city identified by IP address.
+        ip_location_zip:
+          type: string
+          example: '92131'
+          description: Location ZIP code identified by IP address.
+        ip_location_longitude:
+          type: string
+          example: '-117.0903'
+          description: Geolocation longitude identified by IP address.
+        ip_location_latitude:
+          type: string
+          example: '32.9167'
+          description: Geolocation latitude identified by IP address.
+        ip_asn_id:
+          type: string
+          example: AS174
+          description: >-
+            Globally unique identifier that defines a group of one or more IP
+            prefixes.
+        ip_asn_name:
+          type: string
+          example: AS174 Cogent Communications
+          description: ASN name of the IP address.
+        ip_organization_name:
+          type: string
+          example: Cogent Communications
+          description: IP organization name.
+        ip_organization_type:
+          type: string
+          example: isp
+          description: Type of IP connection (for example, `isp`, `hosting`, `business`).
+        ip_location_timezone:
+          type: string
+          example: America/Los_Angeles
+          description: Timezone location identified by IP address.
+        device_timezone:
+          type: string
+          example: America/Los_Angeles
+          description: Timezone on device.
+        device_languages:
+          type: array
+          items:
+            type: string
+          example:
+            - en-US
+            - en
+          description: Languages on device.
+        device_platform:
+          type: string
+          example: desktop
+          description: Type of device platform.
+        os_name:
+          type: string
+          example: macOS
+          description: Name of the operating system.
+        os_version:
+          type: string
+          example: 14.1.0
+          description: Operating system version.
+        browser_name:
+          type: string
+          example: Chrome
+          description: Name of the browser.
+        browser_version:
+          type: string
+          example: '113'
+          description: Browser major version.
+        user_agent:
+          type: string
+          example: >-
+            Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like
+            Gecko) Chrome/77.0.3865.90 Safari/537.36
+          description: User agent string.
+    risk_signals:
+      type: object
+      description: Additional informative signals derived from the action.
+      properties:
+        device:
+          type: object
+          description: Device-relevant signals.
+          properties:
+            ram:
+              type: number
+              description: Device memory, a floating-point number.
+            total_storage:
+              type: number
+              description: >-
+                Device total storage, as received from the mobile native
+                platform.
+            available_storage:
+              type: number
+              description: >-
+                Device available storage, as received from the mobile native
+                platform.
+            battery_level:
+              type: number
+              description: Device battery level, a floating-point number.
+            device_power_state:
+              type: string
+              description: >-
+                Indicates if the device is currently plugged into a power
+                source.
+            core_number:
+              type: number
+              description: Device core number.
+            graphic_card:
+              type: string
+              description: Device graphics card, as received from the web platform.
+            model:
+              type: string
+              description: Device model.
+            screen_width:
+              type: number
+              description: Device screen width in pixels.
+            screen_height:
+              type: number
+              description: Device screen height in pixels.
+            screen_pixel_depth:
+              type: number
+              description: Pixel depth of the device screen.
+            screen_color_depth:
+              type: number
+              description: Color depth of the device screen.
+            screen_avail_width:
+              type: number
+              description: Available width of the screen.
+            screen_avail_height:
+              type: number
+              description: Available height of the screen.
+            incognito:
+              type: boolean
+              description: Whether the event was performed using incognito browsing.
+            tampered:
+              type: boolean
+              description: Whether the device is tampered (root or jailbreak).
+            emulated:
+              type: boolean
+              description: Whether the device is emulated.
+            spoofed:
+              type: boolean
+              description: Whether the device is spoofed.
+            tz_mismatch:
+              type: boolean
+              description: >-
+                Whether the event was performed on a device with a timezone
+                mismatching expected.
+            esim_usage:
+              type: boolean
+              description: Whether the event was performed using eSIM.
+            accept_languages:
+              type: string
+              description: Value of the `accept-language` header at the action request.
+            mobile_network_code:
+              type: string
+              description: >-
+                String representation of the device's mobile carrier MCC and
+                MNC.
+            font_count:
+              type: number
+              description: Number of fonts available on the device.
+            cpu_arch:
+              type: string
+              description: Device CPU architecture.
+            navigator_useragent:
+              type: string
+              description: User agent string from the device's browser navigator.
+            true_useragent:
+              type: string
+              description: >-
+                User agent string reconstructed by the SDK, providing details
+                about the browser, OS, and device.
+            device_timezone_offset:
+              type: number
+              description: Timezone offset of the device, in minutes from UTC.
+            summer_timezone_offset:
+              type: number
+              description: >-
+                Device's timezone offset in minutes from UTC during daylight
+                saving time.
+            winter_timezone_offset:
+              type: number
+              description: >-
+                Device's timezone offset in minutes from UTC during standard
+                time.
+            device_name:
+              type: string
+              description: Device's name as recorded on iOS, reflecting the user-set name.
+        network:
+          type: object
+          description: Network-relevant signals.
+          properties:
+            vpn:
+              type: boolean
+              description: Whether the event was performed using a VPN connection.
+            tor:
+              type: boolean
+              description: Whether the event was performed using a Tor connection.
+            hosting:
+              type: boolean
+              description: Whether the event was performed from a hosting provider.
+            proxy:
+              type: boolean
+              description: Whether the event was performed via a proxy.
+            anonymizer:
+              type: boolean
+              description: Whether the event was performed via an anonymizer.
+            x_forwarded_for:
+              type: array
+              items:
+                type: string
+              description: >-
+                The `X-Forwarded-For` header value, indicating the chain of
+                intermediate proxies.
+              example:
+                - 160.221.187.219
+                - 52.23.177.192
+                - 172.70.34.26
+        behavior:
+          type: object
+          description: User-behavior-relevant signals.
+          properties:
+            typing_velocity:
+              type: number
+              example: 0.867
+              description: Percentile of user typing speed.
+            movement_velocity:
+              type: number
+              example: 10
+              description: Number of input events per second.
+            input_method:
+              description: >-
+                A list of used input methods.
+
+
+                | Value | Description | Platform |
+
+                |---|---|---|
+
+                | `is_typing` | Standard character-by-character keyboard text
+                entry. | Web, Mobile |
+
+                | `is_paste` | Content inserted via paste (e.g. Ctrl/Cmd+V or
+                context-menu paste). | Web, Mobile |
+
+                | `is_autocomplete` | Value entered via an OS/keyboard
+                autocomplete or autofill suggestion. | Mobile |
+
+                | `is_password_manager` | Value populated by a password manager
+                / browser autofill. | Web |
+
+                | `is_insert_replacement_text` | Existing text replaced with a
+                suggested value (e.g. spell-check/autocorrect or autofill
+                replacement). | Web |
+
+                | `is_insert_composition` | Text inserted from an in-progress
+                IME composition (e.g. while composing CJK characters). | Web |
+
+                | `is_insert_from_composition` | Text committed (finalized) from
+                an IME composition. | Web |
+
+                | `is_insert_line_break` | A line break was inserted (e.g.
+                Shift+Enter). | Web |
+
+                | `is_insert_from_drop` | Text inserted by dragging and dropping
+                content into the field. | Web |
+
+                | `is_delete` | A deletion occurred (generic). | Mobile |
+
+                | `is_delete_content_backward` | Deletion of the character
+                before the cursor (Backspace). | Web |
+
+                | `is_delete_content_forward` | Deletion of the character after
+                the cursor (Delete key). | Web |
+
+                | `is_delete_content` | Generic content deletion where direction
+                is unspecified. | Web |
+
+                | `is_delete_word_backward` | Deletion of the word before the
+                cursor (e.g. Ctrl/Alt+Backspace). | Web |
+
+                | `is_delete_softline_backward` | Deletion to the start of the
+                current soft-wrapped line. | Web |
+
+                | `is_delete_hardline_backward` | Deletion to the start of the
+                current line/block (hard line boundary). | Web |
+
+                | `is_delete_by_cut` | Content removed via Cut (e.g.
+                Ctrl/Cmd+X). | Web |
+
+                | `is_delete_by_drag` | Content removed by dragging it out of
+                the field. | Web |
+
+                | `is_delete_composition_text` | Deletion of in-progress IME
+                composition text. | Web |
+
+                | `is_history_undo` | An undo action (e.g. Ctrl/Cmd+Z). | Web |
+
+                | `is_history_redo` | A redo action (e.g. Ctrl/Cmd+Y or
+                Shift+Ctrl/Cmd+Z). | Web |
+              example:
+                - is_typing
+                - is_paste
+              type: array
+              items:
+                type: string
+            no_user_interaction:
+              type: boolean
+              description: Whether there was any user interaction before clicks.
+            straight_line_ratio:
+              type: number
+              description: >-
+                Ratio of straight-line movements out of all movements in the
+                action's context.
+            right_angels_ratio:
+              type: number
+              description: >-
+                Ratio of right-angle movements out of all movements in the
+                action's context.
+            minor_angels_ratio:
+              type: number
+              description: >-
+                Ratio of minor-angle movements out of all movements in the
+                action's context.
+            movement_latency:
+              type: number
+              description: >-
+                Median delay of mouse or touchscreen movements (ms) within the
+                action's context.
+            corner_click:
+              type: boolean
+              description: >-
+                Whether there were multiple clicks on the corner of a button in
+                the action's context.
+        history:
+          type: object
+          description: User-history-relevant signals.
+          properties:
+            ip_action_rate_60_sec:
+              type: integer
+              example: 7
+              description: >-
+                Number of actions originating from the same client IP within 60
+                seconds prior to this action.
+            user_action_rate_60_sec:
+              type: integer
+              description: >-
+                Number of actions with the same `user_id` within 60 seconds
+                prior to this action.
+            device_action_rate_60_sec:
+              type: integer
+              description: >-
+                Number of actions originating from the same `device_id` within
+                60 seconds prior to this action.
+            ip_user_count_last_hour:
+              type: integer
+              description: >-
+                Number of distinct `user_id`s associated with the IP address
+                within the previous hour.
+            ip_device_count_last_hour:
+              type: integer
+              description: >-
+                Number of distinct `device_id`s associated with the IP address
+                within the previous hour.
+            linking_device_to_users_count:
+              type: integer
+              description: Number of distinct `user_id`s associated with this `device_id`.
+            linking_user_to_device_count:
+              type: integer
+              description: Number of distinct `device_id`s associated with this `user_id`.
+    reasons:
+      type: array
+      description: Reasons that contributed to the recommendation.
+      items:
+        type: string
+      example:
+        - BEHAVIOR_BOT
+        - IP_RISKY_REPUTATION
+        - DEVICE_SUSPICIOUS_ATTRIBUTE
+        - PROFILE_DEVICE_NEW
+    transaction_type:
+      type: string
+      description: Transaction type.
+      enum:
+        - purchase
+        - bill_payment
+        - mobile_recharge
+        - money_transfer
+        - credit_transfer
+        - credit_redemption
+        - top_up
+        - withdrawal
+        - investment
+        - loan
+        - refund
+        - other
+      example: purchase
+    transaction_method:
+      type: string
+      description: Transaction method.
+      enum:
+        - bank_account
+        - wire
+        - card
+        - p2p
+        - wallet
+      example: card
+    transaction_card:
+      type: object
+      description: Card-level identifiers for the party.
+      properties:
+        holderName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: John Doe
+          description: Name of the card holder.
+        bin:
+          type: string
+          minLength: 6
+          maxLength: 8
+          example: '411111'
+          description: Bank Identification Number (first 6 digits of the card).
+        last4:
+          type: string
+          minLength: 4
+          maxLength: 4
+          example: '1234'
+          description: Last 4 digits of the credit card number.
+    transaction_party:
+      type: object
+      description: Shared shape for a transaction party (payee or payer).
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: John Doe
+          description: Party's name.
+        accountNumber:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: '1234567890123456'
+          description: Party's account number.
+        accountId:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: USER_983245
+          description: Unique identifier for the party's account.
+        accountCountryCode:
+          type: string
+          minLength: 2
+          maxLength: 2
+          pattern: ^[A-Z]{2}$
+          example: US
+          description: Country code of the account (ISO-3166-1 alpha-2).
+        bankIdentifier:
+          type: string
+          minLength: 1
+          maxLength: 40
+          example: CHASEUS33
+          description: Party's bank identifier.
+        branchIdentifier:
+          type: string
+          minLength: 1
+          maxLength: 40
+          example: '123456'
+          description: Party's branch identifier.
+        card:
+          $ref: '#/components/schemas/transaction_card'
+    transaction_address:
+      type: object
+      description: >-
+        Address and contact information (used by `billingInfo` and
+        `shippingInfo`).
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: John Doe
+          description: Full name.
+        addressLine1:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: 123 Main St
+          description: Address line 1.
+        addressLine2:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: Apt 4B
+          description: Address line 2.
+        city:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: New York
+          description: City.
+        state:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: NY
+          description: State, province, or region.
+        zipPostalCode:
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: '10001'
+          description: ZIP or postal code.
+        country:
+          type: string
+          minLength: 2
+          maxLength: 2
+          pattern: ^[A-Z]{2}$
+          example: US
+          description: Country code (ISO-3166-1 alpha-2).
+        email:
+          type: string
+          minLength: 3
+          maxLength: 255
+          example: john.doe@example.com
+          description: Email address.
+        phone:
+          type: string
+          minLength: 1
+          maxLength: 30
+          example: '+1234567890'
+          description: Phone number.
+    transaction_payer:
+      allOf:
+        - $ref: '#/components/schemas/transaction_party'
+      type: object
+      description: >-
+        Payer party of the transaction. Adds customer-tier and billing-info
+        fields on top of the shared party shape.
+      properties:
+        customerTier:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: premium
+          description: Payer's customer tier.
+        billingInfo:
+          $ref: '#/components/schemas/transaction_address'
+    transaction_payee:
+      allOf:
+        - $ref: '#/components/schemas/transaction_party'
+      description: Payee party of the transaction.
+    transaction_product:
+      type: object
+      description: A single product line item.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: PROD_12345
+          description: Unique identifier for the product.
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: iPhone 15
+          description: Name of the product.
+        amount:
+          type: integer
+          minimum: 1
+          example: 1
+          description: Quantity of this product line item.
+        price:
+          type: number
+          minimum: 0
+          example: 999.99
+          description: Price per unit of the product.
+    transaction_purchase:
+      type: object
+      description: Purchase details for the transaction.
+      properties:
+        totalItems:
+          type: integer
+          minimum: 1
+          example: 3
+          description: Total number of items in the purchase.
+        products:
+          type: array
+          description: Line items in the purchase.
+          items:
+            $ref: '#/components/schemas/transaction_product'
+        shippingInfo:
+          $ref: '#/components/schemas/transaction_address'
+    avs_match_level:
+      type: string
+      description: AVS match level.
+      enum:
+        - none
+        - postal
+        - street
+        - full
+        - unknown
+      example: full
+    transaction_avs:
+      type: object
+      description: Address Verification Service result for the transaction.
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 10
+          example: 'Y'
+          description: AVS response code.
+        provider:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: Stripe
+          description: AVS provider name.
+        matchLevel:
+          $ref: '#/components/schemas/avs_match_level'
+    transaction_data:
+      type: object
+      description: Transaction data-points provided with the action via the SDK.
+      properties:
+        amount:
+          type: number
+          description: >
+            Monetary amount of the transaction. Sanitized server-side with
+            `parseFloat`; must be strictly positive and at most 999,999,999.99.
+          exclusiveMinimum: 0
+          maximum: 999999999.99
+          example: 1500.75
+        currency:
+          type: string
+          example: USD
+          description: Currency code for the transaction (ISO-4217).
+        type:
+          $ref: '#/components/schemas/transaction_type'
+        method:
+          $ref: '#/components/schemas/transaction_method'
+        channelId:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: MOBILE_APP
+          description: Identifier for the channel used for the transaction.
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 200
+          example: Monthly subscription payment
+          description: Reason for the transaction.
+        transactionDate:
+          type: integer
+          minimum: 0
+          example: 1712594340000
+          description: Transaction timestamp (Unix epoch, milliseconds or seconds).
+        payer:
+          $ref: '#/components/schemas/transaction_payer'
+        payee:
+          $ref: '#/components/schemas/transaction_payee'
+        purchase:
+          $ref: '#/components/schemas/transaction_purchase'
+        avs:
+          $ref: '#/components/schemas/transaction_avs'
+    custom_attributes:
+      type: object
+      description: >
+        Tenant-defined custom attributes attached to the action. These add
+        context to an action but must match the schema defined in the Admin
+        Portal. Invalid attributes are ignored and not included in the response.
+      additionalProperties:
+        oneOf:
+          - type: string
+          - type: number
+          - type: boolean
+    threats:
+      type: array
+      description: List of all detected threats.
+      items:
+        type: string
+      example:
+        - ACCOUNT_TAKEOVER
+        - NEW_FRAUD_ACCOUNT
+    preview_rule:
+      type: object
+      description: >
+        Rule configured in preview mode that would have determined this action's
+        recommendation if all enabled rules were in production. Useful for
+        impact analysis without changing live behavior.
+      properties:
+        rule_name:
+          type: string
+          description: Name of the preview rule.
+        recommendation:
+          type: string
+          description: Recommendation the preview rule would have applied.
+          enum:
+            - ALLOW
+            - CHALLENGE
+            - DENY
+            - TRUST
+        risk_score:
+          type: number
+          description: Risk score the preview rule would have applied.
+  responses:
+    recommendation:
+      description: Recommendation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/recommendation_full'
+    success_get_rules:
+      description: Rules retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/get_all_response'
+    success_get_rule_by_id:
+      description: Rule retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/get_rule_response'
+    success_update_delete_rule:
+      description: Rule updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_delete_rule_response'
+    unauthorized:
+      description: Invalid authentication
+    forbidden:
+      description: Invalid authorization
+    blacklisted_token:
+      description: >-
+        Blacklisted token—Returned when Fraud Prevention detects repeated or
+        abusive token/payload misuse within a short time window (e.g., reuse of
+        expired tokens, token caching/automation, or repeated invalid requests,
+        including highly repetitive invalid request values). The response body
+        contains the underlying error code (e.g., expired session token).
+        Clients should identify and stop the source of invalid requests. Other
+        authorization failures that do not trigger blacklisting return 403
+        Forbidden.
+    rate_limit_reached:
+      description: Rate limit reached
+    internal_error:
+      description: Internal error
+    collision:
+      description: Unique field collision
+    bad_request:
+      description: Bad request
+    not_found:
+      description: Not found
+    success_create_rule:
+      description: Rule created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_rule_response'
+  securitySchemes:
+    risk_access_token:
+      type: http
+      scheme: bearer
+      description: >-
+        An access token generated by the [token
+        endpoint](/openapi/token.openapi/other/getaccesstoken)
+      bearerFormat: JWT

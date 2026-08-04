@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
+  version: "1.0"
   title: One-Time Login Applications Verification API
   description: Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.
-  version: ''
 servers:
 - url: https://api.sbx.transmitsecurity.io/cis
   description: Sandbox environment

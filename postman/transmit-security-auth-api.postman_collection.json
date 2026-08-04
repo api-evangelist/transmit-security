@@ -1,0 +1,2454 @@
+{
+  "info": {
+    "_postman_id": "d0d172ec-ae5f-4a79-af63-14e6f81b342a",
+    "name": "One-Time Login Applications Auth API",
+    "description": "Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T11:05:11.000Z",
+    "updatedAt": "2026-07-28T11:05:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d0d172ec-ae5f-4a79-af63-14e6f81b342a"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "link",
+              "item": [
+                {
+                  "name": "email",
+                  "item": [
+                    {
+                      "name": "send",
+                      "item": [
+                        {
+                          "name": "Send email link",
+                          "id": "86285e28-bcab-4ec9-b9fb-4390ef6081b5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/oidc/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"redirect_uri\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"identifier_type\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"state\": \"<string>\",\n  \"email_expiration\": \"<number>\",\n  \"channel\": \"email\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"generate_request_id\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/link/email/send",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "link",
+                                "email",
+                                "send"
+                              ]
+                            },
+                            "description": "Send a magic link by email to a user. Upon clicking the email link, the User Agent will be redirected to the requested redirect URI with a code (passed in the `code` query parameter). This code can be used to complete the authentication in the subsequent request."
+                          },
+                          "response": [
+                            {
+                              "id": "fb5265c0-f1ab-4d7b-8443-0837d7d51fd5",
+                              "name": "Backend auth initialized successfully.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"redirect_uri\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"identifier_type\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"state\": \"<string>\",\n  \"email_expiration\": \"<number>\",\n  \"channel\": \"email\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"generate_request_id\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/link/email/send",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "link",
+                                    "email",
+                                    "send"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-fb5265c0-f1ab-4d7b-8443-0837d7d51fd5"
+                            },
+                            {
+                              "id": "0524333d-0a0f-4baf-a975-9ccb0381b7f7",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"redirect_uri\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"identifier_type\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"state\": \"<string>\",\n  \"email_expiration\": \"<number>\",\n  \"channel\": \"email\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"generate_request_id\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/link/email/send",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "link",
+                                    "email",
+                                    "send"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"examples\": {\n    \"redirectUriNotAllowed\": {\n      \"value\": {\n        \"error_code\": \"400\",\n        \"message\": \"redirect_uri is not one of the allowed redirect URIs configured for this app\"\n      },\n      \"description\": \"redirect_uri is not one of the allowed redirect URIs configured for this app\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-0524333d-0a0f-4baf-a975-9ccb0381b7f7"
+                            },
+                            {
+                              "id": "409c2026-ab12-4350-8268-4fb57cb44da9",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"redirect_uri\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"identifier_type\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"state\": \"<string>\",\n  \"email_expiration\": \"<number>\",\n  \"channel\": \"email\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"generate_request_id\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/link/email/send",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "link",
+                                    "email",
+                                    "send"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"examples\": {\n    \"signupNotAllowed\": {\n      \"value\": {\n        \"error_code\": \"403\",\n        \"message\": \"Public signup is not allowed for this application\"\n      },\n      \"description\": \"Public signup is not allowed for this application\"\n    },\n    \"userNotActive\": {\n      \"value\": {\n        \"error_code\": \"403\",\n        \"message\": \"User is not active\"\n      },\n      \"description\": \"User is not active\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-409c2026-ab12-4350-8268-4fb57cb44da9"
+                            },
+                            {
+                              "id": "bd78e2fb-0aad-413b-8512-c44d09dc723a",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"redirect_uri\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"identifier_type\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"state\": \"<string>\",\n  \"email_expiration\": \"<number>\",\n  \"channel\": \"email\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"generate_request_id\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/link/email/send",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "link",
+                                    "email",
+                                    "send"
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"examples\": {\n    \"appNotFound\": {\n      \"value\": {\n        \"error_code\": \"404\",\n        \"message\": \"App not found\"\n      },\n      \"description\": \"App not found\"\n    },\n    \"userNotFound\": {\n      \"value\": {\n        \"error_code\": \"404\",\n        \"message\": \"User not found\"\n      },\n      \"description\": \"User not found\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-bd78e2fb-0aad-413b-8512-c44d09dc723a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-86285e28-bcab-4ec9-b9fb-4390ef6081b5"
+                        }
+                      ],
+                      "id": "79b7510c-9f1a-4567-9a78-f957b5a57ea6",
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-79b7510c-9f1a-4567-9a78-f957b5a57ea6"
+                    },
+                    {
+                      "name": "authenticate",
+                      "item": [
+                        {
+                          "name": "Authenticate email link",
+                          "id": "9bac283b-edf1-4299-9b7a-be83a4fd3e97",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/oidc/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"code\": \"<string>\",\n  \"resource\": \"<string>\",\n  \"claims\": {\n    \"id_token\": {},\n    \"access_token\": {}\n  },\n  \"org_id\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"device_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/link/email/authenticate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "link",
+                                "email",
+                                "authenticate"
+                              ]
+                            },
+                            "description": "Authenticate a user using the email magic link you sent them. Upon clicking the email link, a code was returned to your redirect URI as the `code` query parameter. This API validates this code and returns user tokens."
+                          },
+                          "response": [
+                            {
+                              "id": "bb3742d9-441f-4052-8433-d53819849db6",
+                              "name": "Returns user tokens",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"code\": \"<string>\",\n  \"resource\": \"<string>\",\n  \"claims\": {\n    \"id_token\": {},\n    \"access_token\": {}\n  },\n  \"org_id\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"device_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/link/email/authenticate",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "link",
+                                    "email",
+                                    "authenticate"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"<string>\",\n  \"expires_in\": 3600,\n  \"session_id\": \"<string>\",\n  \"id_token\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-bb3742d9-441f-4052-8433-d53819849db6"
+                            },
+                            {
+                              "id": "d4d07ec8-a1f8-4818-8b29-18f1c74fef2a",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"code\": \"<string>\",\n  \"resource\": \"<string>\",\n  \"claims\": {\n    \"id_token\": {},\n    \"access_token\": {}\n  },\n  \"org_id\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"device_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/link/email/authenticate",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "link",
+                                    "email",
+                                    "authenticate"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"examples\": {\n    \"invalidMagicLinkCode\": {\n      \"value\": {\n        \"error_code\": \"400\",\n        \"message\": \"Invalid magic link code\"\n      },\n      \"description\": \"Invalid magic link code\"\n    },\n    \"userNotFound\": {\n      \"value\": {\n        \"error_code\": \"400\",\n        \"message\": \"User not found\"\n      },\n      \"description\": \"User not found\"\n    },\n    \"sessionNotFound\": {\n      \"value\": {\n        \"error_code\": \"400\",\n        \"message\": \"Session not found\"\n      },\n      \"description\": \"Session not found\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-d4d07ec8-a1f8-4818-8b29-18f1c74fef2a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-9bac283b-edf1-4299-9b7a-be83a4fd3e97"
+                        }
+                      ],
+                      "id": "1ddf4e25-9b84-4c86-99e8-5fadef253b1c",
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-1ddf4e25-9b84-4c86-99e8-5fadef253b1c"
+                    }
+                  ],
+                  "id": "19c414ba-3cc2-4760-9f5e-b6bbd1c5252e",
+                  "createdAt": "2026-07-28T11:05:11.000Z",
+                  "updatedAt": "2026-07-28T11:05:11.000Z",
+                  "uid": "35240-19c414ba-3cc2-4760-9f5e-b6bbd1c5252e"
+                }
+              ],
+              "id": "414dbae2-8ec6-49d3-a3e4-66c7dfcd59d9",
+              "createdAt": "2026-07-28T11:05:11.000Z",
+              "updatedAt": "2026-07-28T11:05:11.000Z",
+              "uid": "35240-414dbae2-8ec6-49d3-a3e4-66c7dfcd59d9"
+            },
+            {
+              "name": "otp",
+              "item": [
+                {
+                  "name": "send",
+                  "item": [
+                    {
+                      "name": "Send OTP",
+                      "id": "0ef196df-37e3-4657-aa22-3aba28458604",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/oidc/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"channel\": \"email\",\n  \"identifier_type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"custom_sms_input\": {\n    \"custom_message\": \"<string>\",\n    \"sender_id\": \"<string>\"\n  },\n  \"approval_data\": {},\n  \"custom_email\": \"<string>\",\n  \"custom_phone_number\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"expires_in\": \"<number>\",\n  \"generate_request_id\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/auth/otp/send",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "auth",
+                            "otp",
+                            "send"
+                          ]
+                        },
+                        "description": "Send a one-time passcode to a user by email or SMS, or retrieve the code directly in the response to deliver it out-of-band \u2014 for example, when an admin generates a temporary access code on behalf of a user."
+                      },
+                      "response": [
+                        {
+                          "id": "d0c08d29-d648-45ec-a79d-6b1cd349c270",
+                          "name": "Backend auth initialized successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"channel\": \"email\",\n  \"identifier_type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"custom_sms_input\": {\n    \"custom_message\": \"<string>\",\n    \"sender_id\": \"<string>\"\n  },\n  \"approval_data\": {},\n  \"custom_email\": \"<string>\",\n  \"custom_phone_number\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"expires_in\": \"<number>\",\n  \"generate_request_id\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/send",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "send"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"approval_data\": {},\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-d0c08d29-d648-45ec-a79d-6b1cd349c270"
+                        },
+                        {
+                          "id": "0c38e5d3-99f4-4728-8b77-71bf7b4fcd74",
+                          "name": "Invalid input or configuration errors",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"channel\": \"email\",\n  \"identifier_type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"custom_sms_input\": {\n    \"custom_message\": \"<string>\",\n    \"sender_id\": \"<string>\"\n  },\n  \"approval_data\": {},\n  \"custom_email\": \"<string>\",\n  \"custom_phone_number\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"expires_in\": \"<number>\",\n  \"generate_request_id\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/send",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "send"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"external_provider_configuration_error\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-0c38e5d3-99f4-4728-8b77-71bf7b4fcd74"
+                        },
+                        {
+                          "id": "16ebea92-e948-4878-87fd-2a316e63cbc0",
+                          "name": "User not active or OTP login preferences not configured",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"channel\": \"email\",\n  \"identifier_type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"custom_sms_input\": {\n    \"custom_message\": \"<string>\",\n    \"sender_id\": \"<string>\"\n  },\n  \"approval_data\": {},\n  \"custom_email\": \"<string>\",\n  \"custom_phone_number\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"expires_in\": \"<number>\",\n  \"generate_request_id\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/send",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "send"
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"auth_login_preferences_missing\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-16ebea92-e948-4878-87fd-2a316e63cbc0"
+                        },
+                        {
+                          "id": "15f1886d-9e90-48e1-8dd6-9fe9da011977",
+                          "name": "User or configuration not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"channel\": \"email\",\n  \"identifier_type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"custom_sms_input\": {\n    \"custom_message\": \"<string>\",\n    \"sender_id\": \"<string>\"\n  },\n  \"approval_data\": {},\n  \"custom_email\": \"<string>\",\n  \"custom_phone_number\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"expires_in\": \"<number>\",\n  \"generate_request_id\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/send",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "send"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"auth_login_preferences_missing\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-15f1886d-9e90-48e1-8dd6-9fe9da011977"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-0ef196df-37e3-4657-aa22-3aba28458604"
+                    }
+                  ],
+                  "id": "bd4b7530-d123-4592-9864-7e67d8e6e25b",
+                  "createdAt": "2026-07-28T11:05:11.000Z",
+                  "updatedAt": "2026-07-28T11:05:11.000Z",
+                  "uid": "35240-bd4b7530-d123-4592-9864-7e67d8e6e25b"
+                },
+                {
+                  "name": "authenticate",
+                  "item": [
+                    {
+                      "name": "Authenticate OTP",
+                      "id": "e544c884-3111-482d-bf0b-fefd14a9cb7a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/oidc/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"passcode\": \"<string>\",\n  \"identifier_type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"resource\": \"<string>\",\n  \"claims\": {},\n  \"org_id\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"device_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/auth/otp/authenticate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "auth",
+                            "otp",
+                            "authenticate"
+                          ]
+                        },
+                        "description": "Authenticates a user using a one-time passcode that was sent to them by email or SMS. This API validates the code provided by the user and returns user tokens."
+                      },
+                      "response": [
+                        {
+                          "id": "138f566e-1a8c-4b44-a2c6-85871293a1cb",
+                          "name": "Returns user tokens",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"passcode\": \"<string>\",\n  \"identifier_type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"resource\": \"<string>\",\n  \"claims\": {},\n  \"org_id\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"device_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/authenticate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "authenticate"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"<string>\",\n  \"expires_in\": 3600,\n  \"session_id\": \"<string>\",\n  \"id_token\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-138f566e-1a8c-4b44-a2c6-85871293a1cb"
+                        },
+                        {
+                          "id": "c1bae303-00a8-428a-a471-07e61d1bf670",
+                          "name": "Invalid credentials or passcode expired",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"passcode\": \"<string>\",\n  \"identifier_type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"resource\": \"<string>\",\n  \"claims\": {},\n  \"org_id\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"device_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/authenticate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "authenticate"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"system_invalid_input\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-c1bae303-00a8-428a-a471-07e61d1bf670"
+                        },
+                        {
+                          "id": "fcab1018-892e-4017-8660-c5d155aa9228",
+                          "name": "One time code invalid due to multiple failed attempts",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"passcode\": \"<string>\",\n  \"identifier_type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"resource\": \"<string>\",\n  \"claims\": {},\n  \"org_id\": \"<string>\",\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"device_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/authenticate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "authenticate"
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"auth_locked\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-fcab1018-892e-4017-8660-c5d155aa9228"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-e544c884-3111-482d-bf0b-fefd14a9cb7a"
+                    }
+                  ],
+                  "id": "7751d62f-7505-4d4a-aae7-7700ac0bcc36",
+                  "createdAt": "2026-07-28T11:05:11.000Z",
+                  "updatedAt": "2026-07-28T11:05:11.000Z",
+                  "uid": "35240-7751d62f-7505-4d4a-aae7-7700ac0bcc36"
+                },
+                {
+                  "name": "email",
+                  "item": [
+                    {
+                      "name": "validation",
+                      "item": [
+                        {
+                          "name": "Validate email OTP",
+                          "id": "590aa660-4b16-4d75-88d2-e6bb02f98e0c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/oidc/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"passcode\": \"<string>\",\n  \"response_type\": \"code\",\n  \"nonce\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/email/validation",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "email",
+                                "validation"
+                              ]
+                            },
+                            "description": "Validate a one-time passcode sent by email to a user. The endpoint will return a URI which can be used to redirect the client in order to complete authentication. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+                          },
+                          "response": [
+                            {
+                              "id": "12be6a26-8d2e-4c66-9b3c-9113250b5f76",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"email\": \"<string>\",\n  \"passcode\": \"<string>\",\n  \"response_type\": \"code\",\n  \"nonce\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/otp/email/validation",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "otp",
+                                    "email",
+                                    "validation"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"result\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-12be6a26-8d2e-4c66-9b3c-9113250b5f76"
+                            },
+                            {
+                              "id": "603f1a7b-4aa9-47de-b53e-a9849c941d16",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"email\": \"<string>\",\n  \"passcode\": \"<string>\",\n  \"response_type\": \"code\",\n  \"nonce\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/otp/email/validation",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "otp",
+                                    "email",
+                                    "validation"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"error_code\": \"<number>\"\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-603f1a7b-4aa9-47de-b53e-a9849c941d16"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-590aa660-4b16-4d75-88d2-e6bb02f98e0c"
+                        }
+                      ],
+                      "id": "ad126f08-8dac-4165-a739-7e6de311ef4e",
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-ad126f08-8dac-4165-a739-7e6de311ef4e"
+                    },
+                    {
+                      "name": "Send email OTP",
+                      "id": "f0fbf401-4d36-4dff-9c6d-4549602068f4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/oidc/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"create_new_user\": false,\n  \"resource\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"org_id\": \"<string>\",\n  \"approval_data\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/auth/otp/email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "auth",
+                            "otp",
+                            "email"
+                          ]
+                        },
+                        "description": "Send a one-time passcode (OTP) by email to the given email address. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+                      },
+                      "response": [
+                        {
+                          "id": "d3cab576-e772-4a5b-80c4-2562d8587178",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"create_new_user\": false,\n  \"resource\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"org_id\": \"<string>\",\n  \"approval_data\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "email"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"approval_data\": {}\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-d3cab576-e772-4a5b-80c4-2562d8587178"
+                        },
+                        {
+                          "id": "89ad0412-a575-4ff0-9ecd-ef6e7d0dec2a",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"create_new_user\": false,\n  \"resource\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"org_id\": \"<string>\",\n  \"approval_data\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "email"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"error_code\": \"<number>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-89ad0412-a575-4ff0-9ecd-ef6e7d0dec2a"
+                        },
+                        {
+                          "id": "cb34d96b-b3d9-4028-ab43-4b956ac389ac",
+                          "name": "User Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"create_new_user\": false,\n  \"resource\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"org_id\": \"<string>\",\n  \"approval_data\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "email"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"error_code\": \"<number>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-cb34d96b-b3d9-4028-ab43-4b956ac389ac"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-f0fbf401-4d36-4dff-9c6d-4549602068f4"
+                    }
+                  ],
+                  "id": "51a0aa38-394d-492d-9710-6869b930844d",
+                  "createdAt": "2026-07-28T11:05:11.000Z",
+                  "updatedAt": "2026-07-28T11:05:11.000Z",
+                  "uid": "35240-51a0aa38-394d-492d-9710-6869b930844d"
+                },
+                {
+                  "name": "sms",
+                  "item": [
+                    {
+                      "name": "validation",
+                      "item": [
+                        {
+                          "name": "Validate SMS OTP",
+                          "id": "d1e0e7e5-d594-483f-b275-6f6908ab1dd2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/oidc/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"passcode\": \"<string>\",\n  \"response_type\": \"code\",\n  \"nonce\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/sms/validation",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "sms",
+                                "validation"
+                              ]
+                            },
+                            "description": "Validate a one-time passcode sent by SMS to a user. The endpoint will return a URI which can be used to redirect the client in order to complete authentication. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+                          },
+                          "response": [
+                            {
+                              "id": "c625cd85-ca75-4b89-b809-36db15ffc703",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"phone_number\": \"<string>\",\n  \"passcode\": \"<string>\",\n  \"response_type\": \"code\",\n  \"nonce\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/otp/sms/validation",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "otp",
+                                    "sms",
+                                    "validation"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"result\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-c625cd85-ca75-4b89-b809-36db15ffc703"
+                            },
+                            {
+                              "id": "b95a0901-ef14-44de-bacc-57e83ffa384d",
+                              "name": "New Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"phone_number\": \"<string>\",\n  \"passcode\": \"<string>\",\n  \"response_type\": \"code\",\n  \"nonce\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/auth/otp/sms/validation",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "auth",
+                                    "otp",
+                                    "sms",
+                                    "validation"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"error_code\": \"<number>\"\n}",
+                              "createdAt": "2026-07-28T11:05:11.000Z",
+                              "updatedAt": "2026-07-28T11:05:11.000Z",
+                              "uid": "35240-b95a0901-ef14-44de-bacc-57e83ffa384d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-d1e0e7e5-d594-483f-b275-6f6908ab1dd2"
+                        }
+                      ],
+                      "id": "cf5a3efd-e11a-4f59-a225-332c88b08244",
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-cf5a3efd-e11a-4f59-a225-332c88b08244"
+                    },
+                    {
+                      "name": "Send SMS OTP",
+                      "id": "c26ccb06-4651-4eba-8855-b9ed6f9313f2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/oidc/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"phone_number\": \"<string>\",\n  \"create_new_user\": false,\n  \"redirect_uri\": \"<string>\",\n  \"custom_message\": \"<string>\",\n  \"sender_id\": \"<string>\",\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"approval_data\": {},\n  \"org_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/auth/otp/sms",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "auth",
+                            "otp",
+                            "sms"
+                          ]
+                        },
+                        "description": "Send a one-time passcode (OTP) by SMS to the given phone number. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+                      },
+                      "response": [
+                        {
+                          "id": "76bcf8b3-fbf8-43d1-b436-2cd275d4a5b4",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"create_new_user\": false,\n  \"redirect_uri\": \"<string>\",\n  \"custom_message\": \"<string>\",\n  \"sender_id\": \"<string>\",\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"approval_data\": {},\n  \"org_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/sms",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "sms"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"approval_data\": {}\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-76bcf8b3-fbf8-43d1-b436-2cd275d4a5b4"
+                        },
+                        {
+                          "id": "4d091af4-8d00-48c9-b17e-22b39771a246",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"create_new_user\": false,\n  \"redirect_uri\": \"<string>\",\n  \"custom_message\": \"<string>\",\n  \"sender_id\": \"<string>\",\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"approval_data\": {},\n  \"org_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/sms",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "sms"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"error_code\": \"<number>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-4d091af4-8d00-48c9-b17e-22b39771a246"
+                        },
+                        {
+                          "id": "9898b4dc-f10e-4cf9-88f9-cff1bc0ccb7a",
+                          "name": "User Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"phone_number\": \"<string>\",\n  \"create_new_user\": false,\n  \"redirect_uri\": \"<string>\",\n  \"custom_message\": \"<string>\",\n  \"sender_id\": \"<string>\",\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"approval_data\": {},\n  \"org_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/otp/sms",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "otp",
+                                "sms"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"error_code\": \"<number>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-9898b4dc-f10e-4cf9-88f9-cff1bc0ccb7a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-c26ccb06-4651-4eba-8855-b9ed6f9313f2"
+                    }
+                  ],
+                  "id": "068a5a9c-e78f-46b5-b93e-dbbe073c2c49",
+                  "createdAt": "2026-07-28T11:05:11.000Z",
+                  "updatedAt": "2026-07-28T11:05:11.000Z",
+                  "uid": "35240-068a5a9c-e78f-46b5-b93e-dbbe073c2c49"
+                }
+              ],
+              "id": "eec3f187-da05-412a-aff8-2f8ad99cb7a7",
+              "createdAt": "2026-07-28T11:05:11.000Z",
+              "updatedAt": "2026-07-28T11:05:11.000Z",
+              "uid": "35240-eec3f187-da05-412a-aff8-2f8ad99cb7a7"
+            },
+            {
+              "name": "links",
+              "item": [
+                {
+                  "name": "email",
+                  "item": [
+                    {
+                      "name": "Send email link",
+                      "id": "19008cb0-a49a-464f-a423-de0430dd6fb3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/oidc/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"create_new_user\": false,\n  \"resource\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"org_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/auth/links/email",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "auth",
+                            "links",
+                            "email"
+                          ]
+                        },
+                        "description": "Send a magic link by email to a user. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+                      },
+                      "response": [
+                        {
+                          "id": "6fbce72f-e4a4-40d9-8054-156e6434506a",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"create_new_user\": false,\n  \"resource\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"org_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/links/email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "links",
+                                "email"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-6fbce72f-e4a4-40d9-8054-156e6434506a"
+                        },
+                        {
+                          "id": "c9ec3f53-2481-4a15-b440-ab7ea96c0213",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"create_new_user\": false,\n  \"resource\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"org_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/links/email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "links",
+                                "email"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"error_code\": \"<number>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-c9ec3f53-2481-4a15-b440-ab7ea96c0213"
+                        },
+                        {
+                          "id": "fe507633-8919-4b27-bb77-d2147384986f",
+                          "name": "New Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"create_new_user\": false,\n  \"resource\": \"<string>\",\n  \"email_content\": {\n    \"subject\": \"<string>\",\n    \"primaryColor\": \"<string>\",\n    \"base64logo\": \"<string>\",\n    \"headerText\": \"<string>\",\n    \"bodyText\": \"<string>\",\n    \"linkText\": \"<string>\",\n    \"infoText\": \"<string>\",\n    \"footerText\": \"<string>\",\n    \"senderName\": \"<string>\"\n  },\n  \"require_mfa\": false,\n  \"claims\": {},\n  \"client_attributes\": {\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\"\n  },\n  \"org_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/auth/links/email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "auth",
+                                "links",
+                                "email"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"error_code\": \"<number>\"\n}",
+                          "createdAt": "2026-07-28T11:05:11.000Z",
+                          "updatedAt": "2026-07-28T11:05:11.000Z",
+                          "uid": "35240-fe507633-8919-4b27-bb77-d2147384986f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-19008cb0-a49a-464f-a423-de0430dd6fb3"
+                    }
+                  ],
+                  "id": "34311a88-7be0-4fad-bf92-48dfedf442fb",
+                  "createdAt": "2026-07-28T11:05:11.000Z",
+                  "updatedAt": "2026-07-28T11:05:11.000Z",
+                  "uid": "35240-34311a88-7be0-4fad-bf92-48dfedf442fb"
+                }
+              ],
+              "id": "7ee80cc7-7dec-4097-9ea5-be525f11d45e",
+              "createdAt": "2026-07-28T11:05:11.000Z",
+              "updatedAt": "2026-07-28T11:05:11.000Z",
+              "uid": "35240-7ee80cc7-7dec-4097-9ea5-be525f11d45e"
+            },
+            {
+              "name": "logout",
+              "item": [
+                {
+                  "name": "Logout",
+                  "id": "d291b470-4a21-4111-b63a-d40d9b220d12",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/auth/logout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "auth",
+                        "logout"
+                      ]
+                    },
+                    "description": "Logout the user from a specific session. The user and session are derived from the access token used to authorize the request (which was issued based on the authentication that created the session)"
+                  },
+                  "response": [
+                    {
+                      "id": "ff114c09-d814-4eac-babf-4a80f89d4922",
+                      "name": "Sessions deleted Successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/auth/logout",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "auth",
+                            "logout"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"sessions_count\": \"<number>\"\n}",
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-ff114c09-d814-4eac-babf-4a80f89d4922"
+                    },
+                    {
+                      "id": "20b3e4cf-051e-42bb-a2ee-650ace8c18b8",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/auth/logout",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "auth",
+                            "logout"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-20b3e4cf-051e-42bb-a2ee-650ace8c18b8"
+                    },
+                    {
+                      "id": "de90a876-a742-4267-89fe-1ecffef9e745",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/auth/logout",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "auth",
+                            "logout"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"error_code\": \"<number>\"\n}",
+                      "createdAt": "2026-07-28T11:05:11.000Z",
+                      "updatedAt": "2026-07-28T11:05:11.000Z",
+                      "uid": "35240-de90a876-a742-4267-89fe-1ecffef9e745"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T11:05:11.000Z",
+                  "updatedAt": "2026-07-28T11:05:11.000Z",
+                  "uid": "35240-d291b470-4a21-4111-b63a-d40d9b220d12"
+                }
+              ],
+              "id": "8d977c28-9cd8-4eba-999c-40bd1e2f63f2",
+              "createdAt": "2026-07-28T11:05:11.000Z",
+              "updatedAt": "2026-07-28T11:05:11.000Z",
+              "uid": "35240-8d977c28-9cd8-4eba-999c-40bd1e2f63f2"
+            }
+          ],
+          "id": "0fc322b9-0b2f-4941-9e27-c9a993fb82ea",
+          "createdAt": "2026-07-28T11:05:11.000Z",
+          "updatedAt": "2026-07-28T11:05:11.000Z",
+          "uid": "35240-0fc322b9-0b2f-4941-9e27-c9a993fb82ea"
+        }
+      ],
+      "id": "5362e798-9a83-4f05-af89-84d4f6ee0ebc",
+      "createdAt": "2026-07-28T11:05:11.000Z",
+      "updatedAt": "2026-07-28T11:05:11.000Z",
+      "uid": "35240-5362e798-9a83-4f05-af89-84d4f6ee0ebc"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.sbx.transmitsecurity.io/cis"
+    }
+  ]
+}
