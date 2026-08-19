@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "One-Time Login Applications Token API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Exchange code for token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve ID and access tokens. This API is used to retrieve ID and access tokens using the code that was returned in the redirect URI as a query parameter (for example, when the user clicks a magic link). It may also create a new user if create_new_user was set to true in the send request and no user exists for the email address or phone number (depending on the flow)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

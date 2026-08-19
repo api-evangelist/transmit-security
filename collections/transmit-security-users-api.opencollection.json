@@ -1,0 +1,666 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "One-Time Login Applications Users API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get users count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/count",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search expression based on the [SCIM protocol](https://www.rfc-editor.org/rfc/rfc7644#section-3.4.2.2). For syntax and searchable fields, see [Search query syntax](/openapi/scim_search_syntax/)"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the number of saved users. <br><br>**Required permissions**: `users:list`, `apps:list`, `[appId]:list`."
+        },
+        {
+          "info": {
+            "name": "Get users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search expression based on the [SCIM protocol](https://www.rfc-editor.org/rfc/rfc7644#section-3.4.2.2). For syntax and searchable fields, see [Search query syntax](/openapi/scim_search_syntax/)"
+              },
+              {
+                "name": "page_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of users you wish to skip before selecting users"
+              },
+              {
+                "name": "page_limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of users to return in page"
+              },
+              {
+                "name": "search_prefix",
+                "value": "joe",
+                "type": "query",
+                "description": "Value to search for in the primary email and phone_number fields, where the search value must match the prefix of the field value. For example, \"search_prefix=john\" will return users whose email starts with \"john\" and \"search_prefix=%2B1212\" returns users whose phone number starts with \"+1212\"."
+              },
+              {
+                "name": "sort_field",
+                "value": "",
+                "type": "query",
+                "description": "The name of the field you wish to sort by. Mgmt flows also support: organization_added_at (sort by when member was added to org)"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "The order of the sort"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Search across your application’s users at Transmit. This endpoint also allows you to return all of your application’s users by sending no filters at all. <br><br>**Required permissions**: `users:read`, `users:list`, `apps:read`, `[appId]:read`, `apps:list`, `[appId]:list`."
+        },
+        {
+          "info": {
+            "name": "Create user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add a user to Transmit. A user_id is returned as part of the User in the response that can then be used to perform other operations, such as get, update and delete. An email or a phone_number are required. <br><br>**Required permissions**: `apps:create`, `[appId]:create`, `users:create`."
+        },
+        {
+          "info": {
+            "name": "Get user by identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/identifier",
+            "params": [
+              {
+                "name": "identifier_name",
+                "value": "",
+                "type": "query",
+                "description": "Identifier name: one of the built-ins (email, phoneNumber, externalUserId, username, idpIdentifier) or a tenant-defined custom identifier"
+              },
+              {
+                "name": "identifier_value",
+                "value": "",
+                "type": "query",
+                "description": "Identifier value"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Search for a user by identifier. <br><br>**Required permissions**: `apps:read`, `[appId]:read`, `users:read`."
+        },
+        {
+          "info": {
+            "name": "Get user by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID to search for"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Search for a user by user ID. <br><br>**Required permissions**: `apps:read`, `[appId]:read`, `users:read`."
+        },
+        {
+          "info": {
+            "name": "Update user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user that should be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a user's attributes or their custom data. Changes will be merged into the user's profile, so you can specify only the fields you want to update. <br><br> **Note:** <ul> <li> Attributes (like name and address) **cannot** be partially updated, as the new value of an object or array will just replace the current one.</li> <li>`custom_data` **can** be partially updated since it will be merged with the existing data (as a shallow merge).</li></ul>. <br><br>**Required permissions**: `apps:edit`"
+        },
+        {
+          "info": {
+            "name": "Get user's groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id/groups",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user to retrieve groups for"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a list of groups associated with a user. <br><br>**Required permissions**: `apps:read`, `[appId]:read`, `groups:read`."
+        },
+        {
+          "info": {
+            "name": "Get user by email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/email/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path",
+                "description": "The user's primary email to search for"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Search for a user by primary email. <br><br>**Required permissions**: `apps:read`, `[appId]:read`, `users:read`."
+        },
+        {
+          "info": {
+            "name": "Get user by external user ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/external-user-id/:external_user_id",
+            "params": [
+              {
+                "name": "external_user_id",
+                "value": "",
+                "type": "path",
+                "description": "The external user ID to search for"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Search for a user by their external_user_id, which represents the user identifier in external provider. <br><br>**Required permissions**: `apps:read`, `[appId]:read`, `users:read`."
+        },
+        {
+          "info": {
+            "name": "Get user by username",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/username/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The user's username to search for"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Search for a user by username. <br><br>**Required permissions**: `apps:read`, `[appId]:read`, `users:read`."
+        },
+        {
+          "info": {
+            "name": "Remove user from app",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id/apps",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to remove from application"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Remove a user from the requesting application. <br><br>**Required permissions**: `apps:edit`, `[appId]:edit`, `users:edit`."
+        },
+        {
+          "info": {
+            "name": "Create credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id/password",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates new password credentials for a user that doesn't already have a password. The password is temporary, and must be reset upon the user's first login. <br><br>**Required permissions**: `apps:create`, `[appId]:create`, `authenticators:create`."
+        },
+        {
+          "info": {
+            "name": "Update password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id/password",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates the user's existing credentials with a new temporary password, which must be reset the next time they login. <br><br>**Required permissions**: `apps:edit`, `[appId]:edit`, `authenticators:edit`."
+        },
+        {
+          "info": {
+            "name": "Get user by phone number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/phone/:phone_number",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "",
+                "type": "path",
+                "description": "The phone number of the user to get"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Search for a user by their primary phone number"
+        },
+        {
+          "info": {
+            "name": "Get user by phone number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/phone-number/:phone_number",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "",
+                "type": "path",
+                "description": "The phone number of the user to get"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Search for a user by their primary phone number. <br><br>**Required permissions**: `apps:read`, `[appId]:read`, `users:read`."
+        },
+        {
+          "info": {
+            "name": "Remove secondary email",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id/emails/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path",
+                "description": "Secondary email to remove"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Removes a secondary email address from the user's profile. <br><br>**Required permissions**: `apps:edit`, `[appId]:edit`, `users:edit`."
+        },
+        {
+          "info": {
+            "name": "Remove secondary phone number",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id/phone-numbers/:phone_number",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "",
+                "type": "path",
+                "description": "Secondary phone number to remove"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Remove a secondary phone number from the user's profile. <br><br>**Required permissions**: `apps:edit`, `[appId]:edit`, `users:edit`."
+        },
+        {
+          "info": {
+            "name": "Mark email as verified",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id/emails/:email/verify",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user that should be updated"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "path",
+                "description": "The email of the user that should be verified"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Indicates that the user's email address was verified externally. A user's email address is automatically marked as verified when used in a Transmit authentication or verification flow. If the email address is a secondary email, the request can also be used to set it as the user's primary email (by setting `change_to_primary` to `true`). <br><br>**Required permissions**: `apps:edit`, `[appId]:edit`, `users:edit`."
+        },
+        {
+          "info": {
+            "name": "Mark phone as verified",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/:user_id/phone-numbers/:phone_number/verify",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "",
+                "type": "path",
+                "description": "The phone number of the user that should be verified"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user that should be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Indicates that the user's phone number was verified externally. A user's phone number is automatically marked as verified when used in a Transmit authentication or verification flow. If the phone number is a secondary one, the request can also be used to set it as the user's primary phone (by setting `change_to_primary` to `true`). <br><br>**Required permissions**: `apps:edit`, `[appId]:edit`, `users:edit`."
+        },
+        {
+          "info": {
+            "name": "Register password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/me/password-credentials",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Allows a logged-in user to register their first password. Must be authorized using a valid user access token returned upon successful authentication."
+        },
+        {
+          "info": {
+            "name": "Get current user's device keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/users/me/device-keys",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get device keys by user id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

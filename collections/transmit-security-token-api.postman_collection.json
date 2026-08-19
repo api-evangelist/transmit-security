@@ -1,0 +1,167 @@
+{
+  "item": [
+    {
+      "id": "d9fe4ceb-b138-44f6-a9fe-857db8f0a7c7",
+      "name": "Token",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12aba023-9f46-4b53-b248-942cd04ed468",
+          "name": "Exchange code for token",
+          "request": {
+            "name": "Exchange code for token",
+            "description": {
+              "content": "Retrieve ID and access tokens. This API is used to retrieve ID and access tokens using the code that was returned in the redirect URI as a query parameter (for example, when the user clicks a magic link). It may also create a new user if create_new_user was set to true in the send request and no user exists for the email address or phone number (depending on the flow).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37178df8-2636-4051-afc7-315704c45674",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"GZxLFKTDCnlANVTxNvaWz7AIGPpXqZYSXdAwjiWRuOH\",\n  \"client_id\": \"DgsdfhSDsdfhtSDFXCCXBVMKPws345yscv2345XCZV\",\n  \"client_secret\": \"FzxvdDMbvxnc45sdfb789XCVGEW6usazxcvbw3KPsb23\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id_token\": \"string\",\n  \"access_token\": \"string\",\n  \"refresh_token\": \"string\",\n  \"is_user_created\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9fb992c-0e46-4a61-950c-e24620af59d2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"GZxLFKTDCnlANVTxNvaWz7AIGPpXqZYSXdAwjiWRuOH\",\n  \"client_id\": \"DgsdfhSDsdfhtSDFXCCXBVMKPws345yscv2345XCZV\",\n  \"client_secret\": \"FzxvdDMbvxnc45sdfb789XCVGEW6usazxcvbw3KPsb23\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": [\n    \"string\",\n    \"string\"\n  ],\n  \"error_code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sbx.transmitsecurity.io/cis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "773d8bca-c7ac-4dd0-9991-2be3a63459ae",
+    "name": "One-Time Login Applications Token API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.",
+      "type": "text/plain"
+    }
+  }
+}

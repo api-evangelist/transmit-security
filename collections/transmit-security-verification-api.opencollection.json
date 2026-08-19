@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "One-Time Login Applications Verification API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create verification session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/api/v1/verification",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new verification session that will provide a secure context to the verification process. It returns a start token that will be used when initiating the verification process from the client side. This should be called from the backend. See the [Quick start guide](https://developer.transmitsecurity.com/guides/verify/quick_start_web/#step-4-initiate-id-verification) for details."
+        },
+        {
+          "info": {
+            "name": "Get verification result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/api/v1/verification/:sid/result",
+            "params": [
+              {
+                "name": "detailed",
+                "value": "false",
+                "type": "query",
+                "description": "This parameter allows existing customers to select between response objects. You should explicitly send `false` to return the `DeprecatedSessionResult` response structure or send `true` to return the new `CompleteSessionResult`/`IncompleteSessionResult` response structure. Please note this parameter will be removed once `DeprecatedSessionResult` is fully deprecated."
+              },
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Session ID returned upon session creation or in the callback URL upon completing the verification"
+              }
+            ]
+          },
+          "docs": "Retrieves the results of the verification session, which contains detailed information about the submitted documents (including PII). This should be called from the backend."
+        },
+        {
+          "info": {
+            "name": "Delete verification session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/api/v1/verification/:sid",
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Session ID returned upon session creation or in the callback URL upon completing the verification"
+              }
+            ]
+          },
+          "docs": "Deletes a verification session. This deletes the personal user data collected during the verification process"
+        },
+        {
+          "info": {
+            "name": "Get all images for session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/api/v1/verification/:sid/images",
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Session ID returned upon session creation or in the callback URL upon completing the verification"
+              }
+            ]
+          },
+          "docs": "Retrieves all the images that were submitted for the session. The response contains only the image metadata, which includes the image ID that can be used to fetch the actual image."
+        },
+        {
+          "info": {
+            "name": "Get image by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/api/v1/verification/:sid/images/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Image ID returned by the request to get all images"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Optional. Determines the image format returned. Enum: `raw` `base64`"
+              },
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Session ID returned upon session creation or in the callback URL upon completing the verification"
+              }
+            ]
+          },
+          "docs": "Retrieve the actual image from the session (and not only the image metadata). The image is specified by the image ID returned upon fetching all the session images."
+        },
+        {
+          "info": {
+            "name": "Get consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/api/v1/verification/:sid/consent",
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Session ID returned upon session creation or in the callback URL upon completing the verification"
+              }
+            ]
+          },
+          "docs": "Checks whether user consent was provided for a specific session and if so, provides the timestamp"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

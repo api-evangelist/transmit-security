@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "One-Time Login Applications Recommendation API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recommendation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recommendation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/recommendation",
+            "params": [
+              {
+                "name": "action_token",
+                "value": "",
+                "type": "query",
+                "description": "Action token returned by the SDK when the action was reported"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "*Deprecated – This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`."
+              }
+            ]
+          },
+          "docs": "Get a risk recommendation for a client action reported to the SDK (via `triggerActionEvent()` call)"
+        },
+        {
+          "info": {
+            "name": "Get all rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/recommendation/rules"
+          },
+          "docs": "Retrieves a list of all recommendation rules"
+        },
+        {
+          "info": {
+            "name": "Create rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/recommendation/rules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new recommendation rule. Returns the `rule_id` used to reference the rule in subsequent requests."
+        },
+        {
+          "info": {
+            "name": "Get rule by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/recommendation/rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the recommendation rule"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific recommendation rule by its ID"
+        },
+        {
+          "info": {
+            "name": "Update rule by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sbx.transmitsecurity.io/cis/recommendation/rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the recommendation rule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific recommendation rule"
+        },
+        {
+          "info": {
+            "name": "Delete rule by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/recommendation/rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the recommendation rule"
+              }
+            ]
+          },
+          "docs": "Deletes a specific recommendation rule. Note that you can also disable rules if needed using the enabled rule attribute."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

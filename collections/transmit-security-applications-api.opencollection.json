@@ -1,0 +1,696 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "One-Time Login Applications API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set org's role groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:app_id/organizations/:organization_id/role-groups/set",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application to set the roles to"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the organization to set the roles to"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update the role groups of the organization for a specific application, which will replace any existing role groups for the organization. These role groups must first be created for the application. Once added to the organization, roles that belong to these role groups can be assigned to members of the organization to control their access to the application. <br><br>**Required permissions**: `organizations:edit`, `orgs:edit`."
+        },
+        {
+          "info": {
+            "name": "Get org's role groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:app_id/organizations/:organization_id/role-groups",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application to assign the roles to"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the organization to assign the roles to"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves all role groups that were added to the organization for a specific application. Roles that belong to these role groups can be assigned to members of the organization to control their access to the application. <br><br>**Required permissions**: `organizations:read`, `orgs:read`."
+        },
+        {
+          "info": {
+            "name": "Set org's roles and role groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:app_id/organizations/:organization_id/roles-and-groups/set",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update the roles and role groups of the organization for a specific application, which will replace any existing assignments. These roles and role groups must first be created for the application. Once added to the organization, roles that belong to these role groups or are directly assigned can be assigned to members of the organization to control their access to the application. <br><br>**Required permissions**: `organizations:edit`, `orgs:edit`."
+        },
+        {
+          "info": {
+            "name": "Get org's roles and role groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:app_id/organizations/:organization_id/roles-and-groups",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the organization"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves all roles and role groups that were added to the organization for a specific application. Roles that belong to these role groups or are directly assigned can be assigned to members of the organization to control their access to the application. <br><br>**Required permissions**: `organizations:read`, `orgs:read`."
+        },
+        {
+          "info": {
+            "name": "Get all clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId/clients",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a list of clients for an application. <br><br>**Required permissions**: `apps:read`."
+        },
+        {
+          "info": {
+            "name": "Create client",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId/clients",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new client. <br><br>**Required permissions**: `apps:create`, `apps:edit`."
+        },
+        {
+          "info": {
+            "name": "Delete all clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId/clients",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Deletes all clients for an application."
+        },
+        {
+          "info": {
+            "name": "Get client by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId/clients/:clientId",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the client to retrieve"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a client by client ID. <br><br>**Required permissions**: `apps:read`."
+        },
+        {
+          "info": {
+            "name": "Update client",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId/clients/:clientId",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the client to update"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a client. Note: Fields that are objects cannot be partially updated, since the new value you set will just replace the current one. <br><br>**Required permissions**: `apps:edit`, `apps:create`."
+        },
+        {
+          "info": {
+            "name": "Delete client",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId/clients/:clientId",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the client to delete"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a client. <br><br>**Required permissions**: `apps:delete`, `apps:create`, `apps:edit`."
+        },
+        {
+          "info": {
+            "name": "Update client resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId/clients/:clientId/resources",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update the list of resources that a client is allowed to explicitly request access to"
+        },
+        {
+          "info": {
+            "name": "Get all apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a list of all applications with their default clients. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints. <br><br>**Required permissions**: `apps:read`, `apps:list`, `[appId]:read`, `[appId]:list`."
+        },
+        {
+          "info": {
+            "name": "Create app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new application with a default client. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints. <br><br>**Required permissions**: `apps:create`, `[appId]:create`."
+        },
+        {
+          "info": {
+            "name": "Get all apps basic information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/list",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a list of all applications with their basic information. <br><br>**Required permissions**: `apps:list`, `users:read`, `organizations:read`, `roles:read`, `orgs:read`, `[appId]:list`."
+        },
+        {
+          "info": {
+            "name": "Get app by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves an application by application ID with the default client. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints. <br><br>**Required permissions**: `apps:read`, `[appId]:read`."
+        },
+        {
+          "info": {
+            "name": "Update app",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates an application. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints. Note: Fields that are objects cannot be partially updated, since the new value you set will just replace the current one. <br><br>**Required permissions**: `apps:edit`, `[appId]:edit`."
+        },
+        {
+          "info": {
+            "name": "Delete app",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application to delete"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete an application. <br><br>**Required permissions**: `apps:delete`, `[appId]:delete`."
+        },
+        {
+          "info": {
+            "name": "Update app resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/:appId/resources",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update the list of resources that a default client of the application is allowed to explicitly request access to"
+        },
+        {
+          "info": {
+            "name": "Get all token signing keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/signing-keys",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieves a list of token signing keys for an application. <br><br>**Required permissions**: `apps:read`, `[appId]:read`."
+        },
+        {
+          "info": {
+            "name": "Create signing key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/signing-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new signing key. <br><br>**Required permissions**: `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`."
+        },
+        {
+          "info": {
+            "name": "Upload signing key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/signing-keys/upload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Upload a new signing key. <br><br>**Required permissions**: `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`."
+        },
+        {
+          "info": {
+            "name": "Update a signing key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/signing-keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a signing key. <br><br>**Required permissions**: `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`."
+        },
+        {
+          "info": {
+            "name": "Delete signing key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/applications/signing-keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the signing key to delete"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a signing key. <br><br>**Required permissions**: `apps:delete`, `[appId]:delete`, `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

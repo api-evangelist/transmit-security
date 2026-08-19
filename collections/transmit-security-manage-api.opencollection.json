@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "One-Time Login Applications Manage API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/manage/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a user and all their data (tenant-level and app-level). Requires an admin access token (from a management app). <br><br>**Required permissions**: `users:delete`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

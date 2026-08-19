@@ -1,0 +1,1929 @@
+{
+  "item": [
+    {
+      "id": "ddd475a7-cda5-48e4-828c-55bd08471ec4",
+      "name": "Recommendation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca3b1ca4-881a-4531-92d8-be5b49e5349d",
+          "name": "Get recommendation",
+          "request": {
+            "name": "Get recommendation",
+            "description": {
+              "content": "Get a risk recommendation for a client action reported to the SDK (via `triggerActionEvent()` call)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recommendation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action_token",
+                  "value": "REPLACE_WITH_ACTION_TOKEN",
+                  "description": "(Required) Action token returned by the SDK when the action was reported"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "REPLACE_WITH_USER_ID",
+                  "description": "*Deprecated – This parameter is no longer required. Identity and context should be provided during the `triggerActionEvent` or `reportActionResult` call. This API now only retrieves the calculated recommendation tied to the `action_token`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "cd1699dc-eb4e-4e11-ae8a-e74fec84c376",
+              "name": "Recommendation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"385cd06b527a974982e0560b67123fe2b1b5a39fd98d8d32cdbaca8ec16fd62d\",\n  \"issued_at\": 1648028118123,\n  \"recommendation\": {\n    \"type\": \"CHALLENGE\",\n    \"result\": \"success\",\n    \"challenge_type\": \"email_otp\"\n  },\n  \"risk_score\": 73.2,\n  \"context\": {\n    \"action_id\": \"885cd06b527a97498200560b67123fe221b5a39fd98d8d22cdb7ca8ec16ed62d\",\n    \"action_type\": \"login\",\n    \"action_performed_at\": 1648028118123,\n    \"device_id\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwZGE4ZmZjYy01NmE1LTRmMjgtYThkZi04NDY5MmYwYThmYTAiLCJ2ZXJzaW9uIjoxLCJpYXQiOjE2NTU3OTYzODQ1MzF9.TeGoqlCe_6eWzl9a3-vAumG4Xap8WjwsgcO2-DzGtLg\",\n    \"device_fingerprint\": \"a3c8f5ea75cb65fcdc3d0452b985f957a46e24afdc912e93dac1e115ecf408e5\",\n    \"application_id\": \"ece93f4\",\n    \"device_timestamp\": 1648028107819,\n    \"client_id\": \"d152ddd.ece93f4.c2a3d12.riskid.security\",\n    \"tenant_id\": \"c2a3d12\",\n    \"correlation_id\": \"bcb934d8-89cb-433b-a4c7-b7d94299586b\",\n    \"device_public_key\": \"625ad815e47a1a05318c98185ff8cfb35fd706d836a1ad7459842f381929a8e3\",\n    \"user_id\": \"5c4afa75c\",\n    \"claimed_user_id\": \"5c4afa75c\",\n    \"location\": \"https://www.amazingapp.com/shops?target=1\",\n    \"ip\": \"160.221.187.219\",\n    \"ip_country\": \"US\",\n    \"ip_location_region\": \"California\",\n    \"ip_domain\": \"example.com\",\n    \"ip_location_city\": \"Los Angeles\",\n    \"ip_location_zip\": \"92131\",\n    \"ip_location_longitude\": \"-117.0903\",\n    \"ip_location_latitude\": \"32.9167\",\n    \"ip_asn_id\": \"AS174\",\n    \"ip_asn_name\": \"AS174 Cogent Communications\",\n    \"ip_organization_name\": \"Cogent Communications\",\n    \"ip_organization_type\": \"isp\",\n    \"ip_location_timezone\": \"America/Los_Angeles\",\n    \"device_timezone\": \"America/Los_Angeles\",\n    \"device_languages\": [\n      \"en-US\",\n      \"en\"\n    ],\n    \"device_platform\": \"desktop\",\n    \"os_name\": \"macOS\",\n    \"os_version\": \"14.1.0\",\n    \"browser_name\": \"Chrome\",\n    \"browser_version\": \"113\",\n    \"user_agent\": \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36\"\n  },\n  \"reasons\": [\n    \"BEHAVIOR_BOT\",\n    \"IP_RISKY_REPUTATION\",\n    \"DEVICE_SUSPICIOUS_ATTRIBUTE\",\n    \"PROFILE_DEVICE_NEW\"\n  ],\n  \"risk_signals\": {\n    \"device\": {\n      \"ram\": 2550.97611032306,\n      \"total_storage\": 3977.4906739129556,\n      \"available_storage\": 7017.183807982614,\n      \"battery_level\": 925.8276008669775,\n      \"device_power_state\": \"string\",\n      \"core_number\": 2320.5744191731224,\n      \"graphic_card\": \"string\",\n      \"model\": \"string\",\n      \"screen_width\": 7188.768801427314,\n      \"screen_height\": 3467.846944699906,\n      \"screen_pixel_depth\": 2445.7571633831144,\n      \"screen_color_depth\": 5243.565365715236,\n      \"screen_avail_width\": 442.1164514277076,\n      \"screen_avail_height\": 8879.735189555091,\n      \"incognito\": true,\n      \"tampered\": false,\n      \"emulated\": false,\n      \"spoofed\": false,\n      \"tz_mismatch\": true,\n      \"esim_usage\": false,\n      \"accept_languages\": \"string\",\n      \"mobile_network_code\": \"string\",\n      \"font_count\": 3150.2931519405784,\n      \"cpu_arch\": \"string\",\n      \"navigator_useragent\": \"string\",\n      \"true_useragent\": \"string\",\n      \"device_timezone_offset\": 1527.9246573023986,\n      \"summer_timezone_offset\": 5428.276180483898,\n      \"winter_timezone_offset\": 1768.0296462398815,\n      \"device_name\": \"string\"\n    },\n    \"network\": {\n      \"vpn\": true,\n      \"tor\": true,\n      \"hosting\": false,\n      \"proxy\": false,\n      \"anonymizer\": false,\n      \"x_forwarded_for\": [\n        \"160.221.187.219\",\n        \"52.23.177.192\",\n        \"172.70.34.26\"\n      ]\n    },\n    \"behavior\": {\n      \"typing_velocity\": 0.867,\n      \"movement_velocity\": 10,\n      \"input_method\": [\n        \"is_typing\",\n        \"is_paste\"\n      ],\n      \"no_user_interaction\": false,\n      \"straight_line_ratio\": 5036.387105391022,\n      \"right_angels_ratio\": 76.28986444777497,\n      \"minor_angels_ratio\": 4549.804509446222,\n      \"movement_latency\": 5764.556256846932,\n      \"corner_click\": true\n    },\n    \"history\": {\n      \"ip_action_rate_60_sec\": 7,\n      \"user_action_rate_60_sec\": 2996,\n      \"device_action_rate_60_sec\": 3074,\n      \"ip_user_count_last_hour\": 5584,\n      \"ip_device_count_last_hour\": 7596,\n      \"linking_device_to_users_count\": 7886,\n      \"linking_user_to_device_count\": 6830\n    }\n  },\n  \"transaction_data\": {\n    \"amount\": 1500.75,\n    \"currency\": \"USD\",\n    \"type\": \"purchase\",\n    \"method\": \"card\",\n    \"channelId\": \"MOBILE_APP\",\n    \"reason\": \"Monthly subscription payment\",\n    \"transactionDate\": 1712594340000,\n    \"payer\": {\n      \"customerTier\": \"premium\",\n      \"billingInfo\": {\n        \"name\": \"John Doe\",\n        \"addressLine1\": \"123 Main St\",\n        \"addressLine2\": \"Apt 4B\",\n        \"city\": \"New York\",\n        \"state\": \"NY\",\n        \"zipPostalCode\": \"10001\",\n        \"country\": \"US\",\n        \"email\": \"john.doe@example.com\",\n        \"phone\": \"+1234567890\"\n      },\n      \"name\": \"John Doe\",\n      \"accountNumber\": \"1234567890123456\",\n      \"accountId\": \"USER_983245\",\n      \"accountCountryCode\": \"US\",\n      \"bankIdentifier\": \"CHASEUS33\",\n      \"branchIdentifier\": \"123456\",\n      \"card\": {\n        \"holderName\": \"John Doe\",\n        \"bin\": \"411111\",\n        \"last4\": \"1234\"\n      }\n    },\n    \"payee\": {\n      \"name\": \"John Doe\",\n      \"accountNumber\": \"1234567890123456\",\n      \"accountId\": \"USER_983245\",\n      \"accountCountryCode\": \"US\",\n      \"bankIdentifier\": \"CHASEUS33\",\n      \"branchIdentifier\": \"123456\",\n      \"card\": {\n        \"holderName\": \"John Doe\",\n        \"bin\": \"411111\",\n        \"last4\": \"1234\"\n      }\n    },\n    \"purchase\": {\n      \"totalItems\": 3,\n      \"products\": [\n        {\n          \"id\": \"PROD_12345\",\n          \"name\": \"iPhone 15\",\n          \"amount\": 1,\n          \"price\": 999.99\n        },\n        {\n          \"id\": \"PROD_12345\",\n          \"name\": \"iPhone 15\",\n          \"amount\": 1,\n          \"price\": 999.99\n        }\n      ],\n      \"shippingInfo\": {\n        \"name\": \"John Doe\",\n        \"addressLine1\": \"123 Main St\",\n        \"addressLine2\": \"Apt 4B\",\n        \"city\": \"New York\",\n        \"state\": \"NY\",\n        \"zipPostalCode\": \"10001\",\n        \"country\": \"US\",\n        \"email\": \"john.doe@example.com\",\n        \"phone\": \"+1234567890\"\n      }\n    },\n    \"avs\": {\n      \"code\": \"Y\",\n      \"provider\": \"Stripe\",\n      \"matchLevel\": \"full\"\n    }\n  },\n  \"custom_attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"threats\": [\n    \"ACCOUNT_TAKEOVER\",\n    \"NEW_FRAUD_ACCOUNT\"\n  ],\n  \"preview_rule\": {\n    \"rule_name\": \"string\",\n    \"recommendation\": \"TRUST\",\n    \"risk_score\": 4449.504296017176\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b586f8b2-2cb2-4f1f-906f-748d0e41dff8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d6f2a17-3b3d-4b40-a252-24718897b50e",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a806c1d-5994-4ec6-83cc-54c088e40b55",
+              "name": "Invalid authorization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "143c77eb-5dd5-4feb-8823-1d972e1ac05a",
+              "name": "Rate limit reached",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "080d4326-2ba0-4443-a4ea-3bbc0a3df141",
+              "name": "Blacklisted token—Returned when Fraud Prevention detects repeated or abusive token/payload misuse within a short time window (e.g., reuse of expired tokens, token caching/automation, or repeated invalid requests, including highly repetitive invalid request values). The response body contains the underlying error code (e.g., expired session token). Clients should identify and stop the source of invalid requests. Other authorization failures that do not trigger blacklisting return 403 Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 463,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "01245e51-11d7-47f6-b2cc-62b41f1075d8",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action_token",
+                      "value": "REPLACE_WITH_ACTION_TOKEN"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "REPLACE_WITH_USER_ID"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4375e5c9-a9d1-4196-85cb-51422feb373f",
+          "name": "Create rule",
+          "request": {
+            "name": "Create rule",
+            "description": {
+              "content": "Creates a new recommendation rule. Returns the `rule_id` used to reference the rule in subsequent requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recommendation",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "084c7570-bca3-436b-8995-4a39132693f1",
+              "name": "Rule created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"rule_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6d918d7-648b-46d4-8739-d25cdeae39de",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d41bd9c-5a64-4634-9614-0e45ab02b283",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc86b817-a745-494b-8bc8-8afc50217101",
+              "name": "Invalid authorization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e26a8e2-e538-4736-a2ae-4cdc6946c9ca",
+              "name": "Unique field collision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "60612ab8-e567-4854-a8bb-f8c2ecc2600a",
+              "name": "Rate limit reached",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7cb56b9d-d378-400b-a1f8-c73621028496",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0f3d1fb-3428-485a-a10c-cea25700257a",
+          "name": "Get all rules",
+          "request": {
+            "name": "Get all rules",
+            "description": {
+              "content": "Retrieves a list of all recommendation rules",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recommendation",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "1e5cc585-4ba4-48f6-844d-e0f2e3996c95",
+              "name": "Rules retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"Block risky countries\",\n      \"priority\": 10,\n      \"matcher\": {\n        \"ip_cidrs\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"recommendation\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"mode\": \"<string>\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"Block risky countries\",\n      \"priority\": 10,\n      \"matcher\": {\n        \"ip_cidrs\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"recommendation\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"mode\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2400e73-b7b5-42b4-b98f-2fd108355ae8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "86ce86ba-7329-4cb2-804c-71b5727792cc",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87d6b937-068a-45f7-83e1-7dc156d9a281",
+              "name": "Invalid authorization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67b9e160-2626-440f-b3af-6dba100e51e2",
+              "name": "Rate limit reached",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f99c1be1-ca1c-4442-9952-dfc6667f0533",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5eeb1364-d444-4580-8e5b-a15800e45673",
+          "name": "Get rule by ID",
+          "request": {
+            "name": "Get rule by ID",
+            "description": {
+              "content": "Retrieves a specific recommendation rule by its ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recommendation",
+                "rules",
+                ":rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rule_id",
+                  "description": "(Required) ID of the recommendation rule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e1c42eca-9fdd-4ca0-9b21-9d00dc253d06",
+              "name": "Rule retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"data\": {\n    \"priority\": 10,\n    \"matcher\": {\n      \"ip_cidrs\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"recommendation\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"mode\": \"<string>\",\n    \"name\": \"Block risky countries\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ae844fc-5ca4-4ad6-be12-3ee622ae6ef9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "12ffb926-5109-44a9-9d86-42938f6456f8",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5d3853b6-7af4-4dff-a41b-c7e12b4f402b",
+              "name": "Invalid authorization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da880e16-dfcc-43cc-beef-7d59e1ef9e8a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "787ed0c2-b43d-47d7-ac6a-f8a6b8cf7cbe",
+              "name": "Rate limit reached",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4cad25f6-3224-4491-b01e-7c5d4c8bfc0f",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74e15f76-bd18-4fb6-b995-19bdbaea75cc",
+          "name": "Update rule by ID",
+          "request": {
+            "name": "Update rule by ID",
+            "description": {
+              "content": "Updates a specific recommendation rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recommendation",
+                "rules",
+                ":rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rule_id",
+                  "description": "(Required) ID of the recommendation rule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"priority\": \"<integer>\",\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e57007f-0e06-4c1f-9f76-50dd502e591c",
+              "name": "Rule updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef0eb106-be6d-4e08-ba2e-48a56b977e8e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2e01d3e0-f3e6-45d5-9686-9f455b1f0146",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c1a1a6c-d0c9-4cf8-8212-09dc3d8c2091",
+              "name": "Invalid authorization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fec4ad02-0667-4ae8-bd50-e636d09c048d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9d48b86-dbea-4f79-8ba9-06f70150f730",
+              "name": "Rate limit reached",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "824a6eee-c003-496a-ad43-7d163c86469b",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"priority\": 10,\n  \"matcher\": {\n    \"ip_cidrs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"recommendation\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"name\": \"Block risky countries\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60d4713a-56f3-467c-9043-76fc3eedcf37",
+          "name": "Delete rule by ID",
+          "request": {
+            "name": "Delete rule by ID",
+            "description": {
+              "content": "Deletes a specific recommendation rule. Note that you can also disable rules if needed using the enabled rule attribute.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recommendation",
+                "rules",
+                ":rule_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rule_id",
+                  "description": "(Required) ID of the recommendation rule"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "3047c54d-e526-4abb-bc98-5b490048cf6b",
+              "name": "Rule updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdc60902-cee7-4459-abe4-8ec537256493",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cdbbb12a-a042-40a2-a17d-6bbc99e39f40",
+              "name": "Invalid authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45fc1ac5-019d-4749-b3c7-dcbdda0b0d81",
+              "name": "Invalid authorization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09bbb875-fe53-4dba-96d8-8ca6adac0e30",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac52563f-e18e-436e-8570-9d0de34c2949",
+              "name": "Rate limit reached",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "69c939d2-850d-4f55-8a31-0c64de63842a",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recommendation",
+                    "rules",
+                    ":rule_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rule_id",
+                      "description": "(Required) ID of the recommendation rule"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sbx.transmitsecurity.io/cis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "46386438-db69-42b8-8841-f72299ee68df",
+    "name": "One-Time Login Applications Recommendation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.",
+      "type": "text/plain"
+    }
+  }
+}

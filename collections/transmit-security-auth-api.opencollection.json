@@ -1,0 +1,249 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "One-Time Login Applications Auth API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send email link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/link/email/send",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Send a magic link by email to a user. Upon clicking the email link, the User Agent will be redirected to the requested redirect URI with a code (passed in the `code` query parameter). This code can be used to complete the authentication in the subsequent request."
+        },
+        {
+          "info": {
+            "name": "Authenticate email link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/link/email/authenticate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Authenticate a user using the email magic link you sent them. Upon clicking the email link, a code was returned to your redirect URI as the `code` query parameter. This API validates this code and returns user tokens."
+        },
+        {
+          "info": {
+            "name": "Send OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/otp/send",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Send a one-time passcode to a user by email or SMS, or retrieve the code directly in the response to deliver it out-of-band — for example, when an admin generates a temporary access code on behalf of a user."
+        },
+        {
+          "info": {
+            "name": "Authenticate OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/otp/authenticate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Authenticates a user using a one-time passcode that was sent to them by email or SMS. This API validates the code provided by the user and returns user tokens."
+        },
+        {
+          "info": {
+            "name": "Send email link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/links/email",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Send a magic link by email to a user. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+        },
+        {
+          "info": {
+            "name": "Send email OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/otp/email",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Send a one-time passcode (OTP) by email to the given email address. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+        },
+        {
+          "info": {
+            "name": "Validate email OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/otp/email/validation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Validate a one-time passcode sent by email to a user. The endpoint will return a URI which can be used to redirect the client in order to complete authentication. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+        },
+        {
+          "info": {
+            "name": "Send SMS OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/otp/sms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Send a one-time passcode (OTP) by SMS to the given phone number. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+        },
+        {
+          "info": {
+            "name": "Validate SMS OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/otp/sms/validation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/oidc/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Validate a one-time passcode sent by SMS to a user. The endpoint will return a URI which can be used to redirect the client in order to complete authentication. <br><br>**Required permissions**: `apps:execute`, `[appId]:execute`, `auth:execute`."
+        },
+        {
+          "info": {
+            "name": "Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sbx.transmitsecurity.io/cis/v1/auth/logout",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Logout the user from a specific session. The user and session are derived from the access token used to authorize the request (which was issued based on the authentication that created the session)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

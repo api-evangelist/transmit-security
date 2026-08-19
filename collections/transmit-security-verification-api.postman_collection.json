@@ -1,0 +1,1319 @@
+{
+  "item": [
+    {
+      "id": "cb265d8b-5c01-4863-8273-be9dd0d48219",
+      "name": "Verification",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d1f068c-1d74-4965-a3aa-549fcc819c0b",
+          "name": "Create verification session",
+          "request": {
+            "name": "Create verification session",
+            "description": {
+              "content": "Creates a new verification session that will provide a secure context to the verification process. It returns a start token that will be used when initiating the verification process from the client side. This should be called from the backend. See the [Quick start guide](https://developer.transmitsecurity.com/guides/verify/quick_start_web/#step-4-initiate-id-verification) for details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "verification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"callback_url\": \"<string>\",\n  \"state\": \"<string>\",\n  \"time_to_live\": \"90d\",\n  \"mock_behavior\": {\n    \"mock_recommendation\": \"<string>\",\n    \"recommendation\": \"<string>\",\n    \"processing_time\": \"<string>\",\n    \"force_retry\": \"<boolean>\",\n    \"info\": {\n      \"person_details\": {\n        \"given_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"surname\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"gender\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"full_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"age\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"date_of_birth\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"document_details\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"issue_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_serial_number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id_value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"given_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"surname\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"full_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"date_of_birth\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"valid_until\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"auto_start\": \"<boolean>\",\n  \"start\": {\n    \"consent\": {\n      \"granted\": \"<boolean>\",\n      \"document_id\": \"<string>\"\n    }\n  },\n  \"customer_information\": {\n    \"organization_name\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"external_user_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc2c4500-e2a6-4b42-aeba-be82a9f37fe3",
+              "name": "Session created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callback_url\": \"<string>\",\n  \"state\": \"<string>\",\n  \"time_to_live\": \"90d\",\n  \"mock_behavior\": {\n    \"mock_recommendation\": \"<string>\",\n    \"recommendation\": \"<string>\",\n    \"processing_time\": \"<string>\",\n    \"force_retry\": \"<boolean>\",\n    \"info\": {\n      \"person_details\": {\n        \"given_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"surname\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"gender\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"full_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"age\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"date_of_birth\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"document_details\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"issue_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_serial_number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id_value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"given_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"surname\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"full_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"date_of_birth\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"valid_until\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"auto_start\": \"<boolean>\",\n  \"start\": {\n    \"consent\": {\n      \"granted\": \"<boolean>\",\n      \"document_id\": \"<string>\"\n    }\n  },\n  \"customer_information\": {\n    \"organization_name\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"external_user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"string\",\n  \"expiration\": \"string\",\n  \"missing_images\": [\n    \"document_front\",\n    \"document_back\"\n  ],\n  \"start_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "243c0d6f-6687-46fb-acc9-f8c541ff1840",
+              "name": "Request is malformed or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callback_url\": \"<string>\",\n  \"state\": \"<string>\",\n  \"time_to_live\": \"90d\",\n  \"mock_behavior\": {\n    \"mock_recommendation\": \"<string>\",\n    \"recommendation\": \"<string>\",\n    \"processing_time\": \"<string>\",\n    \"force_retry\": \"<boolean>\",\n    \"info\": {\n      \"person_details\": {\n        \"given_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"surname\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"gender\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"full_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"age\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"date_of_birth\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"document_details\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"issue_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_serial_number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id_value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"given_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"surname\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"full_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"date_of_birth\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"valid_until\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"auto_start\": \"<boolean>\",\n  \"start\": {\n    \"consent\": {\n      \"granted\": \"<boolean>\",\n      \"document_id\": \"<string>\"\n    }\n  },\n  \"customer_information\": {\n    \"organization_name\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"external_user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f5ad892e-81bc-4cf6-aeca-ee7786a4b330",
+              "name": "Access token is malformed, missing data, or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callback_url\": \"<string>\",\n  \"state\": \"<string>\",\n  \"time_to_live\": \"90d\",\n  \"mock_behavior\": {\n    \"mock_recommendation\": \"<string>\",\n    \"recommendation\": \"<string>\",\n    \"processing_time\": \"<string>\",\n    \"force_retry\": \"<boolean>\",\n    \"info\": {\n      \"person_details\": {\n        \"given_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"surname\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"gender\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"full_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"age\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"address\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"date_of_birth\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"document_details\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"country\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"issue_date\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"document_serial_number\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"id_value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"given_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"surname\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"full_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"date_of_birth\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"valid_until\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"auto_start\": \"<boolean>\",\n  \"start\": {\n    \"consent\": {\n      \"granted\": \"<boolean>\",\n      \"document_id\": \"<string>\"\n    }\n  },\n  \"customer_information\": {\n    \"organization_name\": \"<string>\",\n    \"organization_id\": \"<string>\",\n    \"external_user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f89d31fe-7f09-4c41-9fa7-d9bb6495767a",
+          "name": "Get verification result",
+          "request": {
+            "name": "Get verification result",
+            "description": {
+              "content": "Retrieves the results of the verification session, which contains detailed information about the submitted documents (including PII). This should be called from the backend.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "verification",
+                ":sid",
+                "result"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "detailed",
+                  "value": "<boolean>",
+                  "description": "This parameter allows existing customers to select between response objects. You should explicitly send `false` to return the `DeprecatedSessionResult` response structure or send `true` to return the new `CompleteSessionResult`/`IncompleteSessionResult` response structure. Please note this parameter will be removed once `DeprecatedSessionResult` is fully deprecated."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "sid",
+                  "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "0b74501f-4269-4895-b35f-0fd7e95c287b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"string\",\n  \"status\": \"complete\",\n  \"recommendation\": \"DENY\",\n  \"person\": {\n    \"full_name\": \"Marie Salomea Skłodowska-Curies\",\n    \"given_name\": \"Marie\",\n    \"surname\": \"Curies\",\n    \"gender\": \"female\",\n    \"national_id\": \"123ABC\",\n    \"date_of_birth\": \"1867-11-07T00:00:00.000Z\",\n    \"age\": 35\n  },\n  \"document\": {\n    \"type\": \"national_id\",\n    \"country\": \"US\",\n    \"region\": \"NY\",\n    \"number\": \"1234567\",\n    \"serial_number\": \"1234567\",\n    \"issue_date\": \"1867-11-07T00:00:00.000Z\",\n    \"expiration_date\": \"1867-11-07T00:00:00.000Z\"\n  },\n  \"checks\": {\n    \"document_validation\": {\n      \"recommendation\": \"DENY\",\n      \"reasons\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"document_authentication\": {\n      \"recommendation\": \"DENY\",\n      \"reasons\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"document_liveness\": {\n      \"recommendation\": \"DENY\",\n      \"reasons\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"biometric_matching\": {\n      \"recommendation\": \"DENY\",\n      \"reasons\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"biometric_liveness\": {\n      \"recommendation\": \"DENY\",\n      \"reasons\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"flagged_identity\": {\n      \"recommendation\": \"DENY\",\n      \"reasons\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    },\n    \"risk_recommendation\": {\n      \"recommendation\": \"DENY\",\n      \"reasons\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  \"verification_images\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"document_front\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"document_front\"\n    }\n  ],\n  \"risk_details\": {\n    \"general\": {\n      \"correlation_id\": \"SUMCposIdWZfgNp\",\n      \"action_type\": \"identity_verification\",\n      \"recommendation\": \"rejected\",\n      \"risk_score\": 94.6\n    },\n    \"device\": {\n      \"os\": \"Android\",\n      \"browser\": \"Chrome\",\n      \"device_id\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\",\n      \"device_fingerprint\": \"4ebf21edcb4297363ad239386fc6e45e34123045f6ac7b9da93c415d7cb60bdc\",\n      \"device_type\": \"mobile\",\n      \"device_model\": \"SM-G955U\",\n      \"device_timestamp\": 1777462766771,\n      \"timezone\": \"Asia/Jerusalem\",\n      \"incognito\": false,\n      \"tampered\": false,\n      \"emulated\": false,\n      \"spoofed\": true,\n      \"esim\": false\n    },\n    \"network\": {\n      \"network_country\": \"IE\",\n      \"ip_address\": \"192.168.1.1\",\n      \"ip_type\": \"hosting\",\n      \"ip_organization\": \"Amazon.com, Inc.\",\n      \"timezone\": \"Europe/Dublin\",\n      \"vpn\": false,\n      \"tor\": false,\n      \"proxy\": false,\n      \"anonymizer\": false\n    },\n    \"recommendation_reasons\": [\n      \"DEVICE_SPOOFED_BY_USERAGENT\",\n      \"DEVICE_SUSPICIOUS_PLATFORM_OS\",\n      \"DEVICE_VERY_OLD_VERSION\",\n      \"DEVICE_PLATFORM_ANOMALY\",\n      \"DEVICE_IP_TIMEZONE_MISMATCH\",\n      \"IP_RISKY_REPUTATION\",\n      \"DEVICE_NEW\"\n    ]\n  },\n  \"additional_info\": {\n    \"address\": {\n      \"country\": \"USA\",\n      \"region\": \"Indiana\",\n      \"city\": \"Indianapolis\",\n      \"street\": \"Snowy Ridge Road\",\n      \"house_number\": \"1234\",\n      \"apartment_number\": \"12\",\n      \"postcode\": \"56789\",\n      \"full_address\": \"1234 Snowy Ridge Road Indianapolis, IN 56789\"\n    },\n    \"national_status\": {\n      \"citizen\": false,\n      \"resident\": false\n    },\n    \"employment\": {\n      \"profession\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cc92b6e-9467-4c47-9319-5dac04711c52",
+              "name": "Request is malformed or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d781a1d9-5851-47c0-962c-06761046aaf6",
+              "name": "Access token is malformed, missing data, or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc309ae5-8a52-4ce7-937a-f87c19be55d4",
+              "name": "Session not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc2768d5-2edf-4c59-b8b9-85789b58a43b",
+          "name": "Delete verification session",
+          "request": {
+            "name": "Delete verification session",
+            "description": {
+              "content": "Deletes a verification session. This deletes the personal user data collected during the verification process",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "verification",
+                ":sid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "sid",
+                  "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "55211ea8-9a63-4f27-abf0-befc183ac194",
+              "name": "Session deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "664ee5d2-8d89-4401-b49c-02da02ea20a2",
+              "name": "Request is malformed or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4b529b0f-4f29-40c1-9221-b290693aea3e",
+              "name": "Access token is malformed, missing data, or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dae42222-12f3-4ec5-9637-ad591210fb81",
+              "name": "Session not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51cba678-7c69-41bf-8be2-b55c2b100ada",
+          "name": "Get all images for session",
+          "request": {
+            "name": "Get all images for session",
+            "description": {
+              "content": "Retrieves all the images that were submitted for the session. The response contains only the image metadata, which includes the image ID that can be used to fetch the actual image.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "verification",
+                ":sid",
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "sid",
+                  "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "16f0b2ef-c771-4470-b120-db823b63d90f",
+              "name": "List of all images (metadata)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_images\": [\n    {\n      \"id\": \"string\",\n      \"rejected\": true,\n      \"original\": false,\n      \"format\": \"string\",\n      \"type\": \"selfie\",\n      \"original_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"rejected\": false,\n      \"original\": false,\n      \"format\": \"string\",\n      \"type\": \"document_front\",\n      \"original_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7977590-d471-4eef-a963-46ef3221d7ff",
+              "name": "Request is malformed or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57509c2e-d107-441a-be65-8fee2176ff31",
+              "name": "Access token is malformed, missing data, or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc2644e2-9e1c-422c-b582-338e20f785ce",
+          "name": "Get image by ID",
+          "request": {
+            "name": "Get image by ID",
+            "description": {
+              "content": "Retrieve the actual image from the session (and not only the image metadata). The image is specified by the image ID returned upon fetching all the session images.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "verification",
+                ":sid",
+                "images",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Optional. Determines the image format returned. Enum: `raw` `base64`"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Image ID returned by the request to get all images"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "sid",
+                  "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/jpg"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "1d3cfeaf-1e90-4ab4-8749-dd78e30fee74",
+              "name": "Actual image",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "images",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "raw"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Image ID returned by the request to get all images"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/jpg"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/jpg"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d21f366-b25a-485e-9463-89410e691c8c",
+              "name": "Request is malformed or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "images",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "raw"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Image ID returned by the request to get all images"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "48baf93d-6de0-496c-8f6a-7b2dfae3cbbe",
+              "name": "Access token is malformed, missing data, or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "images",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "raw"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Image ID returned by the request to get all images"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0bd9615c-d3b8-45d1-8e03-ca70504f563c",
+              "name": "Image not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "images",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "raw"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Image ID returned by the request to get all images"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "000e727e-cb8b-4d8a-834a-fa2ed9bcef8e",
+          "name": "Get consent",
+          "request": {
+            "name": "Get consent",
+            "description": {
+              "content": "Checks whether user consent was provided for a specific session and if so, provides the timestamp",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "verification",
+                ":sid",
+                "consent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "sid",
+                  "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "86e90bac-2523-4521-a5bb-5ff824e96909",
+              "name": "Session created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"consent_granted\": false,\n  \"consent_date\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eab0dec9-0c68-4a21-9933-ca9c5cf89cb2",
+              "name": "Request is malformed or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db4e0622-5d7e-4fbf-a91e-fcb931aa3740",
+              "name": "Access token is malformed, missing data, or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd16a572-47d3-4ec0-a321-3009ba5ead7d",
+              "name": "Session not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "verification",
+                    ":sid",
+                    "consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "sid",
+                      "description": "(Required) Session ID returned upon session creation or in the callback URL upon completing the verification"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sbx.transmitsecurity.io/cis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dc388817-589d-474e-a830-d534b47ce61a",
+    "name": "One-Time Login Applications Verification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.",
+      "type": "text/plain"
+    }
+  }
+}
