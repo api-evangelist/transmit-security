@@ -33,6 +33,18 @@ tags:
   - Risk Management
   - Identity Verification
   - Orchestration
+  - Security
+  - SSO
+tags_raw:
+  - CIAM
+  - Identity
+  - Authentication
+  - Passkeys
+  - WebAuthn
+  - Fraud Detection
+  - Risk Management
+  - Identity Verification
+  - Orchestration
   - OAuth2
   - Security
   - SSO
@@ -63,6 +75,8 @@ apis:
   humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
   baseURL: https://api.transmitsecurity.io
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -95,6 +109,8 @@ apis:
   humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
   baseURL: https://api.transmitsecurity.io
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -159,6 +175,8 @@ apis:
   humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
   baseURL: https://api.transmitsecurity.io
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -255,6 +273,8 @@ apis:
   humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
   baseURL: https://api.transmitsecurity.io
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
