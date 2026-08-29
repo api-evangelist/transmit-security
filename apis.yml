@@ -9,6 +9,18 @@ description: >
   authentication. Mosaic serves leading banks, insurers, and retailers worldwide with region-specific
   deployments across the US, EU, Canada, and Australia, backed by a 99.99% uptime SLA.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
