@@ -221,6 +221,8 @@ apis:
   humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
   baseURL: https://api.transmitsecurity.io
   tags:
+  - Recommendations
+  tags_raw:
   - Recommendation
   properties:
   - type: OpenAPI
@@ -253,6 +255,8 @@ apis:
   humanURL: https://developer.transmitsecurity.com/openapi/api_ref_intro
   baseURL: https://api.transmitsecurity.io
   tags:
+  - Tokens
+  tags_raw:
   - Token
   properties:
   - type: OpenAPI
