@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  title: One-Time Login Applications Token API
-  description: Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.
+  title: One-Time Login Token API
+  description: Login users using one-time login methods like magic links or OTPs. This implements a frontend integration for authentication, where the client obtains an authorization code that your app can exchange in the backend for user tokens.
+  version: ''
 servers:
 - url: https://api.sbx.transmitsecurity.io/cis
   description: Sandbox environment
@@ -48,20 +48,6 @@ paths:
       - Token
 components:
   schemas:
-    BadRequestHttpError:
-      type: object
-      properties:
-        message:
-          example: Bad request
-          type: array
-          items:
-            type: string
-        error_code:
-          type: number
-          example: 400
-      required:
-      - message
-      - error_code
     ApiTokenExchangeResponse:
       type: object
       properties:
@@ -79,6 +65,20 @@ components:
       - access_token
       - refresh_token
       - is_user_created
+    BadRequestHttpError:
+      type: object
+      properties:
+        message:
+          example: Bad request
+          type: array
+          items:
+            type: string
+        error_code:
+          type: number
+          example: 400
+      required:
+      - message
+      - error_code
     ApiTokenExchangeRequestInput:
       type: object
       properties:

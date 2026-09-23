@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  title: One-Time Login Applications Manage API
-  description: Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.
+  title: Users Manage API
+  description: Manage user profiles
+  version: ''
 servers:
 - url: https://api.sbx.transmitsecurity.io/cis
   description: Sandbox environment
@@ -22,7 +22,10 @@ paths:
     delete:
       operationId: deleteTenantUser
       summary: Delete user
-      description: 'Delete a user and all their data (tenant-level and app-level). Requires an admin access token (from a management app). <br><br>**Required permissions**: `users:delete`.'
+      description: 'Delete a user and all their data (tenant-level and app-level). Requires an admin access token (from a management app).
+
+
+        **Required permissions**: `users:delete`.'
       parameters:
       - name: user_id
         required: true

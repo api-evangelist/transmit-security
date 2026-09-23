@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  title: One-Time Login Applications API
-  description: Login users using one-time login methods like magic links or OTPs. This implements a backend-to-backend integration for authentication.
+  title: Transmit Security Applications API
+  version: ''
+  description: 'Operations tagged Applications across 2 of this provider''s published API definitions: transmit-security-organizations-openapi.yml, transmit-security-platform-administration-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.sbx.transmitsecurity.io/cis
   description: Sandbox environment
@@ -22,7 +22,10 @@ paths:
     post:
       operationId: setAssignedRoleGroups
       summary: Set org's role groups
-      description: 'Update the role groups of the organization for a specific application, which will replace any existing role groups for the organization. These role groups must first be created for the application. Once added to the organization, roles that belong to these role groups can be assigned to members of the organization to control their access to the application. <br><br>**Required permissions**: `organizations:edit`, `orgs:edit`.'
+      description: 'Update the role groups of the organization for a specific application, which will replace any existing role groups for the organization. These role groups must first be created for the application. Once added to the organization, roles that belong to these role groups can be assigned to members of the organization to control their access to the application.
+
+
+        **Required permissions**: `organizations:edit`, `orgs:edit`.'
       parameters:
       - name: app_id
         required: true
@@ -49,11 +52,25 @@ paths:
       - AdminAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/{app_id}/organizations/{organization_id}/role-groups:
     get:
       operationId: getAssignedRoleGroups
       summary: Get org's role groups
-      description: 'Retrieves all role groups that were added to the organization for a specific application. Roles that belong to these role groups can be assigned to members of the organization to control their access to the application. <br><br>**Required permissions**: `organizations:read`, `orgs:read`.'
+      description: 'Retrieves all role groups that were added to the organization for a specific application. Roles that belong to these role groups can be assigned to members of the organization to control their access to the application.
+
+
+        **Required permissions**: `organizations:read`, `orgs:read`.'
       parameters:
       - name: app_id
         required: true
@@ -85,11 +102,25 @@ paths:
       - AdminAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/{app_id}/organizations/{organization_id}/roles-and-groups/set:
     post:
       operationId: setAssignedRolesAndGroups
       summary: Set org's roles and role groups
-      description: 'Update the roles and role groups of the organization for a specific application, which will replace any existing assignments. These roles and role groups must first be created for the application. Once added to the organization, roles that belong to these role groups or are directly assigned can be assigned to members of the organization to control their access to the application. <br><br>**Required permissions**: `organizations:edit`, `orgs:edit`.'
+      description: 'Update the roles and role groups of the organization for a specific application, which will replace any existing assignments. These roles and role groups must first be created for the application. Once added to the organization, roles that belong to these role groups or are directly assigned can be assigned to members of the organization to control their access to the application.
+
+
+        **Required permissions**: `organizations:edit`, `orgs:edit`.'
       parameters:
       - name: app_id
         required: true
@@ -116,11 +147,25 @@ paths:
       - AdminAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/{app_id}/organizations/{organization_id}/roles-and-groups:
     get:
       operationId: getAssignedRolesAndGroups
       summary: Get org's roles and role groups
-      description: 'Retrieves all roles and role groups that were added to the organization for a specific application. Roles that belong to these role groups or are directly assigned can be assigned to members of the organization to control their access to the application. <br><br>**Required permissions**: `organizations:read`, `orgs:read`.'
+      description: 'Retrieves all roles and role groups that were added to the organization for a specific application. Roles that belong to these role groups or are directly assigned can be assigned to members of the organization to control their access to the application.
+
+
+        **Required permissions**: `organizations:read`, `orgs:read`.'
       parameters:
       - name: app_id
         required: true
@@ -152,11 +197,25 @@ paths:
       - AdminAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/{appId}/clients:
     post:
       operationId: createAppClient
       summary: Create client
-      description: 'Create a new client. <br><br>**Required permissions**: `apps:create`, `apps:edit`.'
+      description: 'Create a new client.
+
+
+        **Required permissions**: `apps:create`, `apps:edit`.'
       parameters:
       - name: appId
         required: true
@@ -200,7 +259,10 @@ paths:
     get:
       operationId: getAppClients
       summary: Get all clients
-      description: 'Retrieves a list of clients for an application. <br><br>**Required permissions**: `apps:read`.'
+      description: 'Retrieves a list of clients for an application.
+
+
+        **Required permissions**: `apps:read`.'
       parameters:
       - name: appId
         required: true
@@ -259,11 +321,25 @@ paths:
       - AdminAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/{appId}/clients/{clientId}:
     get:
       operationId: getAppClientById
       summary: Get client by ID
-      description: 'Retrieves a client by client ID. <br><br>**Required permissions**: `apps:read`.'
+      description: 'Retrieves a client by client ID.
+
+
+        **Required permissions**: `apps:read`.'
       parameters:
       - name: clientId
         required: true
@@ -305,7 +381,10 @@ paths:
     put:
       operationId: updateAppClient
       summary: Update client
-      description: 'Update a client. Note: Fields that are objects cannot be partially updated, since the new value you set will just replace the current one. <br><br>**Required permissions**: `apps:edit`, `apps:create`.'
+      description: 'Update a client. Note: Fields that are objects cannot be partially updated, since the new value you set will just replace the current one.
+
+
+        **Required permissions**: `apps:edit`, `apps:create`.'
       parameters:
       - name: clientId
         required: true
@@ -355,7 +434,10 @@ paths:
     delete:
       operationId: deleteAppClient
       summary: Delete client
-      description: 'Delete a client. <br><br>**Required permissions**: `apps:delete`, `apps:create`, `apps:edit`.'
+      description: 'Delete a client.
+
+
+        **Required permissions**: `apps:delete`, `apps:create`, `apps:edit`.'
       parameters:
       - name: clientId
         required: true
@@ -388,6 +470,17 @@ paths:
       - AdminAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/{appId}/clients/{clientId}/resources:
     put:
       operationId: updateAppClientResources
@@ -424,11 +517,25 @@ paths:
       - AdminAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications:
     post:
       operationId: createApp
       summary: Create app
-      description: 'Create a new application with a default client. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints. <br><br>**Required permissions**: `apps:create`, `[appId]:create`.'
+      description: 'Create a new application with a default client. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints.
+
+
+        **Required permissions**: `apps:create`, `[appId]:create`.'
       parameters: []
       requestBody:
         required: true
@@ -469,7 +576,10 @@ paths:
     get:
       operationId: getAllApps
       summary: Get all apps
-      description: 'Retrieves a list of all applications with their default clients. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints. <br><br>**Required permissions**: `apps:read`, `apps:list`, `[appId]:read`, `[appId]:list`.'
+      description: 'Retrieves a list of all applications with their default clients. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints.
+
+
+        **Required permissions**: `apps:read`, `apps:list`, `[appId]:read`, `[appId]:list`.'
       parameters: []
       responses:
         '200':
@@ -497,11 +607,25 @@ paths:
       - ClientAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/list:
     get:
       operationId: getAppsList
       summary: Get all apps basic information
-      description: 'Retrieves a list of all applications with their basic information. <br><br>**Required permissions**: `apps:list`, `users:read`, `organizations:read`, `roles:read`, `orgs:read`, `[appId]:list`.'
+      description: 'Retrieves a list of all applications with their basic information.
+
+
+        **Required permissions**: `apps:list`, `users:read`, `organizations:read`, `roles:read`, `orgs:read`, `[appId]:list`.'
       parameters: []
       responses:
         '200':
@@ -529,11 +653,25 @@ paths:
       - ClientAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/{appId}:
     get:
       operationId: getAppById
       summary: Get app by ID
-      description: 'Retrieves an application by application ID with the default client. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints. <br><br>**Required permissions**: `apps:read`, `[appId]:read`.'
+      description: 'Retrieves an application by application ID with the default client. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints.
+
+
+        **Required permissions**: `apps:read`, `[appId]:read`.'
       parameters:
       - name: appId
         required: true
@@ -574,7 +712,10 @@ paths:
     put:
       operationId: updateApp
       summary: Update app
-      description: 'Updates an application. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints. Note: Fields that are objects cannot be partially updated, since the new value you set will just replace the current one. <br><br>**Required permissions**: `apps:edit`, `[appId]:edit`.'
+      description: 'Updates an application. The fields marked as deprecated are now managed on the client level. To update a default client, create additional clients, or fetch all app clients, use `/clients` or `applications/{appId}/clients` endpoints. Note: Fields that are objects cannot be partially updated, since the new value you set will just replace the current one.
+
+
+        **Required permissions**: `apps:edit`, `[appId]:edit`.'
       parameters:
       - name: appId
         required: true
@@ -621,7 +762,10 @@ paths:
     delete:
       operationId: deleteApp
       summary: Delete app
-      description: 'Delete an application. <br><br>**Required permissions**: `apps:delete`, `[appId]:delete`.'
+      description: 'Delete an application.
+
+
+        **Required permissions**: `apps:delete`, `[appId]:delete`.'
       parameters:
       - name: appId
         required: true
@@ -648,6 +792,17 @@ paths:
       - ClientAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/{appId}/resources:
     put:
       operationId: updateResourcesInApp
@@ -684,11 +839,25 @@ paths:
       - ClientAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/signing-keys:
     post:
       operationId: createClientTokenSigningKey
       summary: Create signing key
-      description: 'Create a new signing key. <br><br>**Required permissions**: `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`.'
+      description: 'Create a new signing key.
+
+
+        **Required permissions**: `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`.'
       parameters: []
       requestBody:
         required: true
@@ -716,7 +885,10 @@ paths:
     get:
       operationId: getClientTokenSigningKeys
       summary: Get all token signing keys
-      description: 'Retrieves a list of token signing keys for an application. <br><br>**Required permissions**: `apps:read`, `[appId]:read`.'
+      description: 'Retrieves a list of token signing keys for an application.
+
+
+        **Required permissions**: `apps:read`, `[appId]:read`.'
       parameters: []
       responses:
         '200':
@@ -738,11 +910,25 @@ paths:
       - ClientAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/signing-keys/upload:
     post:
       operationId: uploadClientTokenSigningKey
       summary: Upload signing key
-      description: 'Upload a new signing key. <br><br>**Required permissions**: `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`.'
+      description: 'Upload a new signing key.
+
+
+        **Required permissions**: `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`.'
       parameters: []
       requestBody:
         required: true
@@ -767,11 +953,25 @@ paths:
       - ClientAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
   /v1/applications/signing-keys/{id}:
     put:
       operationId: updateTokenSigningKey
       summary: Update a signing key
-      description: 'Update a signing key. <br><br>**Required permissions**: `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`.'
+      description: 'Update a signing key.
+
+
+        **Required permissions**: `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`.'
       parameters:
       - name: id
         required: true
@@ -804,7 +1004,10 @@ paths:
     delete:
       operationId: deleteClientTokenSigningKey
       summary: Delete signing key
-      description: 'Delete a signing key. <br><br>**Required permissions**: `apps:delete`, `[appId]:delete`, `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`.'
+      description: 'Delete a signing key.
+
+
+        **Required permissions**: `apps:delete`, `[appId]:delete`, `apps:create`, `[appId]:create`, `apps:edit`, `[appId]:edit`.'
       parameters:
       - name: id
         required: true
@@ -825,8 +1028,84 @@ paths:
       - ClientAccessToken: []
       tags:
       - Applications
+    servers:
+    - url: https://api.sbx.transmitsecurity.io/cis
+      description: Sandbox environment
+    - url: https://api.transmitsecurity.io/cis
+      description: Production environment (US)
+    - url: https://api.eu.transmitsecurity.io/cis
+      description: Production environment (EU)
+    - url: https://api.ca.transmitsecurity.io/cis
+      description: Production environment (CA)
+    - url: https://api.au.transmitsecurity.io/cis
+      description: Production environment (AU)
 components:
   schemas:
+    RolesAndRoleGroupsInputDto:
+      type: object
+      properties:
+        role_group_ids:
+          description: Role group ids
+          type: array
+          items:
+            type: string
+        role_ids:
+          description: Role ids
+          type: array
+          items:
+            type: string
+    RoleGroupsAndDefaultOrgRolesDto:
+      type: object
+      properties:
+        role_groups:
+          description: Role groups
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiRoleGroup'
+        default_organization_roles:
+          description: Default organization roles
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiRole'
+      required:
+      - role_groups
+      - default_organization_roles
+    ApiRole:
+      type: object
+      properties:
+        role_id:
+          type: string
+          description: Role ID
+        role_name:
+          type: string
+          description: Role name
+        permissions:
+          description: Role permissions
+          type: array
+          items:
+            type: string
+        app_id:
+          type: string
+          description: Role's app id
+        description:
+          type: string
+          description: Role's description
+        display_name:
+          type: string
+          description: Role's display name
+      required:
+      - role_id
+      - role_name
+    ApiRoleGroupIds:
+      type: object
+      properties:
+        role_group_ids:
+          description: Role group ids
+          type: array
+          items:
+            type: string
+      required:
+      - role_group_ids
     RolesAndRoleGroupsDto:
       type: object
       properties:
@@ -849,20 +1128,320 @@ components:
       - role_groups
       - default_organization_roles
       - roles
-    MessageConfiguration:
+    ApiRoleGroup:
       type: object
       properties:
-        primaryColor:
+        group_id:
           type: string
-          description: Primary color of the email, specified as a Hex color
-        from:
+          description: Group ID
+        name:
           type: string
-          description: Origin of the email message
-        subject:
+          description: Group name
+        description:
           type: string
-          description: Subject of the email message
+          description: Group description
+        roles:
+          description: Group's roles
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiRole'
+        display_name:
+          type: string
+          description: Role group's display name
       required:
-      - primaryColor
+      - group_id
+      - name
+      - roles
+    SMSConfiguration:
+      type: object
+      properties:
+        expiresIn:
+          type: number
+          description: Number of minutes until the OTP expires
+        lockoutDuration:
+          type: number
+          description: OTP lockout duration (in minutes) after maximum attempts are reached
+          example: 15
+        maxFailures:
+          type: number
+          description: Number of wrong OTP attempts allowed before the passcode is invalidated. Must be between 1 and 20.
+          example: 3
+        codeLength:
+          type: number
+          description: The length of the generated OTP code. Must be between 4 and 8.
+          example: 6
+        crossClientsAllowed:
+          type: boolean
+          description: Determines if OTP authentication is allowed across different clients within the same application
+          default: false
+      required:
+      - expiresIn
+      - maxFailures
+    EmailOtpConfiguration:
+      type: object
+      properties:
+        expiresIn:
+          type: number
+          description: Number of minutes until the OTP expires
+        lockoutDuration:
+          type: number
+          description: OTP lockout duration (in minutes) after maximum attempts are reached
+          example: 15
+        maxFailures:
+          type: number
+          description: Number of wrong OTP attempts allowed before the passcode is invalidated. Must be between 1 and 20.
+          example: 3
+        codeLength:
+          type: number
+          description: The length of the generated OTP code. Must be between 4 and 8.
+          example: 6
+        crossClientsAllowed:
+          type: boolean
+          description: Determines if OTP authentication is allowed across different clients within the same application
+          default: false
+        message:
+          $ref: '#/components/schemas/MessageConfiguration'
+      required:
+      - expiresIn
+      - maxFailures
+      - message
+    PinAuthenticatorConfiguration:
+      type: object
+      properties:
+        failuresExpireIn:
+          type: number
+          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
+          default: 15
+          example: 15
+          minimum: 1
+          maximum: 525600
+        lockoutTiers:
+          description: Progressive lockout tiers based on failed attempts
+          type: array
+          items:
+            $ref: '#/components/schemas/LockoutTier'
+        maxFailures:
+          type: number
+          description: Number of wrong PIN Authenticator attempts allowed before the passcode is invalidated. Must be between 1 and 20.
+          example: 3
+          default: 5
+          deprecated: true
+        lockoutDuration:
+          type: number
+          description: PIN Authenticator lockout duration (in minutes) after maximum attempts are reached
+          example: 15
+          default: 15
+          deprecated: true
+    ApiClientAuthenticationConfiguration:
+      type: object
+      properties:
+        method:
+          type: string
+          enum:
+          - client_secret_basic
+          - self_signed_tls_client_auth
+          - tls_client_auth
+          - private_key_jwt
+          description: Client authentication method
+          default: client_secret_basic
+        tls_client_auth:
+          description: TLS client authentication configuration for mTLS
+          allOf:
+          - $ref: '#/components/schemas/TlsClientAuth'
+        isMtlsCertTokenBound:
+          type: boolean
+          description: States whether to bind the access token to the client certificate when mTLS is enabled
+        jwks:
+          type: object
+          description: A set of JWK keys containing the public keys for the Client to use for authentication
+      required:
+      - method
+    TlsClientAuth:
+      type: object
+      properties:
+        certificate_chain:
+          type: string
+          description: Certificate chain including intermediate CA certificates used for client certificate validation
+        distinguished_name:
+          type: number
+          description: The length of the generated OTP code. Must be between 4 and 8.
+          example: 6
+        ocsp_on:
+          type: boolean
+          description: Enables OCSP (Online Certificate Status Protocol) verification
+        ocsp_responder_uri:
+          type: string
+          description: OCSP responder URI
+        ocsp_responder_certificate:
+          type: string
+          description: OCSP responder certificate used for signature verification
+        ocsp_fail_open:
+          type: boolean
+          description: OCSP fail-open
+    ApiCreateSamlClientInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the client
+          example: My Client
+        description:
+          type: string
+          description: Short description of the client
+        resources:
+          description: List of resources IDs associated with this client
+          type: array
+          items:
+            type: string
+        authentication_protocol:
+          type: string
+          enum:
+          - oidc
+          - saml
+          description: Authentication protocol used by the client
+          default: oidc
+        client_group_id:
+          type: string
+          description: Id of client group to associate with
+        default_custom_claims:
+          type: array
+          description: List of client default custom claims
+          items:
+            type: string
+            enum:
+            - tid
+            - fname
+            - lname
+            - mname
+            - email
+            - email_verified
+            - phone_number
+            - phone_number_verified
+            - groups
+            - new_user
+            - birthday
+            - language
+            - city
+            - address
+            - country
+            - street_address
+            - address_type
+            - webauthn
+            - roles
+            - ts_roles
+            - role_values
+            - ts_permissions
+            - permissions
+            - approval_data
+            - custom_group_data
+            - username
+            - secondary_phone_numbers
+            - secondary_emails
+            - picture
+            - created_at
+            - last_auth
+            - auth_time
+            - external_account_id
+            - external_user_id
+            - app_name
+            - custom_data
+            - custom_app_data
+            - ai_actor
+        default_user_info_claims:
+          type: array
+          description: List of client default custom claims returned by the UserInfo endpoint. Mutually exclusive with sync_id_token_claims_to_userinfo=true in the same request.
+          items:
+            type: string
+            enum:
+            - tid
+            - fname
+            - lname
+            - mname
+            - email
+            - email_verified
+            - phone_number
+            - phone_number_verified
+            - groups
+            - new_user
+            - birthday
+            - language
+            - city
+            - address
+            - country
+            - street_address
+            - address_type
+            - webauthn
+            - roles
+            - ts_roles
+            - role_values
+            - ts_permissions
+            - permissions
+            - approval_data
+            - custom_group_data
+            - username
+            - secondary_phone_numbers
+            - secondary_emails
+            - picture
+            - created_at
+            - last_auth
+            - auth_time
+            - external_account_id
+            - external_user_id
+            - app_name
+            - custom_data
+            - custom_app_data
+            - ai_actor
+        sync_id_token_claims_to_userinfo:
+          type: boolean
+          description: When true, UserInfo custom claims are kept in sync with default_custom_claims (the ID Token list). Mutually exclusive with explicit default_user_info_claims in the same request.
+          default: false
+        short_cookies_samesite_type:
+          type: string
+          enum:
+          - lax
+          - none
+          description: 'Short cookies samesite type. Possible values: "none", "lax", "strict". Default: "lax"'
+          default: lax
+        sp_acs_url:
+          type: string
+          description: SAML ACS URL
+        sp_entity_id:
+          type: string
+          description: SAML Service provider entity ID
+        sp_name_id_type:
+          type: string
+          enum:
+          - email
+          - secondaryEmail
+          - username
+          - phoneNumber
+          - externalUserId
+          description: SAML Name ID Type
+        supported_prompts:
+          type: array
+          example:
+          - login
+          - consent
+          - none
+          description: Supported prompts for the OIDC authentication flow
+          items:
+            type: string
+            enum:
+            - login
+            - consent
+            - none
+        sign_assertion:
+          type: boolean
+          description: Sign SAML assertion
+        optional_acs_url:
+          type: boolean
+          description: Allow ACS URL to be optional
+        use_centralized_login:
+          type: boolean
+          description: When enabled, SAML SP-initiated SSO redirects to the tenant centralized hub application instead of hosted login
+      required:
+      - name
+      - sp_entity_id
     ApiCreateOidcClientInput:
       type: object
       properties:
@@ -1095,38 +1674,1264 @@ components:
       required:
       - name
       - redirect_uris
-    TlsClientAuth:
+    FaceAuthenticatorConfiguration:
       type: object
       properties:
-        certificate_chain:
-          type: string
-          description: Certificate chain including intermediate CA certificates used for client certificate validation
-        distinguished_name:
+        failuresExpireIn:
           type: number
-          description: The length of the generated OTP code. Must be between 4 and 8.
-          example: 6
-        ocsp_on:
+          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
+          default: 15
+          example: 15
+          minimum: 1
+          maximum: 525600
+        lockoutTiers:
+          description: Progressive lockout tiers based on failed attempts
+          type: array
+          items:
+            $ref: '#/components/schemas/LockoutTier'
+        maxFailures:
+          type: number
+          description: Number of wrong Face Authenticator attempts allowed. Must be between 1 and 20.
+          example: 3
+          default: 5
+          deprecated: true
+        lockoutDuration:
+          type: number
+          description: Face Authenticator lockout duration (in minutes) after maximum attempts are reached
+          example: 15
+          default: 15
+          deprecated: true
+        saveImageEmbedding:
           type: boolean
-          description: Enables OCSP (Online Certificate Status Protocol) verification
-        ocsp_responder_uri:
-          type: string
-          description: OCSP responder URI
-        ocsp_responder_certificate:
-          type: string
-          description: OCSP responder certificate used for signature verification
-        ocsp_fail_open:
-          type: boolean
-          description: OCSP fail-open
-    ApiRoleGroupIds:
+          description: Enables saving the image embedding
+          default: true
+    ApiBasicApp:
       type: object
       properties:
-        role_group_ids:
-          description: Role group ids
+        app_id:
+          type: string
+          description: Application ID
+        tenant_id:
+          type: string
+          description: Tenant ID
+        app_name:
+          type: string
+          description: Application name displayed in the Admin Portal
+        app_description:
+          type: string
+          description: Short description of your application, displayed in the Admin Portal
+        login_uri:
+          type: string
+          description: URI used to redirect the user to the login page of the application (when needed)
+          example: https://www.example.com/login
+        application_type:
+          type: string
+          enum:
+          - ido
+          - basic
+          description: Application type
+      required:
+      - app_id
+      - tenant_id
+      - app_name
+      - app_description
+    ApiApp:
+      type: object
+      properties:
+        app_id:
+          type: string
+          description: Application ID
+        tenant_id:
+          type: string
+          description: Tenant ID
+        app_name:
+          type: string
+          description: Application name displayed in the Admin Portal
+        app_description:
+          type: string
+          description: Short description of your application, displayed in the Admin Portal
+        client_type:
+          type: string
+          enum:
+          - web
+          - native
+          description: Type of the default client
+          default: web
+          deprecated: true
+        logo:
+          type: string
+          description: URI of your application's logo, such as for email templates
+        client_id:
+          type: string
+          description: Client ID of the default client used for API requests
+          deprecated: true
+        client_display_name:
+          type: string
+          description: Client name of the default client to display when needed
+          deprecated: true
+        client_description:
+          type: string
+          description: Short description of the default client
+          deprecated: true
+        client_secret:
+          type: string
+          description: Client secret of the default client used to obtain tokens for API authorization
+          deprecated: true
+        redirect_uris:
+          description: List of URI approved for redirects for your default client
+          deprecated: true
+          type: array
+          items:
+            type: string
+        login_preferences:
+          $ref: '#/components/schemas/ApiLoginPreferences'
+        created_at:
+          format: date-time
+          type: string
+          description: Date the application was created
+        created_by:
+          type: string
+          description: The user that created the application
+        updated_at:
+          format: date-time
+          type: string
+          description: Date the application was last updated
+        resources:
+          description: List of resources the default client is allowed to explicitly request access to
+          deprecated: true
+          type: array
+          items:
+            type: string
+        service_providers:
+          description: List of service providers this application is allowed to explicitly redirect to
+          type: array
+          items:
+            type: string
+        authenticator_preferences:
+          description: Configures the application as the Authentication Hub of this tenant, allowing other apps to use it to perform a centralized login.
+          allOf:
+          - $ref: '#/components/schemas/ApiAuthenticatorAppPreferences'
+        allow_public_signup:
+          type: boolean
+          description: Determines if the application is allowed to request to create new users via login flows
+        client_auth_method:
+          type: string
+          enum:
+          - client_secret_basic
+          - self_signed_tls_client_auth
+          - tls_client_auth
+          - none
+          - private_key_jwt
+          description: This field is deprecated- to configure pkce use "pkce" field instead
+          deprecated: true
+        pkce:
+          type: string
+          enum:
+          - enforcePkceInsteadOfClientCredentials
+          - enforcePkceAlongsideClientCredentials
+          - allowPkceAlongsideClientCredentials
+          description: PKCE configuration
+        device_authorization:
+          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628) of the default client
+          deprecated: true
+          allOf:
+          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
+        ciba_authorization:
+          description: CIBA authorization flow configuration of the default client
+          deprecated: true
+          allOf:
+          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
+        password_sharing_group_id:
+          type: string
+          description: If the app has opted in to password sharing, this identifies the group of apps that it shares passwords with.
+        login_uri:
+          type: string
+          description: URI used to redirect the user to the login page of the application (when needed)
+          example: https://www.example.com/login
+        invite_member_uri:
+          type: string
+          description: URI used to redirect the member to the login page of the application (when needed)
+          example: https://www.example.com/login
+        invite_client_id:
+          type: string
+          description: Client used for the email magic link invitation flow
+        subdomain:
+          type: string
+          description: Subdomain of Org admin portal that can be offered for organizations to manage their users (when needed)
+          example: myapp
+        invite_member_email_expiration_minutes:
+          type: number
+          description: Member invite email link expiration in minutes
+          default: 2880
+        custom_domain:
+          description: Custom domain of the application that can be offered for the application to be accessed from
+          allOf:
+          - $ref: '#/components/schemas/ApiCustomDomainOutput'
+        external_communication:
+          description: External communication configuration for the application
+          allOf:
+          - $ref: '#/components/schemas/ApiExternalCommunication'
+        signing_key_enabled:
+          type: boolean
+          description: Determines if application specific signing key is enabled
+        refresh_token_invalidation_trigger_configuration:
+          description: Refresh token invalidation trigger configuration
+          allOf:
+          - $ref: '#/components/schemas/ApiRefreshTokenInvalidationTriggerConfiguration'
+        application_type:
+          type: string
+          enum:
+          - ido
+          - basic
+          description: Application type
+      required:
+      - app_id
+      - tenant_id
+      - app_name
+      - app_description
+      - logo
+      - login_preferences
+      - created_at
+      - created_by
+      - updated_at
+      - service_providers
+      - authenticator_preferences
+      - allow_public_signup
+    ClientSecretConfiguration:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Client ID retrieved from the identity provider
+        clientSecret:
+          type: string
+          description: Client Secret retrieved from the identity provider
+        redirectUris:
+          description: List of URIs approved for redirects for your client
+          example:
+          - https://www.example.com/login
           type: array
           items:
             type: string
       required:
-      - role_group_ids
+      - clientId
+    ApiUpdateOidcClientInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the client
+          example: My Client
+        description:
+          type: string
+          description: Short description of the client
+        resources:
+          description: List of resources IDs associated with this client
+          type: array
+          items:
+            type: string
+        client_group_id:
+          type: string
+          description: Id of client group to associate with
+        default_custom_claims:
+          type: array
+          description: List of client default custom claims
+          items:
+            type: string
+            enum:
+            - tid
+            - fname
+            - lname
+            - mname
+            - email
+            - email_verified
+            - phone_number
+            - phone_number_verified
+            - groups
+            - new_user
+            - birthday
+            - language
+            - city
+            - address
+            - country
+            - street_address
+            - address_type
+            - webauthn
+            - roles
+            - ts_roles
+            - role_values
+            - ts_permissions
+            - permissions
+            - approval_data
+            - custom_group_data
+            - username
+            - secondary_phone_numbers
+            - secondary_emails
+            - picture
+            - created_at
+            - last_auth
+            - auth_time
+            - external_account_id
+            - external_user_id
+            - app_name
+            - custom_data
+            - custom_app_data
+            - ai_actor
+        default_user_info_claims:
+          type: array
+          description: List of client default custom claims returned by the UserInfo endpoint. Mutually exclusive with sync_id_token_claims_to_userinfo=true in the same request.
+          items:
+            type: string
+            enum:
+            - tid
+            - fname
+            - lname
+            - mname
+            - email
+            - email_verified
+            - phone_number
+            - phone_number_verified
+            - groups
+            - new_user
+            - birthday
+            - language
+            - city
+            - address
+            - country
+            - street_address
+            - address_type
+            - webauthn
+            - roles
+            - ts_roles
+            - role_values
+            - ts_permissions
+            - permissions
+            - approval_data
+            - custom_group_data
+            - username
+            - secondary_phone_numbers
+            - secondary_emails
+            - picture
+            - created_at
+            - last_auth
+            - auth_time
+            - external_account_id
+            - external_user_id
+            - app_name
+            - custom_data
+            - custom_app_data
+            - ai_actor
+        sync_id_token_claims_to_userinfo:
+          type: boolean
+          description: When true, UserInfo custom claims are kept in sync with default_custom_claims (the ID Token list). Mutually exclusive with explicit default_user_info_claims in the same request.
+          default: false
+        short_cookies_samesite_type:
+          type: string
+          enum:
+          - lax
+          - none
+          description: 'Short cookies samesite type. Possible values: "none", "lax", "strict". Default: "lax"'
+          default: lax
+        redirect_uris:
+          description: List of URIs approved for redirects for your client
+          example:
+          - https://www.example.com/login
+          type: array
+          items:
+            type: string
+        client_type:
+          type: string
+          enum:
+          - web
+          - native
+          description: Client type
+          default: web
+        device_authorization:
+          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628)
+          allOf:
+          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
+        ciba_authorization:
+          description: CIBA authorization flow configuration
+          allOf:
+          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
+        is_third_party:
+          type: boolean
+          description: Is third party client
+        allowed_scopes:
+          description: Allowed scopes
+          type: array
+          items:
+            type: string
+        consent_uri:
+          type: string
+          description: Consent URI
+        consent_validity_period:
+          type: number
+          description: Consent validity period
+        pkce:
+          type: string
+          enum:
+          - enforcePkceInsteadOfClientCredentials
+          - enforcePkceAlongsideClientCredentials
+          - allowPkceAlongsideClientCredentials
+          description: PKCE configuration
+        supported_prompts:
+          type: array
+          example:
+          - login
+          - consent
+          - none
+          description: Supported prompts for the OIDC authentication flow
+          items:
+            type: string
+            enum:
+            - login
+            - consent
+            - none
+        token_expiration:
+          description: Token expiration settings
+          allOf:
+          - $ref: '#/components/schemas/ApiTokenExpirationConfiguration'
+        session_expiration:
+          type: number
+          description: Session expiration time (seconds)
+        enforce_par:
+          type: boolean
+          description: enforce PAR (Pushed Authorization Request) for this client
+        role_ids:
+          description: Role IDs
+          type: array
+          items:
+            type: string
+        fapi_version_compliancy:
+          type: boolean
+          description: FAPI 2.0 compliancy configuration
+        token_endpoint_auth_method:
+          type: string
+          enum:
+          - client_secret_basic
+          - self_signed_tls_client_auth
+          - tls_client_auth
+          - none
+          - private_key_jwt
+          description: This field is deprecated- to configure pkce use "pkce" field instead
+          default: client_secret_basic
+          deprecated: true
+        response_types:
+          type: array
+          default:
+          - code
+          - id_token
+          example:
+          - code
+          items:
+            type: string
+            enum:
+            - code
+            - id_token
+        authentication_configuration:
+          description: Client authentication configuration
+          allOf:
+          - $ref: '#/components/schemas/ApiClientAuthenticationConfiguration'
+        id_token_encryption:
+          description: ID Token encryption configuration
+          allOf:
+          - $ref: '#/components/schemas/ApiIdTokenEncryptionConfiguration'
+    APNConfiguration:
+      type: object
+      properties:
+        key:
+          type: string
+          description: APN key
+        keyId:
+          type: string
+          description: APN key id
+        teamId:
+          type: string
+          description: APN team id
+        bundle:
+          type: string
+          description: APN bundle
+        isProduction:
+          type: boolean
+          description: Is Production APN Environment
+      required:
+      - key
+      - keyId
+      - teamId
+      - bundle
+    ApiAppWithoutLogo:
+      type: object
+      properties:
+        app_id:
+          type: string
+          description: Application ID
+        tenant_id:
+          type: string
+          description: Tenant ID
+        app_name:
+          type: string
+          description: Application name displayed in the Admin Portal
+        app_description:
+          type: string
+          description: Short description of your application, displayed in the Admin Portal
+        client_type:
+          type: string
+          enum:
+          - web
+          - native
+          description: Type of the default client
+          default: web
+          deprecated: true
+        client_id:
+          type: string
+          description: Client ID of the default client used for API requests
+          deprecated: true
+        client_display_name:
+          type: string
+          description: Client name of the default client to display when needed
+          deprecated: true
+        client_description:
+          type: string
+          description: Short description of the default client
+          deprecated: true
+        client_secret:
+          type: string
+          description: Client secret of the default client used to obtain tokens for API authorization
+          deprecated: true
+        redirect_uris:
+          description: List of URI approved for redirects for your default client
+          deprecated: true
+          type: array
+          items:
+            type: string
+        login_preferences:
+          $ref: '#/components/schemas/ApiLoginPreferences'
+        created_at:
+          format: date-time
+          type: string
+          description: Date the application was created
+        created_by:
+          type: string
+          description: The user that created the application
+        updated_at:
+          format: date-time
+          type: string
+          description: Date the application was last updated
+        resources:
+          description: List of resources the default client is allowed to explicitly request access to
+          deprecated: true
+          type: array
+          items:
+            type: string
+        service_providers:
+          description: List of service providers this application is allowed to explicitly redirect to
+          type: array
+          items:
+            type: string
+        authenticator_preferences:
+          description: Configures the application as the Authentication Hub of this tenant, allowing other apps to use it to perform a centralized login.
+          allOf:
+          - $ref: '#/components/schemas/ApiAuthenticatorAppPreferences'
+        allow_public_signup:
+          type: boolean
+          description: Determines if the application is allowed to request to create new users via login flows
+        client_auth_method:
+          type: string
+          enum:
+          - client_secret_basic
+          - self_signed_tls_client_auth
+          - tls_client_auth
+          - none
+          - private_key_jwt
+          description: This field is deprecated- to configure pkce use "pkce" field instead
+          deprecated: true
+        pkce:
+          type: string
+          enum:
+          - enforcePkceInsteadOfClientCredentials
+          - enforcePkceAlongsideClientCredentials
+          - allowPkceAlongsideClientCredentials
+          description: PKCE configuration
+        device_authorization:
+          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628) of the default client
+          deprecated: true
+          allOf:
+          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
+        ciba_authorization:
+          description: CIBA authorization flow configuration of the default client
+          deprecated: true
+          allOf:
+          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
+        password_sharing_group_id:
+          type: string
+          description: If the app has opted in to password sharing, this identifies the group of apps that it shares passwords with.
+        login_uri:
+          type: string
+          description: URI used to redirect the user to the login page of the application (when needed)
+          example: https://www.example.com/login
+        invite_member_uri:
+          type: string
+          description: URI used to redirect the member to the login page of the application (when needed)
+          example: https://www.example.com/login
+        invite_client_id:
+          type: string
+          description: Client used for the email magic link invitation flow
+        subdomain:
+          type: string
+          description: Subdomain of Org admin portal that can be offered for organizations to manage their users (when needed)
+          example: myapp
+        invite_member_email_expiration_minutes:
+          type: number
+          description: Member invite email link expiration in minutes
+          default: 2880
+        custom_domain:
+          description: Custom domain of the application that can be offered for the application to be accessed from
+          allOf:
+          - $ref: '#/components/schemas/ApiCustomDomainOutput'
+        external_communication:
+          description: External communication configuration for the application
+          allOf:
+          - $ref: '#/components/schemas/ApiExternalCommunication'
+        signing_key_enabled:
+          type: boolean
+          description: Determines if application specific signing key is enabled
+        refresh_token_invalidation_trigger_configuration:
+          description: Refresh token invalidation trigger configuration
+          allOf:
+          - $ref: '#/components/schemas/ApiRefreshTokenInvalidationTriggerConfiguration'
+        application_type:
+          type: string
+          enum:
+          - ido
+          - basic
+          description: Application type
+      required:
+      - app_id
+      - tenant_id
+      - app_name
+      - app_description
+      - login_preferences
+      - created_at
+      - created_by
+      - updated_at
+      - service_providers
+      - authenticator_preferences
+      - allow_public_signup
+    ApiUpdateAppInput:
+      type: object
+      properties:
+        app_name:
+          type: string
+          description: Name of the application
+          example: My App
+        app_description:
+          type: string
+          description: Short description of the application
+        service_providers:
+          description: List of service provider IDs associated with this application
+          type: array
+          items:
+            type: string
+        allow_public_signup:
+          type: boolean
+          description: Determines if the application is allowed to request to create new users via login flows
+          default: false
+        authenticator_preferences:
+          description: Configures the application as the Authentication Hub of this tenant, allowing other apps to use it to perform a centralized login
+          allOf:
+          - $ref: '#/components/schemas/ApiAuthenticatorAppPreferences'
+        login_uri:
+          type: string
+          description: URI used to redirect the user to the login page of the application (when needed)
+          example: https://www.example.com/login
+        invite_member_uri:
+          type: string
+          description: URI used to redirect the member to the login page of the application (when needed)
+          example: https://www.example.com/login
+        invite_member_email_expiration_minutes:
+          type: number
+          description: Member invite email link expiration in minutes
+          default: 2880
+        refresh_token_invalidation_trigger_configuration:
+          description: Refresh token invalidation trigger configuration
+          allOf:
+          - $ref: '#/components/schemas/ApiRefreshTokenInvalidationTriggerConfiguration'
+        client_type:
+          type: string
+          enum:
+          - web
+          - native
+          description: Client type of the default client
+          default: web
+          deprecated: true
+        client_display_name:
+          type: string
+          description: Client name of the default client to display when needed
+          deprecated: true
+        client_description:
+          type: string
+          description: Short description of the default client
+          deprecated: true
+        first_client_authentication_protocol:
+          type: string
+          description: Defines the first client authentication protocol.
+          enum:
+          - oidc
+          - saml
+        first_client:
+          description: Creates first client for the application. Client can be OIDC or SAML, depending what is set in first_client_authentication_protocol
+          oneOf:
+          - $ref: '#/components/schemas/ApiCreateOidcClientInput'
+          - $ref: '#/components/schemas/ApiCreateSamlClientInput'
+        redirect_uris:
+          description: List of URI approved for redirects for your default client
+          example:
+          - https://www.example.com/login
+          deprecated: true
+          type: array
+          items:
+            type: string
+        logo:
+          type: string
+          description: URI of your application's logo, such as for email templates
+        resources:
+          description: List of resources IDs associated with the default client
+          deprecated: true
+          type: array
+          items:
+            type: string
+        device_authorization:
+          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628) of the default client
+          deprecated: true
+          allOf:
+          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
+        ciba_authorization:
+          description: CIBA authorization flow configuration of the default client
+          deprecated: true
+          allOf:
+          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
+        client_auth_method:
+          type: string
+          enum:
+          - client_secret_basic
+          - self_signed_tls_client_auth
+          - tls_client_auth
+          - none
+          - private_key_jwt
+          description: This field is deprecated- to configure pkce use "pkce" field instead
+          default: client_secret_basic
+          deprecated: true
+        subdomain:
+          type: string
+          description: Subdomain of Org admin portal that can be offered for organizations to manage their users (when needed)
+          example: myapp
+        custom_domain:
+          type: string
+          description: Domain of the application that can be offered for the application to be accessed from
+          example: myapp.com
+        pkce:
+          type: string
+          enum:
+          - enforcePkceInsteadOfClientCredentials
+          - enforcePkceAlongsideClientCredentials
+          - allowPkceAlongsideClientCredentials
+          description: PKCE configuration for client
+        should_delete_signing_key:
+          type: boolean
+          description: Determines whether the application-specific signing key should be deleted when disabled. If deleted, any tokens previously issued with this key will no longer be valid.
+          default: false
+        signing_key_enabled:
+          type: boolean
+          description: Determines if application specific signing key is enabled
+          default: false
+        invite_client_id:
+          type: string
+          description: Client used for the email magic link invitation flow
+    ApiCibaAuthConfiguration:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Determines if the client is allowed to use the OAuth CIBA authorization flow
+          default: false
+        login_uri:
+          type: string
+          description: The URI of the page that allows the user to log-in and verify the access request
+          example: https://www.example.com/ciba/login
+      required:
+      - enabled
+    ApiCustomDomainOutput:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: Domain of the application that can be offered for the application to be accessed from
+          example: myapp.com
+        updated_at:
+          format: date-time
+          type: string
+          description: Date the custom domain was last updated
+        status:
+          type: string
+          enum:
+          - pending
+          - verified
+          - error
+          description: The status of the custom domain validation process
+          default: pending
+        error:
+          type: string
+          description: The error message if the custom domain validation process failed
+      required:
+      - domain
+      - updated_at
+    TotpConfiguration:
+      type: object
+      properties:
+        failuresExpireIn:
+          type: number
+          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
+          default: 15
+          example: 15
+          minimum: 1
+          maximum: 525600
+        lockoutTiers:
+          description: Progressive lockout tiers based on failed attempts
+          type: array
+          items:
+            $ref: '#/components/schemas/LockoutTier'
+        algorithm:
+          type: string
+          enum:
+          - sha1
+          - sha256
+          - sha512
+          description: The algorithm used to generate the TOTP code
+          default: sha1
+        digits:
+          type: number
+          description: Number of digits in the generated TOTP code, must be 6 or 8
+          example: 6
+          default: 6
+        period:
+          type: number
+          description: Number of seconds in which the TOTP code is valid
+          example: 30
+          default: 30
+        window:
+          type: number
+          description: Number of windows to check for valid TOTP codes
+          example: 2
+          default: 1
+        issuer:
+          type: string
+          description: TOTP issuer
+          example: My Company
+        maxFailures:
+          type: number
+          description: Number of wrong TOTP attempts allowed before the passcode is invalidated. Must be between 1 and 20.
+          example: 3
+          default: 5
+          deprecated: true
+        lockoutDuration:
+          type: number
+          description: TOTP lockout duration (in minutes) after maximum attempts are reached
+          example: 15
+          default: 15
+          deprecated: true
+        maxTotpPerUser:
+          type: number
+          description: Maximum number of TOTP authenticators allowed per user. Must be between 1 and 50.
+          example: 1
+          default: 1
+    ApiCreateAppInput:
+      type: object
+      properties:
+        app_name:
+          type: string
+          description: Name of the application
+          example: My App
+        app_description:
+          type: string
+          description: Short description of the application
+        service_providers:
+          description: List of service provider IDs associated with this application
+          type: array
+          items:
+            type: string
+        allow_public_signup:
+          type: boolean
+          description: Determines if the application is allowed to request to create new users via login flows
+          default: false
+        authenticator_preferences:
+          description: Configures the application as the Authentication Hub of this tenant, allowing other apps to use it to perform a centralized login
+          allOf:
+          - $ref: '#/components/schemas/ApiAuthenticatorAppPreferences'
+        login_uri:
+          type: string
+          description: URI used to redirect the user to the login page of the application (when needed)
+          example: https://www.example.com/login
+        invite_member_uri:
+          type: string
+          description: URI used to redirect the member to the login page of the application (when needed)
+          example: https://www.example.com/login
+        invite_member_email_expiration_minutes:
+          type: number
+          description: Member invite email link expiration in minutes
+          default: 2880
+        refresh_token_invalidation_trigger_configuration:
+          description: Refresh token invalidation trigger configuration
+          allOf:
+          - $ref: '#/components/schemas/ApiRefreshTokenInvalidationTriggerConfiguration'
+        client_type:
+          type: string
+          enum:
+          - web
+          - native
+          description: Client type of the default client
+          default: web
+          deprecated: true
+        client_display_name:
+          type: string
+          description: Client name of the default client to display when needed
+          deprecated: true
+        client_description:
+          type: string
+          description: Short description of the default client
+          deprecated: true
+        first_client_authentication_protocol:
+          type: string
+          description: Defines the first client authentication protocol.
+          enum:
+          - oidc
+          - saml
+        first_client:
+          description: Creates first client for the application. Client can be OIDC or SAML, depending what is set in first_client_authentication_protocol
+          oneOf:
+          - $ref: '#/components/schemas/ApiCreateOidcClientInput'
+          - $ref: '#/components/schemas/ApiCreateSamlClientInput'
+        redirect_uris:
+          description: List of URI approved for redirects for your default client
+          example:
+          - https://www.example.com/login
+          deprecated: true
+          type: array
+          items:
+            type: string
+        logo:
+          type: string
+          description: URI of your application's logo, such as for email templates
+        resources:
+          description: List of resources IDs associated with the default client
+          deprecated: true
+          type: array
+          items:
+            type: string
+        device_authorization:
+          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628) of the default client
+          deprecated: true
+          allOf:
+          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
+        ciba_authorization:
+          description: CIBA authorization flow configuration of the default client
+          deprecated: true
+          allOf:
+          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
+        client_auth_method:
+          type: string
+          enum:
+          - client_secret_basic
+          - self_signed_tls_client_auth
+          - tls_client_auth
+          - none
+          - private_key_jwt
+          description: This field is deprecated- to configure pkce use "pkce" field instead
+          default: client_secret_basic
+          deprecated: true
+        subdomain:
+          type: string
+          description: Subdomain of Org admin portal that can be offered for organizations to manage their users (when needed)
+          example: myapp
+        custom_domain:
+          type: string
+          description: Domain of the application that can be offered for the application to be accessed from
+          example: myapp.com
+        pkce:
+          type: string
+          enum:
+          - enforcePkceInsteadOfClientCredentials
+          - enforcePkceAlongsideClientCredentials
+          - allowPkceAlongsideClientCredentials
+          description: PKCE configuration for client
+        should_delete_signing_key:
+          type: boolean
+          description: Determines whether the application-specific signing key should be deleted when disabled. If deleted, any tokens previously issued with this key will no longer be valid.
+          default: false
+        signing_key_enabled:
+          type: boolean
+          description: Determines if application specific signing key is enabled
+          default: false
+        invite_client_id:
+          type: string
+          description: Client used for the email magic link invitation flow
+      required:
+      - app_name
+      - client_display_name
+    NotFoundHttpError:
+      type: object
+      properties:
+        message:
+          type: string
+        error_code:
+          type: number
+          example: 404
+      required:
+      - message
+      - error_code
+    CreateTokenSigningKeyInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the signing key
+      required:
+      - name
+    ApiRefreshTokenInvalidationTriggerConfiguration:
+      type: object
+      properties:
+        invalidateOnMemberSuspension:
+          type: boolean
+          description: Determines if refresh tokens should be invalidated when a member is suspended
+          default: true
+        invalidateOnMemberPasswordReset:
+          type: boolean
+          description: Determines if refresh tokens should be invalidated when a member resets their password
+          default: true
+        invalidateOnMemberRoleUpdate:
+          type: boolean
+          description: Determines if refresh tokens should be invalidated when a member role is updated
+          default: true
+    WebAuthnApiConfiguration:
+      type: object
+      properties:
+        failuresExpireIn:
+          type: number
+          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
+          default: 15
+          example: 15
+          minimum: 1
+          maximum: 525600
+        lockoutTiers:
+          description: Progressive lockout tiers based on failed attempts
+          type: array
+          items:
+            $ref: '#/components/schemas/LockoutTier'
+        rpId:
+          type: string
+          description: Domain to which WebAuthn credentials are registered and used to authenticate (e.g., example.com)
+        rpWebOrigins:
+          description: A list of Web origins that will be used to request registration and authentication. The origin must match the domain of the RP ID, but may be a subdomain of the RP ID (e.g., https://login.example.com ). The origin must also include the HTTPS scheme and port (if relevant).
+          type: array
+          items:
+            type: string
+        rpMobileOrigins:
+          description: A list of mobile origins that will be used to request registration and authentication. The origin must match the domain of the RP ID.
+          type: array
+          items:
+            type: string
+        replaceExistingPasskey:
+          type: boolean
+          description: Set to true in order to replace the existing passkey. Default is False.
+          default: false
+        maxFailures:
+          type: number
+          description: Number of wrong attempts allowed before the passcode is invalidated. Must be between 1 and 20.
+          example: 3
+          default: 5
+          deprecated: true
+        lockoutDuration:
+          type: number
+          description: Lockout duration (in minutes) after maximum attempts are reached
+          example: 15
+          default: 15
+          deprecated: true
+        allowSyncedPasskeys:
+          type: boolean
+          description: Allow synced passkeys
+          default: true
+        enforceAttestation:
+          type: boolean
+          description: Enforce attestation for device-bound passkeys
+          default: false
+        attestationType:
+          type: string
+          enum:
+          - none
+          - indirect
+          - direct
+          description: Attestation conveyance preference (none, indirect, or direct)
+          default: none
+        aaguidAllowList:
+          description: List of allowed AAGUIDs (Authenticator Attestation GUIDs). If specified, only authenticators with these AAGUIDs will be accepted. Mutually exclusive with aaguidBlockList.
+          type: array
+          items:
+            type: string
+        aaguidBlockList:
+          description: List of blocked AAGUIDs (Authenticator Attestation GUIDs). Authenticators with these AAGUIDs will be rejected. Mutually exclusive with aaguidAllowList.
+          type: array
+          items:
+            type: string
+        rpOrigin:
+          type: string
+          deprecated: true
+          description: Web origin that will be used to request registration and authentication. The origin must match the domain of the RP ID, but may be a subdomain of the RP ID (e.g., https://login.example.com ). The origin must also include the HTTPS scheme and port (if relevant).
+        rpOrigins:
+          deprecated: true
+          description: Use rpWebOrigins or rpMobileOrigins instead
+          type: array
+          items:
+            type: string
+      required:
+      - rpId
+    ApiIdTokenEncryptionConfiguration:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Determines if ID token encryption is enabled for the client
+          default: false
+        jwks:
+          type: object
+          description: A set of JWK keys containing the public keys for the client to use for ID token encryption
+      required:
+      - enabled
+    PasswordConfiguration:
+      type: object
+      properties:
+        failuresExpireIn:
+          type: number
+          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
+          default: 15
+          example: 15
+          minimum: 1
+          maximum: 525600
+        lockoutTiers:
+          description: Progressive lockout tiers based on failed attempts
+          type: array
+          items:
+            $ref: '#/components/schemas/LockoutTier'
+        resetValidityMinutes:
+          type: number
+          description: Number of minutes until reset password token/OTP expires.
+          default: 5
+          example: 5
+          minimum: 5
+          maximum: 60
+        passwordComplexity:
+          type: number
+          description: Password complexity. Must be between 1 and 5.
+          default: 5
+          example: 5
+          minimum: 1
+          maximum: 5
+        passwordMinLength:
+          type: number
+          description: Minimum required length of the password.
+          default: 14
+          example: 14
+          minimum: 5
+          maximum: 14
+        blockPreviousPasswords:
+          type: number
+          description: Number of most recent passwords to block the user from setting as their new password.
+          default: 0
+          example: 0
+          minimum: 0
+          maximum: 20
+        checkHibp:
+          type: boolean
+          description: Check password updates against HIBP.
+          default: false
+        checkDictionary:
+          type: boolean
+          description: Check password updates against a predefined dictionary.
+          default: false
+        passwordExpiresIn:
+          type: number
+          description: Number of days until the password expires. Must be between 1 and 1096 days (3 years).
+          default: 90
+          example: 90
+          minimum: 1
+          maximum: 1096
+        ignoreExpiration:
+          type: boolean
+          description: Ignore password expiration. If true, the password will never expire.
+          default: false
+        maxPasswordFailures:
+          type: number
+          description: Number of wrong password attempts allowed before the user is suspended. Must be between 1 and 20.
+          default: 5
+          example: 5
+          minimum: 1
+          maximum: 20
+        passwordSuspensionDuration:
+          type: number
+          description: Number of minutes to suspend the user from authenticating using password after the maximum number of allowed failed attempts is exceeded. Must be between 1 and 525600 minutes (1 year).
+          default: 15
+          example: 15
+          minimum: 1
+          maximum: 525600
+        tempPasswordValidityHours:
+          type: number
+          description: Number of hours until temporary passwords are considered expired. Must be between 1 and 8760 hours (1 year).
+          example: 24
+          minimum: 1
+          maximum: 8760
+        message:
+          $ref: '#/components/schemas/MessageConfiguration'
+        requireMFA:
+          type: boolean
+          description: Require multi-factor authentication for password reset flows.
+          default: false
+        codeLength:
+          type: number
+          description: The length of the generated OTP code. Must be between 4 and 8.
+          example: 6
+        notifyOnPasswordUpdate:
+          type: boolean
+          default: false
+          description: Send email to end-user upon password update
+      required:
+      - resetValidityMinutes
+      - passwordComplexity
+      - passwordMinLength
+      - blockPreviousPasswords
+      - passwordExpiresIn
+      - message
+    ApiUpdateResourceInAppInput:
+      type: object
+      properties:
+        resource_ids:
+          type: array
+          items:
+            type: string
+          description: List of resources this application is allowed to explicitly request access to
+      required:
+      - resource_ids
+    UpdateTokenSigningKey:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the signing key
+          enum:
+          - signing
+          - disabled
+          - validating
+        name:
+          type: string
+          description: Name of the signing key
     ApiOidcClient:
       type: object
       properties:
@@ -1370,216 +3175,20 @@ components:
       - session_expiration
       - enforce_par
       - fapi_version_compliancy
-    RoleGroupsAndDefaultOrgRolesDto:
+    ApiAuthenticatorAppPreferences:
       type: object
       properties:
-        role_groups:
-          description: Role groups
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiRoleGroup'
-        default_organization_roles:
-          description: Default organization roles
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiRole'
-      required:
-      - role_groups
-      - default_organization_roles
-    FaceAuthenticatorConfiguration:
-      type: object
-      properties:
-        failuresExpireIn:
-          type: number
-          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
-          default: 15
-          example: 15
-          minimum: 1
-          maximum: 525600
-        lockoutTiers:
-          description: Progressive lockout tiers based on failed attempts
-          type: array
-          items:
-            $ref: '#/components/schemas/LockoutTier'
-        maxFailures:
-          type: number
-          description: Number of wrong Face Authenticator attempts allowed. Must be between 1 and 20.
-          example: 3
-          default: 5
-          deprecated: true
-        lockoutDuration:
-          type: number
-          description: Face Authenticator lockout duration (in minutes) after maximum attempts are reached
-          example: 15
-          default: 15
-          deprecated: true
-        saveImageEmbedding:
+        is_centralized:
           type: boolean
-          description: Enables saving the image embedding
-          default: true
-    ApiIdTokenEncryptionConfiguration:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Determines if ID token encryption is enabled for the client
+          description: Indicates whether to set the application as the Authentication Hub for this tenant
           default: false
-        jwks:
-          type: object
-          description: A set of JWK keys containing the public keys for the client to use for ID token encryption
-      required:
-      - enabled
-    ApiCreateAppInput:
-      type: object
-      properties:
-        app_name:
-          type: string
-          description: Name of the application
-          example: My App
-        app_description:
-          type: string
-          description: Short description of the application
-        service_providers:
-          description: List of service provider IDs associated with this application
-          type: array
-          items:
-            type: string
-        allow_public_signup:
-          type: boolean
-          description: Determines if the application is allowed to request to create new users via login flows
-          default: false
-        authenticator_preferences:
-          description: Configures the application as the Authentication Hub of this tenant, allowing other apps to use it to perform a centralized login
-          allOf:
-          - $ref: '#/components/schemas/ApiAuthenticatorAppPreferences'
         login_uri:
           type: string
-          description: URI used to redirect the user to the login page of the application (when needed)
+          description: URI of the application that will initiate an authentication flow when centralized login is requested
           example: https://www.example.com/login
-        invite_member_uri:
-          type: string
-          description: URI used to redirect the member to the login page of the application (when needed)
-          example: https://www.example.com/login
-        invite_member_email_expiration_minutes:
-          type: number
-          description: Member invite email link expiration in minutes
-          default: 2880
-        refresh_token_invalidation_trigger_configuration:
-          description: Refresh token invalidation trigger configuration
-          allOf:
-          - $ref: '#/components/schemas/ApiRefreshTokenInvalidationTriggerConfiguration'
-        client_type:
-          type: string
-          enum:
-          - web
-          - native
-          description: Client type of the default client
-          default: web
-          deprecated: true
-        client_display_name:
-          type: string
-          description: Client name of the default client to display when needed
-          deprecated: true
-        client_description:
-          type: string
-          description: Short description of the default client
-          deprecated: true
-        first_client_authentication_protocol:
-          type: string
-          description: Defines the first client authentication protocol.
-          enum:
-          - oidc
-          - saml
-        first_client:
-          description: Creates first client for the application. Client can be OIDC or SAML, depending what is set in first_client_authentication_protocol
-          oneOf:
-          - $ref: '#/components/schemas/ApiCreateOidcClientInput'
-          - $ref: '#/components/schemas/ApiCreateSamlClientInput'
-        redirect_uris:
-          description: List of URI approved for redirects for your default client
-          example:
-          - https://www.example.com/login
-          deprecated: true
-          type: array
-          items:
-            type: string
-        logo:
-          type: string
-          description: URI of your application's logo, such as for email templates
-        resources:
-          description: List of resources IDs associated with the default client
-          deprecated: true
-          type: array
-          items:
-            type: string
-        device_authorization:
-          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628) of the default client
-          deprecated: true
-          allOf:
-          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
-        ciba_authorization:
-          description: CIBA authorization flow configuration of the default client
-          deprecated: true
-          allOf:
-          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
-        client_auth_method:
-          type: string
-          enum:
-          - client_secret_basic
-          - self_signed_tls_client_auth
-          - tls_client_auth
-          - none
-          - private_key_jwt
-          description: This field is deprecated- to configure pkce use "pkce" field instead
-          default: client_secret_basic
-          deprecated: true
-        subdomain:
-          type: string
-          description: Subdomain of Org admin portal that can be offered for organizations to manage their users (when needed)
-          example: myapp
-        custom_domain:
-          type: string
-          description: Domain of the application that can be offered for the application to be accessed from
-          example: myapp.com
-        pkce:
-          type: string
-          enum:
-          - enforcePkceInsteadOfClientCredentials
-          - enforcePkceAlongsideClientCredentials
-          - allowPkceAlongsideClientCredentials
-          description: PKCE configuration for client
-        should_delete_signing_key:
-          type: boolean
-          description: Determines whether the application-specific signing key should be deleted when disabled. If deleted, any tokens previously issued with this key will no longer be valid.
-          default: false
-        signing_key_enabled:
-          type: boolean
-          description: Determines if application specific signing key is enabled
-          default: false
-        invite_client_id:
-          type: string
-          description: Client used for the email magic link invitation flow
       required:
-      - app_name
-      - client_display_name
-    ClientSecretConfiguration:
-      type: object
-      properties:
-        clientId:
-          type: string
-          description: Client ID retrieved from the identity provider
-        clientSecret:
-          type: string
-          description: Client Secret retrieved from the identity provider
-        redirectUris:
-          description: List of URIs approved for redirects for your client
-          example:
-          - https://www.example.com/login
-          type: array
-          items:
-            type: string
-      required:
-      - clientId
+      - is_centralized
+      - login_uri
     ApiUpdateSamlClientInput:
       type: object
       properties:
@@ -1734,294 +3343,33 @@ components:
         use_centralized_login:
           type: boolean
           description: When enabled, SAML SP-initiated SSO redirects to the tenant centralized hub application instead of hosted login
-    ApiUpdateResourceInAppInput:
-      type: object
-      properties:
-        resource_ids:
-          type: array
-          items:
-            type: string
-          description: List of resources this application is allowed to explicitly request access to
-      required:
-      - resource_ids
-    ApiRoleGroup:
-      type: object
-      properties:
-        group_id:
-          type: string
-          description: Group ID
-        name:
-          type: string
-          description: Group name
-        description:
-          type: string
-          description: Group description
-        roles:
-          description: Group's roles
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiRole'
-        display_name:
-          type: string
-          description: Role group's display name
-      required:
-      - group_id
-      - name
-      - roles
-    ApiExternalCommunication:
-      type: object
-      properties:
-        language:
-          type: string
-          enum:
-          - en
-          - es
-          - pt
-          - fr
-          - ja
-          - fr-CA
-          description: Language configuration for the external communication. The default language is english.
-          default: en
-    NotFoundHttpError:
+    IdentifierIsTakenHttpError:
       type: object
       properties:
         message:
           type: string
         error_code:
           type: number
-          example: 404
+        ts_error_code:
+          type: string
       required:
       - message
       - error_code
-    RolesAndRoleGroupsInputDto:
+      - ts_error_code
+    MessageConfiguration:
       type: object
       properties:
-        role_group_ids:
-          description: Role group ids
-          type: array
-          items:
-            type: string
-        role_ids:
-          description: Role ids
-          type: array
-          items:
-            type: string
-    ApiUpdateAppInput:
-      type: object
-      properties:
-        app_name:
+        primaryColor:
           type: string
-          description: Name of the application
-          example: My App
-        app_description:
+          description: Primary color of the email, specified as a Hex color
+        from:
           type: string
-          description: Short description of the application
-        service_providers:
-          description: List of service provider IDs associated with this application
-          type: array
-          items:
-            type: string
-        allow_public_signup:
-          type: boolean
-          description: Determines if the application is allowed to request to create new users via login flows
-          default: false
-        authenticator_preferences:
-          description: Configures the application as the Authentication Hub of this tenant, allowing other apps to use it to perform a centralized login
-          allOf:
-          - $ref: '#/components/schemas/ApiAuthenticatorAppPreferences'
-        login_uri:
+          description: Origin of the email message
+        subject:
           type: string
-          description: URI used to redirect the user to the login page of the application (when needed)
-          example: https://www.example.com/login
-        invite_member_uri:
-          type: string
-          description: URI used to redirect the member to the login page of the application (when needed)
-          example: https://www.example.com/login
-        invite_member_email_expiration_minutes:
-          type: number
-          description: Member invite email link expiration in minutes
-          default: 2880
-        refresh_token_invalidation_trigger_configuration:
-          description: Refresh token invalidation trigger configuration
-          allOf:
-          - $ref: '#/components/schemas/ApiRefreshTokenInvalidationTriggerConfiguration'
-        client_type:
-          type: string
-          enum:
-          - web
-          - native
-          description: Client type of the default client
-          default: web
-          deprecated: true
-        client_display_name:
-          type: string
-          description: Client name of the default client to display when needed
-          deprecated: true
-        client_description:
-          type: string
-          description: Short description of the default client
-          deprecated: true
-        first_client_authentication_protocol:
-          type: string
-          description: Defines the first client authentication protocol.
-          enum:
-          - oidc
-          - saml
-        first_client:
-          description: Creates first client for the application. Client can be OIDC or SAML, depending what is set in first_client_authentication_protocol
-          oneOf:
-          - $ref: '#/components/schemas/ApiCreateOidcClientInput'
-          - $ref: '#/components/schemas/ApiCreateSamlClientInput'
-        redirect_uris:
-          description: List of URI approved for redirects for your default client
-          example:
-          - https://www.example.com/login
-          deprecated: true
-          type: array
-          items:
-            type: string
-        logo:
-          type: string
-          description: URI of your application's logo, such as for email templates
-        resources:
-          description: List of resources IDs associated with the default client
-          deprecated: true
-          type: array
-          items:
-            type: string
-        device_authorization:
-          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628) of the default client
-          deprecated: true
-          allOf:
-          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
-        ciba_authorization:
-          description: CIBA authorization flow configuration of the default client
-          deprecated: true
-          allOf:
-          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
-        client_auth_method:
-          type: string
-          enum:
-          - client_secret_basic
-          - self_signed_tls_client_auth
-          - tls_client_auth
-          - none
-          - private_key_jwt
-          description: This field is deprecated- to configure pkce use "pkce" field instead
-          default: client_secret_basic
-          deprecated: true
-        subdomain:
-          type: string
-          description: Subdomain of Org admin portal that can be offered for organizations to manage their users (when needed)
-          example: myapp
-        custom_domain:
-          type: string
-          description: Domain of the application that can be offered for the application to be accessed from
-          example: myapp.com
-        pkce:
-          type: string
-          enum:
-          - enforcePkceInsteadOfClientCredentials
-          - enforcePkceAlongsideClientCredentials
-          - allowPkceAlongsideClientCredentials
-          description: PKCE configuration for client
-        should_delete_signing_key:
-          type: boolean
-          description: Determines whether the application-specific signing key should be deleted when disabled. If deleted, any tokens previously issued with this key will no longer be valid.
-          default: false
-        signing_key_enabled:
-          type: boolean
-          description: Determines if application specific signing key is enabled
-          default: false
-        invite_client_id:
-          type: string
-          description: Client used for the email magic link invitation flow
-    AppleConfiguration:
-      type: object
-      properties:
-        clientId:
-          type: string
-          description: Services ID retrieved from Apple
-        clientSecret:
-          type: string
-          description: Client Secret Signing Key retrieved from Apple
-        redirectUris:
-          description: List of URIs approved for redirects for your client
-          example:
-          - https://www.example.com/login
-          type: array
-          items:
-            type: string
-        appleTeamId:
-          type: string
-          description: Apple Team ID
-        keyId:
-          type: string
-          description: Apple Key ID
+          description: Subject of the email message
       required:
-      - clientId
-      - appleTeamId
-      - keyId
-    EmailOtpConfiguration:
-      type: object
-      properties:
-        expiresIn:
-          type: number
-          description: Number of minutes until the OTP expires
-        lockoutDuration:
-          type: number
-          description: OTP lockout duration (in minutes) after maximum attempts are reached
-          example: 15
-        maxFailures:
-          type: number
-          description: Number of wrong OTP attempts allowed before the passcode is invalidated. Must be between 1 and 20.
-          example: 3
-        codeLength:
-          type: number
-          description: The length of the generated OTP code. Must be between 4 and 8.
-          example: 6
-        crossClientsAllowed:
-          type: boolean
-          description: Determines if OTP authentication is allowed across different clients within the same application
-          default: false
-        message:
-          $ref: '#/components/schemas/MessageConfiguration'
-      required:
-      - expiresIn
-      - maxFailures
-      - message
-    ApiDeviceAuthConfiguration:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Determines if the client is allowed to use the OAuth device authorization flow
-          default: false
-        approval_uri:
-          type: string
-          description: The URI of the page that allows the user to approve the access request
-          example: https://www.example.com/device/approval
-        success_uri:
-          type: string
-          description: Callback URI that receives an indication of whether the end-user authentication was completed successfully.
-          example: https://www.example.com/device/complete
-        input_uri:
-          type: string
-          description: The URI of the page that allows the user to enter the code
-          example: https://www.example.com/device/start
-      required:
-      - enabled
-      - approval_uri
-      - success_uri
-      - input_uri
-    CreateTokenSigningKeyInput:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the signing key
-      required:
-      - name
+      - primaryColor
     ApiSamlClient:
       type: object
       properties:
@@ -2222,20 +3570,68 @@ components:
       - x509_certificate
       - sp_name_id_type
       - sign_assertion
-    ApiAuthenticatorAppPreferences:
+    ApiLoginPreferences:
       type: object
       properties:
-        is_centralized:
-          type: boolean
-          description: Indicates whether to set the application as the Authentication Hub for this tenant
-          default: false
-        login_uri:
-          type: string
-          description: URI of the application that will initiate an authentication flow when centralized login is requested
-          example: https://www.example.com/login
+        auth_methods:
+          description: Login preferences
+          allOf:
+          - $ref: '#/components/schemas/ApiAuthMethods'
       required:
-      - is_centralized
-      - login_uri
+      - auth_methods
+    ApiTokenExpirationConfiguration:
+      type: object
+      properties:
+        access_token_ttl:
+          type: number
+          description: Access token time-to-live
+        refresh_token_ttl:
+          type: number
+          description: Refresh token time-to-live
+        max_refresh_rotate:
+          type: number
+          description: Maximum time the refresh token can be rotated
+    EmailConfiguration:
+      type: object
+      properties:
+        expiresIn:
+          type: number
+          description: Number of minutes until the email link/code expires
+        linksPerUser:
+          type: number
+          description: Allowed magic links to send a user per minute
+        message:
+          $ref: '#/components/schemas/MessageConfiguration'
+      required:
+      - expiresIn
+      - linksPerUser
+      - message
+    AppleConfiguration:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Services ID retrieved from Apple
+        clientSecret:
+          type: string
+          description: Client Secret Signing Key retrieved from Apple
+        redirectUris:
+          description: List of URIs approved for redirects for your client
+          example:
+          - https://www.example.com/login
+          type: array
+          items:
+            type: string
+        appleTeamId:
+          type: string
+          description: Apple Team ID
+        keyId:
+          type: string
+          description: Apple Key ID
+      required:
+      - clientId
+      - appleTeamId
+      - keyId
     PushConfiguration:
       type: object
       properties:
@@ -2252,558 +3648,38 @@ components:
           description: FCM configuration
           allOf:
           - $ref: '#/components/schemas/FcmConfiguration'
-    ApiAppWithoutLogo:
+    FcmConfiguration:
       type: object
       properties:
-        app_id:
-          type: string
-          description: Application ID
-        tenant_id:
-          type: string
-          description: Tenant ID
-        app_name:
-          type: string
-          description: Application name displayed in the Admin Portal
-        app_description:
-          type: string
-          description: Short description of your application, displayed in the Admin Portal
-        client_type:
-          type: string
-          enum:
-          - web
-          - native
-          description: Type of the default client
-          default: web
-          deprecated: true
-        client_id:
-          type: string
-          description: Client ID of the default client used for API requests
-          deprecated: true
-        client_display_name:
-          type: string
-          description: Client name of the default client to display when needed
-          deprecated: true
-        client_description:
-          type: string
-          description: Short description of the default client
-          deprecated: true
-        client_secret:
-          type: string
-          description: Client secret of the default client used to obtain tokens for API authorization
-          deprecated: true
-        redirect_uris:
-          description: List of URI approved for redirects for your default client
-          deprecated: true
-          type: array
-          items:
-            type: string
-        login_preferences:
-          $ref: '#/components/schemas/ApiLoginPreferences'
-        created_at:
-          format: date-time
-          type: string
-          description: Date the application was created
-        created_by:
-          type: string
-          description: The user that created the application
-        updated_at:
-          format: date-time
-          type: string
-          description: Date the application was last updated
-        resources:
-          description: List of resources the default client is allowed to explicitly request access to
-          deprecated: true
-          type: array
-          items:
-            type: string
-        service_providers:
-          description: List of service providers this application is allowed to explicitly redirect to
-          type: array
-          items:
-            type: string
-        authenticator_preferences:
-          description: Configures the application as the Authentication Hub of this tenant, allowing other apps to use it to perform a centralized login.
-          allOf:
-          - $ref: '#/components/schemas/ApiAuthenticatorAppPreferences'
-        allow_public_signup:
-          type: boolean
-          description: Determines if the application is allowed to request to create new users via login flows
-        client_auth_method:
-          type: string
-          enum:
-          - client_secret_basic
-          - self_signed_tls_client_auth
-          - tls_client_auth
-          - none
-          - private_key_jwt
-          description: This field is deprecated- to configure pkce use "pkce" field instead
-          deprecated: true
-        pkce:
-          type: string
-          enum:
-          - enforcePkceInsteadOfClientCredentials
-          - enforcePkceAlongsideClientCredentials
-          - allowPkceAlongsideClientCredentials
-          description: PKCE configuration
-        device_authorization:
-          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628) of the default client
-          deprecated: true
-          allOf:
-          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
-        ciba_authorization:
-          description: CIBA authorization flow configuration of the default client
-          deprecated: true
-          allOf:
-          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
-        password_sharing_group_id:
-          type: string
-          description: If the app has opted in to password sharing, this identifies the group of apps that it shares passwords with.
-        login_uri:
-          type: string
-          description: URI used to redirect the user to the login page of the application (when needed)
-          example: https://www.example.com/login
-        invite_member_uri:
-          type: string
-          description: URI used to redirect the member to the login page of the application (when needed)
-          example: https://www.example.com/login
-        invite_client_id:
-          type: string
-          description: Client used for the email magic link invitation flow
-        subdomain:
-          type: string
-          description: Subdomain of Org admin portal that can be offered for organizations to manage their users (when needed)
-          example: myapp
-        invite_member_email_expiration_minutes:
-          type: number
-          description: Member invite email link expiration in minutes
-          default: 2880
-        custom_domain:
-          description: Custom domain of the application that can be offered for the application to be accessed from
-          allOf:
-          - $ref: '#/components/schemas/ApiCustomDomainOutput'
-        external_communication:
-          description: External communication configuration for the application
-          allOf:
-          - $ref: '#/components/schemas/ApiExternalCommunication'
-        signing_key_enabled:
-          type: boolean
-          description: Determines if application specific signing key is enabled
-        refresh_token_invalidation_trigger_configuration:
-          description: Refresh token invalidation trigger configuration
-          allOf:
-          - $ref: '#/components/schemas/ApiRefreshTokenInvalidationTriggerConfiguration'
-        application_type:
-          type: string
-          enum:
-          - ido
-          - basic
-          description: Application type
+        key:
+          type: object
+          description: FCM key
       required:
-      - app_id
-      - tenant_id
-      - app_name
-      - app_description
-      - login_preferences
-      - created_at
-      - created_by
-      - updated_at
-      - service_providers
-      - authenticator_preferences
-      - allow_public_signup
-    ApiCustomDomainOutput:
-      type: object
-      properties:
-        domain:
-          type: string
-          description: Domain of the application that can be offered for the application to be accessed from
-          example: myapp.com
-        updated_at:
-          format: date-time
-          type: string
-          description: Date the custom domain was last updated
-        status:
-          type: string
-          enum:
-          - pending
-          - verified
-          - error
-          description: The status of the custom domain validation process
-          default: pending
-        error:
-          type: string
-          description: The error message if the custom domain validation process failed
-      required:
-      - domain
-      - updated_at
-    ApiRole:
-      type: object
-      properties:
-        role_id:
-          type: string
-          description: Role ID
-        role_name:
-          type: string
-          description: Role name
-        permissions:
-          description: Role permissions
-          type: array
-          items:
-            type: string
-        app_id:
-          type: string
-          description: Role's app id
-        description:
-          type: string
-          description: Role's description
-        display_name:
-          type: string
-          description: Role's display name
-      required:
-      - role_id
-      - role_name
-    TotpConfiguration:
-      type: object
-      properties:
-        failuresExpireIn:
-          type: number
-          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
-          default: 15
-          example: 15
-          minimum: 1
-          maximum: 525600
-        lockoutTiers:
-          description: Progressive lockout tiers based on failed attempts
-          type: array
-          items:
-            $ref: '#/components/schemas/LockoutTier'
-        algorithm:
-          type: string
-          enum:
-          - sha1
-          - sha256
-          - sha512
-          description: The algorithm used to generate the TOTP code
-          default: sha1
-        digits:
-          type: number
-          description: Number of digits in the generated TOTP code, must be 6 or 8
-          example: 6
-          default: 6
-        period:
-          type: number
-          description: Number of seconds in which the TOTP code is valid
-          example: 30
-          default: 30
-        window:
-          type: number
-          description: Number of windows to check for valid TOTP codes
-          example: 2
-          default: 1
-        issuer:
-          type: string
-          description: TOTP issuer
-          example: My Company
-        maxFailures:
-          type: number
-          description: Number of wrong TOTP attempts allowed before the passcode is invalidated. Must be between 1 and 20.
-          example: 3
-          default: 5
-          deprecated: true
-        lockoutDuration:
-          type: number
-          description: TOTP lockout duration (in minutes) after maximum attempts are reached
-          example: 15
-          default: 15
-          deprecated: true
-        maxTotpPerUser:
-          type: number
-          description: Maximum number of TOTP authenticators allowed per user. Must be between 1 and 50.
-          example: 1
-          default: 1
-    IdentifierIsTakenHttpError:
-      type: object
-      properties:
-        message:
-          type: string
-        error_code:
-          type: number
-        ts_error_code:
-          type: string
-      required:
-      - message
-      - error_code
-      - ts_error_code
-    PinAuthenticatorConfiguration:
-      type: object
-      properties:
-        failuresExpireIn:
-          type: number
-          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
-          default: 15
-          example: 15
-          minimum: 1
-          maximum: 525600
-        lockoutTiers:
-          description: Progressive lockout tiers based on failed attempts
-          type: array
-          items:
-            $ref: '#/components/schemas/LockoutTier'
-        maxFailures:
-          type: number
-          description: Number of wrong PIN Authenticator attempts allowed before the passcode is invalidated. Must be between 1 and 20.
-          example: 3
-          default: 5
-          deprecated: true
-        lockoutDuration:
-          type: number
-          description: PIN Authenticator lockout duration (in minutes) after maximum attempts are reached
-          example: 15
-          default: 15
-          deprecated: true
-    ApiRefreshTokenInvalidationTriggerConfiguration:
-      type: object
-      properties:
-        invalidateOnMemberSuspension:
-          type: boolean
-          description: Determines if refresh tokens should be invalidated when a member is suspended
-          default: true
-        invalidateOnMemberPasswordReset:
-          type: boolean
-          description: Determines if refresh tokens should be invalidated when a member resets their password
-          default: true
-        invalidateOnMemberRoleUpdate:
-          type: boolean
-          description: Determines if refresh tokens should be invalidated when a member role is updated
-          default: true
-    ApiTokenSigningKey:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the signing key
-        app_id:
-          type: string
-          description: Application ID
-        tenant_id:
-          type: string
-          description: Tenant ID
-        kid:
-          type: string
-          description: KID of the signing key
-        name:
-          type: string
-          description: Name of the signing key
-        status:
-          type: string
-          description: Status of the signing key
-          enum:
-          - signing
-          - disabled
-          - validating
-        source:
-          type: string
-          description: Source of the signing key
-          enum:
-          - global
-          - mosaic
-          - uploaded
-        created_at:
-          format: date-time
-          type: string
-          description: Date the signing key was created
-        updated_at:
-          format: date-time
-          type: string
-          description: Date the signing key was updated
-        deleted_at:
-          format: date-time
-          type: string
-          description: Date the signing key was deleted
-      required:
-      - id
-      - app_id
-      - tenant_id
-      - kid
-      - name
-      - status
-      - source
-      - created_at
-      - updated_at
-      - deleted_at
-    ApiCibaAuthConfiguration:
+      - key
+    ApiDeviceAuthConfiguration:
       type: object
       properties:
         enabled:
           type: boolean
-          description: Determines if the client is allowed to use the OAuth CIBA authorization flow
+          description: Determines if the client is allowed to use the OAuth device authorization flow
           default: false
-        login_uri:
+        approval_uri:
           type: string
-          description: The URI of the page that allows the user to log-in and verify the access request
-          example: https://www.example.com/ciba/login
+          description: The URI of the page that allows the user to approve the access request
+          example: https://www.example.com/device/approval
+        success_uri:
+          type: string
+          description: Callback URI that receives an indication of whether the end-user authentication was completed successfully.
+          example: https://www.example.com/device/complete
+        input_uri:
+          type: string
+          description: The URI of the page that allows the user to enter the code
+          example: https://www.example.com/device/start
       required:
       - enabled
-    WebAuthnApiConfiguration:
-      type: object
-      properties:
-        failuresExpireIn:
-          type: number
-          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
-          default: 15
-          example: 15
-          minimum: 1
-          maximum: 525600
-        lockoutTiers:
-          description: Progressive lockout tiers based on failed attempts
-          type: array
-          items:
-            $ref: '#/components/schemas/LockoutTier'
-        rpId:
-          type: string
-          description: Domain to which WebAuthn credentials are registered and used to authenticate (e.g., example.com)
-        rpWebOrigins:
-          description: A list of Web origins that will be used to request registration and authentication. The origin must match the domain of the RP ID, but may be a subdomain of the RP ID (e.g., https://login.example.com ). The origin must also include the HTTPS scheme and port (if relevant).
-          type: array
-          items:
-            type: string
-        rpMobileOrigins:
-          description: A list of mobile origins that will be used to request registration and authentication. The origin must match the domain of the RP ID.
-          type: array
-          items:
-            type: string
-        replaceExistingPasskey:
-          type: boolean
-          description: Set to true in order to replace the existing passkey. Default is False.
-          default: false
-        maxFailures:
-          type: number
-          description: Number of wrong attempts allowed before the passcode is invalidated. Must be between 1 and 20.
-          example: 3
-          default: 5
-          deprecated: true
-        lockoutDuration:
-          type: number
-          description: Lockout duration (in minutes) after maximum attempts are reached
-          example: 15
-          default: 15
-          deprecated: true
-        allowSyncedPasskeys:
-          type: boolean
-          description: Allow synced passkeys
-          default: true
-        enforceAttestation:
-          type: boolean
-          description: Enforce attestation for device-bound passkeys
-          default: false
-        attestationType:
-          type: string
-          enum:
-          - none
-          - indirect
-          - direct
-          description: Attestation conveyance preference (none, indirect, or direct)
-          default: none
-        aaguidAllowList:
-          description: List of allowed AAGUIDs (Authenticator Attestation GUIDs). If specified, only authenticators with these AAGUIDs will be accepted. Mutually exclusive with aaguidBlockList.
-          type: array
-          items:
-            type: string
-        aaguidBlockList:
-          description: List of blocked AAGUIDs (Authenticator Attestation GUIDs). Authenticators with these AAGUIDs will be rejected. Mutually exclusive with aaguidAllowList.
-          type: array
-          items:
-            type: string
-        rpOrigin:
-          type: string
-          deprecated: true
-          description: Web origin that will be used to request registration and authentication. The origin must match the domain of the RP ID, but may be a subdomain of the RP ID (e.g., https://login.example.com ). The origin must also include the HTTPS scheme and port (if relevant).
-        rpOrigins:
-          deprecated: true
-          description: Use rpWebOrigins or rpMobileOrigins instead
-          type: array
-          items:
-            type: string
-      required:
-      - rpId
-    EmailConfiguration:
-      type: object
-      properties:
-        expiresIn:
-          type: number
-          description: Number of minutes until the email link/code expires
-        linksPerUser:
-          type: number
-          description: Allowed magic links to send a user per minute
-        message:
-          $ref: '#/components/schemas/MessageConfiguration'
-      required:
-      - expiresIn
-      - linksPerUser
-      - message
-    APNConfiguration:
-      type: object
-      properties:
-        key:
-          type: string
-          description: APN key
-        keyId:
-          type: string
-          description: APN key id
-        teamId:
-          type: string
-          description: APN team id
-        bundle:
-          type: string
-          description: APN bundle
-        isProduction:
-          type: boolean
-          description: Is Production APN Environment
-      required:
-      - key
-      - keyId
-      - teamId
-      - bundle
-    ApiClientAuthenticationConfiguration:
-      type: object
-      properties:
-        method:
-          type: string
-          enum:
-          - client_secret_basic
-          - self_signed_tls_client_auth
-          - tls_client_auth
-          - private_key_jwt
-          description: Client authentication method
-          default: client_secret_basic
-        tls_client_auth:
-          description: TLS client authentication configuration for mTLS
-          allOf:
-          - $ref: '#/components/schemas/TlsClientAuth'
-        isMtlsCertTokenBound:
-          type: boolean
-          description: States whether to bind the access token to the client certificate when mTLS is enabled
-        jwks:
-          type: object
-          description: A set of JWK keys containing the public keys for the Client to use for authentication
-      required:
-      - method
-    LockoutTier:
-      type: object
-      properties:
-        attempts:
-          type: number
-          description: Number of failed attempts before this tier is triggered
-          example: 3
-          minimum: 1
-        duration:
-          type: number
-          description: Lockout duration in minutes for this tier
-          example: 15
-          minimum: 1
-          maximum: 525600
-      required:
-      - attempts
-      - duration
+      - approval_uri
+      - success_uri
+      - input_uri
     ApiAuthMethods:
       type: object
       properties:
@@ -2863,540 +3739,75 @@ components:
           description: Face authenticator configuration
           allOf:
           - $ref: '#/components/schemas/FaceAuthenticatorConfiguration'
-    FcmConfiguration:
+    ApiTokenSigningKey:
       type: object
       properties:
-        key:
-          type: object
-          description: FCM key
-      required:
-      - key
-    ApiApp:
-      type: object
-      properties:
+        id:
+          type: string
+          description: ID of the signing key
         app_id:
           type: string
           description: Application ID
         tenant_id:
           type: string
           description: Tenant ID
-        app_name:
+        kid:
           type: string
-          description: Application name displayed in the Admin Portal
-        app_description:
+          description: KID of the signing key
+        name:
           type: string
-          description: Short description of your application, displayed in the Admin Portal
-        client_type:
+          description: Name of the signing key
+        status:
           type: string
+          description: Status of the signing key
           enum:
-          - web
-          - native
-          description: Type of the default client
-          default: web
-          deprecated: true
-        logo:
+          - signing
+          - disabled
+          - validating
+        source:
           type: string
-          description: URI of your application's logo, such as for email templates
-        client_id:
-          type: string
-          description: Client ID of the default client used for API requests
-          deprecated: true
-        client_display_name:
-          type: string
-          description: Client name of the default client to display when needed
-          deprecated: true
-        client_description:
-          type: string
-          description: Short description of the default client
-          deprecated: true
-        client_secret:
-          type: string
-          description: Client secret of the default client used to obtain tokens for API authorization
-          deprecated: true
-        redirect_uris:
-          description: List of URI approved for redirects for your default client
-          deprecated: true
-          type: array
-          items:
-            type: string
-        login_preferences:
-          $ref: '#/components/schemas/ApiLoginPreferences'
+          description: Source of the signing key
+          enum:
+          - global
+          - mosaic
+          - uploaded
         created_at:
           format: date-time
           type: string
-          description: Date the application was created
-        created_by:
-          type: string
-          description: The user that created the application
+          description: Date the signing key was created
         updated_at:
           format: date-time
           type: string
-          description: Date the application was last updated
-        resources:
-          description: List of resources the default client is allowed to explicitly request access to
-          deprecated: true
-          type: array
-          items:
-            type: string
-        service_providers:
-          description: List of service providers this application is allowed to explicitly redirect to
-          type: array
-          items:
-            type: string
-        authenticator_preferences:
-          description: Configures the application as the Authentication Hub of this tenant, allowing other apps to use it to perform a centralized login.
-          allOf:
-          - $ref: '#/components/schemas/ApiAuthenticatorAppPreferences'
-        allow_public_signup:
-          type: boolean
-          description: Determines if the application is allowed to request to create new users via login flows
-        client_auth_method:
+          description: Date the signing key was updated
+        deleted_at:
+          format: date-time
           type: string
-          enum:
-          - client_secret_basic
-          - self_signed_tls_client_auth
-          - tls_client_auth
-          - none
-          - private_key_jwt
-          description: This field is deprecated- to configure pkce use "pkce" field instead
-          deprecated: true
-        pkce:
-          type: string
-          enum:
-          - enforcePkceInsteadOfClientCredentials
-          - enforcePkceAlongsideClientCredentials
-          - allowPkceAlongsideClientCredentials
-          description: PKCE configuration
-        device_authorization:
-          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628) of the default client
-          deprecated: true
-          allOf:
-          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
-        ciba_authorization:
-          description: CIBA authorization flow configuration of the default client
-          deprecated: true
-          allOf:
-          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
-        password_sharing_group_id:
-          type: string
-          description: If the app has opted in to password sharing, this identifies the group of apps that it shares passwords with.
-        login_uri:
-          type: string
-          description: URI used to redirect the user to the login page of the application (when needed)
-          example: https://www.example.com/login
-        invite_member_uri:
-          type: string
-          description: URI used to redirect the member to the login page of the application (when needed)
-          example: https://www.example.com/login
-        invite_client_id:
-          type: string
-          description: Client used for the email magic link invitation flow
-        subdomain:
-          type: string
-          description: Subdomain of Org admin portal that can be offered for organizations to manage their users (when needed)
-          example: myapp
-        invite_member_email_expiration_minutes:
-          type: number
-          description: Member invite email link expiration in minutes
-          default: 2880
-        custom_domain:
-          description: Custom domain of the application that can be offered for the application to be accessed from
-          allOf:
-          - $ref: '#/components/schemas/ApiCustomDomainOutput'
-        external_communication:
-          description: External communication configuration for the application
-          allOf:
-          - $ref: '#/components/schemas/ApiExternalCommunication'
-        signing_key_enabled:
-          type: boolean
-          description: Determines if application specific signing key is enabled
-        refresh_token_invalidation_trigger_configuration:
-          description: Refresh token invalidation trigger configuration
-          allOf:
-          - $ref: '#/components/schemas/ApiRefreshTokenInvalidationTriggerConfiguration'
-        application_type:
-          type: string
-          enum:
-          - ido
-          - basic
-          description: Application type
+          description: Date the signing key was deleted
       required:
+      - id
       - app_id
       - tenant_id
-      - app_name
-      - app_description
-      - logo
-      - login_preferences
+      - kid
+      - name
+      - status
+      - source
       - created_at
-      - created_by
       - updated_at
-      - service_providers
-      - authenticator_preferences
-      - allow_public_signup
-    ApiLoginPreferences:
+      - deleted_at
+    ApiExternalCommunication:
       type: object
       properties:
-        auth_methods:
-          description: Login preferences
-          allOf:
-          - $ref: '#/components/schemas/ApiAuthMethods'
-      required:
-      - auth_methods
-    PasswordConfiguration:
-      type: object
-      properties:
-        failuresExpireIn:
-          type: number
-          description: Number of minutes until previous failed attempts are considered expired. Must be between 1 and 525600 minutes (1 year).
-          default: 15
-          example: 15
-          minimum: 1
-          maximum: 525600
-        lockoutTiers:
-          description: Progressive lockout tiers based on failed attempts
-          type: array
-          items:
-            $ref: '#/components/schemas/LockoutTier'
-        resetValidityMinutes:
-          type: number
-          description: Number of minutes until reset password token/OTP expires.
-          default: 5
-          example: 5
-          minimum: 5
-          maximum: 60
-        passwordComplexity:
-          type: number
-          description: Password complexity. Must be between 1 and 5.
-          default: 5
-          example: 5
-          minimum: 1
-          maximum: 5
-        passwordMinLength:
-          type: number
-          description: Minimum required length of the password.
-          default: 14
-          example: 14
-          minimum: 5
-          maximum: 14
-        blockPreviousPasswords:
-          type: number
-          description: Number of most recent passwords to block the user from setting as their new password.
-          default: 0
-          example: 0
-          minimum: 0
-          maximum: 20
-        checkHibp:
-          type: boolean
-          description: Check password updates against HIBP.
-          default: false
-        checkDictionary:
-          type: boolean
-          description: Check password updates against a predefined dictionary.
-          default: false
-        passwordExpiresIn:
-          type: number
-          description: Number of days until the password expires. Must be between 1 and 1096 days (3 years).
-          default: 90
-          example: 90
-          minimum: 1
-          maximum: 1096
-        ignoreExpiration:
-          type: boolean
-          description: Ignore password expiration. If true, the password will never expire.
-          default: false
-        maxPasswordFailures:
-          type: number
-          description: Number of wrong password attempts allowed before the user is suspended. Must be between 1 and 20.
-          default: 5
-          example: 5
-          minimum: 1
-          maximum: 20
-        passwordSuspensionDuration:
-          type: number
-          description: Number of minutes to suspend the user from authenticating using password after the maximum number of allowed failed attempts is exceeded. Must be between 1 and 525600 minutes (1 year).
-          default: 15
-          example: 15
-          minimum: 1
-          maximum: 525600
-        tempPasswordValidityHours:
-          type: number
-          description: Number of hours until temporary passwords are considered expired. Must be between 1 and 8760 hours (1 year).
-          example: 24
-          minimum: 1
-          maximum: 8760
-        message:
-          $ref: '#/components/schemas/MessageConfiguration'
-        requireMFA:
-          type: boolean
-          description: Require multi-factor authentication for password reset flows.
-          default: false
-        codeLength:
-          type: number
-          description: The length of the generated OTP code. Must be between 4 and 8.
-          example: 6
-        notifyOnPasswordUpdate:
-          type: boolean
-          default: false
-          description: Send email to end-user upon password update
-      required:
-      - resetValidityMinutes
-      - passwordComplexity
-      - passwordMinLength
-      - blockPreviousPasswords
-      - passwordExpiresIn
-      - message
-    ApiUpdateOidcClientInput:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the client
-          example: My Client
-        description:
-          type: string
-          description: Short description of the client
-        resources:
-          description: List of resources IDs associated with this client
-          type: array
-          items:
-            type: string
-        client_group_id:
-          type: string
-          description: Id of client group to associate with
-        default_custom_claims:
-          type: array
-          description: List of client default custom claims
-          items:
-            type: string
-            enum:
-            - tid
-            - fname
-            - lname
-            - mname
-            - email
-            - email_verified
-            - phone_number
-            - phone_number_verified
-            - groups
-            - new_user
-            - birthday
-            - language
-            - city
-            - address
-            - country
-            - street_address
-            - address_type
-            - webauthn
-            - roles
-            - ts_roles
-            - role_values
-            - ts_permissions
-            - permissions
-            - approval_data
-            - custom_group_data
-            - username
-            - secondary_phone_numbers
-            - secondary_emails
-            - picture
-            - created_at
-            - last_auth
-            - auth_time
-            - external_account_id
-            - external_user_id
-            - app_name
-            - custom_data
-            - custom_app_data
-            - ai_actor
-        default_user_info_claims:
-          type: array
-          description: List of client default custom claims returned by the UserInfo endpoint. Mutually exclusive with sync_id_token_claims_to_userinfo=true in the same request.
-          items:
-            type: string
-            enum:
-            - tid
-            - fname
-            - lname
-            - mname
-            - email
-            - email_verified
-            - phone_number
-            - phone_number_verified
-            - groups
-            - new_user
-            - birthday
-            - language
-            - city
-            - address
-            - country
-            - street_address
-            - address_type
-            - webauthn
-            - roles
-            - ts_roles
-            - role_values
-            - ts_permissions
-            - permissions
-            - approval_data
-            - custom_group_data
-            - username
-            - secondary_phone_numbers
-            - secondary_emails
-            - picture
-            - created_at
-            - last_auth
-            - auth_time
-            - external_account_id
-            - external_user_id
-            - app_name
-            - custom_data
-            - custom_app_data
-            - ai_actor
-        sync_id_token_claims_to_userinfo:
-          type: boolean
-          description: When true, UserInfo custom claims are kept in sync with default_custom_claims (the ID Token list). Mutually exclusive with explicit default_user_info_claims in the same request.
-          default: false
-        short_cookies_samesite_type:
+        language:
           type: string
           enum:
-          - lax
-          - none
-          description: 'Short cookies samesite type. Possible values: "none", "lax", "strict". Default: "lax"'
-          default: lax
-        redirect_uris:
-          description: List of URIs approved for redirects for your client
-          example:
-          - https://www.example.com/login
-          type: array
-          items:
-            type: string
-        client_type:
-          type: string
-          enum:
-          - web
-          - native
-          description: Client type
-          default: web
-        device_authorization:
-          description: Configuration for an [OAuth Device Authorization Flow](https://www.rfc-editor.org/rfc/rfc8628)
-          allOf:
-          - $ref: '#/components/schemas/ApiDeviceAuthConfiguration'
-        ciba_authorization:
-          description: CIBA authorization flow configuration
-          allOf:
-          - $ref: '#/components/schemas/ApiCibaAuthConfiguration'
-        is_third_party:
-          type: boolean
-          description: Is third party client
-        allowed_scopes:
-          description: Allowed scopes
-          type: array
-          items:
-            type: string
-        consent_uri:
-          type: string
-          description: Consent URI
-        consent_validity_period:
-          type: number
-          description: Consent validity period
-        pkce:
-          type: string
-          enum:
-          - enforcePkceInsteadOfClientCredentials
-          - enforcePkceAlongsideClientCredentials
-          - allowPkceAlongsideClientCredentials
-          description: PKCE configuration
-        supported_prompts:
-          type: array
-          example:
-          - login
-          - consent
-          - none
-          description: Supported prompts for the OIDC authentication flow
-          items:
-            type: string
-            enum:
-            - login
-            - consent
-            - none
-        token_expiration:
-          description: Token expiration settings
-          allOf:
-          - $ref: '#/components/schemas/ApiTokenExpirationConfiguration'
-        session_expiration:
-          type: number
-          description: Session expiration time (seconds)
-        enforce_par:
-          type: boolean
-          description: enforce PAR (Pushed Authorization Request) for this client
-        role_ids:
-          description: Role IDs
-          type: array
-          items:
-            type: string
-        fapi_version_compliancy:
-          type: boolean
-          description: FAPI 2.0 compliancy configuration
-        token_endpoint_auth_method:
-          type: string
-          enum:
-          - client_secret_basic
-          - self_signed_tls_client_auth
-          - tls_client_auth
-          - none
-          - private_key_jwt
-          description: This field is deprecated- to configure pkce use "pkce" field instead
-          default: client_secret_basic
-          deprecated: true
-        response_types:
-          type: array
-          default:
-          - code
-          - id_token
-          example:
-          - code
-          items:
-            type: string
-            enum:
-            - code
-            - id_token
-        authentication_configuration:
-          description: Client authentication configuration
-          allOf:
-          - $ref: '#/components/schemas/ApiClientAuthenticationConfiguration'
-        id_token_encryption:
-          description: ID Token encryption configuration
-          allOf:
-          - $ref: '#/components/schemas/ApiIdTokenEncryptionConfiguration'
-    ApiBasicApp:
-      type: object
-      properties:
-        app_id:
-          type: string
-          description: Application ID
-        tenant_id:
-          type: string
-          description: Tenant ID
-        app_name:
-          type: string
-          description: Application name displayed in the Admin Portal
-        app_description:
-          type: string
-          description: Short description of your application, displayed in the Admin Portal
-        login_uri:
-          type: string
-          description: URI used to redirect the user to the login page of the application (when needed)
-          example: https://www.example.com/login
-        application_type:
-          type: string
-          enum:
-          - ido
-          - basic
-          description: Application type
-      required:
-      - app_id
-      - tenant_id
-      - app_name
-      - app_description
+          - en
+          - es
+          - pt
+          - fr
+          - ja
+          - fr-CA
+          description: Language configuration for the external communication. The default language is english.
+          default: en
     BadRequestHttpError:
       type: object
       properties:
@@ -3423,220 +3834,23 @@ components:
       required:
       - name
       - jwk
-    UpdateTokenSigningKey:
+    LockoutTier:
       type: object
       properties:
-        status:
-          type: string
-          description: Status of the signing key
-          enum:
-          - signing
-          - disabled
-          - validating
-        name:
-          type: string
-          description: Name of the signing key
-    ApiTokenExpirationConfiguration:
-      type: object
-      properties:
-        access_token_ttl:
+        attempts:
           type: number
-          description: Access token time-to-live
-        refresh_token_ttl:
-          type: number
-          description: Refresh token time-to-live
-        max_refresh_rotate:
-          type: number
-          description: Maximum time the refresh token can be rotated
-    SMSConfiguration:
-      type: object
-      properties:
-        expiresIn:
-          type: number
-          description: Number of minutes until the OTP expires
-        lockoutDuration:
-          type: number
-          description: OTP lockout duration (in minutes) after maximum attempts are reached
-          example: 15
-        maxFailures:
-          type: number
-          description: Number of wrong OTP attempts allowed before the passcode is invalidated. Must be between 1 and 20.
+          description: Number of failed attempts before this tier is triggered
           example: 3
-        codeLength:
+          minimum: 1
+        duration:
           type: number
-          description: The length of the generated OTP code. Must be between 4 and 8.
-          example: 6
-        crossClientsAllowed:
-          type: boolean
-          description: Determines if OTP authentication is allowed across different clients within the same application
-          default: false
+          description: Lockout duration in minutes for this tier
+          example: 15
+          minimum: 1
+          maximum: 525600
       required:
-      - expiresIn
-      - maxFailures
-    ApiCreateSamlClientInput:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the client
-          example: My Client
-        description:
-          type: string
-          description: Short description of the client
-        resources:
-          description: List of resources IDs associated with this client
-          type: array
-          items:
-            type: string
-        authentication_protocol:
-          type: string
-          enum:
-          - oidc
-          - saml
-          description: Authentication protocol used by the client
-          default: oidc
-        client_group_id:
-          type: string
-          description: Id of client group to associate with
-        default_custom_claims:
-          type: array
-          description: List of client default custom claims
-          items:
-            type: string
-            enum:
-            - tid
-            - fname
-            - lname
-            - mname
-            - email
-            - email_verified
-            - phone_number
-            - phone_number_verified
-            - groups
-            - new_user
-            - birthday
-            - language
-            - city
-            - address
-            - country
-            - street_address
-            - address_type
-            - webauthn
-            - roles
-            - ts_roles
-            - role_values
-            - ts_permissions
-            - permissions
-            - approval_data
-            - custom_group_data
-            - username
-            - secondary_phone_numbers
-            - secondary_emails
-            - picture
-            - created_at
-            - last_auth
-            - auth_time
-            - external_account_id
-            - external_user_id
-            - app_name
-            - custom_data
-            - custom_app_data
-            - ai_actor
-        default_user_info_claims:
-          type: array
-          description: List of client default custom claims returned by the UserInfo endpoint. Mutually exclusive with sync_id_token_claims_to_userinfo=true in the same request.
-          items:
-            type: string
-            enum:
-            - tid
-            - fname
-            - lname
-            - mname
-            - email
-            - email_verified
-            - phone_number
-            - phone_number_verified
-            - groups
-            - new_user
-            - birthday
-            - language
-            - city
-            - address
-            - country
-            - street_address
-            - address_type
-            - webauthn
-            - roles
-            - ts_roles
-            - role_values
-            - ts_permissions
-            - permissions
-            - approval_data
-            - custom_group_data
-            - username
-            - secondary_phone_numbers
-            - secondary_emails
-            - picture
-            - created_at
-            - last_auth
-            - auth_time
-            - external_account_id
-            - external_user_id
-            - app_name
-            - custom_data
-            - custom_app_data
-            - ai_actor
-        sync_id_token_claims_to_userinfo:
-          type: boolean
-          description: When true, UserInfo custom claims are kept in sync with default_custom_claims (the ID Token list). Mutually exclusive with explicit default_user_info_claims in the same request.
-          default: false
-        short_cookies_samesite_type:
-          type: string
-          enum:
-          - lax
-          - none
-          description: 'Short cookies samesite type. Possible values: "none", "lax", "strict". Default: "lax"'
-          default: lax
-        sp_acs_url:
-          type: string
-          description: SAML ACS URL
-        sp_entity_id:
-          type: string
-          description: SAML Service provider entity ID
-        sp_name_id_type:
-          type: string
-          enum:
-          - email
-          - secondaryEmail
-          - username
-          - phoneNumber
-          - externalUserId
-          description: SAML Name ID Type
-        supported_prompts:
-          type: array
-          example:
-          - login
-          - consent
-          - none
-          description: Supported prompts for the OIDC authentication flow
-          items:
-            type: string
-            enum:
-            - login
-            - consent
-            - none
-        sign_assertion:
-          type: boolean
-          description: Sign SAML assertion
-        optional_acs_url:
-          type: boolean
-          description: Allow ACS URL to be optional
-        use_centralized_login:
-          type: boolean
-          description: When enabled, SAML SP-initiated SSO redirects to the tenant centralized hub application instead of hosted login
-      required:
-      - name
-      - sp_entity_id
+      - attempts
+      - duration
   securitySchemes:
     bearer:
       scheme: bearer
@@ -3668,3 +3882,6 @@ components:
           tokenUrl: /oidc/token
           scopes: {}
       description: A token returned upon B2B authentication for a user that has the organizationAdmin or organizationCreator role.
+x-refined-from:
+- transmit-security-organizations-openapi.yml
+- transmit-security-platform-administration-openapi.yml
