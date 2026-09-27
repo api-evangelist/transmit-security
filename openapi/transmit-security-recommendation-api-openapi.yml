@@ -213,149 +213,6 @@ paths:
       - Recommendation
 components:
   schemas:
-    transaction_payer:
-      allOf:
-      - $ref: '#/components/schemas/transaction_party'
-      type: object
-      description: Payer party of the transaction. Adds customer-tier and billing-info fields on top of the shared party shape.
-      properties:
-        customerTier:
-          type: string
-          minLength: 1
-          maxLength: 50
-          example: premium
-          description: Payer's customer tier.
-        billingInfo:
-          $ref: '#/components/schemas/transaction_address'
-    device_public_keys:
-      type: object
-      properties:
-        device_public_keys:
-          type: array
-          description: List of unique and persistent device key IDs derived from cryptographic binding
-          items:
-            type: string
-    os_versions:
-      type: object
-      properties:
-        os_versions:
-          type: array
-          description: 'List of OS versions as presented by Transmit Security systems. e.g. `14.4.2`, `x86_64`
-
-            '
-          items:
-            type: string
-    browser_names:
-      type: object
-      properties:
-        browser_names:
-          type: array
-          description: 'List of browser names as presented by Transmit Security systems. e.g. `yandex`, `electron`
-
-            '
-          items:
-            type: string
-    rule:
-      type: object
-      description: Recommendation rule
-      required:
-      - priority
-      - matcher
-      - recommendation
-      - enabled
-      - mode
-      properties:
-        name:
-          type: string
-          example: Block risky countries
-          description: 'Name of the recommendation rule. Must be unique across the tenant. Auto generated if not provided.
-
-            '
-        priority:
-          type: integer
-          example: 10
-          minimum: 1
-          maximum: 1000
-          description: 'Priority of the recommendation rule, which determines the order in which rules are evaluated. Rules are evaluated from smallest to biggest priority value and only the first rule to match will apply. Priority value must be unique.
-
-            '
-        matcher:
-          $ref: '#/components/schemas/matcher'
-        recommendation:
-          $ref: '#/components/schemas/rule_recommendation_type'
-        enabled:
-          type: boolean
-          description: Whether or not the rule will be evaluated
-        mode:
-          $ref: '#/components/schemas/rule_mode'
-    transaction_data:
-      type: object
-      description: Transaction data-points provided with the action via the SDK.
-      properties:
-        amount:
-          type: number
-          description: 'Monetary amount of the transaction. Sanitized server-side with `parseFloat`; must be strictly positive and at most 999,999,999.99.
-
-            '
-          exclusiveMinimum: 0
-          maximum: 999999999.99
-          example: 1500.75
-        currency:
-          type: string
-          example: USD
-          description: Currency code for the transaction (ISO-4217).
-        type:
-          $ref: '#/components/schemas/transaction_type'
-        method:
-          $ref: '#/components/schemas/transaction_method'
-        channelId:
-          type: string
-          minLength: 1
-          maxLength: 100
-          example: MOBILE_APP
-          description: Identifier for the channel used for the transaction.
-        reason:
-          type: string
-          minLength: 1
-          maxLength: 200
-          example: Monthly subscription payment
-          description: Reason for the transaction.
-        transactionDate:
-          type: integer
-          minimum: 0
-          example: 1712594340000
-          description: Transaction timestamp (Unix epoch, milliseconds or seconds).
-        payer:
-          $ref: '#/components/schemas/transaction_payer'
-        payee:
-          $ref: '#/components/schemas/transaction_payee'
-        purchase:
-          $ref: '#/components/schemas/transaction_purchase'
-        avs:
-          $ref: '#/components/schemas/transaction_avs'
-    challenge_type:
-      type: string
-      description: The type of challenge enforced for the reported action.
-      enum:
-      - sms_otp
-      - email_otp
-      - totp
-      - push_otp
-      - voice_otp
-      - idv
-      - captcha
-      - invisible_captcha
-      - password
-      - passkey
-      example: email_otp
-    threats:
-      type: array
-      description: List of all detected threats.
-      items:
-        type: string
-      example:
-      - ACCOUNT_TAKEOVER
-      - NEW_FRAUD_ACCOUNT
     device_fingerprints:
       type: object
       properties:
@@ -364,186 +221,14 @@ components:
           description: List of device fingerprints calculated based on multiple device persistent identifiers
           items:
             type: string
-    avs_match_level:
-      type: string
-      description: AVS match level.
-      enum:
-      - none
-      - postal
-      - street
-      - full
-      - unknown
-      example: full
-    transaction_avs:
-      type: object
-      description: Address Verification Service result for the transaction.
-      properties:
-        code:
-          type: string
-          minLength: 1
-          maxLength: 10
-          example: Y
-          description: AVS response code.
-        provider:
-          type: string
-          minLength: 1
-          maxLength: 50
-          example: Stripe
-          description: AVS provider name.
-        matchLevel:
-          $ref: '#/components/schemas/avs_match_level'
-    transaction_card:
-      type: object
-      description: Card-level identifiers for the party.
-      properties:
-        holderName:
-          type: string
-          minLength: 1
-          maxLength: 100
-          example: John Doe
-          description: Name of the card holder.
-        bin:
-          type: string
-          minLength: 6
-          maxLength: 8
-          example: '411111'
-          description: Bank Identification Number (first 6 digits of the card).
-        last4:
-          type: string
-          minLength: 4
-          maxLength: 4
-          example: '1234'
-          description: Last 4 digits of the credit card number.
-    get_all_response:
+    ip_cidrs:
       type: object
       properties:
-        data:
+        ip_cidrs:
           type: array
-          items:
-            type: object
-            description: Recommendation rule
-            properties:
-              id:
-                type: string
-                description: Rule ID
-              name:
-                $ref: '#/components/schemas/rule/properties/name'
-              priority:
-                $ref: '#/components/schemas/rule/properties/priority'
-              matcher:
-                $ref: '#/components/schemas/matcher'
-              recommendation:
-                $ref: '#/components/schemas/rule_recommendation_type'
-              enabled:
-                $ref: '#/components/schemas/rule/properties/enabled'
-              mode:
-                $ref: '#/components/schemas/rule_mode'
-    rule_recommendation_type:
-      type: string
-      description: Recommendation type
-      enum:
-      - CHALLENGE
-      - DENY
-      - TRUST
-    transaction_party:
-      type: object
-      description: Shared shape for a transaction party (payee or payer).
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 100
-          example: John Doe
-          description: Party's name.
-        accountNumber:
-          type: string
-          minLength: 1
-          maxLength: 100
-          example: '1234567890123456'
-          description: Party's account number.
-        accountId:
-          type: string
-          minLength: 1
-          maxLength: 100
-          example: USER_983245
-          description: Unique identifier for the party's account.
-        accountCountryCode:
-          type: string
-          minLength: 2
-          maxLength: 2
-          pattern: ^[A-Z]{2}$
-          example: US
-          description: Country code of the account (ISO-3166-1 alpha-2).
-        bankIdentifier:
-          type: string
-          minLength: 1
-          maxLength: 40
-          example: CHASEUS33
-          description: Party's bank identifier.
-        branchIdentifier:
-          type: string
-          minLength: 1
-          maxLength: 40
-          example: '123456'
-          description: Party's branch identifier.
-        card:
-          $ref: '#/components/schemas/transaction_card'
-    transaction_type:
-      type: string
-      description: Transaction type.
-      enum:
-      - purchase
-      - bill_payment
-      - mobile_recharge
-      - money_transfer
-      - credit_transfer
-      - credit_redemption
-      - top_up
-      - withdrawal
-      - investment
-      - loan
-      - refund
-      - other
-      example: purchase
-    matcher:
-      description: Activity field matcher. Only one matcher can be defined per rule.
-      oneOf:
-      - $ref: '#/components/schemas/ip_cidrs'
-      - $ref: '#/components/schemas/device_ids'
-      - $ref: '#/components/schemas/device_fingerprints'
-      - $ref: '#/components/schemas/device_public_keys'
-      - $ref: '#/components/schemas/user_ids'
-      - $ref: '#/components/schemas/country_codes'
-      - $ref: '#/components/schemas/browser_names'
-      - $ref: '#/components/schemas/os_versions'
-    custom_attributes:
-      type: object
-      description: 'Tenant-defined custom attributes attached to the action. These add context to an action but must match the schema defined in the Admin Portal. Invalid attributes are ignored and not included in the response.
-
-        '
-      additionalProperties:
-        oneOf:
-        - type: string
-        - type: number
-        - type: boolean
-    country_codes:
-      type: object
-      properties:
-        country_codes:
-          type: array
-          description: List of country codes per ISO 3166-1 alpha-2 standard
+          description: List of IP ranges in CIDR notation
           items:
             type: string
-    transaction_method:
-      type: string
-      description: Transaction method.
-      enum:
-      - bank_account
-      - wire
-      - card
-      - p2p
-      - wallet
-      example: card
     transaction_address:
       type: object
       description: Address and contact information (used by `billingInfo` and `shippingInfo`).
@@ -603,100 +288,74 @@ components:
           maxLength: 30
           example: '+1234567890'
           description: Phone number.
-    preview_rule:
-      type: object
-      description: 'Rule configured in preview mode that would have determined this action''s recommendation if all enabled rules were in production. Useful for impact analysis without changing live behavior.
-
-        '
-      properties:
-        rule_name:
-          type: string
-          description: Name of the preview rule.
-        recommendation:
-          type: string
-          description: Recommendation the preview rule would have applied.
-          enum:
-          - ALLOW
-          - CHALLENGE
-          - DENY
-          - TRUST
-        risk_score:
-          type: number
-          description: Risk score the preview rule would have applied.
-    rule_mode:
+    recommendation_type:
       type: string
-      description: 'Allows you to simulate a rule and evaluate its impact before releasing it to production. The simulation occurs each time a recommendation is requested. If a preview rule matches the request (meaning, its priority is higher than all matching rules), the response will include this preview rule and what the recommendation would have been if all rules were in production.
-
-        '
+      description: Recommendation type.
       enum:
-      - PREVIEW
-      - PRODUCTION
-    recommendation_full:
+      - ALLOW
+      - CHALLENGE
+      - DENY
+      - TRUST
+      example: CHALLENGE
+    device_ids:
       type: object
-      description: Recommendation
-      required:
-      - id
-      - issued_at
-      - recommendation
-      - risk_score
-      - context
-      - reasons
       properties:
-        id:
+        device_ids:
+          type: array
+          description: List of device identifiers generated by Transmit Security and stored by the SDK
+          items:
+            type: string
+    rule:
+      type: object
+      description: Recommendation rule
+      required:
+      - priority
+      - matcher
+      - recommendation
+      - enabled
+      - mode
+      properties:
+        name:
           type: string
-          example: 385cd06b527a974982e0560b67123fe2b1b5a39fd98d8d32cdbaca8ec16fd62d
-          description: Recommendation identifier
-        issued_at:
-          type: number
-          example: 1648028118123
-          description: Unix epoch time in milliseconds this recommendation was issued at
+          example: Block risky countries
+          description: 'Name of the recommendation rule. Must be unique across the tenant. Auto generated if not provided.
+
+            '
+        priority:
+          type: integer
+          example: 10
+          minimum: 1
+          maximum: 1000
+          description: 'Priority of the recommendation rule, which determines the order in which rules are evaluated. Rules are evaluated from smallest to biggest priority value and only the first rule to match will apply. Priority value must be unique.
+
+            '
+        matcher:
+          $ref: '#/components/schemas/matcher'
         recommendation:
-          $ref: '#/components/schemas/recommendation'
-        risk_score:
-          $ref: '#/components/schemas/risk_score'
-        context:
-          allOf:
-          - $ref: '#/components/schemas/context'
-          - type: object
-            required:
-            - action_id
-            - action_type
-            - action_performed_at
-            - device_id
-            - device_fingerprint
-            - application_id
-        risk_signals:
-          $ref: '#/components/schemas/risk_signals'
-        reasons:
-          $ref: '#/components/schemas/reasons'
-        transaction_data:
-          $ref: '#/components/schemas/transaction_data'
-        custom_attributes:
-          $ref: '#/components/schemas/custom_attributes'
-        threats:
-          $ref: '#/components/schemas/threats'
-        preview_rule:
-          $ref: '#/components/schemas/preview_rule'
-    reasons:
-      type: array
-      description: Reasons that contributed to the recommendation.
-      items:
-        type: string
-      example:
-      - BEHAVIOR_BOT
-      - IP_RISKY_REPUTATION
-      - DEVICE_SUSPICIOUS_ATTRIBUTE
-      - PROFILE_DEVICE_NEW
-    risk_score:
-      type: number
-      description: Used to assess the risk level of the action.
-      minimum: 0
-      maximum: 100
-      example: 73.2
-    transaction_payee:
-      allOf:
-      - $ref: '#/components/schemas/transaction_party'
-      description: Payee party of the transaction.
+          $ref: '#/components/schemas/rule_recommendation_type'
+        enabled:
+          type: boolean
+          description: Whether or not the rule will be evaluated
+        mode:
+          $ref: '#/components/schemas/rule_mode'
+    os_versions:
+      type: object
+      properties:
+        os_versions:
+          type: array
+          description: 'List of OS versions as presented by Transmit Security systems. e.g. `14.4.2`, `x86_64`
+
+            '
+          items:
+            type: string
+    create_rule_response:
+      type: object
+      properties:
+        message:
+          type: string
+        rule_id:
+          type: string
+          description: ID of the recommendation rule, used to reference the rule
     context:
       type: object
       description: Identifies the context in which the action occurred.
@@ -848,6 +507,209 @@ components:
           type: string
           example: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36
           description: User agent string.
+    rule_recommendation_type:
+      type: string
+      description: Recommendation type
+      enum:
+      - CHALLENGE
+      - DENY
+      - TRUST
+    reasons:
+      type: array
+      description: Reasons that contributed to the recommendation.
+      items:
+        type: string
+      example:
+      - BEHAVIOR_BOT
+      - IP_RISKY_REPUTATION
+      - DEVICE_SUSPICIOUS_ATTRIBUTE
+      - PROFILE_DEVICE_NEW
+    avs_match_level:
+      type: string
+      description: AVS match level.
+      enum:
+      - none
+      - postal
+      - street
+      - full
+      - unknown
+      example: full
+    transaction_payee:
+      allOf:
+      - $ref: '#/components/schemas/transaction_party'
+      description: Payee party of the transaction.
+    action_type:
+      type: string
+      example: login
+      description: Type of client action this recommendation was issued for.
+    result_type:
+      type: string
+      description: The outcome of the action.
+      enum:
+      - success
+      - failure
+      - incomplete
+      example: success
+    transaction_avs:
+      type: object
+      description: Address Verification Service result for the transaction.
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 10
+          example: Y
+          description: AVS response code.
+        provider:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: Stripe
+          description: AVS provider name.
+        matchLevel:
+          $ref: '#/components/schemas/avs_match_level'
+    challenge_type:
+      type: string
+      description: The type of challenge enforced for the reported action.
+      enum:
+      - sms_otp
+      - email_otp
+      - totp
+      - push_otp
+      - voice_otp
+      - idv
+      - captcha
+      - invisible_captcha
+      - password
+      - passkey
+      example: email_otp
+    risk_score:
+      type: number
+      description: Used to assess the risk level of the action.
+      minimum: 0
+      maximum: 100
+      example: 73.2
+    transaction_type:
+      type: string
+      description: Transaction type.
+      enum:
+      - purchase
+      - bill_payment
+      - mobile_recharge
+      - money_transfer
+      - credit_transfer
+      - credit_redemption
+      - top_up
+      - withdrawal
+      - investment
+      - loan
+      - refund
+      - other
+      example: purchase
+    recommendation:
+      type: object
+      description: Decision the engine produced for the action.
+      required:
+      - type
+      properties:
+        type:
+          $ref: '#/components/schemas/recommendation_type'
+        result:
+          allOf:
+          - $ref: '#/components/schemas/result_type'
+        challenge_type:
+          $ref: '#/components/schemas/challenge_type'
+    transaction_data:
+      type: object
+      description: Transaction data-points provided with the action via the SDK.
+      properties:
+        amount:
+          type: number
+          description: 'Monetary amount of the transaction. Sanitized server-side with `parseFloat`; must be strictly positive and at most 999,999,999.99.
+
+            '
+          exclusiveMinimum: 0
+          maximum: 999999999.99
+          example: 1500.75
+        currency:
+          type: string
+          example: USD
+          description: Currency code for the transaction (ISO-4217).
+        type:
+          $ref: '#/components/schemas/transaction_type'
+        method:
+          $ref: '#/components/schemas/transaction_method'
+        channelId:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: MOBILE_APP
+          description: Identifier for the channel used for the transaction.
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 200
+          example: Monthly subscription payment
+          description: Reason for the transaction.
+        transactionDate:
+          type: integer
+          minimum: 0
+          example: 1712594340000
+          description: Transaction timestamp (Unix epoch, milliseconds or seconds).
+        payer:
+          $ref: '#/components/schemas/transaction_payer'
+        payee:
+          $ref: '#/components/schemas/transaction_payee'
+        purchase:
+          $ref: '#/components/schemas/transaction_purchase'
+        avs:
+          $ref: '#/components/schemas/transaction_avs'
+    preview_rule:
+      type: object
+      description: 'Rule configured in preview mode that would have determined this action''s recommendation if all enabled rules were in production. Useful for impact analysis without changing live behavior.
+
+        '
+      properties:
+        rule_name:
+          type: string
+          description: Name of the preview rule.
+        recommendation:
+          type: string
+          description: Recommendation the preview rule would have applied.
+          enum:
+          - ALLOW
+          - CHALLENGE
+          - DENY
+          - TRUST
+        risk_score:
+          type: number
+          description: Risk score the preview rule would have applied.
+    matcher:
+      description: Activity field matcher. Only one matcher can be defined per rule.
+      oneOf:
+      - $ref: '#/components/schemas/ip_cidrs'
+      - $ref: '#/components/schemas/device_ids'
+      - $ref: '#/components/schemas/device_fingerprints'
+      - $ref: '#/components/schemas/device_public_keys'
+      - $ref: '#/components/schemas/user_ids'
+      - $ref: '#/components/schemas/country_codes'
+      - $ref: '#/components/schemas/browser_names'
+      - $ref: '#/components/schemas/os_versions'
+    update_delete_rule_response:
+      type: object
+      properties:
+        message:
+          type: string
+    transaction_method:
+      type: string
+      description: Transaction method.
+      enum:
+      - bank_account
+      - wire
+      - card
+      - p2p
+      - wallet
+      example: card
     risk_signals:
       type: object
       description: Additional informative signals derived from the action.
@@ -1085,26 +947,197 @@ components:
             linking_user_to_device_count:
               type: integer
               description: Number of distinct `device_id`s associated with this `user_id`.
-    user_ids:
+    transaction_payer:
+      allOf:
+      - $ref: '#/components/schemas/transaction_party'
+      type: object
+      description: Payer party of the transaction. Adds customer-tier and billing-info fields on top of the shared party shape.
+      properties:
+        customerTier:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: premium
+          description: Payer's customer tier.
+        billingInfo:
+          $ref: '#/components/schemas/transaction_address'
+    threats:
+      type: array
+      description: List of all detected threats.
+      items:
+        type: string
+      example:
+      - ACCOUNT_TAKEOVER
+      - NEW_FRAUD_ACCOUNT
+    transaction_party:
+      type: object
+      description: Shared shape for a transaction party (payee or payer).
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: John Doe
+          description: Party's name.
+        accountNumber:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: '1234567890123456'
+          description: Party's account number.
+        accountId:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: USER_983245
+          description: Unique identifier for the party's account.
+        accountCountryCode:
+          type: string
+          minLength: 2
+          maxLength: 2
+          pattern: ^[A-Z]{2}$
+          example: US
+          description: Country code of the account (ISO-3166-1 alpha-2).
+        bankIdentifier:
+          type: string
+          minLength: 1
+          maxLength: 40
+          example: CHASEUS33
+          description: Party's bank identifier.
+        branchIdentifier:
+          type: string
+          minLength: 1
+          maxLength: 40
+          example: '123456'
+          description: Party's branch identifier.
+        card:
+          $ref: '#/components/schemas/transaction_card'
+    recommendation_full:
+      type: object
+      description: Recommendation
+      required:
+      - id
+      - issued_at
+      - recommendation
+      - risk_score
+      - context
+      - reasons
+      properties:
+        id:
+          type: string
+          example: 385cd06b527a974982e0560b67123fe2b1b5a39fd98d8d32cdbaca8ec16fd62d
+          description: Recommendation identifier
+        issued_at:
+          type: number
+          example: 1648028118123
+          description: Unix epoch time in milliseconds this recommendation was issued at
+        recommendation:
+          $ref: '#/components/schemas/recommendation'
+        risk_score:
+          $ref: '#/components/schemas/risk_score'
+        context:
+          allOf:
+          - $ref: '#/components/schemas/context'
+          - type: object
+            required:
+            - action_id
+            - action_type
+            - action_performed_at
+            - device_id
+            - device_fingerprint
+            - application_id
+        risk_signals:
+          $ref: '#/components/schemas/risk_signals'
+        reasons:
+          $ref: '#/components/schemas/reasons'
+        transaction_data:
+          $ref: '#/components/schemas/transaction_data'
+        custom_attributes:
+          $ref: '#/components/schemas/custom_attributes'
+        threats:
+          $ref: '#/components/schemas/threats'
+        preview_rule:
+          $ref: '#/components/schemas/preview_rule'
+    transaction_purchase:
+      type: object
+      description: Purchase details for the transaction.
+      properties:
+        totalItems:
+          type: integer
+          minimum: 1
+          example: 3
+          description: Total number of items in the purchase.
+        products:
+          type: array
+          description: Line items in the purchase.
+          items:
+            $ref: '#/components/schemas/transaction_product'
+        shippingInfo:
+          $ref: '#/components/schemas/transaction_address'
+    transaction_card:
+      type: object
+      description: Card-level identifiers for the party.
+      properties:
+        holderName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: John Doe
+          description: Name of the card holder.
+        bin:
+          type: string
+          minLength: 6
+          maxLength: 8
+          example: '411111'
+          description: Bank Identification Number (first 6 digits of the card).
+        last4:
+          type: string
+          minLength: 4
+          maxLength: 4
+          example: '1234'
+          description: Last 4 digits of the credit card number.
+    country_codes:
       type: object
       properties:
-        user_ids:
+        country_codes:
           type: array
-          description: List of opaque identifiers of users in your system
+          description: List of country codes per ISO 3166-1 alpha-2 standard
           items:
             type: string
-    action_type:
-      type: string
-      example: login
-      description: Type of client action this recommendation was issued for.
-    ip_cidrs:
+    get_all_response:
       type: object
       properties:
-        ip_cidrs:
+        data:
           type: array
-          description: List of IP ranges in CIDR notation
           items:
-            type: string
+            type: object
+            description: Recommendation rule
+            properties:
+              id:
+                type: string
+                description: Rule ID
+              name:
+                $ref: '#/components/schemas/rule/properties/name'
+              priority:
+                $ref: '#/components/schemas/rule/properties/priority'
+              matcher:
+                $ref: '#/components/schemas/matcher'
+              recommendation:
+                $ref: '#/components/schemas/rule_recommendation_type'
+              enabled:
+                $ref: '#/components/schemas/rule/properties/enabled'
+              mode:
+                $ref: '#/components/schemas/rule_mode'
+    custom_attributes:
+      type: object
+      description: 'Tenant-defined custom attributes attached to the action. These add context to an action but must match the schema defined in the Admin Portal. Invalid attributes are ignored and not included in the response.
+
+        '
+      additionalProperties:
+        oneOf:
+        - type: string
+        - type: number
+        - type: boolean
     transaction_product:
       type: object
       description: A single product line item.
@@ -1131,6 +1164,32 @@ components:
           minimum: 0
           example: 999.99
           description: Price per unit of the product.
+    device_public_keys:
+      type: object
+      properties:
+        device_public_keys:
+          type: array
+          description: List of unique and persistent device key IDs derived from cryptographic binding
+          items:
+            type: string
+    browser_names:
+      type: object
+      properties:
+        browser_names:
+          type: array
+          description: 'List of browser names as presented by Transmit Security systems. e.g. `yandex`, `electron`
+
+            '
+          items:
+            type: string
+    rule_mode:
+      type: string
+      description: 'Allows you to simulate a rule and evaluate its impact before releasing it to production. The simulation occurs each time a recommendation is requested. If a preview rule matches the request (meaning, its priority is higher than all matching rules), the response will include this preview rule and what the recommendation would have been if all rules were in production.
+
+        '
+      enum:
+      - PREVIEW
+      - PRODUCTION
     get_rule_response:
       type: object
       properties:
@@ -1139,120 +1198,61 @@ components:
           description: Rule ID
         data:
           $ref: '#/components/schemas/rule'
-    transaction_purchase:
-      type: object
-      description: Purchase details for the transaction.
-      properties:
-        totalItems:
-          type: integer
-          minimum: 1
-          example: 3
-          description: Total number of items in the purchase.
-        products:
-          type: array
-          description: Line items in the purchase.
-          items:
-            $ref: '#/components/schemas/transaction_product'
-        shippingInfo:
-          $ref: '#/components/schemas/transaction_address'
-    device_ids:
+    user_ids:
       type: object
       properties:
-        device_ids:
+        user_ids:
           type: array
-          description: List of device identifiers generated by Transmit Security and stored by the SDK
+          description: List of opaque identifiers of users in your system
           items:
             type: string
-    create_rule_response:
-      type: object
-      properties:
-        message:
-          type: string
-        rule_id:
-          type: string
-          description: ID of the recommendation rule, used to reference the rule
-    update_delete_rule_response:
-      type: object
-      properties:
-        message:
-          type: string
-    recommendation_type:
-      type: string
-      description: Recommendation type.
-      enum:
-      - ALLOW
-      - CHALLENGE
-      - DENY
-      - TRUST
-      example: CHALLENGE
-    result_type:
-      type: string
-      description: The outcome of the action.
-      enum:
-      - success
-      - failure
-      - incomplete
-      example: success
-    recommendation:
-      type: object
-      description: Decision the engine produced for the action.
-      required:
-      - type
-      properties:
-        type:
-          $ref: '#/components/schemas/recommendation_type'
-        result:
-          allOf:
-          - $ref: '#/components/schemas/result_type'
-        challenge_type:
-          $ref: '#/components/schemas/challenge_type'
   responses:
-    not_found:
-      description: Not found
-    unauthorized:
-      description: Invalid authentication
-    forbidden:
-      description: Invalid authorization
-    success_get_rule_by_id:
-      description: Rule retrieved successfully
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/get_rule_response'
-    bad_request:
-      description: Bad request
     blacklisted_token:
       description: Blacklisted token—Returned when Fraud Prevention detects repeated or abusive token/payload misuse within a short time window (e.g., reuse of expired tokens, token caching/automation, or repeated invalid requests, including highly repetitive invalid request values). The response body contains the underlying error code (e.g., expired session token). Clients should identify and stop the source of invalid requests. Other authorization failures that do not trigger blacklisting return 403 Forbidden.
-    collision:
-      description: Unique field collision
-    internal_error:
-      description: Internal error
     success_update_delete_rule:
       description: Rule updated successfully
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/update_delete_rule_response'
-    rate_limit_reached:
-      description: Rate limit reached
-    success_get_rules:
-      description: Rules retrieved successfully
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/get_all_response'
-    success_create_rule:
-      description: Rule created successfully
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/create_rule_response'
     recommendation:
       description: Recommendation
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/recommendation_full'
+    forbidden:
+      description: Invalid authorization
+    bad_request:
+      description: Bad request
+    unauthorized:
+      description: Invalid authentication
+    collision:
+      description: Unique field collision
+    internal_error:
+      description: Internal error
+    not_found:
+      description: Not found
+    success_create_rule:
+      description: Rule created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_rule_response'
+    success_get_rule_by_id:
+      description: Rule retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/get_rule_response'
+    success_get_rules:
+      description: Rules retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/get_all_response'
+    rate_limit_reached:
+      description: Rate limit reached
   securitySchemes:
     risk_access_token:
       type: http

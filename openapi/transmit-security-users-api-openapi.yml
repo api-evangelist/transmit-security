@@ -1019,138 +1019,37 @@ paths:
       - Users
 components:
   schemas:
-    ApiUserNameInput:
+    DeviceKeyResponseDto:
       type: object
       properties:
-        title:
-          type: string
-          description: Title
-        first_name:
-          type: string
-          description: User's first name
-        last_name:
-          type: string
-          description: User's last name
-        middle_name:
-          type: string
-          description: User's middle name
-    ApiUserEmail:
-      type: object
-      properties:
-        value:
-          type: string
-          description: Email address
-        email_verified:
-          type: boolean
-          description: Indicates if email was verified (via magic link, social login, or email verification flows)
-        verified_at:
-          format: date-time
-          type: string
-          description: Last verification date of the email
-      required:
-      - value
-    ApiUpdateUserInput:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Primary email address of the user
-        phone_number:
-          type: string
-          description: Primary phone number of the user, specified in E.164 format
-        secondary_emails:
-          description: Secondary email addresses to add to user's current emails
-          type: array
-          items:
-            type: string
-        secondary_phone_numbers:
-          description: Secondary phone numbers to add to user's phone numbers, each specified in E.164 format
-          type: array
-          items:
-            type: string
-        birthday:
-          format: date-time
-          type: string
-          description: User's birthday
-        address:
-          description: User's address
-          allOf:
-          - $ref: '#/components/schemas/ApiCreateOrUpdateAddressInput'
-        name:
-          description: Object describing user's full name
-          allOf:
-          - $ref: '#/components/schemas/ApiUserNameInput'
         status:
+          description: Status of the device
+          $ref: '#/components/schemas/DeviceStatus'
+        display_name:
           type: string
-          description: Status of user
-          enum:
-          - Active
-          - Disabled
-          - Pending
-        external_account_id:
-          type: string
-          description: User identifier in an app, set by the app
-        custom_app_data:
-          type: object
-          description: Custom data object for app-related user info
-        picture:
-          type: string
-          description: The picture of user, specified as a URL
-        language:
-          type: string
-          description: The language of the user, as provided by the browser using the [Accept-Language](https://www.rfc-editor.org/rfc/rfc7231#section-5.3.5) header field
+          description: Friendly device name, used when displaying a list of the user's devices
         custom_data:
           type: object
-          description: Custom data object for tenant user info
-        external_user_id:
+          description: Custom data stored for this device, such as tags or device data obtained using other tools
+        push_config:
+          description: Device push notification configuration
+          allOf:
+          - $ref: '#/components/schemas/DevicePushConfigDto'
+        key_id:
           type: string
-          description: A unique identifier in a tenant
-        username:
+          description: Identifier of the user's device
+        created_at:
+          format: date-time
           type: string
-          description: Username used to identify the user for password login (unless a primary email will be used instead)
-    ApiAddPassword:
-      type: object
-      properties:
-        password:
+          description: Date the device key was added
+        updated_at:
+          format: date-time
           type: string
-          description: The user's new password
-        force_replace:
-          type: boolean
-          description: When true the password is temporary and the user will be required to replace it upon successful login
-          default: true
-        username:
-          type: string
-          description: The user's new username. This will be the identifier the user will use to authenticate. If username is not provided and the user has verified their email, that email address will be used as the username.
-        enforce_complexity:
-          type: boolean
-          description: If true, the password must meet the password complexity requirements. If false, the password can be any string.
-          default: true
+          description: Date the device key metadata was last updated
       required:
-      - password
-    DelegatedAccessInput:
-      type: object
-      properties:
-        actor_id:
-          type: string
-          description: The ID of the primary user that has permissions to act on behalf of this user
-        permissions:
-          description: Names of permissions that are granted to the primary user on behalf of the dependent
-          type: array
-          items:
-            type: string
-      required:
-      - actor_id
-      - permissions
-    PageInfo:
-      type: object
-      properties:
-        has_next_page:
-          type: boolean
-        has_previous_page:
-          type: boolean
-      required:
-      - has_next_page
-      - has_previous_page
+      - status
+      - created_at
+      - updated_at
     ApiCreateUserInput:
       type: object
       properties:
@@ -1211,26 +1110,6 @@ components:
           description: If this user is a dependent, this defines the permissions that the primary user will have to act on behalf of the dependent user.
           allOf:
           - $ref: '#/components/schemas/DelegatedAccessInput'
-    ApiGetAllUsers:
-      type: object
-      properties:
-        total_count:
-          type: number
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiUser'
-      required:
-      - total_count
-      - page_info
-      - result
-    UserVerifyEmailOrPhoneNumberInput:
-      type: object
-      properties:
-        change_to_primary:
-          type: boolean
     ApiPasswordInformation:
       type: object
       properties:
@@ -1251,6 +1130,246 @@ components:
       - expired
       - temporary
       - updated_at
+    ApiUserIdentityAlias:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Alias type, which varies based on authentication method
+          enum:
+          - username
+          - email
+          - phone_number
+          - unspecified
+        value:
+          type: string
+          description: Alias value
+      required:
+      - type
+      - value
+    ApiUserName:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title
+          maximum: 30
+        first_name:
+          type: string
+          description: User's first name
+          maximum: 30
+        last_name:
+          type: string
+          description: User's last name
+          maximum: 30
+        middle_name:
+          type: string
+          description: User's middle name
+          maximum: 30
+    ForbiddenHttpError:
+      type: object
+      properties:
+        message:
+          type: string
+        error_code:
+          type: number
+          example: 403
+      required:
+      - message
+      - error_code
+    ApiAddPassword:
+      type: object
+      properties:
+        password:
+          type: string
+          description: The user's new password
+        force_replace:
+          type: boolean
+          description: When true the password is temporary and the user will be required to replace it upon successful login
+          default: true
+        username:
+          type: string
+          description: The user's new username. This will be the identifier the user will use to authenticate. If username is not provided and the user has verified their email, that email address will be used as the username.
+        enforce_complexity:
+          type: boolean
+          description: If true, the password must meet the password complexity requirements. If false, the password can be any string.
+          default: true
+      required:
+      - password
+    ApiUpdatePassword:
+      type: object
+      properties:
+        password:
+          type: string
+          description: The user's new password
+        force_replace:
+          type: boolean
+          description: When true the password is temporary and the user will be required to replace it upon successful login
+          default: true
+    RegisterPasswordResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          readOnly: true
+          example: Password registered
+      required:
+      - message
+    IdentifierIsTakenHttpError:
+      type: object
+      properties:
+        message:
+          type: string
+        error_code:
+          type: number
+        ts_error_code:
+          type: string
+      required:
+      - message
+      - error_code
+      - ts_error_code
+    ApiUserEmail:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Email address
+        email_verified:
+          type: boolean
+          description: Indicates if email was verified (via magic link, social login, or email verification flows)
+        verified_at:
+          format: date-time
+          type: string
+          description: Last verification date of the email
+      required:
+      - value
+    ApiUserPasswordInput:
+      type: object
+      properties:
+        password:
+          type: string
+          description: The user's new password
+        force_replace:
+          type: boolean
+          description: When true the password is temporary and the user will be required to replace it upon successful login
+          default: true
+      required:
+      - password
+    ApiCreateOrUpdateAddressInput:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Country
+        state:
+          type: string
+          description: State
+        city:
+          type: string
+          description: City
+        street_address:
+          type: string
+          description: Street address
+        postal_code:
+          type: string
+          description: Postal code
+        type:
+          $ref: '#/components/schemas/AddressType'
+    ApiGroup:
+      type: object
+      properties:
+        group_id:
+          type: string
+          description: Group ID
+        name:
+          type: string
+          description: Group name
+        description:
+          type: string
+          description: Group description
+        created_at:
+          type: number
+          description: Date group was created in the tenant
+        updated_at:
+          type: number
+          description: Date group was last updated
+        custom_data:
+          type: object
+          description: Group custom data object
+      required:
+      - group_id
+      - name
+      - created_at
+      - updated_at
+    DeviceStatus:
+      type: string
+      enum:
+      - Active
+      - Blocked
+      - Suspended
+    ApiMeAddPassword:
+      type: object
+      properties:
+        password:
+          type: string
+          description: The user's new password
+        username:
+          type: string
+          description: The user's new username. This will be the identifier the user will use to authenticate. If username is not provided and the user has verified their email, that email address will be used as the username.
+      required:
+      - password
+    BadRequestHttpError:
+      type: object
+      properties:
+        message:
+          example: Bad request
+          type: array
+          items:
+            type: string
+        error_code:
+          type: number
+          example: 400
+      required:
+      - message
+      - error_code
+    ApiUsersCount:
+      type: object
+      properties:
+        user_count:
+          type: number
+          description: Number of users
+      required:
+      - user_count
+    DevicePushConfigDto:
+      type: object
+      properties:
+        device_token:
+          type: string
+          description: Device token for push notifications (FCM registration token or APN device token)
+          minLength: 32
+          maxLength: 255
+        type:
+          type: string
+          enum:
+          - FCM
+          - APN
+          description: Type of push notification
+        bundle_id:
+          type: string
+          description: Bundle identifier, used for push notifications
+      required:
+      - device_token
+      - type
+    PageInfo:
+      type: object
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+      required:
+      - has_next_page
+      - has_previous_page
     ApiUser:
       type: object
       properties:
@@ -1348,83 +1467,34 @@ components:
       - status
       - created_at
       - updated_at
-    ApiUpdatePassword:
-      type: object
-      properties:
-        password:
-          type: string
-          description: The user's new password
-        force_replace:
-          type: boolean
-          description: When true the password is temporary and the user will be required to replace it upon successful login
-          default: true
-    ApiUserName:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title
-          maximum: 30
-        first_name:
-          type: string
-          description: User's first name
-          maximum: 30
-        last_name:
-          type: string
-          description: User's last name
-          maximum: 30
-        middle_name:
-          type: string
-          description: User's middle name
-          maximum: 30
-    NotFoundHttpError:
-      type: object
-      properties:
-        message:
-          type: string
-        error_code:
-          type: number
-          example: 404
-      required:
-      - message
-      - error_code
-    Status:
-      type: string
-      enum:
-      - Active
-      - Disabled
-      - Pending
-    ForbiddenHttpError:
-      type: object
-      properties:
-        message:
-          type: string
-        error_code:
-          type: number
-          example: 403
-      required:
-      - message
-      - error_code
-    ApiCreateOrUpdateAddressInput:
+    ApiAddress:
       type: object
       properties:
         country:
           type: string
           description: Country
+          maximum: 30
         state:
           type: string
           description: State
+          maximum: 30
         city:
           type: string
           description: City
+          maximum: 30
         street_address:
           type: string
           description: Street address
+          maximum: 150
         postal_code:
           type: string
           description: Postal code
+          maximum: 30
         type:
           $ref: '#/components/schemas/AddressType'
+        updated_at:
+          type: number
+          description: Date user's address was last updated
     ApiUserIdentityProvider:
       type: object
       properties:
@@ -1473,23 +1543,50 @@ components:
       - email
       - first_auth_date
       - last_auth_date
-    ApiUserIdentityAlias:
+    ApiGetAllUsers:
       type: object
       properties:
-        type:
-          type: string
-          description: Alias type, which varies based on authentication method
-          enum:
-          - username
-          - email
-          - phone_number
-          - unspecified
-        value:
-          type: string
-          description: Alias value
+        total_count:
+          type: number
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiUser'
       required:
-      - type
-      - value
+      - total_count
+      - page_info
+      - result
+    ApiUserNameInput:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title
+        first_name:
+          type: string
+          description: User's first name
+        last_name:
+          type: string
+          description: User's last name
+        middle_name:
+          type: string
+          description: User's middle name
+    DelegatedAccessInput:
+      type: object
+      properties:
+        actor_id:
+          type: string
+          description: The ID of the primary user that has permissions to act on behalf of this user
+        permissions:
+          description: Names of permissions that are granted to the primary user on behalf of the dependent
+          type: array
+          items:
+            type: string
+      required:
+      - actor_id
+      - permissions
     ApiUserPhone:
       type: object
       properties:
@@ -1505,39 +1602,29 @@ components:
           description: Last verification date of the phone number
       required:
       - value
-    IdentifierIsTakenHttpError:
+    Status:
+      type: string
+      enum:
+      - Active
+      - Disabled
+      - Pending
+    NotFoundHttpError:
       type: object
       properties:
         message:
           type: string
         error_code:
           type: number
-        ts_error_code:
-          type: string
+          example: 404
       required:
       - message
       - error_code
-      - ts_error_code
-    DevicePushConfigDto:
-      type: object
-      properties:
-        device_token:
-          type: string
-          description: Device token for push notifications (FCM registration token or APN device token)
-          minLength: 32
-          maxLength: 255
-        type:
-          type: string
-          enum:
-          - FCM
-          - APN
-          description: Type of push notification
-        bundle_id:
-          type: string
-          description: Bundle identifier, used for push notifications
-      required:
-      - device_token
-      - type
+    AddressType:
+      type: string
+      enum:
+      - Home
+      - Work
+      - Other
     ApiUserIdentity:
       type: object
       properties:
@@ -1587,157 +1674,70 @@ components:
       - identifier
       - first_auth_date
       - last_auth_date
-    DeviceStatus:
-      type: string
-      enum:
-      - Active
-      - Blocked
-      - Suspended
-    ApiGroup:
+    ApiUpdateUserInput:
       type: object
       properties:
-        group_id:
+        email:
           type: string
-          description: Group ID
-        name:
+          description: Primary email address of the user
+        phone_number:
           type: string
-          description: Group name
-        description:
-          type: string
-          description: Group description
-        created_at:
-          type: number
-          description: Date group was created in the tenant
-        updated_at:
-          type: number
-          description: Date group was last updated
-        custom_data:
-          type: object
-          description: Group custom data object
-      required:
-      - group_id
-      - name
-      - created_at
-      - updated_at
-    DeviceKeyResponseDto:
-      type: object
-      properties:
-        status:
-          description: Status of the device
-          $ref: '#/components/schemas/DeviceStatus'
-        display_name:
-          type: string
-          description: Friendly device name, used when displaying a list of the user's devices
-        custom_data:
-          type: object
-          description: Custom data stored for this device, such as tags or device data obtained using other tools
-        push_config:
-          description: Device push notification configuration
-          allOf:
-          - $ref: '#/components/schemas/DevicePushConfigDto'
-        key_id:
-          type: string
-          description: Identifier of the user's device
-        created_at:
-          format: date-time
-          type: string
-          description: Date the device key was added
-        updated_at:
-          format: date-time
-          type: string
-          description: Date the device key metadata was last updated
-      required:
-      - status
-      - created_at
-      - updated_at
-    ApiUserPasswordInput:
-      type: object
-      properties:
-        password:
-          type: string
-          description: The user's new password
-        force_replace:
-          type: boolean
-          description: When true the password is temporary and the user will be required to replace it upon successful login
-          default: true
-      required:
-      - password
-    ApiMeAddPassword:
-      type: object
-      properties:
-        password:
-          type: string
-          description: The user's new password
-        username:
-          type: string
-          description: The user's new username. This will be the identifier the user will use to authenticate. If username is not provided and the user has verified their email, that email address will be used as the username.
-      required:
-      - password
-    RegisterPasswordResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          readOnly: true
-          example: Password registered
-      required:
-      - message
-    AddressType:
-      type: string
-      enum:
-      - Home
-      - Work
-      - Other
-    ApiUsersCount:
-      type: object
-      properties:
-        user_count:
-          type: number
-          description: Number of users
-      required:
-      - user_count
-    ApiAddress:
-      type: object
-      properties:
-        country:
-          type: string
-          description: Country
-          maximum: 30
-        state:
-          type: string
-          description: State
-          maximum: 30
-        city:
-          type: string
-          description: City
-          maximum: 30
-        street_address:
-          type: string
-          description: Street address
-          maximum: 150
-        postal_code:
-          type: string
-          description: Postal code
-          maximum: 30
-        type:
-          $ref: '#/components/schemas/AddressType'
-        updated_at:
-          type: number
-          description: Date user's address was last updated
-    BadRequestHttpError:
-      type: object
-      properties:
-        message:
-          example: Bad request
+          description: Primary phone number of the user, specified in E.164 format
+        secondary_emails:
+          description: Secondary email addresses to add to user's current emails
           type: array
           items:
             type: string
-        error_code:
-          type: number
-          example: 400
-      required:
-      - message
-      - error_code
+        secondary_phone_numbers:
+          description: Secondary phone numbers to add to user's phone numbers, each specified in E.164 format
+          type: array
+          items:
+            type: string
+        birthday:
+          format: date-time
+          type: string
+          description: User's birthday
+        address:
+          description: User's address
+          allOf:
+          - $ref: '#/components/schemas/ApiCreateOrUpdateAddressInput'
+        name:
+          description: Object describing user's full name
+          allOf:
+          - $ref: '#/components/schemas/ApiUserNameInput'
+        status:
+          type: string
+          description: Status of user
+          enum:
+          - Active
+          - Disabled
+          - Pending
+        external_account_id:
+          type: string
+          description: User identifier in an app, set by the app
+        custom_app_data:
+          type: object
+          description: Custom data object for app-related user info
+        picture:
+          type: string
+          description: The picture of user, specified as a URL
+        language:
+          type: string
+          description: The language of the user, as provided by the browser using the [Accept-Language](https://www.rfc-editor.org/rfc/rfc7231#section-5.3.5) header field
+        custom_data:
+          type: object
+          description: Custom data object for tenant user info
+        external_user_id:
+          type: string
+          description: A unique identifier in a tenant
+        username:
+          type: string
+          description: Username used to identify the user for password login (unless a primary email will be used instead)
+    UserVerifyEmailOrPhoneNumberInput:
+      type: object
+      properties:
+        change_to_primary:
+          type: boolean
   securitySchemes:
     bearer:
       scheme: bearer

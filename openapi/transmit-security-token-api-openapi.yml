@@ -48,6 +48,20 @@ paths:
       - Token
 components:
   schemas:
+    BadRequestHttpError:
+      type: object
+      properties:
+        message:
+          example: Bad request
+          type: array
+          items:
+            type: string
+        error_code:
+          type: number
+          example: 400
+      required:
+      - message
+      - error_code
     ApiTokenExchangeResponse:
       type: object
       properties:
@@ -65,20 +79,6 @@ components:
       - access_token
       - refresh_token
       - is_user_created
-    BadRequestHttpError:
-      type: object
-      properties:
-        message:
-          example: Bad request
-          type: array
-          items:
-            type: string
-        error_code:
-          type: number
-          example: 400
-      required:
-      - message
-      - error_code
     ApiTokenExchangeRequestInput:
       type: object
       properties:

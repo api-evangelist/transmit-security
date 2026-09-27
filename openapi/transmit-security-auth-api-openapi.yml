@@ -563,93 +563,6 @@ paths:
       description: Production environment (AU)
 components:
   schemas:
-    BaseSmsOtpInput:
-      type: object
-      properties:
-        custom_message:
-          type: string
-          description: Message to send, must contain {otp} and {app} placeholders to be replaced with one time password and application name. Limited to 140 characters
-        sender_id:
-          type: string
-          description: The sender name that appears as the message sender on recipients devices. Limited to 11 characters. Limited support see https://docs.aws.amazon.com/sns/latest/dg/sns-supported-regions-countries.html
-    ApiOtpTokenRequestDto:
-      type: object
-      properties:
-        resource:
-          type: string
-          description: Resource URI the authentication request is attempting to access, which is reflected in the audience (`aud` claim) of the access token. This must be configured as resource for the application.
-        claims:
-          type: object
-          example:
-            id_token:
-              roles: null
-          description: Used to request additional claims in the ID token, such as roles, permissions, and other user profile data. The structure is per the [OIDC Standard](https://openid.net/specs/openid-connect-core-1_0-final.html#ClaimsParameter). For supported claims and how to request custom claims, see the [ID Token Reference](https://developer.transmitsecurity.com/openapi/id_token_reference/).
-        org_id:
-          type: string
-          description: Organization ID, used for member login in B2B scenarios
-        client_attributes:
-          description: Client attributes
-          allOf:
-          - $ref: '#/components/schemas/ClientAttributes'
-        device_id:
-          type: string
-          description: Identifier of the device from which the authentication request originates
-          maxLength: 80
-        session_id:
-          type: string
-          description: Used to associate the authentication with an existing session (such as for MFA). If unspecified, a new session is created and the session ID is returned.
-        passcode:
-          type: string
-          description: OTP to validate
-        identifier_type:
-          type: string
-          description: Type of user identifier used for sending the OTP
-        identifier:
-          type: string
-          description: User identifier that the OTP was sent to
-        request_id:
-          type: string
-          description: The request ID. This is a mandatory parameter if you’ve previously requested to generate a request ID when sending OTP or email link.
-      required:
-      - passcode
-      - identifier_type
-      - identifier
-    ClientAttributes:
-      type: object
-      properties:
-        user_agent:
-          type: string
-        ip_address:
-          type: string
-    ApiSendEmailResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Email sent successfully
-      required:
-      - message
-    ApiSendOtpResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          readOnly: true
-          example: OTP sent
-        approval_data:
-          type: object
-          readOnly: true
-          example:
-            transaction_id: eFII2y40uB9hQ98nXt3tc1IHkRt8GrRZiqZuRn_59wT
-            sum: '200'
-          description: Approval data object, if passed in the request.
-        code:
-          type: string
-          readOnly: true
-          example: '123456'
-          description: One time passcode, if the channel is `direct`.
-      required:
-      - message
     ApiMagicLinkTokenRequestDto:
       type: object
       properties:
@@ -685,6 +598,114 @@ components:
           description: The request ID. This is a mandatory parameter if you’ve previously requested to generate a request ID when sending OTP or email link.
       required:
       - code
+    ApiMagicLinkInitWithIdentifierRequestDto:
+      type: object
+      properties:
+        device_id:
+          type: string
+          description: Identifier of the device from which the authentication request originates
+          maxLength: 80
+        redirect_uri:
+          type: string
+          example: https://www.example.com/verify
+          description: URI that receives a code when the user clicks the email link. This is your server GET endpoint used to complete the authentication, and should accept 'code' as a query parameter. This URI must be configured as an allowed redirect URI for your Transmit client.
+        email_content:
+          description: Texts, logo and color to render email template with
+          allOf:
+          - $ref: '#/components/schemas/EmailContentAttributes'
+        state:
+          type: string
+          description: An opaque string that is used to maintain state between the request and the callback. It will be added to the redirect URI as a query parameter, which should be validated by your server to protect against cross-site request forgery (CSRF) attacks
+        email_expiration:
+          type: number
+          description: invitation link expiration in minutes
+        channel:
+          type: string
+          enum:
+          - email
+          - direct
+          description: Channel to use to send the magic link
+        client_attributes:
+          description: Client attributes
+          allOf:
+          - $ref: '#/components/schemas/ClientAttributes'
+        generate_request_id:
+          type: boolean
+          description: The request ID can serve as an additional security identifier for authentication requests. When set to 'false' (by default), the request ID isn't returned. When set to 'true',  Mosaic generates a unique request ID that must be included in the subsequent Authenticate OTP request along with other required parameters.
+          default: false
+        identifier:
+          type: string
+          example: name@example.com
+          description: Identifier value (email, phone number, user ID, or custom identifier)
+        identifier_type:
+          type: string
+          example: email
+          description: Type of identifier (email, phone_number, user_id, username, or custom identifier type)
+      required:
+      - redirect_uri
+      - identifier
+      - identifier_type
+    ApiTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: User access token for accessing endpoints on behalf of the authenticated user.
+        id_token:
+          type: string
+          description: ID token that identifies the user.
+        refresh_token:
+          type: string
+          description: Refresh token used to refresh an expired access token.
+        token_type:
+          type: string
+          description: Bearer.
+        expires_in:
+          type: number
+          description: Expiration time of the access token in seconds.
+          default: 3600
+        session_id:
+          type: string
+          description: ID of the session in which the authentication occurs.
+      required:
+      - access_token
+      - token_type
+      - expires_in
+      - session_id
+    EmailContentAttributes:
+      type: object
+      properties:
+        subject:
+          type: string
+          description: The subject of the email
+        primaryColor:
+          type: string
+          example: '#6981FF'
+          description: Primary color of the email, specified as a Hex color
+        base64logo:
+          type: string
+          description: Base64 encoded image for email logo. The string length must be less than or equal to 20000 characters
+        headerText:
+          type: string
+          description: The header of the email
+        bodyText:
+          type: string
+          description: The body of the email
+        linkText:
+          type: string
+          description: The text of the link button in the email
+        infoText:
+          type: string
+          description: Any extra information in the email
+        footerText:
+          type: string
+          example: If you didn't request this email, you can safely ignore it.
+          description: The footer of the email
+        senderName:
+          type: string
+          description: Name of the sender of the email
+      required:
+      - subject
     ApiTokenRequestClaims:
       type: object
       properties:
@@ -692,6 +713,35 @@ components:
           type: object
         access_token:
           type: object
+    ApiSendEmailResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Email sent successfully
+      required:
+      - message
+    ApiSendOtpResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          readOnly: true
+          example: OTP sent
+        approval_data:
+          type: object
+          readOnly: true
+          example:
+            transaction_id: eFII2y40uB9hQ98nXt3tc1IHkRt8GrRZiqZuRn_59wT
+            sum: '200'
+          description: Approval data object, if passed in the request.
+        code:
+          type: string
+          readOnly: true
+          example: '123456'
+          description: One time passcode, if the channel is `direct`.
+      required:
+      - message
     ApiOtpInitRequestDto:
       type: object
       properties:
@@ -747,33 +797,22 @@ components:
       - channel
       - identifier_type
       - identifier
-    ApiTokenResponse:
+    BaseSmsOtpInput:
       type: object
       properties:
-        access_token:
+        custom_message:
           type: string
-          description: User access token for accessing endpoints on behalf of the authenticated user.
-        id_token:
+          description: Message to send, must contain {otp} and {app} placeholders to be replaced with one time password and application name. Limited to 140 characters
+        sender_id:
           type: string
-          description: ID token that identifies the user.
-        refresh_token:
+          description: The sender name that appears as the message sender on recipients devices. Limited to 11 characters. Limited support see https://docs.aws.amazon.com/sns/latest/dg/sns-supported-regions-countries.html
+    ClientAttributes:
+      type: object
+      properties:
+        user_agent:
           type: string
-          description: Refresh token used to refresh an expired access token.
-        token_type:
+        ip_address:
           type: string
-          description: Bearer.
-        expires_in:
-          type: number
-          description: Expiration time of the access token in seconds.
-          default: 3600
-        session_id:
-          type: string
-          description: ID of the session in which the authentication occurs.
-      required:
-      - access_token
-      - token_type
-      - expires_in
-      - session_id
     ApiMagicLinkInitWithEmailRequestDto:
       type: object
       properties:
@@ -817,87 +856,127 @@ components:
       required:
       - redirect_uri
       - email
-    ApiMagicLinkInitWithIdentifierRequestDto:
+    ApiOtpTokenRequestDto:
       type: object
       properties:
-        device_id:
+        resource:
           type: string
-          description: Identifier of the device from which the authentication request originates
-          maxLength: 80
-        redirect_uri:
+          description: Resource URI the authentication request is attempting to access, which is reflected in the audience (`aud` claim) of the access token. This must be configured as resource for the application.
+        claims:
+          type: object
+          example:
+            id_token:
+              roles: null
+          description: Used to request additional claims in the ID token, such as roles, permissions, and other user profile data. The structure is per the [OIDC Standard](https://openid.net/specs/openid-connect-core-1_0-final.html#ClaimsParameter). For supported claims and how to request custom claims, see the [ID Token Reference](https://developer.transmitsecurity.com/openapi/id_token_reference/).
+        org_id:
           type: string
-          example: https://www.example.com/verify
-          description: URI that receives a code when the user clicks the email link. This is your server GET endpoint used to complete the authentication, and should accept 'code' as a query parameter. This URI must be configured as an allowed redirect URI for your Transmit client.
-        email_content:
-          description: Texts, logo and color to render email template with
-          allOf:
-          - $ref: '#/components/schemas/EmailContentAttributes'
-        state:
-          type: string
-          description: An opaque string that is used to maintain state between the request and the callback. It will be added to the redirect URI as a query parameter, which should be validated by your server to protect against cross-site request forgery (CSRF) attacks
-        email_expiration:
-          type: number
-          description: invitation link expiration in minutes
-        channel:
-          type: string
-          enum:
-          - email
-          - direct
-          description: Channel to use to send the magic link
+          description: Organization ID, used for member login in B2B scenarios
         client_attributes:
           description: Client attributes
           allOf:
           - $ref: '#/components/schemas/ClientAttributes'
-        generate_request_id:
-          type: boolean
-          description: The request ID can serve as an additional security identifier for authentication requests. When set to 'false' (by default), the request ID isn't returned. When set to 'true',  Mosaic generates a unique request ID that must be included in the subsequent Authenticate OTP request along with other required parameters.
-          default: false
-        identifier:
+        device_id:
           type: string
-          example: name@example.com
-          description: Identifier value (email, phone number, user ID, or custom identifier)
+          description: Identifier of the device from which the authentication request originates
+          maxLength: 80
+        session_id:
+          type: string
+          description: Used to associate the authentication with an existing session (such as for MFA). If unspecified, a new session is created and the session ID is returned.
+        passcode:
+          type: string
+          description: OTP to validate
         identifier_type:
           type: string
-          example: email
-          description: Type of identifier (email, phone_number, user_id, username, or custom identifier type)
+          description: Type of user identifier used for sending the OTP
+        identifier:
+          type: string
+          description: User identifier that the OTP was sent to
+        request_id:
+          type: string
+          description: The request ID. This is a mandatory parameter if you’ve previously requested to generate a request ID when sending OTP or email link.
       required:
-      - redirect_uri
-      - identifier
+      - passcode
       - identifier_type
-    EmailContentAttributes:
+      - identifier
+    ApiSendOtpEmailResponse:
       type: object
       properties:
-        subject:
+        message:
           type: string
-          description: The subject of the email
-        primaryColor:
-          type: string
-          example: '#6981FF'
-          description: Primary color of the email, specified as a Hex color
-        base64logo:
-          type: string
-          description: Base64 encoded image for email logo. The string length must be less than or equal to 20000 characters
-        headerText:
-          type: string
-          description: The header of the email
-        bodyText:
-          type: string
-          description: The body of the email
-        linkText:
-          type: string
-          description: The text of the link button in the email
-        infoText:
-          type: string
-          description: Any extra information in the email
-        footerText:
-          type: string
-          example: If you didn't request this email, you can safely ignore it.
-          description: The footer of the email
-        senderName:
-          type: string
-          description: Name of the sender of the email
+          readOnly: true
+          example: OTP email sent
+        approval_data:
+          type: object
+          readOnly: true
+          example:
+            transaction_id: eFII2y40uB9hQ98nXt3tc1IHkRt8GrRZiqZuRn_59wT
+            sum: '200'
+          description: Approval data object, if passed in the request.
       required:
-      - subject
+      - message
+    BadRequestHttpError:
+      type: object
+      properties:
+        message:
+          example: Bad request
+          type: array
+          items:
+            type: string
+        error_code:
+          type: number
+          example: 400
+      required:
+      - message
+      - error_code
+    ApiValidateAuthEmailOtpInput:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email that the OTP was sent to
+        passcode:
+          type: string
+          description: Email code to validate
+        response_type:
+          type: string
+          description: Response type requested for the authentication flow.
+          default: code
+          enum:
+          - code
+          - id_token
+        nonce:
+          type: string
+          description: A random value that will associate the client request with the ID token, and used to mitigate replay attacks. It will be added to the ID token and the backend service should only accept ID tokens that include the same nonce value as the one included in the original request.
+      required:
+      - email
+      - passcode
+    BadRequestException:
+      type: object
+      properties: {}
+    ApiSendAuthSmsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          readOnly: true
+          example: SMS sent
+        approval_data:
+          type: object
+          readOnly: true
+          example:
+            transaction_id: eFII2y40uB9hQ98nXt3tc1IHkRt8GrRZiqZuRn_59wT
+            sum: '200'
+          description: Approval data object, if passed in the request.
+      required:
+      - message
+    ApiLogoutResponse:
+      type: object
+      properties:
+        sessions_count:
+          type: number
+          description: Number of logged out sessions
+      required:
+      - sessions_count
     InvalidTokenHttpError:
       type: object
       properties:
@@ -910,14 +989,6 @@ components:
       required:
       - message
       - error_code
-    ApiLogoutResponse:
-      type: object
-      properties:
-        sessions_count:
-          type: number
-          description: Number of logged out sessions
-      required:
-      - sessions_count
     ApiSendLoginEmailInput:
       type: object
       properties:
@@ -962,33 +1033,6 @@ components:
       required:
       - email
       - redirect_uri
-    NotFoundHttpError:
-      type: object
-      properties:
-        message:
-          type: string
-        error_code:
-          type: number
-          example: 404
-      required:
-      - message
-      - error_code
-    ApiSendOtpEmailResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          readOnly: true
-          example: OTP email sent
-        approval_data:
-          type: object
-          readOnly: true
-          example:
-            transaction_id: eFII2y40uB9hQ98nXt3tc1IHkRt8GrRZiqZuRn_59wT
-            sum: '200'
-          description: Approval data object, if passed in the request.
-      required:
-      - message
     ApiValidateAuthSmsOtpInput:
       type: object
       properties:
@@ -1011,25 +1055,6 @@ components:
       required:
       - phone_number
       - passcode
-    BadRequestException:
-      type: object
-      properties: {}
-    ApiSendAuthSmsResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          readOnly: true
-          example: SMS sent
-        approval_data:
-          type: object
-          readOnly: true
-          example:
-            transaction_id: eFII2y40uB9hQ98nXt3tc1IHkRt8GrRZiqZuRn_59wT
-            sum: '200'
-          description: Approval data object, if passed in the request.
-      required:
-      - message
     ApiSendOtpEmailRequestInput:
       type: object
       properties:
@@ -1080,28 +1105,17 @@ components:
       required:
       - email
       - redirect_uri
-    ApiValidateAuthEmailOtpInput:
+    NotFoundHttpError:
       type: object
       properties:
-        email:
+        message:
           type: string
-          description: Email that the OTP was sent to
-        passcode:
-          type: string
-          description: Email code to validate
-        response_type:
-          type: string
-          description: Response type requested for the authentication flow.
-          default: code
-          enum:
-          - code
-          - id_token
-        nonce:
-          type: string
-          description: A random value that will associate the client request with the ID token, and used to mitigate replay attacks. It will be added to the ID token and the backend service should only accept ID tokens that include the same nonce value as the one included in the original request.
+        error_code:
+          type: number
+          example: 404
       required:
-      - email
-      - passcode
+      - message
+      - error_code
     RedirectUriResponse:
       type: object
       properties:
@@ -1111,20 +1125,6 @@ components:
           description: URI used to complete the flow. Sending a GET request to this URI will redirect the browser to your redirect URI with a code to exchange for user tokens.
       required:
       - result
-    BadRequestHttpError:
-      type: object
-      properties:
-        message:
-          example: Bad request
-          type: array
-          items:
-            type: string
-        error_code:
-          type: number
-          example: 400
-      required:
-      - message
-      - error_code
     ApiSendAuthSmsOtpInput:
       type: object
       properties:
