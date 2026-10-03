@@ -416,109 +416,15 @@ paths:
       - Organizations
 components:
   schemas:
-    BadRequestHttpError:
+    ApiAppIds:
       type: object
       properties:
-        message:
-          example: Bad request
-          type: array
-          items:
-            type: string
-        error_code:
-          type: number
-          example: 400
-      required:
-      - message
-      - error_code
-    ApiUpdateOrganizationInput:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the organization
-        domain:
-          type: string
-          description: Domain of the organization
-          deprecated: true
-        domains:
-          description: Domains of the organization
-          type: array
-          items:
-            type: string
-        enabled:
-          type: boolean
-          description: Indicates if the organization is currently enabled
-        alias_name:
-          type: string
-          description: Alias name of the organization
-    ApiCreateManagedOrganizationInput:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the organization
-        domain:
-          type: string
-          description: Domain of the organization
-          deprecated: true
-        domains:
-          description: Domains of the organization
-          type: array
-          items:
-            type: string
-        enabled:
-          type: boolean
-          description: Indicates if the organization is currently enabled
-        alias_name:
-          type: string
-          description: Alias name of the managed organization
-      required:
-      - name
-      - domain
-      - domains
-    IdentifierIsTakenHttpError:
-      type: object
-      properties:
-        message:
-          type: string
-        error_code:
-          type: number
-        ts_error_code:
-          type: string
-      required:
-      - message
-      - error_code
-      - ts_error_code
-    ApiCreateOrganizationInput:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the organization
-        domain:
-          type: string
-          description: Domain of the organization
-          deprecated: true
-        domains:
-          description: Domains of the organization
-          type: array
-          items:
-            type: string
         app_ids:
-          description: A list of applications the organization can access
+          description: A list of applications to add the organization to
           type: array
           items:
             type: string
-        enabled:
-          type: boolean
-          description: Indicates if the organization is currently enabled
-        alias_name:
-          type: string
-          description: Alias name of the organization
       required:
-      - name
-      - domain
-      - domains
       - app_ids
     ApiOrganization:
       type: object
@@ -574,6 +480,118 @@ components:
       - name
       - domain
       - enabled
+    BadRequestHttpError:
+      type: object
+      properties:
+        message:
+          example: Bad request
+          type: array
+          items:
+            type: string
+        error_code:
+          type: number
+          example: 400
+      required:
+      - message
+      - error_code
+    ApiCreateManagedOrganizationInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the organization
+        domain:
+          type: string
+          description: Domain of the organization
+          deprecated: true
+        domains:
+          description: Domains of the organization
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+          description: Indicates if the organization is currently enabled
+        alias_name:
+          type: string
+          description: Alias name of the managed organization
+      required:
+      - name
+      - domain
+      - domains
+    ApiUpdateOrganizationInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the organization
+        domain:
+          type: string
+          description: Domain of the organization
+          deprecated: true
+        domains:
+          description: Domains of the organization
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+          description: Indicates if the organization is currently enabled
+        alias_name:
+          type: string
+          description: Alias name of the organization
+    LogoUploadDto:
+      type: object
+      properties:
+        logo:
+          type: string
+          format: binary
+      required:
+      - logo
+    IdentifierIsTakenHttpError:
+      type: object
+      properties:
+        message:
+          type: string
+        error_code:
+          type: number
+        ts_error_code:
+          type: string
+      required:
+      - message
+      - error_code
+      - ts_error_code
+    ApiCreateOrganizationInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the organization
+        domain:
+          type: string
+          description: Domain of the organization
+          deprecated: true
+        domains:
+          description: Domains of the organization
+          type: array
+          items:
+            type: string
+        app_ids:
+          description: A list of applications the organization can access
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+          description: Indicates if the organization is currently enabled
+        alias_name:
+          type: string
+          description: Alias name of the organization
+      required:
+      - name
+      - domain
+      - domains
+      - app_ids
     NotFoundHttpError:
       type: object
       properties:
@@ -585,24 +603,6 @@ components:
       required:
       - message
       - error_code
-    LogoUploadDto:
-      type: object
-      properties:
-        logo:
-          type: string
-          format: binary
-      required:
-      - logo
-    ApiAppIds:
-      type: object
-      properties:
-        app_ids:
-          description: A list of applications to add the organization to
-          type: array
-          items:
-            type: string
-      required:
-      - app_ids
   securitySchemes:
     bearer:
       scheme: bearer

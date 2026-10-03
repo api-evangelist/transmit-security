@@ -1019,37 +1019,96 @@ paths:
       - Users
 components:
   schemas:
-    DeviceKeyResponseDto:
+    ApiUserIdentityProvider:
       type: object
       properties:
-        status:
-          description: Status of the device
-          $ref: '#/components/schemas/DeviceStatus'
-        display_name:
+        source:
           type: string
-          description: Friendly device name, used when displaying a list of the user's devices
-        custom_data:
-          type: object
-          description: Custom data stored for this device, such as tags or device data obtained using other tools
-        push_config:
-          description: Device push notification configuration
-          allOf:
-          - $ref: '#/components/schemas/DevicePushConfigDto'
-        key_id:
+          description: Type of identity provider
+          enum:
+          - UserID
+          - BindID
+          - Google
+          - Apple
+          - Facebook
+          - Line
+          - Tiktok
+          - Transmit Identity
+          - Transmit Security
+          - BindIDApi
+          - Email OTP
+          - SMS OTP
+          - Direct OTP
+          - Email Magic Link
+          - Password
+          - Orchestrated
+          - SAML
+          - SSO OIDC
+          - Mobile Biometrics
+          - totp
+          - face
+        identifier:
           type: string
-          description: Identifier of the user's device
-        created_at:
+          description: Identifier of the user in the provider's system
+        email:
+          type: string
+          description: Email used by the user to authenticate to this provider
+        first_auth_date:
           format: date-time
           type: string
-          description: Date the device key was added
-        updated_at:
+          description: Date user first authenticated to this provider
+        last_auth_date:
           format: date-time
           type: string
-          description: Date the device key metadata was last updated
+          description: Date user last authenticated to this provider
       required:
-      - status
-      - created_at
-      - updated_at
+      - source
+      - identifier
+      - email
+      - first_auth_date
+      - last_auth_date
+    DelegatedAccessInput:
+      type: object
+      properties:
+        actor_id:
+          type: string
+          description: The ID of the primary user that has permissions to act on behalf of this user
+        permissions:
+          description: Names of permissions that are granted to the primary user on behalf of the dependent
+          type: array
+          items:
+            type: string
+      required:
+      - actor_id
+      - permissions
+    ApiAddPassword:
+      type: object
+      properties:
+        password:
+          type: string
+          description: The user's new password
+        force_replace:
+          type: boolean
+          description: When true the password is temporary and the user will be required to replace it upon successful login
+          default: true
+        username:
+          type: string
+          description: The user's new username. This will be the identifier the user will use to authenticate. If username is not provided and the user has verified their email, that email address will be used as the username.
+        enforce_complexity:
+          type: boolean
+          description: If true, the password must meet the password complexity requirements. If false, the password can be any string.
+          default: true
+      required:
+      - password
+    RegisterPasswordResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          readOnly: true
+          example: Password registered
+      required:
+      - message
     ApiCreateUserInput:
       type: object
       properties:
@@ -1110,151 +1169,6 @@ components:
           description: If this user is a dependent, this defines the permissions that the primary user will have to act on behalf of the dependent user.
           allOf:
           - $ref: '#/components/schemas/DelegatedAccessInput'
-    ApiPasswordInformation:
-      type: object
-      properties:
-        expired:
-          type: boolean
-          description: Whether the password is currently expired
-        temporary:
-          type: boolean
-          description: Whether the password must be reset after first use
-        updated_at:
-          type: number
-          description: The date the password was last updated, as unix epoch in milliseconds
-        expires_in:
-          format: date-time
-          type: string
-          description: The date the password will be expired
-      required:
-      - expired
-      - temporary
-      - updated_at
-    ApiUserIdentityAlias:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Alias type, which varies based on authentication method
-          enum:
-          - username
-          - email
-          - phone_number
-          - unspecified
-        value:
-          type: string
-          description: Alias value
-      required:
-      - type
-      - value
-    ApiUserName:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title
-          maximum: 30
-        first_name:
-          type: string
-          description: User's first name
-          maximum: 30
-        last_name:
-          type: string
-          description: User's last name
-          maximum: 30
-        middle_name:
-          type: string
-          description: User's middle name
-          maximum: 30
-    ForbiddenHttpError:
-      type: object
-      properties:
-        message:
-          type: string
-        error_code:
-          type: number
-          example: 403
-      required:
-      - message
-      - error_code
-    ApiAddPassword:
-      type: object
-      properties:
-        password:
-          type: string
-          description: The user's new password
-        force_replace:
-          type: boolean
-          description: When true the password is temporary and the user will be required to replace it upon successful login
-          default: true
-        username:
-          type: string
-          description: The user's new username. This will be the identifier the user will use to authenticate. If username is not provided and the user has verified their email, that email address will be used as the username.
-        enforce_complexity:
-          type: boolean
-          description: If true, the password must meet the password complexity requirements. If false, the password can be any string.
-          default: true
-      required:
-      - password
-    ApiUpdatePassword:
-      type: object
-      properties:
-        password:
-          type: string
-          description: The user's new password
-        force_replace:
-          type: boolean
-          description: When true the password is temporary and the user will be required to replace it upon successful login
-          default: true
-    RegisterPasswordResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          readOnly: true
-          example: Password registered
-      required:
-      - message
-    IdentifierIsTakenHttpError:
-      type: object
-      properties:
-        message:
-          type: string
-        error_code:
-          type: number
-        ts_error_code:
-          type: string
-      required:
-      - message
-      - error_code
-      - ts_error_code
-    ApiUserEmail:
-      type: object
-      properties:
-        value:
-          type: string
-          description: Email address
-        email_verified:
-          type: boolean
-          description: Indicates if email was verified (via magic link, social login, or email verification flows)
-        verified_at:
-          format: date-time
-          type: string
-          description: Last verification date of the email
-      required:
-      - value
-    ApiUserPasswordInput:
-      type: object
-      properties:
-        password:
-          type: string
-          description: The user's new password
-        force_replace:
-          type: boolean
-          description: When true the password is temporary and the user will be required to replace it upon successful login
-          default: true
-      required:
-      - password
     ApiCreateOrUpdateAddressInput:
       type: object
       properties:
@@ -1275,6 +1189,12 @@ components:
           description: Postal code
         type:
           $ref: '#/components/schemas/AddressType'
+    AddressType:
+      type: string
+      enum:
+      - Home
+      - Work
+      - Other
     ApiGroup:
       type: object
       properties:
@@ -1301,12 +1221,90 @@ components:
       - name
       - created_at
       - updated_at
-    DeviceStatus:
+    PageInfo:
+      type: object
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+      required:
+      - has_next_page
+      - has_previous_page
+    ForbiddenHttpError:
+      type: object
+      properties:
+        message:
+          type: string
+        error_code:
+          type: number
+          example: 403
+      required:
+      - message
+      - error_code
+    Status:
       type: string
       enum:
       - Active
-      - Blocked
-      - Suspended
+      - Disabled
+      - Pending
+    DeviceKeyResponseDto:
+      type: object
+      properties:
+        status:
+          description: Status of the device
+          $ref: '#/components/schemas/DeviceStatus'
+        display_name:
+          type: string
+          description: Friendly device name, used when displaying a list of the user's devices
+        custom_data:
+          type: object
+          description: Custom data stored for this device, such as tags or device data obtained using other tools
+        push_config:
+          description: Device push notification configuration
+          allOf:
+          - $ref: '#/components/schemas/DevicePushConfigDto'
+        key_id:
+          type: string
+          description: Identifier of the user's device
+        created_at:
+          format: date-time
+          type: string
+          description: Date the device key was added
+        updated_at:
+          format: date-time
+          type: string
+          description: Date the device key metadata was last updated
+      required:
+      - status
+      - created_at
+      - updated_at
+    NotFoundHttpError:
+      type: object
+      properties:
+        message:
+          type: string
+        error_code:
+          type: number
+          example: 404
+      required:
+      - message
+      - error_code
+    ApiUserPhone:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Phone number
+        phone_number_verified:
+          type: boolean
+          description: Indicates if phone number was verified (via SMS OTP or verification flow)
+        verified_at:
+          format: date-time
+          type: string
+          description: Last verification date of the phone number
+      required:
+      - value
     ApiMeAddPassword:
       type: object
       properties:
@@ -1318,20 +1316,6 @@ components:
           description: The user's new username. This will be the identifier the user will use to authenticate. If username is not provided and the user has verified their email, that email address will be used as the username.
       required:
       - password
-    BadRequestHttpError:
-      type: object
-      properties:
-        message:
-          example: Bad request
-          type: array
-          items:
-            type: string
-        error_code:
-          type: number
-          example: 400
-      required:
-      - message
-      - error_code
     ApiUsersCount:
       type: object
       properties:
@@ -1340,6 +1324,174 @@ components:
           description: Number of users
       required:
       - user_count
+    ApiUpdateUserInput:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Primary email address of the user
+        phone_number:
+          type: string
+          description: Primary phone number of the user, specified in E.164 format
+        secondary_emails:
+          description: Secondary email addresses to add to user's current emails
+          type: array
+          items:
+            type: string
+        secondary_phone_numbers:
+          description: Secondary phone numbers to add to user's phone numbers, each specified in E.164 format
+          type: array
+          items:
+            type: string
+        birthday:
+          format: date-time
+          type: string
+          description: User's birthday
+        address:
+          description: User's address
+          allOf:
+          - $ref: '#/components/schemas/ApiCreateOrUpdateAddressInput'
+        name:
+          description: Object describing user's full name
+          allOf:
+          - $ref: '#/components/schemas/ApiUserNameInput'
+        status:
+          type: string
+          description: Status of user
+          enum:
+          - Active
+          - Disabled
+          - Pending
+        external_account_id:
+          type: string
+          description: User identifier in an app, set by the app
+        custom_app_data:
+          type: object
+          description: Custom data object for app-related user info
+        picture:
+          type: string
+          description: The picture of user, specified as a URL
+        language:
+          type: string
+          description: The language of the user, as provided by the browser using the [Accept-Language](https://www.rfc-editor.org/rfc/rfc7231#section-5.3.5) header field
+        custom_data:
+          type: object
+          description: Custom data object for tenant user info
+        external_user_id:
+          type: string
+          description: A unique identifier in a tenant
+        username:
+          type: string
+          description: Username used to identify the user for password login (unless a primary email will be used instead)
+    ApiUserNameInput:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title
+        first_name:
+          type: string
+          description: User's first name
+        last_name:
+          type: string
+          description: User's last name
+        middle_name:
+          type: string
+          description: User's middle name
+    ApiUserName:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title
+          maximum: 30
+        first_name:
+          type: string
+          description: User's first name
+          maximum: 30
+        last_name:
+          type: string
+          description: User's last name
+          maximum: 30
+        middle_name:
+          type: string
+          description: User's middle name
+          maximum: 30
+    ApiUserPasswordInput:
+      type: object
+      properties:
+        password:
+          type: string
+          description: The user's new password
+        force_replace:
+          type: boolean
+          description: When true the password is temporary and the user will be required to replace it upon successful login
+          default: true
+      required:
+      - password
+    ApiUpdatePassword:
+      type: object
+      properties:
+        password:
+          type: string
+          description: The user's new password
+        force_replace:
+          type: boolean
+          description: When true the password is temporary and the user will be required to replace it upon successful login
+          default: true
+    UserVerifyEmailOrPhoneNumberInput:
+      type: object
+      properties:
+        change_to_primary:
+          type: boolean
+    ApiAddress:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Country
+          maximum: 30
+        state:
+          type: string
+          description: State
+          maximum: 30
+        city:
+          type: string
+          description: City
+          maximum: 30
+        street_address:
+          type: string
+          description: Street address
+          maximum: 150
+        postal_code:
+          type: string
+          description: Postal code
+          maximum: 30
+        type:
+          $ref: '#/components/schemas/AddressType'
+        updated_at:
+          type: number
+          description: Date user's address was last updated
+    ApiPasswordInformation:
+      type: object
+      properties:
+        expired:
+          type: boolean
+          description: Whether the password is currently expired
+        temporary:
+          type: boolean
+          description: Whether the password must be reset after first use
+        updated_at:
+          type: number
+          description: The date the password was last updated, as unix epoch in milliseconds
+        expires_in:
+          format: date-time
+          type: string
+          description: The date the password will be expired
+      required:
+      - expired
+      - temporary
+      - updated_at
     DevicePushConfigDto:
       type: object
       properties:
@@ -1360,16 +1512,84 @@ components:
       required:
       - device_token
       - type
-    PageInfo:
+    ApiUserIdentity:
       type: object
       properties:
-        has_next_page:
-          type: boolean
-        has_previous_page:
-          type: boolean
+        provider_name:
+          type: string
+          description: Name of identity provider
+        provider_type:
+          type: string
+          description: Indicates whether the identity provider is Transmit (Native) or a social login provider (OAuth2)
+          enum:
+          - OAuth2
+          - Native
+          - External
+        auth_type:
+          type: string
+          enum:
+          - webauthn
+          - email_otp
+          - sms_otp
+          - direct_otp
+          - email_magic_link
+          - password
+          - oauth2
+          - saml
+          - transmit
+          - totp
+          description: Type of authentication method that was used
+        identifier:
+          type: string
+          description: Identifier of the user in the provider's system
+        user_alias:
+          description: Alias used by the user to authenticate to this provider
+          allOf:
+          - $ref: '#/components/schemas/ApiUserIdentityAlias'
+        first_auth_date:
+          format: date-time
+          type: string
+          description: Date user first authenticated to this provider
+        last_auth_date:
+          format: date-time
+          type: string
+          description: Date user last authenticated to this provider
       required:
-      - has_next_page
-      - has_previous_page
+      - provider_name
+      - provider_type
+      - auth_type
+      - identifier
+      - first_auth_date
+      - last_auth_date
+    ApiGetAllUsers:
+      type: object
+      properties:
+        total_count:
+          type: number
+        page_info:
+          $ref: '#/components/schemas/PageInfo'
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiUser'
+      required:
+      - total_count
+      - page_info
+      - result
+    BadRequestHttpError:
+      type: object
+      properties:
+        message:
+          example: Bad request
+          type: array
+          items:
+            type: string
+        error_code:
+          type: number
+          example: 400
+      required:
+      - message
+      - error_code
     ApiUser:
       type: object
       properties:
@@ -1467,277 +1687,57 @@ components:
       - status
       - created_at
       - updated_at
-    ApiAddress:
-      type: object
-      properties:
-        country:
-          type: string
-          description: Country
-          maximum: 30
-        state:
-          type: string
-          description: State
-          maximum: 30
-        city:
-          type: string
-          description: City
-          maximum: 30
-        street_address:
-          type: string
-          description: Street address
-          maximum: 150
-        postal_code:
-          type: string
-          description: Postal code
-          maximum: 30
-        type:
-          $ref: '#/components/schemas/AddressType'
-        updated_at:
-          type: number
-          description: Date user's address was last updated
-    ApiUserIdentityProvider:
-      type: object
-      properties:
-        source:
-          type: string
-          description: Type of identity provider
-          enum:
-          - UserID
-          - BindID
-          - Google
-          - Apple
-          - Facebook
-          - Line
-          - Tiktok
-          - Transmit Identity
-          - Transmit Security
-          - BindIDApi
-          - Email OTP
-          - SMS OTP
-          - Direct OTP
-          - Email Magic Link
-          - Password
-          - Orchestrated
-          - SAML
-          - SSO OIDC
-          - Mobile Biometrics
-          - totp
-          - face
-        identifier:
-          type: string
-          description: Identifier of the user in the provider's system
-        email:
-          type: string
-          description: Email used by the user to authenticate to this provider
-        first_auth_date:
-          format: date-time
-          type: string
-          description: Date user first authenticated to this provider
-        last_auth_date:
-          format: date-time
-          type: string
-          description: Date user last authenticated to this provider
-      required:
-      - source
-      - identifier
-      - email
-      - first_auth_date
-      - last_auth_date
-    ApiGetAllUsers:
-      type: object
-      properties:
-        total_count:
-          type: number
-        page_info:
-          $ref: '#/components/schemas/PageInfo'
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiUser'
-      required:
-      - total_count
-      - page_info
-      - result
-    ApiUserNameInput:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title
-        first_name:
-          type: string
-          description: User's first name
-        last_name:
-          type: string
-          description: User's last name
-        middle_name:
-          type: string
-          description: User's middle name
-    DelegatedAccessInput:
-      type: object
-      properties:
-        actor_id:
-          type: string
-          description: The ID of the primary user that has permissions to act on behalf of this user
-        permissions:
-          description: Names of permissions that are granted to the primary user on behalf of the dependent
-          type: array
-          items:
-            type: string
-      required:
-      - actor_id
-      - permissions
-    ApiUserPhone:
+    ApiUserEmail:
       type: object
       properties:
         value:
           type: string
-          description: Phone number
-        phone_number_verified:
+          description: Email address
+        email_verified:
           type: boolean
-          description: Indicates if phone number was verified (via SMS OTP or verification flow)
+          description: Indicates if email was verified (via magic link, social login, or email verification flows)
         verified_at:
           format: date-time
           type: string
-          description: Last verification date of the phone number
+          description: Last verification date of the email
       required:
       - value
-    Status:
-      type: string
-      enum:
-      - Active
-      - Disabled
-      - Pending
-    NotFoundHttpError:
+    IdentifierIsTakenHttpError:
       type: object
       properties:
         message:
           type: string
         error_code:
           type: number
-          example: 404
+        ts_error_code:
+          type: string
       required:
       - message
       - error_code
-    AddressType:
+      - ts_error_code
+    DeviceStatus:
       type: string
       enum:
-      - Home
-      - Work
-      - Other
-    ApiUserIdentity:
+      - Active
+      - Blocked
+      - Suspended
+    ApiUserIdentityAlias:
       type: object
       properties:
-        provider_name:
+        type:
           type: string
-          description: Name of identity provider
-        provider_type:
-          type: string
-          description: Indicates whether the identity provider is Transmit (Native) or a social login provider (OAuth2)
+          description: Alias type, which varies based on authentication method
           enum:
-          - OAuth2
-          - Native
-          - External
-        auth_type:
+          - username
+          - email
+          - phone_number
+          - unspecified
+        value:
           type: string
-          enum:
-          - webauthn
-          - email_otp
-          - sms_otp
-          - direct_otp
-          - email_magic_link
-          - password
-          - oauth2
-          - saml
-          - transmit
-          - totp
-          description: Type of authentication method that was used
-        identifier:
-          type: string
-          description: Identifier of the user in the provider's system
-        user_alias:
-          description: Alias used by the user to authenticate to this provider
-          allOf:
-          - $ref: '#/components/schemas/ApiUserIdentityAlias'
-        first_auth_date:
-          format: date-time
-          type: string
-          description: Date user first authenticated to this provider
-        last_auth_date:
-          format: date-time
-          type: string
-          description: Date user last authenticated to this provider
+          description: Alias value
       required:
-      - provider_name
-      - provider_type
-      - auth_type
-      - identifier
-      - first_auth_date
-      - last_auth_date
-    ApiUpdateUserInput:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Primary email address of the user
-        phone_number:
-          type: string
-          description: Primary phone number of the user, specified in E.164 format
-        secondary_emails:
-          description: Secondary email addresses to add to user's current emails
-          type: array
-          items:
-            type: string
-        secondary_phone_numbers:
-          description: Secondary phone numbers to add to user's phone numbers, each specified in E.164 format
-          type: array
-          items:
-            type: string
-        birthday:
-          format: date-time
-          type: string
-          description: User's birthday
-        address:
-          description: User's address
-          allOf:
-          - $ref: '#/components/schemas/ApiCreateOrUpdateAddressInput'
-        name:
-          description: Object describing user's full name
-          allOf:
-          - $ref: '#/components/schemas/ApiUserNameInput'
-        status:
-          type: string
-          description: Status of user
-          enum:
-          - Active
-          - Disabled
-          - Pending
-        external_account_id:
-          type: string
-          description: User identifier in an app, set by the app
-        custom_app_data:
-          type: object
-          description: Custom data object for app-related user info
-        picture:
-          type: string
-          description: The picture of user, specified as a URL
-        language:
-          type: string
-          description: The language of the user, as provided by the browser using the [Accept-Language](https://www.rfc-editor.org/rfc/rfc7231#section-5.3.5) header field
-        custom_data:
-          type: object
-          description: Custom data object for tenant user info
-        external_user_id:
-          type: string
-          description: A unique identifier in a tenant
-        username:
-          type: string
-          description: Username used to identify the user for password login (unless a primary email will be used instead)
-    UserVerifyEmailOrPhoneNumberInput:
-      type: object
-      properties:
-        change_to_primary:
-          type: boolean
+      - type
+      - value
   securitySchemes:
     bearer:
       scheme: bearer

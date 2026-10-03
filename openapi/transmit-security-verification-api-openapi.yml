@@ -214,327 +214,73 @@ paths:
       - Verification
 components:
   schemas:
-    SessionImagesResponse:
+    NationalStatusDto:
       type: object
       properties:
-        session_images:
+        citizen:
+          type: boolean
+          description: Indicates if the person is a citizen of the issuing country
+        resident:
+          type: boolean
+          description: Indicates if the person is a permanent resident of the issuing country
+    DeprecatedSessionResult:
+      type: object
+      properties:
+        session_id:
+          type: string
+          description: ID of the verification session
+        status:
+          type: string
+          description: "Status of the verification session.\n     See [verification statuses](/guides/verify/identity_verification_result/#verification-status)"
+          enum:
+          - pending
+          - capturing
+          - processing
+          - recapture
+          - complete
+          - error
+        recommendation:
+          type: string
+          description: "Aggregated result of the verification checks. Returned only if the verification was completed.\n    See [recommendations]( /guides/verify/identity_verification_result/#recommendations)"
+          enum:
+          - ALLOW
+          - CHALLENGE
+          - DENY
+        rejection_description:
+          description: Human-readable description of any issues with this session. Not returned if the recommendation is ALLOW
           type: array
-          items:
-            $ref: '#/components/schemas/SessionImageDto'
-      required:
-      - session_images
-    CustomerInformation:
-      type: object
-      properties:
-        organization_name:
-          type: string
-          description: Name of the organization or branch
-        organization_id:
-          type: string
-          description: Unique ID of the organization
-        external_user_id:
-          type: string
-          description: Unique identifier of a user. It should be one word and shouldn't not include any PII
-    RiskDetailsNetworkDto:
-      type: object
-      properties:
-        network_country:
-          type: string
-          description: Country detected from the network.
-          example: IE
-        ip_address:
-          type: string
-          description: IP address (IPv4 or IPv6) detected from the network.
-          example: 192.168.1.1
-        ip_type:
-          type: string
-          description: Type of IP address detected.
-          example: hosting
-        ip_organization:
-          type: string
-          description: Organization associated with the IP address.
-          example: Amazon.com, Inc.
-        timezone:
-          type: string
-          description: Timezone detected from the IP address.
-          example: Europe/Dublin
-        vpn:
-          type: boolean
-          description: Indicates whether VPN usage was detected.
-          example: false
-        tor:
-          type: boolean
-          description: Indicates whether Tor usage was detected.
-          example: false
-        proxy:
-          type: boolean
-          description: Indicates whether proxy usage was detected.
-          example: false
-        anonymizer:
-          type: boolean
-          description: Indicates whether anonymizer usage was detected.
-          example: false
-    CreateSessionRequest:
-      type: object
-      properties:
-        callback_url:
-          type: string
-          description: The url that the user will be redirected to once the verification process completes. It will contain the session ID used to obtain the verification result
-        state:
-          type: string
-          description: An opaque string that is used to maintain state between the request and the callback, so it should be unique per request. It will be added as a URL parameter (named state) to the callback URL. The URL parameter should be validated by your server to protect against cross-site request forgery (CSRF) attacks
-        time_to_live:
-          type: string
-          description: The time after which this session will be deleted (including all images and verification data). Once deleted, it will no longer be visible in the Admin Portal and the verification result won't be available via API. It should be formatted as a duration, e.g "30d", "60d", "90d". Defaults to "90d", which is 90 days.
-          deprecated: true
-          example: 90d
-          default: 90d
-        mock_behavior:
-          description: Sets the behavior for the session for testing purposes only. For example, you can simulate a flow that results in a specific recommendation without performing an actual verification.
-          example: null
-          allOf:
-          - $ref: '#/components/schemas/MockBehavior'
-        auto_start:
-          type: boolean
-          description: Deprecated. See 'start'
-          deprecated: true
-        start:
-          description: Automatically start the session upon creation. If you intend to send this session to a frontend component (app, sdk, etc), leave this parameter empty - the session will be started by the frontend. However if you want to operate this session via your backend server, this parameter should be filled in.
-          allOf:
-          - $ref: '#/components/schemas/StartSessionConfigDto'
-        customer_information:
-          description: Additional customer information for this session. This information should not contain any PII data.
-          allOf:
-          - $ref: '#/components/schemas/CustomerInformation'
-    RiskDetailsDto:
-      type: object
-      properties:
-        general:
-          description: General Fraud Prevention details for the verification action.
-          allOf:
-          - $ref: '#/components/schemas/RiskDetailsGeneralDto'
-        device:
-          description: Device risk details collected during the verification flow.
-          allOf:
-          - $ref: '#/components/schemas/RiskDetailsDeviceDto'
-        network:
-          description: Network risk details collected during the verification flow.
-          allOf:
-          - $ref: '#/components/schemas/RiskDetailsNetworkDto'
-        recommendation_reasons:
-          type: array
-          description: Risk signals that contributed to the recommendation.
           items:
             type: string
-          example:
-          - DEVICE_SPOOFED_BY_USERAGENT
-          - DEVICE_SUSPICIOUS_PLATFORM_OS
-          - DEVICE_VERY_OLD_VERSION
-          - DEVICE_PLATFORM_ANOMALY
-          - DEVICE_IP_TIMEZONE_MISMATCH
-          - IP_RISKY_REPUTATION
-          - DEVICE_NEW
-    AddressDto:
-      type: object
-      properties:
-        country:
-          type: string
-          description: ISO 3166-1 alpha-3 country code
-          example: USA
-        region:
-          type: string
-          description: Region
-          example: Indiana
-        city:
-          type: string
-          description: City
-          example: Indianapolis
-        street:
-          type: string
-          description: Street
-          example: Snowy Ridge Road
-        house_number:
-          type: string
-          description: House number
-          example: '1234'
-        apartment_number:
-          type: string
-          description: Apartment number
-          example: '12'
-        postcode:
-          type: string
-          description: Postcode
-          example: '56789'
-        full_address:
-          type: string
-          description: Full address
-          example: 1234 Snowy Ridge Road Indianapolis, IN 56789
-    MockBehavior:
-      type: object
-      properties:
-        mock_recommendation:
-          type: string
-          description: Deprecated. see 'recommendation'
-          deprecated: true
-          enum:
-          - ALLOW
-          - CHALLENGE
-          - DENY
-        recommendation:
-          type: string
-          description: "The desired recommendation for this session.\n     See [recommendations](/guides/verify/identity_verification_result/#recommendations)"
-          enum:
-          - ALLOW
-          - CHALLENGE
-          - DENY
-        processing_time:
-          type: string
-          description: The desired processing time once all the images are captured. Formatted as a duration, e.g "15s", "1m30s"
-        force_retry:
-          type: boolean
-          description: Allows simulating a recapture status. If true, a recapture status will be returned for the first attempt to verify the session
-        info:
-          description: The desired result for extracted info fields
+        extracted_info:
+          description: Information extracted from this session, but not guaranteed to be verified. Not returned if the recommendation is ALLOW
           allOf:
-          - $ref: '#/components/schemas/ExtractedDetails'
-    SessionConsent:
-      type: object
-      properties:
-        granted:
-          type: boolean
-          description: Flag confirming consent was granted
-        document_id:
-          type: string
-          description: The ID of the consent document presented to the customer
+          - $ref: '#/components/schemas/DeprecatedExtractedInfoDto'
+        verified_info:
+          description: Info verified in the verification session. Returned only if the recommendation is ALLOW
+          allOf:
+          - $ref: '#/components/schemas/VerifiedInfoDto'
       required:
-      - granted
-      - document_id
-    RiskDetailsDeviceDto:
+      - session_id
+      - status
+    IncompleteSessionResult:
       type: object
       properties:
-        os:
+        session_id:
           type: string
-          description: Operating system used by the device.
-          example: Android
-        browser:
+          description: ID of the verification session
+        status:
           type: string
-          description: Browser used by the device.
-          example: Chrome
-        device_id:
-          type: string
-          description: Unique device identifier.
-          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-        device_fingerprint:
-          type: string
-          description: Device fingerprint hash.
-          example: 4ebf21edcb4297363ad239386fc6e45e34123045f6ac7b9da93c415d7cb60bdc
-        device_type:
-          type: string
+          description: "Status of the verification session.\n     See [verification statuses](/guides/verify/identity_verification_result/#verification-status)"
           enum:
-          - mobile
-          - desktop
-          description: Type of device used for the verification.
-          example: mobile
-        device_model:
-          type: string
-          description: Device model used for the verification.
-          example: SM-G955U
-        device_timestamp:
-          type: integer
-          format: int64
-          description: Timestamp of the device event, in epoch milliseconds.
-          example: 1777462766771
-        timezone:
-          type: string
-          description: Device timezone.
-          example: Asia/Jerusalem
-        incognito:
-          type: boolean
-          description: Indicates whether incognito mode was detected.
-          example: false
-        tampered:
-          type: boolean
-          description: Indicates whether device tampering was detected.
-          example: false
-        emulated:
-          type: boolean
-          description: Indicates whether an emulator was detected.
-          example: false
-        spoofed:
-          type: boolean
-          description: Indicates whether device spoofing was detected.
-          example: true
-        esim:
-          type: boolean
-          description: Indicates whether eSIM information was detected.
-          example: false
-    DeprecatedAddressDetailsDto:
-      type: object
-      properties:
-        country:
-          type: string
-          description: ISO 3166-1 alpha-3 country code
-          example: USA
-        region:
-          type: string
-          description: Region
-          example: Indiana
-        city:
-          type: string
-          description: City
-          example: Indianapolis
-        street:
-          type: string
-          description: Street
-          example: Snowy Ridge Road
-        house_number:
-          type: string
-          description: House number
-          example: '1234'
-        apartment_number:
-          type: string
-          description: Apartment number
-          example: '12'
-        postcode:
-          type: string
-          description: Postcode
-          example: '56789'
-        full_address:
-          type: string
-          description: Full address
-          example: 1234 Snowy Ridge Road Indianapolis, IN 56789
-    DeprecatedExtractedInfoDto:
-      type: object
-      properties:
-        document:
-          description: Info extracted from the verification session. Returned only if the verification was completed
-          allOf:
-          - $ref: '#/components/schemas/DeprecatedDocumentDto'
-        person:
-          description: Information about the person in this session
-          allOf:
-          - $ref: '#/components/schemas/DeprecatedPersonDto'
-    RiskDetailsGeneralDto:
-      type: object
-      properties:
-        correlation_id:
-          type: string
-          description: Unique correlation ID for the verification action.
-          example: SUMCposIdWZfgNp
-        action_type:
-          type: string
-          description: Type of action assessed by Fraud Prevention.
-          example: identity_verification
-        recommendation:
-          type: string
-          description: Fraud Prevention recommendation for the verification action.
-          example: rejected
-        risk_score:
-          type: number
-          format: float
-          description: Risk score calculated by Fraud Prevention.
-          example: 94.6
-    FlaggedIdentityCheckDto:
+          - pending
+          - capturing
+          - processing
+          - recapture
+          - error
+      required:
+      - session_id
+      - status
+    BiometricMatchingCheckDto:
       type: object
       properties:
         recommendation:
@@ -552,11 +298,82 @@ components:
           items:
             type: string
             enum:
-            - multiple_same_identity_attempts
-            - previous_document_fraud
-            - previous_face_fraud
+            - biometric_mismatch
+            - age_mismatch
+            - gender_mismatch
       required:
       - recommendation
+    VerificationImageDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Image ID
+        type:
+          type: string
+          description: Image type
+          enum:
+          - document_front
+          - document_back
+          - selfie
+          example: document_front
+      required:
+      - id
+      - type
+    GetConsentApprovalResponse:
+      type: object
+      properties:
+        consent_granted:
+          type: boolean
+          description: An indication of whether a user has approved the consent or not
+        consent_date:
+          type: string
+          description: The timestamp of the consent approval. Returned empty if consent was not granted
+      required:
+      - consent_granted
+    SessionConsent:
+      type: object
+      properties:
+        granted:
+          type: boolean
+          description: Flag confirming consent was granted
+        document_id:
+          type: string
+          description: The ID of the consent document presented to the customer
+      required:
+      - granted
+      - document_id
+    SessionChecksDto:
+      type: object
+      properties:
+        document_validation:
+          description: Checks that the data extracted from the document is valid and matches the document template.
+          allOf:
+          - $ref: '#/components/schemas/DocumentValidationCheckDto'
+        document_authentication:
+          description: Checks that the document is authentic and that there are no signs of tampering.
+          allOf:
+          - $ref: '#/components/schemas/DocumentAuthenticationCheckDto'
+        document_liveness:
+          description: Checks that the document is a real live document (e.g., not a screen capture).
+          allOf:
+          - $ref: '#/components/schemas/DocumentLivenessCheckDto'
+        biometric_matching:
+          description: Checks that the selfie is a biometric match to the picture extracted from the document.
+          allOf:
+          - $ref: '#/components/schemas/BiometricMatchingCheckDto'
+        biometric_liveness:
+          description: Checks that the selfie is a real live person (e.g., not a screen capture).
+          allOf:
+          - $ref: '#/components/schemas/BiometricLivenessCheckDto'
+        flagged_identity:
+          description: Checks the session against previous sessions identifying suspicious fraudulent behavior (e.g., previous face fraud).
+          allOf:
+          - $ref: '#/components/schemas/FlaggedIdentityCheckDto'
+        risk_recommendation:
+          description: Assesses the risk throughout the verification process using a built-in integration with our [Fraud Prevention](/guides/risk/overview.md) services. This is used to detect risk signals, such as bots, spoofed devices, behavioral anomalies, malicious networks, and more.
+          allOf:
+          - $ref: '#/components/schemas/RiskRecommendationCheckDto'
     CreateSessionResponse:
       type: object
       properties:
@@ -582,79 +399,6 @@ components:
       - session_id
       - expiration
       - missing_images
-    StartSessionConfigDto:
-      type: object
-      properties:
-        consent:
-          description: Consent for the session
-          allOf:
-          - $ref: '#/components/schemas/SessionConsent'
-    IncompleteSessionResult:
-      type: object
-      properties:
-        session_id:
-          type: string
-          description: ID of the verification session
-        status:
-          type: string
-          description: "Status of the verification session.\n     See [verification statuses](/guides/verify/identity_verification_result/#verification-status)"
-          enum:
-          - pending
-          - capturing
-          - processing
-          - recapture
-          - error
-      required:
-      - session_id
-      - status
-    VerificationImageDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Image ID
-        type:
-          type: string
-          description: Image type
-          enum:
-          - document_front
-          - document_back
-          - selfie
-          example: document_front
-      required:
-      - id
-      - type
-    DeprecatedPersonDto:
-      type: object
-      properties:
-        given_name:
-          type: string
-          description: Given name
-          example: Marie
-        surname:
-          type: string
-          description: Family name
-          example: Curie
-        gender:
-          type: string
-          description: Gender
-          example: F
-        full_name:
-          type: string
-          description: Full name
-          example: Marie Salomea Skłodowska-Curies
-        age:
-          type: number
-          description: The person's age, at the current UTC date
-          example: 36
-        address:
-          description: The person's address
-          allOf:
-          - $ref: '#/components/schemas/DeprecatedAddressDetailsDto'
-        date_of_birth:
-          type: string
-          description: The person's date of birth, as an ISO-8601 string
-          example: '1867-11-07T00:00:00.000Z'
     RiskRecommendationCheckDto:
       type: object
       properties:
@@ -736,6 +480,117 @@ components:
             - other
       required:
       - recommendation
+    RiskDetailsDto:
+      type: object
+      properties:
+        general:
+          description: General Fraud Prevention details for the verification action.
+          allOf:
+          - $ref: '#/components/schemas/RiskDetailsGeneralDto'
+        device:
+          description: Device risk details collected during the verification flow.
+          allOf:
+          - $ref: '#/components/schemas/RiskDetailsDeviceDto'
+        network:
+          description: Network risk details collected during the verification flow.
+          allOf:
+          - $ref: '#/components/schemas/RiskDetailsNetworkDto'
+        recommendation_reasons:
+          type: array
+          description: Risk signals that contributed to the recommendation.
+          items:
+            type: string
+          example:
+          - DEVICE_SPOOFED_BY_USERAGENT
+          - DEVICE_SUSPICIOUS_PLATFORM_OS
+          - DEVICE_VERY_OLD_VERSION
+          - DEVICE_PLATFORM_ANOMALY
+          - DEVICE_IP_TIMEZONE_MISMATCH
+          - IP_RISKY_REPUTATION
+          - DEVICE_NEW
+    RiskDetailsGeneralDto:
+      type: object
+      properties:
+        correlation_id:
+          type: string
+          description: Unique correlation ID for the verification action.
+          example: SUMCposIdWZfgNp
+        action_type:
+          type: string
+          description: Type of action assessed by Fraud Prevention.
+          example: identity_verification
+        recommendation:
+          type: string
+          description: Fraud Prevention recommendation for the verification action.
+          example: rejected
+        risk_score:
+          type: number
+          format: float
+          description: Risk score calculated by Fraud Prevention.
+          example: 94.6
+    DeprecatedAddressDetailsDto:
+      type: object
+      properties:
+        country:
+          type: string
+          description: ISO 3166-1 alpha-3 country code
+          example: USA
+        region:
+          type: string
+          description: Region
+          example: Indiana
+        city:
+          type: string
+          description: City
+          example: Indianapolis
+        street:
+          type: string
+          description: Street
+          example: Snowy Ridge Road
+        house_number:
+          type: string
+          description: House number
+          example: '1234'
+        apartment_number:
+          type: string
+          description: Apartment number
+          example: '12'
+        postcode:
+          type: string
+          description: Postcode
+          example: '56789'
+        full_address:
+          type: string
+          description: Full address
+          example: 1234 Snowy Ridge Road Indianapolis, IN 56789
+    MockBehavior:
+      type: object
+      properties:
+        mock_recommendation:
+          type: string
+          description: Deprecated. see 'recommendation'
+          deprecated: true
+          enum:
+          - ALLOW
+          - CHALLENGE
+          - DENY
+        recommendation:
+          type: string
+          description: "The desired recommendation for this session.\n     See [recommendations](/guides/verify/identity_verification_result/#recommendations)"
+          enum:
+          - ALLOW
+          - CHALLENGE
+          - DENY
+        processing_time:
+          type: string
+          description: The desired processing time once all the images are captured. Formatted as a duration, e.g "15s", "1m30s"
+        force_retry:
+          type: boolean
+          description: Allows simulating a recapture status. If true, a recapture status will be returned for the first attempt to verify the session
+        info:
+          description: The desired result for extracted info fields
+          allOf:
+          - $ref: '#/components/schemas/ExtractedDetails'
     SessionImageDto:
       type: object
       properties:
@@ -765,114 +620,109 @@ components:
       - id
       - rejected
       - original
-    ExtractedDetails:
+    SessionImagesResponse:
       type: object
       properties:
-        person_details:
-          description: Information about the person in this session
-          allOf:
-          - $ref: '#/components/schemas/DeprecatedPersonDto'
-        document_details:
-          description: Information extracted from the document in this session
-          allOf:
-          - $ref: '#/components/schemas/DeprecatedDocumentDto'
-    SessionChecksDto:
-      type: object
-      properties:
-        document_validation:
-          description: Checks that the data extracted from the document is valid and matches the document template.
-          allOf:
-          - $ref: '#/components/schemas/DocumentValidationCheckDto'
-        document_authentication:
-          description: Checks that the document is authentic and that there are no signs of tampering.
-          allOf:
-          - $ref: '#/components/schemas/DocumentAuthenticationCheckDto'
-        document_liveness:
-          description: Checks that the document is a real live document (e.g., not a screen capture).
-          allOf:
-          - $ref: '#/components/schemas/DocumentLivenessCheckDto'
-        biometric_matching:
-          description: Checks that the selfie is a biometric match to the picture extracted from the document.
-          allOf:
-          - $ref: '#/components/schemas/BiometricMatchingCheckDto'
-        biometric_liveness:
-          description: Checks that the selfie is a real live person (e.g., not a screen capture).
-          allOf:
-          - $ref: '#/components/schemas/BiometricLivenessCheckDto'
-        flagged_identity:
-          description: Checks the session against previous sessions identifying suspicious fraudulent behavior (e.g., previous face fraud).
-          allOf:
-          - $ref: '#/components/schemas/FlaggedIdentityCheckDto'
-        risk_recommendation:
-          description: Assesses the risk throughout the verification process using a built-in integration with our [Fraud Prevention](/guides/risk/overview.md) services. This is used to detect risk signals, such as bots, spoofed devices, behavioral anomalies, malicious networks, and more.
-          allOf:
-          - $ref: '#/components/schemas/RiskRecommendationCheckDto'
-    DeprecatedSessionResult:
-      type: object
-      properties:
-        session_id:
-          type: string
-          description: ID of the verification session
-        status:
-          type: string
-          description: "Status of the verification session.\n     See [verification statuses](/guides/verify/identity_verification_result/#verification-status)"
-          enum:
-          - pending
-          - capturing
-          - processing
-          - recapture
-          - complete
-          - error
-        recommendation:
-          type: string
-          description: "Aggregated result of the verification checks. Returned only if the verification was completed.\n    See [recommendations]( /guides/verify/identity_verification_result/#recommendations)"
-          enum:
-          - ALLOW
-          - CHALLENGE
-          - DENY
-        rejection_description:
-          description: Human-readable description of any issues with this session. Not returned if the recommendation is ALLOW
+        session_images:
           type: array
           items:
-            type: string
-        extracted_info:
-          description: Information extracted from this session, but not guaranteed to be verified. Not returned if the recommendation is ALLOW
-          allOf:
-          - $ref: '#/components/schemas/DeprecatedExtractedInfoDto'
-        verified_info:
-          description: Info verified in the verification session. Returned only if the recommendation is ALLOW
-          allOf:
-          - $ref: '#/components/schemas/VerifiedInfoDto'
+            $ref: '#/components/schemas/SessionImageDto'
       required:
-      - session_id
-      - status
-    BiometricLivenessCheckDto:
+      - session_images
+    RiskDetailsDeviceDto:
       type: object
       properties:
-        recommendation:
+        os:
           type: string
-          description: The recommendation of the check.
+          description: Operating system used by the device.
+          example: Android
+        browser:
+          type: string
+          description: Browser used by the device.
+          example: Chrome
+        device_id:
+          type: string
+          description: Unique device identifier.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+        device_fingerprint:
+          type: string
+          description: Device fingerprint hash.
+          example: 4ebf21edcb4297363ad239386fc6e45e34123045f6ac7b9da93c415d7cb60bdc
+        device_type:
+          type: string
           enum:
-          - ALLOW
-          - CHALLENGE
-          - DENY
-          - N/A
-          example: DENY
-        reasons:
-          type: array
-          description: Machine-readable rejection reasons.
-          items:
-            type: string
-            enum:
-            - screen_capture
-            - printed_copy_capture
-            - printed_cutout
-            - mask_detected
-            - injection_attack_detected
-            - selfie_liveness_attack
-            - multiple_faces_detected
-      required:
-      - recommendation
+          - mobile
+          - desktop
+          description: Type of device used for the verification.
+          example: mobile
+        device_model:
+          type: string
+          description: Device model used for the verification.
+          example: SM-G955U
+        device_timestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the device event, in epoch milliseconds.
+          example: 1777462766771
+        timezone:
+          type: string
+          description: Device timezone.
+          example: Asia/Jerusalem
+        incognito:
+          type: boolean
+          description: Indicates whether incognito mode was detected.
+          example: false
+        tampered:
+          type: boolean
+          description: Indicates whether device tampering was detected.
+          example: false
+        emulated:
+          type: boolean
+          description: Indicates whether an emulator was detected.
+          example: false
+        spoofed:
+          type: boolean
+          description: Indicates whether device spoofing was detected.
+          example: true
+        esim:
+          type: boolean
+          description: Indicates whether eSIM information was detected.
+          example: false
+    AddressDto:
+      type: object
+      properties:
+        country:
+          type: string
+          description: ISO 3166-1 alpha-3 country code
+          example: USA
+        region:
+          type: string
+          description: Region
+          example: Indiana
+        city:
+          type: string
+          description: City
+          example: Indianapolis
+        street:
+          type: string
+          description: Street
+          example: Snowy Ridge Road
+        house_number:
+          type: string
+          description: House number
+          example: '1234'
+        apartment_number:
+          type: string
+          description: Apartment number
+          example: '12'
+        postcode:
+          type: string
+          description: Postcode
+          example: '56789'
+        full_address:
+          type: string
+          description: Full address
+          example: 1234 Snowy Ridge Road Indianapolis, IN 56789
     AdditionalInfoDto:
       type: object
       properties:
@@ -888,17 +738,104 @@ components:
           description: The person's employment information
           allOf:
           - $ref: '#/components/schemas/EmploymentDto'
-    GetConsentApprovalResponse:
+    DeprecatedExtractedInfoDto:
       type: object
       properties:
-        consent_granted:
-          type: boolean
-          description: An indication of whether a user has approved the consent or not
-        consent_date:
+        document:
+          description: Info extracted from the verification session. Returned only if the verification was completed
+          allOf:
+          - $ref: '#/components/schemas/DeprecatedDocumentDto'
+        person:
+          description: Information about the person in this session
+          allOf:
+          - $ref: '#/components/schemas/DeprecatedPersonDto'
+    CompleteSessionResult:
+      type: object
+      properties:
+        session_id:
           type: string
-          description: The timestamp of the consent approval. Returned empty if consent was not granted
+          description: ID of the verification session
+        status:
+          type: string
+          description: "Status of the verification session.\n     See [verification statuses](/guides/verify/identity_verification_result/#verification-status)"
+          enum:
+          - complete
+        recommendation:
+          type: string
+          description: "Aggregated result of the verification checks.\n    See [recommendations]( /guides/verify/identity_verification_result/#recommendations)"
+          enum:
+          - ALLOW
+          - CHALLENGE
+          - DENY
+          example: DENY
+        risk_details:
+          description: Detailed risk information collected during the verification flow.
+          allOf:
+          - $ref: '#/components/schemas/RiskDetailsDto'
+        person:
+          description: Information about the person in this session.
+          allOf:
+          - $ref: '#/components/schemas/PersonDto'
+        document:
+          description: Information about the document in this session.
+          allOf:
+          - $ref: '#/components/schemas/DocumentDto'
+        additional_info:
+          description: Additional information extracted from this session.
+          allOf:
+          - $ref: '#/components/schemas/AdditionalInfoDto'
+        checks:
+          description: The verification checks performed in this session.
+          allOf:
+          - $ref: '#/components/schemas/SessionChecksDto'
+        verification_images:
+          type: array
+          description: Images used for verification
+          items:
+            $ref: '#/components/schemas/VerificationImageDto'
       required:
-      - consent_granted
+      - session_id
+      - status
+      - recommendation
+      - person
+      - document
+      - checks
+      - verification_images
+    PersonDto:
+      type: object
+      properties:
+        full_name:
+          type: string
+          description: Full name
+          example: Marie Salomea Skłodowska-Curies
+        given_name:
+          type: string
+          description: Given name
+          example: Marie
+        surname:
+          type: string
+          description: Family name
+          example: Curies
+        gender:
+          type: string
+          description: Gender
+          enum:
+          - male
+          - female
+          - other
+          example: female
+        national_id:
+          type: string
+          description: The value that identifies this specific person, like an ID number
+          example: 123ABC
+        date_of_birth:
+          type: string
+          description: The person's date of birth, as an ISO-8601 string
+          example: '1867-11-07T00:00:00.000Z'
+        age:
+          type: number
+          description: The person's age, at the time the verification was created. This is a derived field and is not present in the original document. It is calculated from the date of birth and the current date.
+          example: 35
     DocumentLivenessCheckDto:
       type: object
       properties:
@@ -918,30 +855,6 @@ components:
             type: string
             enum:
             - presentation_attack
-      required:
-      - recommendation
-    DocumentValidationCheckDto:
-      type: object
-      properties:
-        recommendation:
-          type: string
-          description: The recommendation of the check.
-          enum:
-          - ALLOW
-          - CHALLENGE
-          - DENY
-          - N/A
-          example: DENY
-        reasons:
-          type: array
-          description: Machine-readable rejection reasons.
-          items:
-            type: string
-            enum:
-            - data_extraction_failed
-            - data_validation_failed
-            - data_comparison_failed
-            - mrz_check_digits_invalid
       required:
       - recommendation
     DocumentDto:
@@ -991,13 +904,9 @@ components:
           example: '1867-11-07T00:00:00.000Z'
       required:
       - type
-    PersonDto:
+    DeprecatedPersonDto:
       type: object
       properties:
-        full_name:
-          type: string
-          description: Full name
-          example: Marie Salomea Skłodowska-Curies
         given_name:
           type: string
           description: Given name
@@ -1005,33 +914,89 @@ components:
         surname:
           type: string
           description: Family name
-          example: Curies
+          example: Curie
         gender:
           type: string
           description: Gender
-          enum:
-          - male
-          - female
-          - other
-          example: female
-        national_id:
+          example: F
+        full_name:
           type: string
-          description: The value that identifies this specific person, like an ID number
-          example: 123ABC
+          description: Full name
+          example: Marie Salomea Skłodowska-Curies
+        age:
+          type: number
+          description: The person's age, at the current UTC date
+          example: 36
+        address:
+          description: The person's address
+          allOf:
+          - $ref: '#/components/schemas/DeprecatedAddressDetailsDto'
         date_of_birth:
           type: string
           description: The person's date of birth, as an ISO-8601 string
           example: '1867-11-07T00:00:00.000Z'
-        age:
-          type: number
-          description: The person's age, at the time the verification was created. This is a derived field and is not present in the original document. It is calculated from the date of birth and the current date.
-          example: 35
-    EmploymentDto:
+    FlaggedIdentityCheckDto:
       type: object
       properties:
-        profession:
+        recommendation:
           type: string
-          description: The person's profession
+          description: The recommendation of the check.
+          enum:
+          - ALLOW
+          - CHALLENGE
+          - DENY
+          - N/A
+          example: DENY
+        reasons:
+          type: array
+          description: Machine-readable rejection reasons.
+          items:
+            type: string
+            enum:
+            - multiple_same_identity_attempts
+            - previous_document_fraud
+            - previous_face_fraud
+      required:
+      - recommendation
+    RiskDetailsNetworkDto:
+      type: object
+      properties:
+        network_country:
+          type: string
+          description: Country detected from the network.
+          example: IE
+        ip_address:
+          type: string
+          description: IP address (IPv4 or IPv6) detected from the network.
+          example: 192.168.1.1
+        ip_type:
+          type: string
+          description: Type of IP address detected.
+          example: hosting
+        ip_organization:
+          type: string
+          description: Organization associated with the IP address.
+          example: Amazon.com, Inc.
+        timezone:
+          type: string
+          description: Timezone detected from the IP address.
+          example: Europe/Dublin
+        vpn:
+          type: boolean
+          description: Indicates whether VPN usage was detected.
+          example: false
+        tor:
+          type: boolean
+          description: Indicates whether Tor usage was detected.
+          example: false
+        proxy:
+          type: boolean
+          description: Indicates whether proxy usage was detected.
+          example: false
+        anonymizer:
+          type: boolean
+          description: Indicates whether anonymizer usage was detected.
+          example: false
     DeprecatedDocumentDto:
       type: object
       properties:
@@ -1095,38 +1060,85 @@ components:
           example: '1867-11-07T00:00:00.000Z'
       required:
       - type
-    NationalStatusDto:
+    EmploymentDto:
       type: object
       properties:
-        citizen:
-          type: boolean
-          description: Indicates if the person is a citizen of the issuing country
-        resident:
-          type: boolean
-          description: Indicates if the person is a permanent resident of the issuing country
-    BiometricMatchingCheckDto:
-      type: object
-      properties:
-        recommendation:
+        profession:
           type: string
-          description: The recommendation of the check.
-          enum:
-          - ALLOW
-          - CHALLENGE
-          - DENY
-          - N/A
-          example: DENY
-        reasons:
-          type: array
-          description: Machine-readable rejection reasons.
-          items:
-            type: string
-            enum:
-            - biometric_mismatch
-            - age_mismatch
-            - gender_mismatch
-      required:
-      - recommendation
+          description: The person's profession
+    VerifiedInfoDto:
+      type: object
+      properties:
+        person:
+          description: Information about the person identified by this session
+          allOf:
+          - $ref: '#/components/schemas/DeprecatedPersonDto'
+        document:
+          description: Information from the documents of this session
+          allOf:
+          - $ref: '#/components/schemas/DeprecatedDocumentDto'
+    CreateSessionRequest:
+      type: object
+      properties:
+        callback_url:
+          type: string
+          description: The url that the user will be redirected to once the verification process completes. It will contain the session ID used to obtain the verification result
+        state:
+          type: string
+          description: An opaque string that is used to maintain state between the request and the callback, so it should be unique per request. It will be added as a URL parameter (named state) to the callback URL. The URL parameter should be validated by your server to protect against cross-site request forgery (CSRF) attacks
+        time_to_live:
+          type: string
+          description: The time after which this session will be deleted (including all images and verification data). Once deleted, it will no longer be visible in the Admin Portal and the verification result won't be available via API. It should be formatted as a duration, e.g "30d", "60d", "90d". Defaults to "90d", which is 90 days.
+          deprecated: true
+          example: 90d
+          default: 90d
+        mock_behavior:
+          description: Sets the behavior for the session for testing purposes only. For example, you can simulate a flow that results in a specific recommendation without performing an actual verification.
+          example: null
+          allOf:
+          - $ref: '#/components/schemas/MockBehavior'
+        auto_start:
+          type: boolean
+          description: Deprecated. See 'start'
+          deprecated: true
+        start:
+          description: Automatically start the session upon creation. If you intend to send this session to a frontend component (app, sdk, etc), leave this parameter empty - the session will be started by the frontend. However if you want to operate this session via your backend server, this parameter should be filled in.
+          allOf:
+          - $ref: '#/components/schemas/StartSessionConfigDto'
+        customer_information:
+          description: Additional customer information for this session. This information should not contain any PII data.
+          allOf:
+          - $ref: '#/components/schemas/CustomerInformation'
+    CustomerInformation:
+      type: object
+      properties:
+        organization_name:
+          type: string
+          description: Name of the organization or branch
+        organization_id:
+          type: string
+          description: Unique ID of the organization
+        external_user_id:
+          type: string
+          description: Unique identifier of a user. It should be one word and shouldn't not include any PII
+    StartSessionConfigDto:
+      type: object
+      properties:
+        consent:
+          description: Consent for the session
+          allOf:
+          - $ref: '#/components/schemas/SessionConsent'
+    ExtractedDetails:
+      type: object
+      properties:
+        person_details:
+          description: Information about the person in this session
+          allOf:
+          - $ref: '#/components/schemas/DeprecatedPersonDto'
+        document_details:
+          description: Information extracted from the document in this session
+          allOf:
+          - $ref: '#/components/schemas/DeprecatedDocumentDto'
     DocumentAuthenticationCheckDto:
       type: object
       properties:
@@ -1155,69 +1167,57 @@ components:
             - document_template_mismatch
       required:
       - recommendation
-    VerifiedInfoDto:
+    DocumentValidationCheckDto:
       type: object
       properties:
-        person:
-          description: Information about the person identified by this session
-          allOf:
-          - $ref: '#/components/schemas/DeprecatedPersonDto'
-        document:
-          description: Information from the documents of this session
-          allOf:
-          - $ref: '#/components/schemas/DeprecatedDocumentDto'
-    CompleteSessionResult:
-      type: object
-      properties:
-        session_id:
-          type: string
-          description: ID of the verification session
-        status:
-          type: string
-          description: "Status of the verification session.\n     See [verification statuses](/guides/verify/identity_verification_result/#verification-status)"
-          enum:
-          - complete
         recommendation:
           type: string
-          description: "Aggregated result of the verification checks.\n    See [recommendations]( /guides/verify/identity_verification_result/#recommendations)"
+          description: The recommendation of the check.
           enum:
           - ALLOW
           - CHALLENGE
           - DENY
+          - N/A
           example: DENY
-        risk_details:
-          description: Detailed risk information collected during the verification flow.
-          allOf:
-          - $ref: '#/components/schemas/RiskDetailsDto'
-        person:
-          description: Information about the person in this session.
-          allOf:
-          - $ref: '#/components/schemas/PersonDto'
-        document:
-          description: Information about the document in this session.
-          allOf:
-          - $ref: '#/components/schemas/DocumentDto'
-        additional_info:
-          description: Additional information extracted from this session.
-          allOf:
-          - $ref: '#/components/schemas/AdditionalInfoDto'
-        checks:
-          description: The verification checks performed in this session.
-          allOf:
-          - $ref: '#/components/schemas/SessionChecksDto'
-        verification_images:
+        reasons:
           type: array
-          description: Images used for verification
+          description: Machine-readable rejection reasons.
           items:
-            $ref: '#/components/schemas/VerificationImageDto'
+            type: string
+            enum:
+            - data_extraction_failed
+            - data_validation_failed
+            - data_comparison_failed
+            - mrz_check_digits_invalid
       required:
-      - session_id
-      - status
       - recommendation
-      - person
-      - document
-      - checks
-      - verification_images
+    BiometricLivenessCheckDto:
+      type: object
+      properties:
+        recommendation:
+          type: string
+          description: The recommendation of the check.
+          enum:
+          - ALLOW
+          - CHALLENGE
+          - DENY
+          - N/A
+          example: DENY
+        reasons:
+          type: array
+          description: Machine-readable rejection reasons.
+          items:
+            type: string
+            enum:
+            - screen_capture
+            - printed_copy_capture
+            - printed_cutout
+            - mask_detected
+            - injection_attack_detected
+            - selfie_liveness_attack
+            - multiple_faces_detected
+      required:
+      - recommendation
   securitySchemes:
     verify_access_token:
       scheme: bearer

@@ -48,37 +48,6 @@ paths:
       - Token
 components:
   schemas:
-    BadRequestHttpError:
-      type: object
-      properties:
-        message:
-          example: Bad request
-          type: array
-          items:
-            type: string
-        error_code:
-          type: number
-          example: 400
-      required:
-      - message
-      - error_code
-    ApiTokenExchangeResponse:
-      type: object
-      properties:
-        id_token:
-          type: string
-        access_token:
-          type: string
-        refresh_token:
-          type: string
-        is_user_created:
-          type: boolean
-          description: Indicates if this is a new user or not
-      required:
-      - id_token
-      - access_token
-      - refresh_token
-      - is_user_created
     ApiTokenExchangeRequestInput:
       type: object
       properties:
@@ -100,6 +69,37 @@ components:
       - code
       - client_id
       - client_secret
+    ApiTokenExchangeResponse:
+      type: object
+      properties:
+        id_token:
+          type: string
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        is_user_created:
+          type: boolean
+          description: Indicates if this is a new user or not
+      required:
+      - id_token
+      - access_token
+      - refresh_token
+      - is_user_created
+    BadRequestHttpError:
+      type: object
+      properties:
+        message:
+          example: Bad request
+          type: array
+          items:
+            type: string
+        error_code:
+          type: number
+          example: 400
+      required:
+      - message
+      - error_code
   securitySchemes:
     bearer:
       scheme: bearer
