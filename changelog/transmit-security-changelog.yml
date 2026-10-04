@@ -1,0 +1,77 @@
+generated: '2026-10-03'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://developer.transmitsecurity.com/guides/platform/migration_steps.md
+sources:
+- https://developer.transmitsecurity.com/guides/platform/migration_steps.md
+- https://developer.transmitsecurity.com/sdk-ref/platform/changelog.md
+- https://developer.transmitsecurity.com/sdk-ref/platform/migration.md
+- https://developer.transmitsecurity.com/sdk-ref/platform/versioning.md
+entries:
+- breaking: false
+  highlights:
+  - '**Identity Verification**'
+  - '* feat: Added an option for user-initiated session cancellation'
+  date: '2026-09-27'
+- breaking: false
+  highlights:
+  - '**Fraud Prevention**'
+  - '* feat: Events pending upload are no longer lost when the user navigates away from the page or closes the tab. The SDK now asks the browser
+    to complete the upload in the background. This behavior is optional and is off by default.'
+  date: '2026-09-27'
+- breaking: false
+  highlights:
+  - '**Fraud Prevention**'
+  - '* feat: Events collected by the agentic AI recognition mechanism are now labeled as such, so agentic-collected activity can be analyzed separately.'
+  date: '2026-09-07'
+- breaking: false
+  highlights:
+  - '**Identity Verification**'
+  - '* fix: resolved the document capture issue reported in 2.6.2 — the capture flow again behaves as expected across all steps'
+  date: '2026-08-31'
+- breaking: false
+  highlights:
+  - '**Identity Verification**'
+  - '* Known issue: under certain conditions, the document capture flow may not behave as expected. Resolved in 2.6.3 — upgrading is recommended.'
+  date: '2026-08-30'
+- breaking: false
+  highlights:
+  - '**Fraud Prevention**'
+  - '* feat: Extended the set of supported challenge types (document_verification, security_question, knowledge_based_authentication, device_approval,
+    out_of_band, otp, device_biometrics, face_id, fingerprint, mobile_approve, pin, cap_rep_token, symantec_token, duo, secure_id, csm, biometric,
+    devicetag_rep_token, email_verification, magic_link, symantec_pin, web_to_mobile).'
+  date: '2026-08-30'
+- breaking: false
+  highlights:
+  - '**Fraud Prevention**'
+  - '* feat: Enriched action and interaction events with further behavioral signs for agentic AI recognition.'
+  date: '2026-08-30'
+- breaking: false
+  highlights:
+  - '**Identity Verification**'
+  - '* fix: prevent the Authorization header from being dropped on session-status requests due to a race condition in header assignment'
+  date: '2026-08-16'
+- breaking: false
+  highlights:
+  - '**Identity Verification**'
+  - '* fix: align selfie autocapture face angle checks with the server, and skip them when the face is cut off by the frame edge'
+  date: '2026-08-16'
+- breaking: false
+  highlights:
+  - '**Fraud Prevention**'
+  - '* feat: added an `authContext` parameter to `triggerActionEvent`, so callers can pass authentication context for non-authentication actions
+    that occur after a successful login.'
+  date: '2026-08-16'
+- breaking: false
+  highlights:
+  - '**General**'
+  - '* fix: Improved `keyScope` isolation to prevent different browser contexts from inadvertently clearing each other''s crypto-binding keys.'
+  date: '2026-08-02'
+- breaking: false
+  highlights:
+  - '**Orchestration**'
+  - '* chore: Bump `ido-web-sdk` to `1.2.1`, which includes `keyScope` support for journey crypto-binding keys.'
+  date: '2026-08-02'
+scheme: semantic versioning (X.Y.Z)
+current_version: 2.6.5
+docs: https://developer.transmitsecurity.com/guides/platform/migration_steps.md

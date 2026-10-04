@@ -1,0 +1,222 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/transmit-security-applications-api-openapi.yml
+- openapi/transmit-security-auth-api-openapi.yml
+- openapi/transmit-security-manage-api-openapi.yml
+- openapi/transmit-security-organizations-api-openapi.yml
+- openapi/transmit-security-recommendation-api-openapi.yml
+- openapi/transmit-security-token-api-openapi.yml
+- openapi/transmit-security-users-api-openapi.yml
+- openapi/transmit-security-verification-api-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: probed
+note: 'No MCP server was found. The pre-flight posted tools/list to /mcp on api.sbx.transmitsecurity.io, api.eu.transmitsecurity.io, api.ca.transmitsecurity.io,
+  api.au.transmitsecurity.io; verdict opaque (https://api.eu.transmitsecurity.io/mcp answered 403: the edge authenticates before it routes, which
+  proves nothing either way). Candidate tools below are derived from the 78 operation(s) in the provider''s own OpenAPI (40 listed); they describe
+  what a server WOULD expose, not one that exists.'
+tools:
+- name: set_assigned_role_groups
+  operationId: setAssignedRoleGroups
+  method: POST
+  path: /v1/applications/{app_id}/organizations/{organization_id}/role-groups/set
+  description: Set org's role groups
+- name: send_magic_link_email
+  operationId: sendMagicLinkEmail
+  method: POST
+  path: /v1/auth/link/email/send
+  description: Send email link
+- name: delete_tenant_user
+  operationId: deleteTenantUser
+  method: DELETE
+  path: /v1/manage/users/{user_id}
+  description: Delete user
+- name: create_organization
+  operationId: createOrganization
+  method: POST
+  path: /v1/organizations
+  description: Create organization
+- name: get_risk_recommendation
+  operationId: getRiskRecommendation
+  method: GET
+  path: /recommendation
+  description: Get recommendation
+- name: token_exchange
+  operationId: tokenExchange
+  method: POST
+  path: /v1/token
+  description: Exchange code for token
+- name: get_users_count
+  operationId: getUsersCount
+  method: GET
+  path: /v1/users/count
+  description: Get users count
+- name: create_session
+  operationId: createSession
+  method: POST
+  path: /api/v1/verification
+  description: Create verification session
+- name: get_assigned_role_groups
+  operationId: getAssignedRoleGroups
+  method: GET
+  path: /v1/applications/{app_id}/organizations/{organization_id}/role-groups
+  description: Get org's role groups
+- name: authenticate_magic_link
+  operationId: authenticateMagicLink
+  method: POST
+  path: /v1/auth/link/email/authenticate
+  description: Authenticate email link
+- name: get_all_organizations
+  operationId: getAllOrganizations
+  method: GET
+  path: /v1/organizations
+  description: Get organizations
+- name: create_rule
+  operationId: createRule
+  method: POST
+  path: /recommendation/rules
+  description: Create rule
+- name: create_user
+  operationId: createUser
+  method: POST
+  path: /v1/users
+  description: Create user
+- name: get_result
+  operationId: getResult
+  method: GET
+  path: /api/v1/verification/{sid}/result
+  description: Get verification result
+- name: set_assigned_roles_and_groups
+  operationId: setAssignedRolesAndGroups
+  method: POST
+  path: /v1/applications/{app_id}/organizations/{organization_id}/roles-and-groups/set
+  description: Set org's roles and role groups
+- name: send_otp
+  operationId: sendOTP
+  method: POST
+  path: /v1/auth/otp/send
+  description: Send OTP
+- name: get_organization
+  operationId: getOrganization
+  method: GET
+  path: /v1/organizations/{organization_id}
+  description: Get organization by ID
+- name: get_rules
+  operationId: getRules
+  method: GET
+  path: /recommendation/rules
+  description: Get all rules
+- name: get_users
+  operationId: getUsers
+  method: GET
+  path: /v1/users
+  description: Get users
+- name: delete_session
+  operationId: deleteSession
+  method: DELETE
+  path: /api/v1/verification/{sid}
+  description: Delete verification session
+- name: get_assigned_roles_and_groups
+  operationId: getAssignedRolesAndGroups
+  method: GET
+  path: /v1/applications/{app_id}/organizations/{organization_id}/roles-and-groups
+  description: Get org's roles and role groups
+- name: authenticate_otp
+  operationId: authenticateOTP
+  method: POST
+  path: /v1/auth/otp/authenticate
+  description: Authenticate OTP
+- name: update_organization
+  operationId: updateOrganization
+  method: PUT
+  path: /v1/organizations/{organization_id}
+  description: Update organization
+- name: get_rule_by_id
+  operationId: getRuleById
+  method: GET
+  path: /recommendation/rules/{rule_id}
+  description: Get rule by ID
+- name: get_user_by_identifier
+  operationId: getUserByIdentifier
+  method: GET
+  path: /v1/users/identifier
+  description: Get user by identifier
+- name: get_images
+  operationId: getImages
+  method: GET
+  path: /api/v1/verification/{sid}/images
+  description: Get all images for session
+- name: create_app_client
+  operationId: createAppClient
+  method: POST
+  path: /v1/applications/{appId}/clients
+  description: Create client
+- name: send_email
+  operationId: SendEmail
+  method: POST
+  path: /v1/auth/links/email
+  description: Send email link
+- name: delete_organization
+  operationId: deleteOrganization
+  method: DELETE
+  path: /v1/organizations/{organization_id}
+  description: Delete organization
+- name: update_rule
+  operationId: updateRule
+  method: PUT
+  path: /recommendation/rules/{rule_id}
+  description: Update rule by ID
+- name: get_user_by_id
+  operationId: getUserById
+  method: GET
+  path: /v1/users/{user_id}
+  description: Get user by ID
+- name: get_image
+  operationId: getImage
+  method: GET
+  path: /api/v1/verification/{sid}/images/{id}
+  description: Get image by ID
+- name: get_app_clients
+  operationId: getAppClients
+  method: GET
+  path: /v1/applications/{appId}/clients
+  description: Get all clients
+- name: send_email_otp
+  operationId: sendEmailOtp
+  method: POST
+  path: /v1/auth/otp/email
+  description: Send email OTP
+- name: get_organization_by_name
+  operationId: getOrganizationByName
+  method: GET
+  path: /v1/organizations/name/{organization_name}
+  description: Get organization by name
+- name: delete_rule
+  operationId: deleteRule
+  method: DELETE
+  path: /recommendation/rules/{rule_id}
+  description: Delete rule by ID
+- name: update_user
+  operationId: updateUser
+  method: PUT
+  path: /v1/users/{user_id}
+  description: Update user
+- name: get_consent
+  operationId: getConsent
+  method: GET
+  path: /api/v1/verification/{sid}/consent
+  description: Get consent
+- name: delete_app_clients
+  operationId: deleteAppClients
+  method: DELETE
+  path: /v1/applications/{appId}/clients
+  description: Delete all clients
+- name: validate_email_otp
+  operationId: validateEmailOtp
+  method: POST
+  path: /v1/auth/otp/email/validation
+  description: Validate email OTP

@@ -1,0 +1,23 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-conformance.py
+source: openapi/ (8 document(s), 49 mutating operations)
+standards:
+- id: openapi-3.2
+  conforms: true
+  evidence: the document declares 3.2.0
+- id: oauth2
+  conforms: true
+  evidence: 'securitySchemes: AdminAccessToken (oauth2), ClientAccessToken (oauth2), OrgAdminAccessToken (oauth2), UserAccessToken (http), bearer
+    (http), risk_access_token (http), verify_access_token (http)'
+- id: rfc9457
+  conforms: false
+  evidence: no response declares application/problem+json
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+- id: pagination
+  conforms: true
+  evidence: list operations take page_limit, page_offset
+note: 'Derived from the provider''s own OpenAPI only: what the contract declares. Claims the contract cannot carry (PCI DSS, SOC 2, FAPI, ISO
+  20022) come from the documentation reader and are merged below when found.'

@@ -1,0 +1,30 @@
+generated: '2026-10-03'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/transmit-security-applications-api-openapi.yml
+skills:
+- file: skills/transmit-security-create-and-retrieve-user.md
+  name: transmit-security-create-and-retrieve-user
+  api: openapi/transmit-security-users-api-openapi.yml
+  operations:
+  - createUser
+  - getUserById
+- file: skills/transmit-security-create-organization-with-apps.md
+  name: transmit-security-create-organization-with-apps
+  api: openapi/transmit-security-organizations-api-openapi.yml
+  operations:
+  - createOrganization
+  - addAppsToOrganization
+- file: skills/transmit-security-verify-session.md
+  name: transmit-security-verify-session
+  api: openapi/transmit-security-verification-api-openapi.yml
+  operations:
+  - createSession
+  - getResult
+  - deleteSession
+- file: skills/transmit-security-auth-magic-link-login.md
+  name: transmit-security-auth-magic-link-login
+  api: openapi/transmit-security-auth-api-openapi.yml
+  operations:
+  - sendMagicLinkEmail
+  - authenticateMagicLink

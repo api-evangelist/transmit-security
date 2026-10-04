@@ -1,14 +1,17 @@
 aid: transmit-security
+
 name: Transmit Security
-description: >
-  Transmit Security provides the Mosaic platform, a comprehensive CIAM (Customer Identity and
-  Access Management) solution offering REST APIs for passkey and WebAuthn authentication, fraud
-  detection and risk-based access control, identity orchestration, identity verification, and
-  user journey management. The platform delivers unified identity management across customer,
-  business, and workforce contexts through an API-first architecture with OAuth2 and JWT
-  authentication. Mosaic serves leading banks, insurers, and retailers worldwide with region-specific
+
+description: 'Transmit Security provides the Mosaic platform, a comprehensive CIAM (Customer Identity and Access Management) solution offering
+  REST APIs for passkey and WebAuthn authentication, fraud detection and risk-based access control, identity orchestration, identity verification,
+  and user journey management. The platform delivers unified identity management across customer, business, and workforce contexts through an
+  API-first architecture with OAuth2 and JWT authentication. Mosaic serves leading banks, insurers, and retailers worldwide with region-specific
   deployments across the US, EU, Canada, and Australia, backed by a 99.99% uptime SLA.
+
+  '
+
 type: Index
+
 deliveryModel:
   model: saas
   open_source: false
@@ -21,6 +24,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -34,42 +38,136 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/transmit-security.png
+
 tags:
-  - CIAM
-  - Identity
-  - Authentication
-  - Passkeys
-  - WebAuthn
-  - Fraud Prevention
-  - Risk Management
-  - Identity Verification
-  - Orchestration
-  - Security
-  - SSO
+- CIAM
+- Identity
+- Authentication
+- Passkeys
+- WebAuthn
+- Fraud Prevention
+- Risk Management
+- Identity Verification
+- Orchestration
+- Security
+- SSO
+
 tags_raw:
-  - CIAM
-  - Identity
-  - Authentication
-  - Passkeys
-  - WebAuthn
-  - Fraud Detection
-  - Risk Management
-  - Identity Verification
-  - Orchestration
-  - OAuth2
-  - Security
-  - SSO
+- CIAM
+- Identity
+- Authentication
+- Passkeys
+- WebAuthn
+- Fraud Detection
+- Risk Management
+- Identity Verification
+- Orchestration
+- OAuth2
+- Security
+- SSO
+
 url: https://raw.githubusercontent.com/api-evangelist/transmit-security/refs/heads/main/apis.yml
+
 created: '2026-06-12'
+
 modified: '2026-06-12'
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: Spectral
+  url: rules/transmit-security-rules.yml
+- type: Spectral
+  url: rules/transmit-security-jsonschema-spectral-rules.yml
+- type: JSONLD
+  url: json-ld/transmit-security-context.jsonld
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/transmit-security-data-model.yml
+- type: ChangeLog
+  url: changelog/transmit-security-changelog.yml
+- type: ErrorCatalog
+  url: errors/transmit-security-problem-types.yml
+- type: Conformance
+  url: conformance/transmit-security-conformance.yml
+- type: LLMsTxt
+  url: llms/transmit-security-llms.txt
+- type: SecurityTxt
+  url: well-known/transmit-security-status-security.txt
+- type: WellKnown
+  url: well-known/transmit-security-well-known.yml
+- type: Hosts
+  url: hosts/transmit-security-hosts.yml
+- type: Vendors
+  url: vendors/transmit-security-vendors.yml
+- type: Packages
+  url: packages/transmit-security-packages.yml
+- type: Support
+  url: https://support.transmitsecurity.com/s/
+- type: PrivacyPolicy
+  url: https://transmitsecurity.com/legal/privacy-policy-for-bindid
+- type: Newsroom
+  url: https://transmitsecurity.com/media/
+- type: Leadership
+  url: https://transmitsecurity.com/leadership
+- type: GettingStarted
+  url: https://developer.transmitsecurity.com/guides/quick_start/enable_communication
+- type: DeveloperPortal
+  url: https://api.transmitsecurity.io/risk-collect/
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/transmit-security/overview
+- type: AgenticAccess
+  url: agentic-access/transmit-security-agentic-access.yml
+- type: DomainSecurity
+  url: security/transmit-security-domain-security.yml
+- type: Authentication
+  url: authentication/transmit-security-authentication.yml
+- type: OAuthScopes
+  url: scopes/transmit-security-scopes.yml
+- type: Website
+  url: https://transmitsecurity.com/
+- type: Documentation
+  url: https://developer.transmitsecurity.com/
+- type: GitHubOrganization
+  url: https://github.com/TransmitSecurity
+- type: LinkedIn
+  url: https://www.linkedin.com/company/transmit-security
+- type: X
+  url: https://x.com/transmitsec
+- type: Blog
+  url: https://transmitsecurity.com/blog
+- type: Pricing
+  url: https://transmitsecurity.com/pricing
+- type: StatusPage
+  url: https://status.transmitsecurity.io/
+- type: ChangeLog
+  url: https://developer.transmitsecurity.com/sdk-ref/platform/changelog
+- type: SDKs
+  url: https://developer.transmitsecurity.com/sdk-ref/sdk_ref_intro
+- type: Plans
+  url: plans/transmit-security-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/transmit-security-rate-limits.yml
+- type: FinOps
+  url: finops/transmit-security-finops.yml
+- type: Vocabulary
+  url: vocabulary/transmit-security-vocabulary.yml
+- type: JSONLDContext
+  url: json-ld/transmit-security-context.jsonld
+
 apis:
 - name: Mosaic Orchestration API
-  description: >
-    No-code identity orchestration API and policy engine enabling dynamic identity flow composition, adaptive
-    access control, and integration with third-party services through pre-built journey templates and
-    a visual orchestration canvas.
+  description: 'No-code identity orchestration API and policy engine enabling dynamic identity flow composition, adaptive access control, and
+    integration with third-party services through pre-built journey templates and a visual orchestration canvas.
+
+    '
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.transmitsecurity.com/guides/orchestration/sdk/web_sdk_guide
   baseURL: https://api.transmitsecurity.io
@@ -81,6 +179,7 @@ apis:
   properties:
   - type: Documentation
     url: https://developer.transmitsecurity.com/guides/orchestration/sdk/web_sdk_guide
+  aid: transmit-security:mosaic-orchestration-api
 - aid: transmit-security:transmit-security-applications-api
   name: Transmit Security Applications API
   description: The Applications API from Transmit Security — 14 operation(s) for applications.
@@ -349,47 +448,9 @@ apis:
     url: json-schema/transmit-security-platform-administration-schema.json
   - type: JSONSchema
     url: json-schema/transmit-security-organizations-schema.json
-common:
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/transmit-security/overview
-  - type: AgenticAccess
-    url: agentic-access/transmit-security-agentic-access.yml
-  - type: DomainSecurity
-    url: security/transmit-security-domain-security.yml
-  - type: Authentication
-    url: authentication/transmit-security-authentication.yml
-  - type: OAuthScopes
-    url: scopes/transmit-security-scopes.yml
-  - type: Website
-    url: https://transmitsecurity.com/
-  - type: Documentation
-    url: https://developer.transmitsecurity.com/
-  - type: GitHubOrganization
-    url: https://github.com/TransmitSecurity
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/transmit-security
-  - type: X
-    url: https://x.com/transmitsec
-  - type: Blog
-    url: https://transmitsecurity.com/blog
-  - type: Pricing
-    url: https://transmitsecurity.com/pricing
-  - type: StatusPage
-    url: https://status.transmitsecurity.io/
-  - type: ChangeLog
-    url: https://developer.transmitsecurity.com/sdk-ref/platform/changelog
-  - type: SDKs
-    url: https://developer.transmitsecurity.com/sdk-ref/sdk_ref_intro
-  - type: Plans
-    url: plans/transmit-security-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/transmit-security-rate-limits.yml
-  - type: FinOps
-    url: finops/transmit-security-finops.yml
-  - type: Vocabulary
-    url: vocabulary/transmit-security-vocabulary.yml
-  - type: JSONLDContext
-    url: json-ld/transmit-security-context.jsonld
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-10-03'
+  status: enriched
+  artifacts_added: 23
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

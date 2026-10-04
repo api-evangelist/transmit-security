@@ -1,0 +1,188 @@
+generated: '2026-10-03'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 15
+  own: 5
+  other_domain: 6
+  platform: 4
+  roles:
+  - api
+  - docs
+  - other
+  - portal
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: api.au.transmitsecurity.io
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: transmitsecurity.io
+  role: api
+  relation: other-domain
+- host: api.ca.transmitsecurity.io
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: transmitsecurity.io
+  role: api
+  relation: other-domain
+- host: api.eu.transmitsecurity.io
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: transmitsecurity.io
+  role: api
+  relation: other-domain
+- host: api.sbx.transmitsecurity.io
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: transmitsecurity.io
+  role: api
+  relation: other-domain
+- host: api.transmitsecurity.io
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - DeveloperPortal
+  serves:
+  - api
+  - docs
+  registrable_domain: transmitsecurity.io
+  role: portal
+  relation: other-domain
+- host: content.transmitsecurity.com
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: transmitsecurity.com
+  role: other
+  relation: own
+- host: developer.transmitsecurity.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - well-known
+  - vendor-detect
+  types:
+  - GettingStarted
+  - Documentation
+  - ChangeLog
+  - SDKs
+  serves:
+  - docs
+  - cdn
+  - documentation
+  vendor: cloudfront
+  registrable_domain: transmitsecurity.com
+  role: docs
+  relation: own
+- host: events.transmitsecurity.com
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: transmitsecurity.com
+  role: other
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: status.transmitsecurity.io
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: transmitsecurity.io
+  role: status
+  relation: other-domain
+- host: support.transmitsecurity.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - Support
+  serves: []
+  registrable_domain: transmitsecurity.com
+  role: support
+  relation: own
+- host: transmitsecurity.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  - vendor-detect
+  types:
+  - PrivacyPolicy
+  - Newsroom
+  - Leadership
+  - Website
+  - Blog
+  - Pricing
+  serves:
+  - cdn
+  - hosting
+  vendor: cloudflare
+  registrable_domain: transmitsecurity.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.postman.com
+  found_by:
+  - pointer
+  types:
+  - PostmanWorkspace
+  serves: []
+  registrable_domain: postman.com
+  role: other
+  relation: platform
+- host: x.com
+  found_by:
+  - pointer
+  types:
+  - X
+  serves: []
+  registrable_domain: x.com
+  role: other
+  relation: platform

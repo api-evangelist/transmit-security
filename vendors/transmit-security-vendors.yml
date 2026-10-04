@@ -1,0 +1,73 @@
+generated: '2026-10-03'
+method: probed
+source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml names
+registry: all/0-working/vendors.yml
+areas_vocabulary:
+- documentation
+- developer-portal
+- api-gateway
+- cdn
+- hosting
+- sdk-generation
+- api-collections
+- status-page
+- support
+- community
+- identity
+- mcp-hosting
+vendors:
+- vendor: cloudflare
+  name: Cloudflare
+  area: cdn
+  host: support.transmitsecurity.com
+  evidence: cname:cloudflare.net
+  signal: cname
+  confidence: high
+  kin_score:
+  - https_enforced
+  - hsts
+- vendor: cloudfront
+  name: Amazon CloudFront
+  area: cdn
+  host: developer.transmitsecurity.com
+  evidence: header:x-amz-cf-id
+  signal: header
+  confidence: high
+  kin_score: []
+- vendor: redocly
+  name: Redocly
+  area: documentation
+  host: developer.transmitsecurity.com
+  evidence: cname:redocly.app
+  signal: docs-platform
+  confidence: high
+  kin_score:
+  - openapi_published
+  - rules_present
+- vendor: wpengine
+  name: WP Engine
+  area: hosting
+  host: transmitsecurity.com
+  evidence: header:x-powered-by:wp engine
+  signal: header
+  confidence: high
+  kin_score: []
+reliance:
+  areas_vendor_served:
+  - cdn
+  - documentation
+  - hosting
+  vendor_count: 4
+  areas_observed: 12
+  share_of_observable_areas: 0.25
+  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or not observed, and this script
+    cannot tell those apart
+checked:
+- 'docs-platform: redocly'
+- support.transmitsecurity.com (Support)
+- developer.transmitsecurity.com (GettingStarted)
+- api.transmitsecurity.io (DeveloperPortal)
+- transmitsecurity.com (Website)
+- developer.transmitsecurity.com (Documentation)
+- status.transmitsecurity.io (StatusPage)
+- api.transmitsecurity.io (baseURL)

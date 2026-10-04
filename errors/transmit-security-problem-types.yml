@@ -1,0 +1,74 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/transmit-security-applications-api-openapi.yml
+- openapi/transmit-security-auth-api-openapi.yml
+- openapi/transmit-security-manage-api-openapi.yml
+- openapi/transmit-security-organizations-api-openapi.yml
+- openapi/transmit-security-recommendation-api-openapi.yml
+- openapi/transmit-security-token-api-openapi.yml
+- openapi/transmit-security-users-api-openapi.yml
+- openapi/transmit-security-verification-api-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: BadRequestHttpError
+coverage:
+  operations: 78
+  statuses_declared: 8
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad request
+  operations: 62
+  media_types:
+  - application/json
+  schema: BadRequestHttpError
+- status: 401
+  title: Unauthorized
+  description: Invalid authentication
+  operations: 13
+  media_types:
+  - application/json
+  schema: InvalidTokenHttpError
+- status: 403
+  title: Forbidden
+  description: Invalid authorization
+  operations: 10
+  media_types:
+  - application/json
+  schema: ForbiddenHttpError
+- status: 404
+  title: Not Found
+  description: Not found
+  operations: 43
+  media_types:
+  - application/json
+  schema: NotFoundHttpError
+- status: 409
+  title: Conflict
+  description: Unique field collision
+  operations: 10
+  media_types:
+  - application/json
+  schema: IdentifierIsTakenHttpError
+- status: 429
+  title: Too Many Requests
+  description: Rate limit reached
+  operations: 6
+  media_types: []
+  schema: null
+- status: 463
+  title: null
+  description: Blacklisted token—Returned when Fraud Prevention detects repeated or abusive token/payload misuse
+    within a short time window (e.g., reuse of
+  operations: 1
+  media_types: []
+  schema: null
+- status: 500
+  title: Internal Server Error
+  description: Internal error
+  operations: 6
+  media_types: []
+  schema: null

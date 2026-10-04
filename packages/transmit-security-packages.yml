@@ -1,0 +1,22 @@
+generated: '2026-10-03'
+method: searched
+source: "https://registry.npmjs.org/-/v1/search?text=transmitsecurity&size=5"
+packages:
+  - name: "@transmitsecurity/platform-web-sdk"
+    registry: "npm"
+    version: "2.6.5"
+    published: "2026-09-27"
+    official: true
+    language: "JavaScript"
+  - name: "@transmitsecurity/riskid-reactjs-ts"
+    registry: "npm"
+    version: "2.0.0"
+    published: "2025-08-17"
+    official: true
+    language: "JavaScript"
+  - name: "@transmitsecurity/ngx-ts-riskid"
+    registry: "npm"
+    version: "4.0.0"
+    published: "2025-08-17"
+    official: true
+    language: "JavaScript"
