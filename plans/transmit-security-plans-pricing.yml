@@ -126,3 +126,38 @@ plans:
         type: boolean
         description: Custom pricing available for 15M–200M+ user enterprise deployments
         value: true
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Mosaic for Identity Verification
+    access: enterprise
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: Mosaic for Identity
+    access: enterprise
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: Mosaic for Identity Fraud and Threat Detection
+    access: enterprise
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: Full Mosaic Platform
+    access: enterprise
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods: []
