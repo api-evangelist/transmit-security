@@ -1,0 +1,32 @@
+generated: '2026-10-13'
+method: searched
+checked:
+- https://openid.net/developers/certified-openid-connect-implementations/
+marketplace_apps: []
+edges:
+- partner_name: OpenID Foundation certification
+  partner: null
+  partner_match: domain
+  type: contract
+  channel: network-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://openid.net/developers/certified-openid-connect-implementations/
+  contract_reference:
+    register: OpenID Foundation certified implementations
+    spec_file: null
+    role: certified-op
+    registered_name: Transmit Security
+    products:
+    - Mosaic as of January 1st 2025
+    matched_domain: transmitsecurity.com
+    api_families:
+    - FAPI2SP MTLS + MTLS
+    - FAPI2SP OpenID Connect
+    - fapi-2-0-op-security-profile-second-implementers-draft-message-signing-first-implementers-draft
+    - openid-providers-profiles
+    api_families_basis: conformance profiles / certification levels passed
+    detected_by: sweep-identity.py
+    detected: '2026-10-13'
+  detected_by: sweep-identity.py
+  detected: '2026-10-13'
