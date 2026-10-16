@@ -2,25 +2,19 @@
 kin_checks:
   slug: transmit-security
   schema_version: 0.23.0
-  scored_at: '2026-10-03'
-  run_ts: 2026-10-03T024842
+  scored_at: '2026-10-11'
+  run_ts: 2026-10-11T110117
   note: Actionable checks (missed + partial) in `checks`, plus the ids that did not
     apply in `na`. Everything else in rubric/scoring-0.23.0.yml was earned; counts
     below let you verify that.
   counts:
     total: 153
-    earned: 26
-    partial: 33
-    missed: 66
+    earned: 37
+    partial: 37
+    missed: 51
     na: 28
   checks:
-  - id: newsroom_present
-    status: missed
-  - id: leadership_present
-    status: missed
   - id: well_known_published
-    status: missed
-  - id: llms_txt_published
     status: missed
   - id: apis_json_self_hosted
     status: missed
@@ -46,10 +40,6 @@ kin_checks:
     status: missed
   - id: domain_standard_conformance
     status: missed
-  - id: rules_substantial
-    status: missed
-  - id: conformance_declared
-    status: missed
   - id: overlay_published
     status: missed
   - id: deprecation_policy
@@ -62,11 +52,7 @@ kin_checks:
     status: missed
   - id: examples_published
     status: missed
-  - id: portal_present
-    status: missed
   - id: api_reference_present
-    status: missed
-  - id: getting_started_present
     status: missed
   - id: sdk_count_3
     status: missed
@@ -74,15 +60,9 @@ kin_checks:
     status: missed
   - id: console_or_sandbox
     status: missed
-  - id: agent_skill_present
-    status: missed
-  - id: support_channel
-    status: missed
   - id: sign_up_present
     status: missed
   - id: terms_of_service
-    status: missed
-  - id: privacy_policy
     status: missed
   - id: compliance_published
     status: missed
@@ -91,8 +71,6 @@ kin_checks:
   - id: reg_vulnerability_disclosure
     status: missed
   - id: reg_terms_of_service
-    status: missed
-  - id: reg_privacy_policy
     status: missed
   - id: reg_compliance_published
     status: missed
@@ -136,8 +114,6 @@ kin_checks:
     status: missed
   - id: event_surface_described
     status: missed
-  - id: agent_skills
-    status: missed
   - id: well_known_catalog
     status: missed
   - id: consent_identity
@@ -145,12 +121,6 @@ kin_checks:
   - id: agent_card
     status: missed
   - id: dry_run_mode
-    status: missed
-  - id: delegated_identity
-    status: missed
-  - id: protected_resource_metadata
-    status: missed
-  - id: dynamic_client_registration
     status: missed
   - id: agentic_commerce
     status: missed
@@ -245,12 +215,18 @@ kin_checks:
   - id: rules_present
     status: partial
     earned: 2.5
+  - id: rules_substantial
+    status: partial
+    earned: 1.25
   - id: balanced_severities
     status: partial
     earned: 0.75
   - id: vocabulary_published
     status: partial
     earned: 4.5
+  - id: conformance_declared
+    status: partial
+    earned: 5.4
   - id: rate_limits_documented
     status: partial
     earned: 7.2
@@ -264,6 +240,9 @@ kin_checks:
   - id: postman_present
     status: partial
     earned: 0.5
+  - id: agent_skill_present
+    status: partial
+    earned: 2.7
   - id: plans_present
     status: partial
     earned: 7.2
@@ -276,16 +255,20 @@ kin_checks:
     detail: 'authorship: derived'
   - id: auth_clarity
     status: partial
-    earned: 3.5
-    detail: 'grade: bearer'
+    earned: 9.0
+    detail: 'grade: served'
   - id: openapi_examples
     status: partial
     earned: 3.5
     detail: 'grade: partial'
   - id: rate_limit_signal
     status: partial
-    earned: 3.5
-    detail: 'grade: documented'
+    earned: 0.88
+    detail: 'grade: derived'
+  - id: agent_skills
+    status: partial
+    earned: 4.5
+    detail: 'authorship: unknown'
   na:
   - asyncapi_3_x
   - channels_defined
