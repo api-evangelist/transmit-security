@@ -1,8 +1,15 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- https://api.nuget.org/v3
 - https://azuremarketplace.microsoft.com/
+- https://crates.io/api/v1
 - https://openid.net/developers/certified-openid-connect-implementations/
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
 - splunk/integrations/splunk-integration-edges.yml
 marketplace_apps: []
@@ -86,6 +93,54 @@ edges:
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
   category: addon
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@transmitsecurity/ngx-ts-riskid
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@transmitsecurity/ngx-ts-riskid'
+      version: 4.0.0
+      released: '2026-10-13'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@transmitsecurity/ngx-ts-riskid
+      repo_leg: github-org:transmitsecurity
+      publisher_leg: email:transmitsecurity.com
+      matched_by: domain
+    - name: '@transmitsecurity/platform-web-sdk'
+      version: 2.7.3
+      released: '2026-10-13'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@transmitsecurity/platform-web-sdk
+      repo_leg: domain:transmitsecurity.com
+      publisher_leg: email:transmitsecurity.com
+      matched_by: domain
+    - name: '@transmitsecurity/riskid-reactjs-ts'
+      version: 2.0.0
+      released: '2026-10-13'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@transmitsecurity/riskid-reactjs-ts
+      repo_leg: github-org:transmitsecurity
+      publisher_leg: email:transmitsecurity.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 source:
 - microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
 - splunk/integrations/splunk-integration-edges.yml
