@@ -1,4 +1,4 @@
-# Transmit Security (transmit-security)
+# Transmit Security
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,67 +64,201 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Transmit Security provides the Mosaic platform, a comprehensive CIAM (Customer Identity and Access Management) solution offering REST APIs for passkey and WebAuthn authentication, fraud detection and risk-based access control, identity orchestration, identity verification, and user journey management. The platform delivers unified identity management across customer, business, and workforce contexts through an API-first architecture with OAuth2 and JWT authentication, serving leading banks, insurers, and retailers worldwide.
+Transmit Security provides the Mosaic platform, a comprehensive CIAM (Customer Identity and Access Management) solution offering REST APIs for passkey and WebAuthn authentication, fraud detection and risk-based access control, identity orchestration, identity verification, and user journey management. The platform delivers unified identity management across customer, business, and workforce contexts through an API-first architecture with OAuth2 and JWT authentication. Mosaic serves leading banks, insurers, and retailers worldwide with region-specific deployments across the US, EU, Canada, and Australia, backed by a 99.99% uptime SLA.
 
-APIs.json: https://raw.githubusercontent.com/api-evangelist/transmit-security/refs/heads/main/apis.yml
+**Areas:** CIAM · Identity · Authentication · Passkeys · WebAuthn · Fraud Prevention · Risk Management · Identity Verification · Orchestration · Security · SSO
 
-Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=transmit-security-api-evangelist&utm_content=repo
+## Transmit Security on APIs.io
 
-## Tags
+Everything profiled for Transmit Security is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/transmit-security/](https://apis.io/providers/transmit-security/)** — or go straight to one of the APIs or properties below.
 
-- CIAM
-- Identity
-- Authentication
-- Passkeys
-- WebAuthn
-- Fraud Detection
-- Risk Management
-- Identity Verification
-- Orchestration
-- OAuth2
-- Security
-- SSO
+### APIs (9)
 
-## APIs
+- [Mosaic Orchestration API](https://apis.io/apis/transmit-security/mosaic-orchestration-api/) — No-code identity orchestration API and policy engine enabling dynamic identity flow composition, adaptive access control, and integration with third-party…
+- [Transmit Security Applications API](https://apis.io/apis/transmit-security/transmit-security-applications-api/) — The Applications API from Transmit Security — 14 operation(s) for applications.
+- [Transmit Security Auth API](https://apis.io/apis/transmit-security/transmit-security-auth-api/) — The Auth API from Transmit Security — 10 operation(s) for auth.
+- [Transmit Security Manage API](https://apis.io/apis/transmit-security/transmit-security-manage-api/) — The Manage API from Transmit Security — 1 operation(s) for manage.
+- [Transmit Security Organizations API](https://apis.io/apis/transmit-security/transmit-security-organizations-api/) — The Organizations API from Transmit Security — 6 operation(s) for organizations.
+- [Transmit Security Recommendation API](https://apis.io/apis/transmit-security/transmit-security-recommendation-api/) — The Recommendation API from Transmit Security — 3 operation(s) for recommendation.
+- [Transmit Security Token API](https://apis.io/apis/transmit-security/transmit-security-token-api/) — The Token API from Transmit Security — 1 operation(s) for token.
+- [Transmit Security Users API](https://apis.io/apis/transmit-security/transmit-security-users-api/) — The Users API from Transmit Security — 18 operation(s) for users.
+- [Transmit Security Verification API](https://apis.io/apis/transmit-security/transmit-security-verification-api/) — The Verification API from Transmit Security — 6 operation(s) for verification.
 
-| Name | Description |
-|------|-------------|
-| Mosaic Identity Management, Authentication & Journeys API | Core identity management, passwordless authentication (passkeys, WebAuthn, OTP, MFA), OIDC, SAML SSO, and orchestrated identity journeys |
-| Mosaic Fraud Prevention API | Real-time risk recommendations, account protection, threat detection and response, bot detection, and behavioral analytics |
-| Mosaic Identity Verification API | Document-based identity verification for remote onboarding and customer KYC workflows |
-| Mosaic Orchestration API | No-code identity flow composition, adaptive access control, and third-party service integration via journeys |
-| Mosaic Platform Administration API | Organization management, RBAC, audit logs, compliance reporting, and multi-tenant configuration |
+### Published properties
 
-## Plans / Rate Limits / FinOps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-| Resource | Path |
-|----------|------|
-| Plans & Pricing | [plans/transmit-security-plans-pricing.yml](plans/transmit-security-plans-pricing.yml) |
-| Rate Limits | [rate-limits/transmit-security-rate-limits.yml](rate-limits/transmit-security-rate-limits.yml) |
-| FinOps | [finops/transmit-security-finops.yml](finops/transmit-security-finops.yml) |
+#### MCP servers (1)
 
-**Pricing summary:** Enterprise contract model with no free tier. Plans start at $50K/year (100K ID checks, verification only) up to $200K/year (100K MAUs, full platform). Custom pricing for large-scale deployments (15M–200M+ MAUs).
+Model Context Protocol servers that expose the API to agents.
 
-## Timestamps
+- [transmit-security-mcp.yml](https://apis.io/servers/transmit-security/transmit-security-mcp-yml/)
 
-- Created: 2026-06-12
-- Modified: 2026-06-12
+#### Agentic access (1)
 
-## Common Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-| Type | URL |
-|------|-----|
-| Website | https://transmitsecurity.com/ |
-| Documentation | https://developer.transmitsecurity.com/ |
-| GitHub Organization | https://github.com/TransmitSecurity |
-| LinkedIn | https://www.linkedin.com/company/transmit-security |
-| X / Twitter | https://x.com/transmitsec |
-| Blog | https://transmitsecurity.com/blog |
-| Pricing | https://transmitsecurity.com/pricing |
-| Status Page | https://status.transmitsecurity.io/ |
-| Changelog | https://developer.transmitsecurity.com/sdk-ref/platform/changelog |
-| SDKs | https://developer.transmitsecurity.com/sdk-ref/sdk_ref_intro |
+- [Transmit Security Agentic Access](https://apis.io/agentic-access/transmit-security/transmit-security-agentic-access/)
 
-## Maintainers
+#### JSON Schema (7)
 
-- Kin Lane / kin@apievangelist.com
+The data models the API reads and writes.
+
+- [Transmit Security One-Time Login Schemas](https://apis.io/schemas/transmit-security/transmit-security-backend-authentication/)
+- [Transmit Security Recommendations Schemas](https://apis.io/schemas/transmit-security/transmit-security-fraud-prevention/)
+- [Transmit Security Users Schemas](https://apis.io/schemas/transmit-security/transmit-security-identity-management/)
+- [Transmit Security Document Verification Schemas](https://apis.io/schemas/transmit-security/transmit-security-identity-verification/)
+- [Transmit Security One-Time Login Schemas](https://apis.io/schemas/transmit-security/transmit-security-oidc-authentication/)
+- [Transmit Security Organizations Schemas](https://apis.io/schemas/transmit-security/transmit-security-organizations/)
+- [Transmit Security Applications Schemas](https://apis.io/schemas/transmit-security/transmit-security-platform-administration/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Transmit Security Context](https://apis.io/jsonld/transmit-security/transmit-security-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Transmit Security API Vocabulary](https://apis.io/vocabularies/transmit-security/transmit-security-vocabulary/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Transmit Security Fraud Prevention Recommendation Request Example](https://apis.io/examples/transmit-security/transmit-security-fraud-prevention-recommendation-request-example/)
+- [Transmit Security Identity Management Create User Example](https://apis.io/examples/transmit-security/transmit-security-identity-management-create-user-example/)
+- [Transmit Security Identity Verification Create Session Example](https://apis.io/examples/transmit-security/transmit-security-identity-verification-create-session-example/)
+- [Transmit Security Organizations Create Org Example](https://apis.io/examples/transmit-security/transmit-security-organizations-create-org-example/)
+- [Transmit Security Platform Administration Create App Example](https://apis.io/examples/transmit-security/transmit-security-platform-administration-create-app-example/)
+
+#### Collections (16)
+
+Postman and Open Collection request collections.
+
+- [One-Time Login Applications API](https://apis.io/collections/transmit-security/open-transmit-security-applications-api/)
+- [One-Time Login Applications Auth API](https://apis.io/collections/transmit-security/open-transmit-security-auth-api/)
+- [One-Time Login Applications Manage API](https://apis.io/collections/transmit-security/open-transmit-security-manage-api/)
+- [One-Time Login Applications Organizations API](https://apis.io/collections/transmit-security/open-transmit-security-organizations-api/)
+- [One-Time Login Applications Recommendation API](https://apis.io/collections/transmit-security/open-transmit-security-recommendation-api/)
+- [One-Time Login Applications Token API](https://apis.io/collections/transmit-security/open-transmit-security-token-api/)
+- [One-Time Login Applications Users API](https://apis.io/collections/transmit-security/open-transmit-security-users-api/)
+- [One-Time Login Applications Verification API](https://apis.io/collections/transmit-security/open-transmit-security-verification-api/)
+- [One-Time Login Applications API](https://apis.io/collections/transmit-security/postman-transmit-security-applications-api/)
+- [One-Time Login Applications Auth API](https://apis.io/collections/transmit-security/postman-transmit-security-auth-api/)
+- [One-Time Login Applications Manage API](https://apis.io/collections/transmit-security/postman-transmit-security-manage-api/)
+- [One-Time Login Applications Organizations API](https://apis.io/collections/transmit-security/postman-transmit-security-organizations-api/)
+- [One-Time Login Applications Recommendation API](https://apis.io/collections/transmit-security/postman-transmit-security-recommendation-api/)
+- [One-Time Login Applications Token API](https://apis.io/collections/transmit-security/postman-transmit-security-token-api/)
+- [One-Time Login Applications Users API](https://apis.io/collections/transmit-security/postman-transmit-security-users-api/)
+- [One-Time Login Applications Verification API](https://apis.io/collections/transmit-security/postman-transmit-security-verification-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Transmit Security — jsonschema rules](https://apis.io/rules/transmit-security/transmit-security-jsonschema-spectral-rules/)
+- [Transmit Security API Rules](https://apis.io/rules/transmit-security/transmit-security-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Transmit Security Authentication](https://apis.io/security/transmit-security/transmit-security-authentication/)
+- [Transmit Security Domain Security](https://apis.io/security/transmit-security/transmit-security-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Transmit Security Scopes](https://apis.io/scopes/transmit-security/transmit-security-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Transmit Security Plans Pricing](https://apis.io/plans/transmit-security/transmit-security-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Transmit Security Rate Limits](https://apis.io/rate-limits/transmit-security/transmit-security-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Transmit Security Finops](https://apis.io/finops/transmit-security/transmit-security-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://transmitsecurity.com/)
+- [Documentation](https://developer.transmitsecurity.com/)
+- [Getting started](https://developer.transmitsecurity.com/guides/quick_start/enable_communication)
+- [Pricing](https://transmitsecurity.com/pricing)
+- [Support](https://support.transmitsecurity.com/s/)
+- [Changelog](https://developer.transmitsecurity.com/sdk-ref/platform/changelog)
+- [Blog](https://transmitsecurity.com/blog)
+- [Privacy policy](https://transmitsecurity.com/legal/privacy-policy-for-bindid)
+- [GitHub](https://github.com/TransmitSecurity)
+- [Status](https://status.transmitsecurity.io/)
+
+## API Evangelist rating
+
+**Kin Score 53.0** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 82.1 |
+| Contract quality | 54.4 |
+| Contract governance | 31.8 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 60.1 |
+| Access clarity | 28.9 |
+
+**Agent readiness 41.9** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | mostly (partial credit) |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/transmit-security/](https://apis.io/providers/transmit-security/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Transmit Security: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/transmit-security/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
